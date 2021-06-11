@@ -4,6 +4,8 @@ navbar:
   left:
     - text: "Home"
       href: index.html
-    - text: "About"
-      href: about.html
+    - text: "MCMC"
+      href: mcmc.html
+    - text: "midori"
+      href: midori.html
 output_dir: "docs"

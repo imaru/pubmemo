@@ -1,8 +1,8 @@
 ---
-title: "index"
+title: 'my public memo'
 author: "Toshihide Imaruoka"
-date: "6/11/2021"
-output: html_document
+output:
+  rmdformats::downcute:
+    highlight: kate
 ---
-- [1-7: MCMC](./mcmc.html)
-- [appendix: midori](./midori.html)
+- [馬場本](./baba.html)

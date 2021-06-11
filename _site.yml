@@ -1,11 +1,9 @@
 name: "my-website"
 navbar:
-  title: "My Website"
+  title: "my public memo"
   left:
     - text: "Home"
       href: index.html
-    - text: "MCMC"
-      href: mcmc.html
-    - text: "midori"
-      href: midori.html
+    - text: "馬場本"
+      href: baba.html
 output_dir: "docs"

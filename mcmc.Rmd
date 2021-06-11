@@ -1,11 +1,9 @@
 ---
 title: '#1-7MCMCの基本'
 author: "Toshihide Imaruoka"
-date: "6/11/2021"
-output: 
-  html_document:
-    number_sections: yes
-    theme: default
+output:
+  rmdformats::html_docco:
+    highlight: kate
 ---
 1. 概要
   - MCMCと統計モデリング

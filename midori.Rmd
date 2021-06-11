@@ -1,12 +1,11 @@
 ---
 title: '緑本MCMC'
 author: "Toshihide Imaruoka"
-date: "6/11/2021"
-output: 
-  html_document:
-    number_sections: yes
-    theme: default
+output:
+  rmdformats::downcute:
+    highlight: kate
 ---
+## 説明
   - [緑本](https://www.amazon.co.jp/dp/400006973X) P.171 例題：種子の生存確率
   - 観測データ：$N_i個の観察種子のうち、生きていて発芽能力があるものはy_i個、死んだ種子はN-y_i個」$
   - $N_iを8とし、20個体について調べる$

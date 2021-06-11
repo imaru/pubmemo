@@ -4,6 +4,7 @@ author: "Toshihide Imaruoka"
 output:
   rmdformats::downcute:
     highlight: kate
+    css: my.css
 ---
 ## 1-1章：ベイズ統計モデリングの基本
 2. 統計モデリング

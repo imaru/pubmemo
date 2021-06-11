@@ -119,7 +119,7 @@ plot(q[1:nrp],type='l', main=q[nrp])
 ```{r}
 layout(matrix(1:2, ncol=2))
 nrp<-100000
-qi<-0.30
+qi<-0.60
 n<-8
 data<-c(4,3,4,5,5,2,3,1,4,0,1,5,5,6,5,4,4,5,3,4)
 logL<-numeric(nrp)

@@ -1026,7 +1026,7 @@
 <li>ベイズの定理に従って作られた（パラメータの）事後分布は複雑な場合が多い（＝パラメータに関して何らかの情報を得るのが難しい。前章のビールの例のようにパラメータ<span class="math inline">\(\beta_1の2.5%がいくつ\)</span>、とか分かればいいけど、分からない）</li>
 <li>なので、その分布に従う乱数を生成。乱数をもとに事後分布を評価。＝分布を評価するのではなく、分布に従って生成した値を評価＝対象が値なら、点推定も簡単。</li>
 </ul></li>
-<li>ちょっと脇道。ここからしばらくは頻度主義（求めたいパラメータは真の値を持つ）の<a href="https://www.amazon.co.jp/dp/400006973X">緑本</a>からお話しを：→<a href="#%E3%81%AE%E8%A3%9C%E8%B6%B3-%E7%B7%91%E6%9C%AC%E3%81%AEmcmc">こちらへどうぞ</a></li>
+<li>ちょっと脇道。ここからしばらくは頻度主義（求めたいパラメータは真の値を持つ）の<a href="https://www.amazon.co.jp/dp/400006973X">緑本</a>{:target="_blank"}からお話しを：→<a href="#%E3%81%AE%E8%A3%9C%E8%B6%B3-%E7%B7%91%E6%9C%AC%E3%81%AEmcmc">こちらへどうぞ</a></li>
 </ul>
 </div>
 <div id="モンテカルロ法" class="section level2">
@@ -1108,7 +1108,7 @@
 <span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(nbA, <span class="at">type=</span><span class="st">&#39;l&#39;</span>,<span class="at">col=</span><span class="st">&#39;red&#39;</span>,<span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="fl">1.0</span>))</span>
 <span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">new=</span>T)</span>
 <span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(nbB, <span class="at">type=</span><span class="st">&#39;l&#39;</span>,<span class="at">col=</span><span class="st">&#39;blue&#39;</span>,<span class="at">xlab=</span><span class="st">&#39;&#39;</span>,<span class="at">ylab=</span><span class="st">&#39;&#39;</span>,<span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="fl">1.0</span>))</span></code></pre></div>
-<p><img src="baba_files/figure-html/unnamed-chunk-10-1.png" width="768" /></p>
+<p><img src="baba_files/figure-html/mobile%20phone-1.png" width="768" /></p>
 </div>
 <div id="mcmcが目指すこと" class="section level2">
 <h2>8. MCMCが目指すこと</h2>
@@ -1187,7 +1187,7 @@
 <span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(theta[<span class="dv">1</span><span class="sc">:</span>nrp],<span class="at">type=</span><span class="st">&#39;l&#39;</span>, <span class="at">main=</span><span class="fu">mean</span>(theta))</span>
 <span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(theta)</span></code></pre></div>
-<p><img src="baba_files/figure-html/unnamed-chunk-11-1.png" width="768" /></p>
+<p><img src="baba_files/figure-html/m-h%20method-1.png" width="768" /></p>
 </div>
 <div id="mh法の欠点" class="section level2">
 <h2>11. MH法の欠点</h2>
@@ -1320,7 +1320,7 @@
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>logb<span class="ot">&lt;-</span><span class="cf">function</span>(x) <span class="fu">sum</span>(<span class="fu">log</span>(<span class="fu">dbinom</span>(data, <span class="dv">8</span>, x)))</span>
 <span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>q <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="fl">0.2</span>, <span class="fl">0.7</span>, <span class="fl">0.01</span>)</span>
 <span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(q, <span class="fu">sapply</span>(q, logb), <span class="at">type=</span><span class="st">&#39;l&#39;</span>)</span></code></pre></div>
-<p><img src="baba_files/figure-html/unnamed-chunk-12-1.png" width="768" /></p>
+<p><img src="baba_files/figure-html/unnamed-chunk-10-1.png" width="768" /></p>
 <ul>
 <li>ここまでは解析的に最尤推定量<span class="math inline">\(\hat{q}\)</span>を求めることができたけど、それができない場合はどうするか。分布がややこしかったりすると尤度関数はもっとややこしくて解けなくなることがある。
 <ul>
@@ -1374,7 +1374,7 @@
 <span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>  }</span>
 <span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(q[<span class="dv">1</span><span class="sc">:</span>nrp],<span class="at">type=</span><span class="st">&#39;l&#39;</span>, <span class="at">main=</span>q[nrp])</span></code></pre></div>
-<p><img src="baba_files/figure-html/unnamed-chunk-13-1.png" width="60%" style="display: block; margin: auto;" /> - このように、ランダムに生成した値を仮のqとして尤度を計算、尤度が高くなる場合だけ値を変化させるという方法で最尤値を推定することができた。緑本に書いてるように、ここまでのアルゴリズムは分かりやすさだけを考えた非効率なもの。実際の最尤推定はもっと効率いいそうです。 - メトロポリス法（MCMCアルゴリズムの一つ） - ふらふら試行錯誤をちょっと修正 1. <span class="math inline">\(q\)</span>の初期値を決める(qi) 2. <span class="math inline">\(q\)</span>を増やすか減らすかをランダムに決める(<span class="math inline">\(q^新\)</span>) 3. 尤度を計算。大きくなってたら<span class="math inline">\(q^新\)</span>を採用 - — ここまではふらふら試行錯誤と同じ — 4. 尤度が小さくなる場合でも、確率<span class="math inline">\(r\)</span>で<span class="math inline">\(q\)</span>を<span class="math inline">\(q^真\)</span>に変更。<span class="math inline">\(r=\frac{L(q^新)}{L(q)}\)</span>。 - じゃあ実装してみよう。</p>
+<p><img src="baba_files/figure-html/unnamed-chunk-11-1.png" width="60%" style="display: block; margin: auto;" /> - このように、ランダムに生成した値を仮のqとして尤度を計算、尤度が高くなる場合だけ値を変化させるという方法で最尤値を推定することができた。緑本に書いてるように、ここまでのアルゴリズムは分かりやすさだけを考えた非効率なもの。実際の最尤推定はもっと効率いいそうです。 - メトロポリス法（MCMCアルゴリズムの一つ） - ふらふら試行錯誤をちょっと修正 1. <span class="math inline">\(q\)</span>の初期値を決める(qi) 2. <span class="math inline">\(q\)</span>を増やすか減らすかをランダムに決める(<span class="math inline">\(q^新\)</span>) 3. 尤度を計算。大きくなってたら<span class="math inline">\(q^新\)</span>を採用 - — ここまではふらふら試行錯誤と同じ — 4. 尤度が小さくなる場合でも、確率<span class="math inline">\(r\)</span>で<span class="math inline">\(q\)</span>を<span class="math inline">\(q^真\)</span>に変更。<span class="math inline">\(r=\frac{L(q^新)}{L(q)}\)</span>。 - じゃあ実装してみよう。</p>
 </div>
 <div id="メトロポリス法の実装例" class="section level2">
 <h2>★メトロポリス法の実装例</h2>
@@ -1409,7 +1409,7 @@
 <span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(q[<span class="dv">1</span><span class="sc">:</span>nrp],<span class="at">type=</span><span class="st">&#39;l&#39;</span>, <span class="at">main=</span><span class="fu">mean</span>(q))</span>
 <span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(q)</span></code></pre></div>
-<p><img src="baba_files/figure-html/unnamed-chunk-14-1.png" width="768" /></p>
+<p><img src="baba_files/figure-html/unnamed-chunk-12-1.png" width="768" /></p>
 <ul>
 <li>とりあえず緑本の感じにはいってる。右側は生成したqのヒストグラム。
 <ul>
@@ -1454,7 +1454,7 @@ $('a[href^=#]').click(function(){
 <div class="footnotes">
 <hr />
 <ol>
-<li id="fn1"><p>一定の条件に関する<a href="https://www.amazon.co.jp/dp/400730789X">文献</a><a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn1"><p>一定の条件に関する<a href="https://www.amazon.co.jp/dp/400730789X">文献</a>{:target="_blank"}<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
 </div>

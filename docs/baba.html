@@ -668,34 +668,21 @@
 </div>
 <div id="正規分布" class="section level2">
 <h2>★正規分布</h2>
-<pre><code>```r
-v&lt;-1
-m&lt;-0
-x&lt;-seq(-5,5,0.01)
-y&lt;-(1/sqrt(2*pi*v))*exp(-(x-m)^2/(2*v))
-plot(x,y,type=&#39;l&#39;)
-```
-
-&lt;img src=&quot;baba_files/figure-html/unnamed-chunk-5-1.png&quot; width=&quot;768&quot; /&gt;</code></pre>
-<ul>
-<li>中心極限定理 -「平均<span class="math inline">\(\mu\)</span>、分散<span class="math inline">\(\sigma^2\)</span>の、独立で同一な確率分布」から得られた<span class="math inline">\(N\)</span>個の確率変数の合計値<span class="math inline">\(X_{sum}\)</span>は、<span class="math inline">\(N\)</span>が大きいときに正規分布<span class="math inline">\(Normal(N\mu,N\sigma^2)\)</span>に従う</li>
-<li>個々の確率分布の平均<span class="math inline">\(mu\)</span>、分散<span class="math inline">\(sigma^2\)</span>ということが変わらず、しかも試行回数が多ければ、個々の分布の形がどのようなものでも、その合計値<span class="math inline">\(X_{sum}\)</span>は平均<span class="math inline">\(N\mu\)</span>, 分散<span class="math inline">\(N\sigma^2\)</span>の正規分布に従う＝個々の試行で得られる平均値は平均<span class="math inline">\(\mu\)</span>、分散<span class="math inline">\(\sigma^2\)</span>の正規分布に従うことになる（Nで割るから）。</li>
-<li>正規分布：無数の誤差の反映と考える</li>
-<li>対数正規分布：Xが正の値しか取らない場合の正規分布</li>
-<li><span class="math inline">\(f(X)=\frac{1}{\sqrt{2\pi\sigma^2}x}exp(-\frac{(log(x)-\mu)^2}{2\sigma^2})\)</span></li>
-</ul>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>    v<span class="ot">&lt;-</span><span class="dv">1</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    m<span class="ot">&lt;-</span><span class="dv">0</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    x<span class="ot">&lt;-</span><span class="fu">seq</span>(<span class="sc">-</span><span class="dv">5</span>,<span class="dv">5</span>,<span class="fl">0.01</span>)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    y<span class="ot">&lt;-</span>(<span class="dv">1</span><span class="sc">/</span><span class="fu">sqrt</span>(<span class="dv">2</span><span class="sc">*</span>pi<span class="sc">*</span>v))<span class="sc">*</span><span class="fu">exp</span>(<span class="sc">-</span>(x<span class="sc">-</span>m)<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>(<span class="dv">2</span><span class="sc">*</span>v))</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">plot</span>(x,y,<span class="at">type=</span><span class="st">&#39;l&#39;</span>)</span></code></pre></div>
+<p><img src="baba_files/figure-html/unnamed-chunk-5-1.png" width="768" /> - 中心極限定理 -「平均<span class="math inline">\(\mu\)</span>、分散<span class="math inline">\(\sigma^2\)</span>の、独立で同一な確率分布」から得られた<span class="math inline">\(N\)</span>個の確率変数の合計値<span class="math inline">\(X_{sum}\)</span>は、<span class="math inline">\(N\)</span>が大きいときに正規分布<span class="math inline">\(Normal(N\mu,N\sigma^2)\)</span>に従う - 個々の確率分布の平均<span class="math inline">\(mu\)</span>、分散<span class="math inline">\(sigma^2\)</span>ということが変わらず、しかも試行回数が多ければ、個々の分布の形がどのようなものでも、その合計値<span class="math inline">\(X_{sum}\)</span>は平均<span class="math inline">\(N\mu\)</span>, 分散<span class="math inline">\(N\sigma^2\)</span>の正規分布に従う＝個々の試行で得られる平均値は平均<span class="math inline">\(\mu\)</span>、分散<span class="math inline">\(\sigma^2\)</span>の正規分布に従うことになる（Nで割るから）。 - 正規分布：無数の誤差の反映と考える - 対数正規分布：Xが正の値しか取らない場合の正規分布 - <span class="math inline">\(f(X)=\frac{1}{\sqrt{2\pi\sigma^2}x}exp(-\frac{(log(x)-\mu)^2}{2\sigma^2})\)</span></p>
 </div>
 <div id="対数正規分布" class="section level2">
 <h2>★対数正規分布</h2>
-<pre><code>```r
-v&lt;-1
-m&lt;-0
-x&lt;-seq(0,3,0.01)
-y&lt;-1/(sqrt(2*pi*v)*x)*exp(-(log(x)-m)^2/(2*v))
-plot(x,y,type=&#39;l&#39;)
-```
-
-&lt;img src=&quot;baba_files/figure-html/unnamed-chunk-6-1.png&quot; width=&quot;768&quot; /&gt;</code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>    v<span class="ot">&lt;-</span><span class="dv">1</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    m<span class="ot">&lt;-</span><span class="dv">0</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    x<span class="ot">&lt;-</span><span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">3</span>,<span class="fl">0.01</span>)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    y<span class="ot">&lt;-</span><span class="dv">1</span><span class="sc">/</span>(<span class="fu">sqrt</span>(<span class="dv">2</span><span class="sc">*</span>pi<span class="sc">*</span>v)<span class="sc">*</span>x)<span class="sc">*</span><span class="fu">exp</span>(<span class="sc">-</span>(<span class="fu">log</span>(x)<span class="sc">-</span>m)<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>(<span class="dv">2</span><span class="sc">*</span>v))</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">plot</span>(x,y,<span class="at">type=</span><span class="st">&#39;l&#39;</span>)</span></code></pre></div>
+<p><img src="baba_files/figure-html/unnamed-chunk-6-1.png" width="768" /></p>
 <ul>
 <li>ガンマ分布
 <ul>

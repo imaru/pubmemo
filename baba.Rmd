@@ -211,13 +211,13 @@ plot(x,y,type='l')
   - 標準正規分布：$\mu$=0, $\sigma^2$=1の正規分布
 
 ## ★正規分布    
-    ```{r}
+```{r}
     v<-1
     m<-0
     x<-seq(-5,5,0.01)
     y<-(1/sqrt(2*pi*v))*exp(-(x-m)^2/(2*v))
     plot(x,y,type='l')
-    ```
+```
   - 中心極限定理
   -「平均$\mu$、分散$\sigma^2$の、独立で同一な確率分布」から得られた$N$個の確率変数の合計値$X_{sum}$は、$N$が大きいときに正規分布$Normal(N\mu,N\sigma^2)$に従う
   - 個々の確率分布の平均$mu$、分散$sigma^2$ということが変わらず、しかも試行回数が多ければ、個々の分布の形がどのようなものでも、その合計値$X_{sum}$は平均$N\mu$, 分散$N\sigma^2$の正規分布に従う＝個々の試行で得られる平均値は平均$\mu$、分散$\sigma^2$の正規分布に従うことになる（Nで割るから）。
@@ -226,13 +226,13 @@ plot(x,y,type='l')
   - $f(X)=\frac{1}{\sqrt{2\pi\sigma^2}x}exp(-\frac{(log(x)-\mu)^2}{2\sigma^2})$
 
 ## ★対数正規分布   
-    ```{r}
+```{r}
     v<-1
     m<-0
     x<-seq(0,3,0.01)
     y<-1/(sqrt(2*pi*v)*x)*exp(-(log(x)-m)^2/(2*v))
     plot(x,y,type='l')
-    ```
+```
 
   - ガンマ分布
     - $f(X)=\frac{1}{\Gamma(k)\theta^k}x^{k-1}e^{-\frac{x}{\theta}}$
@@ -251,7 +251,7 @@ plot(x,y,type='l')
     x<-seq(0,10,0.01)
     y<-dgamma(x,shape=shp, rate=1/scl)
     plot(x,y,type='l')
-    ```
+```
 
 # 1-5章：統計モデルの基本
 ## 2. モデルとは何か

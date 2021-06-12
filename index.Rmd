@@ -4,5 +4,6 @@ author: "Toshihide Imaruoka"
 output:
   rmdformats::downcute:
     highlight: kate
+    css: mycss.css
 ---
 - [馬場本](./baba.html)

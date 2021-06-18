@@ -62,3 +62,8 @@ knitr::opts_chunk$set(echo = FALSE)
 - PC上の環境
   - [Windows Subsystem for Linux](https://docs.microsoft.com/ja-jp/windows/wsl/install-win10)
   - [Homebrew](https://brew.sh/index_ja)
+
+## 不安な点
+
+- 明確なゴールがない
+- 必ずしも指導できない

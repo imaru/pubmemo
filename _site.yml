@@ -6,4 +6,6 @@ navbar:
       href: index.html
     - text: "馬場本"
       href: baba.html
+    - text: "技術部"
+      href: psytech.html
 output_dir: "docs"

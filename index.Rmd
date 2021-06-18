@@ -7,3 +7,4 @@ output:
     css: mycss.css
 ---
 - [馬場本](./baba.html)
+- [心理科学科技術部](./psytech.html)

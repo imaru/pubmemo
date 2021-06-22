@@ -608,7 +608,7 @@
 <div id="二項分布" class="section level2">
 <h2>★二項分布</h2>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 式から</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>p<span class="ot">&lt;-</span><span class="fl">0.5</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>p<span class="ot">&lt;-</span><span class="fl">0.3</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>N<span class="ot">&lt;-</span><span class="dv">10</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>x<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="dv">0</span><span class="sc">:</span>N)</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>y<span class="ot">&lt;-</span><span class="fu">choose</span>(N,x)<span class="sc">*</span>p<span class="sc">^</span>x<span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>p)<span class="sc">^</span>(N<span class="sc">-</span>x)</span>
@@ -1321,7 +1321,7 @@
 <li><span class="math inline">\(N_i\)</span>を<span class="math inline">\(8\)</span>とし、<span class="math inline">\(20\)</span>個体について調べる（8個の観察種子のうち、生きてるものは<span class="math inline">\(y_i\)</span>個、死んでるものは<span class="math inline">\(8-y_i\)</span>個。これを20本の植物について調べる）</li>
 <li><span class="math inline">\(\{y_1,y_2,...,y_{20}\}=\{4,3,4,5,5,2,3,1,4,0,1,5,5,6,5,4,4,5,3,4\}\)</span></li>
 <li>このとき、種子個体iの生存確率qは?</li>
-<li>ある個体<span class="math inline">\(i\)</span>の生存種子数が<span class="math inline">\(y_i\)</span>である確率（ヒストグラム（下図左）を見ると過分散ではないので、二項分布と考える＝統計モデル、ただしパラメータqは不明なので、データからそれを求めたい）：<span class="math inline">\(p(y_i|q)={}_8 C_{y_1} \cdot q^{y_1} \cdot(1-q)^{8-{y_1}}\)</span>
+<li>ある個体<span class="math inline">\(i\)</span>の生存種子数が<span class="math inline">\(y_i\)</span>である確率（ヒストグラム（下図左）を見ると過分散ではないので、<a href="baba.html#%E4%BA%8C%E9%A0%85%E5%88%86%E5%B8%83">二項分布(リンク先はq=0.3の例)</a>と考える＝統計モデル、ただしパラメータqは不明なので、データからそれを求めたい）：<span class="math inline">\(p(y_i|q)={}_8 C_{y_1} \cdot q^{y_1} \cdot(1-q)^{8-{y_1}}\)</span>
 <ul>
 <li>過分散：通常の（二項）分布よりも分散が大きいこと。サンプルごとに傾向に違いがあるような場合に見られる。</li>
 </ul></li>

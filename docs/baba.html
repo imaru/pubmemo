@@ -10,7 +10,7 @@
     
     <title>馬場本</title>
 
-        <script src="site_libs/header-attrs-2.6/header-attrs.js"></script>
+        <script src="site_libs/header-attrs-2.8/header-attrs.js"></script>
         <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link href="site_libs/bootstrap-3.3.7/css/bootstrap.min.css" rel="stylesheet" />
@@ -287,7 +287,7 @@
             </ul></li>
             <li><a href="#の補足-緑本のmcmc">1-7の補足: 緑本のMCMC</a>
             <ul>
-            <li><a href="#緑本の種子の例のヒストグラムと対数尤度関数">★緑本の種子の例のヒストグラムと対数尤度関数</a></li>
+            <li><a href="#緑本の-種子の例のヒストグラムと対数尤度関数">★緑本の 「種子の例」のヒストグラムと対数尤度関数</a></li>
             <li><a href="#ふらふら最尤推定">★ふらふら最尤推定</a></li>
             <li><a href="#メトロポリス法の実装例">★メトロポリス法の実装例</a></li>
             </ul></li>
@@ -1001,22 +1001,23 @@
 <h2>2. MCMCとは何か</h2>
 <ul>
 <li>マルコフ連鎖モンテカルロ法（Markov Chain Monte Carlo）</li>
-<li>乱数生成の手法、マルコフ連鎖を使う</li>
+<li>乱数生成の手法としてマルコフ連鎖を使う</li>
 <li>離散時間マルコフ連鎖: ある時点の値は1時点前の値<span class="math inline">\(\textbf{のみ}\)</span>に依存</li>
 <li>モンテカルロ法：疑似乱数を使って何らかの性質を求める方法</li>
-<li>確率的に変化するランダムな値の例↓</li>
+<li>確率的に変化するランダムな値の例↓ 平均m 分散vの正規分布（左）に従ってn個生成された乱数のヒストグラム（右）</li>
 </ul>
 </div>
 <div id="確率分布に従う乱数の例" class="section level2">
 <h2>★確率分布に従う乱数の例</h2>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">layout</span>(<span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="at">ncol=</span><span class="dv">2</span>))</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>rdata<span class="ot">&lt;-</span><span class="fu">rnorm</span>(<span class="dv">10000</span>)</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(rdata, <span class="at">breaks=</span><span class="dv">12</span>)</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>v<span class="ot">&lt;-</span><span class="dv">1</span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>m<span class="ot">&lt;-</span><span class="dv">0</span></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>x<span class="ot">&lt;-</span><span class="fu">seq</span>(<span class="sc">-</span><span class="dv">5</span>,<span class="dv">5</span>,<span class="fl">0.01</span>)</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>y<span class="ot">&lt;-</span>(<span class="dv">1</span><span class="sc">/</span><span class="fu">sqrt</span>(<span class="dv">2</span><span class="sc">*</span>pi<span class="sc">*</span>v))<span class="sc">*</span><span class="fu">exp</span>(<span class="sc">-</span>(x<span class="sc">-</span>m)<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>(<span class="dv">2</span><span class="sc">*</span>v))</span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x,y,<span class="at">type=</span><span class="st">&#39;l&#39;</span>)</span></code></pre></div>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>m<span class="ot">&lt;-</span><span class="dv">0</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>v<span class="ot">&lt;-</span><span class="dv">1</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>n<span class="ot">&lt;-</span><span class="dv">10000</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>x<span class="ot">&lt;-</span><span class="fu">seq</span>(m<span class="sc">-</span><span class="fu">sqrt</span>(v)<span class="sc">*</span><span class="dv">4</span>,m<span class="sc">+</span><span class="fu">sqrt</span>(v)<span class="sc">*</span><span class="dv">4</span>,<span class="fl">0.01</span>)</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>y<span class="ot">&lt;-</span>(<span class="dv">1</span><span class="sc">/</span><span class="fu">sqrt</span>(<span class="dv">2</span><span class="sc">*</span>pi<span class="sc">*</span>v))<span class="sc">*</span><span class="fu">exp</span>(<span class="sc">-</span>(x<span class="sc">-</span>m)<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>(<span class="dv">2</span><span class="sc">*</span>v))</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x,y,<span class="at">type=</span><span class="st">&#39;l&#39;</span>)</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>rdata<span class="ot">&lt;-</span><span class="fu">rnorm</span>(n, m, <span class="fu">sqrt</span>(v))</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(rdata, <span class="at">breaks=</span><span class="dv">12</span>)</span></code></pre></div>
 <p><img src="baba_files/figure-html/unnamed-chunk-9-1.png" width="768" /></p>
 </div>
 <div id="mcmcと統計モデリングの関わり" class="section level2">
@@ -1025,14 +1026,14 @@
 <li>そもそも
 <ul>
 <li>MCMC -&gt; 単に乱数の生成方法の一つ</li>
-<li>ただし、事後分布に従う乱数の生成に使えるところが偉い。</li>
+<li>ただし、事後分布（6章「データが得られた後に想定する分布」）に従う乱数の生成に使えるところが偉い。</li>
 <li>ベイズの定理に従って作られた（パラメータの）事後分布は複雑な場合が多い（＝パラメータに関して何らかの情報を得るのが難しい。前章のビールの例のようにパラメータ<span class="math inline">\(\beta_1\)</span>の<span class="math inline">\(2.5%\)</span>点の値はコレ、とか分かればいいけど、普通は分からない）</li>
-<li>なので、その分布に従う乱数を生成。乱数をもとに事後分布を作成。＝分布を評価するのではなく、分布に従って生成した値を評価＝対象が値なら、点推定も簡単。
+<li>なので、その分布に従う乱数を生成。乱数をもとに事後分布を作成。＝分布を評価するのではなく、分布に従って生成した値たちを評価＝対象が式じゃなくて値たちなら、点推定もできるし評価が簡単。
 <ul>
 <li>ここで点推定が出てきて個人的にはちょっと混乱した（パラメータの点推定はしないんじゃないの？）けど、生成した確率分布の代表値を点推定で出すことは普通にあるということっぽいです。</li>
 </ul></li>
 </ul></li>
-<li>ちょっと脇道。ここからしばらくは頻度主義（求めたいパラメータは真の値を持つ）の例ですが、<a href="https://www.amazon.co.jp/dp/400006973X">緑本</a>の紹介：<a href="#%E3%81%AE%E8%A3%9C%E8%B6%B3-%E7%B7%91%E6%9C%AC%E3%81%AEmcmc">MCMCを理解するための補足説明</a></li>
+<li>ここで発表はちょっと脇道に逸れます。ここからしばらくは頻度主義（求めたいパラメータは真の値を持つ、という考え方の統計）の例ですが、<a href="https://www.amazon.co.jp/dp/400006973X">緑本</a>から：<a href="#%E3%81%AE%E8%A3%9C%E8%B6%B3-%E7%B7%91%E6%9C%AC%E3%81%AEmcmc">MCMCを理解するための補足説明</a></li>
 </ul>
 </div>
 <div id="モンテカルロ法" class="section level2">
@@ -1065,10 +1066,10 @@
 <li>ある時点<span class="math inline">\(t\)</span>で、どの会社のスマホを使ってるかは、それまで使っていたスマホ会社を所与とした条件つき確率</li>
 <li>このとき遷移核
 <ul>
-<li>A社だった人がA社：<span class="math inline">\(P(X_t=A社|X_{t-i}=A社=0.4\)</span></li>
-<li>B社だった人がA社：<span class="math inline">\(P(X_t=B社|X_{t-i}=A社=0.6\)</span></li>
-<li>B社だった人がB社：<span class="math inline">\(P(X_t=B社|X_{t-i}=B社=0.1\)</span></li>
-<li>B社だった人がA社：<span class="math inline">\(P(X_t=B社|X_{t-i}=A社=0.9\)</span></li>
+<li>A社だった人がA社：<span class="math inline">\(P(X_t=A社|X_{t-i}=A社)=0.4\)</span></li>
+<li>A社だった人がB社：<span class="math inline">\(P(X_t=B社|X_{t-i}=A社)=0.6\)</span></li>
+<li>B社だった人がB社：<span class="math inline">\(P(X_t=B社|X_{t-i}=B社)=0.1\)</span></li>
+<li>B社だった人がA社：<span class="math inline">\(P(X_t=A社|X_{t-i}=B社)=0.9\)</span></li>
 </ul></li>
 </ul>
 </div>
@@ -1081,39 +1082,40 @@
 </div>
 <div id="スマホユーザーの例" class="section level2">
 <h2>★スマホユーザーの例</h2>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>na<span class="ot">&lt;-</span><span class="dv">1</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>nb<span class="ot">&lt;-</span><span class="dv">1</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>aAi<span class="ot">&lt;-</span><span class="fl">0.5</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>aBi<span class="ot">&lt;-</span><span class="dv">1</span><span class="sc">-</span>aAi</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>bAi<span class="ot">&lt;-</span><span class="fl">0.2</span></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>bBi<span class="ot">&lt;-</span><span class="dv">1</span><span class="sc">-</span>bAi</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>nrp<span class="ot">&lt;-</span><span class="dv">30</span></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>rAA<span class="ot">&lt;-</span><span class="fl">0.4</span></span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>rAB<span class="ot">&lt;-</span><span class="fl">0.6</span></span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>rBB<span class="ot">&lt;-</span><span class="fl">0.1</span></span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>rBA<span class="ot">&lt;-</span><span class="fl">0.9</span></span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>naA<span class="ot">&lt;-</span><span class="fu">numeric</span>(nrp)</span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>naB<span class="ot">&lt;-</span><span class="fu">numeric</span>(nrp)</span>
-<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>nbA<span class="ot">&lt;-</span><span class="fu">numeric</span>(nrp)</span>
-<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>nbB<span class="ot">&lt;-</span><span class="fu">numeric</span>(nrp)</span>
-<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>naA[<span class="dv">1</span>]<span class="ot">&lt;-</span>na<span class="sc">*</span>aAi</span>
-<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>naB[<span class="dv">1</span>]<span class="ot">&lt;-</span>na<span class="sc">*</span>aBi</span>
-<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>nbA[<span class="dv">1</span>]<span class="ot">&lt;-</span>nb<span class="sc">*</span>bAi</span>
-<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>nbB[<span class="dv">1</span>]<span class="ot">&lt;-</span>nb<span class="sc">*</span>bBi</span>
-<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(rp <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span>nrp){</span>
-<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>  naA[rp]<span class="ot">&lt;-</span>naA[rp<span class="dv">-1</span>]<span class="sc">*</span>rAA<span class="sc">+</span>naB[rp<span class="dv">-1</span>]<span class="sc">*</span>rBA</span>
-<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>  naB[rp]<span class="ot">&lt;-</span>naA[rp<span class="dv">-1</span>]<span class="sc">*</span>rAB<span class="sc">+</span>naB[rp<span class="dv">-1</span>]<span class="sc">*</span>rBB</span>
-<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>  nbA[rp]<span class="ot">&lt;-</span>nbA[rp<span class="dv">-1</span>]<span class="sc">*</span>rAA<span class="sc">+</span>nbB[rp<span class="dv">-1</span>]<span class="sc">*</span>rBA</span>
-<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>  nbB[rp]<span class="ot">&lt;-</span>nbA[rp<span class="dv">-1</span>]<span class="sc">*</span>rAB<span class="sc">+</span>nbB[rp<span class="dv">-1</span>]<span class="sc">*</span>rBB</span>
-<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a><span class="fu">layout</span>(<span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="at">ncol=</span><span class="dv">2</span>))</span>
-<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(naA, <span class="at">type=</span><span class="st">&#39;l&#39;</span>,<span class="at">col=</span><span class="st">&#39;red&#39;</span>,<span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="fl">1.0</span>))</span>
-<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">new=</span>T)</span>
-<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(naB, <span class="at">type=</span><span class="st">&#39;l&#39;</span>,<span class="at">col=</span><span class="st">&#39;blue&#39;</span>,<span class="at">xlab=</span><span class="st">&#39;&#39;</span>,<span class="at">ylab=</span><span class="st">&#39;&#39;</span>,<span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="fl">1.0</span>))</span>
-<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(nbA, <span class="at">type=</span><span class="st">&#39;l&#39;</span>,<span class="at">col=</span><span class="st">&#39;red&#39;</span>,<span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="fl">1.0</span>))</span>
-<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">new=</span>T)</span>
-<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(nbB, <span class="at">type=</span><span class="st">&#39;l&#39;</span>,<span class="at">col=</span><span class="st">&#39;blue&#39;</span>,<span class="at">xlab=</span><span class="st">&#39;&#39;</span>,<span class="at">ylab=</span><span class="st">&#39;&#39;</span>,<span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="fl">1.0</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># a地域とb地域では初期比が異なるけど、遷移核が同じならそのうち同じ値に収束するという例</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>na<span class="ot">&lt;-</span><span class="dv">1</span> <span class="co"># a地域人数</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>nb<span class="ot">&lt;-</span><span class="dv">1</span> <span class="co"># b地域人数</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>aAi<span class="ot">&lt;-</span><span class="fl">0.5</span> <span class="co"># a地域におけるA社初期比</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>aBi<span class="ot">&lt;-</span><span class="dv">1</span><span class="sc">-</span>aAi <span class="co"># a地域におけるA社初期比</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>bAi<span class="ot">&lt;-</span><span class="fl">0.2</span> <span class="co"># b地域のA社初期比</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>bBi<span class="ot">&lt;-</span><span class="dv">1</span><span class="sc">-</span>bAi　<span class="co"># b地域のB社初期比</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>nrp<span class="ot">&lt;-</span><span class="dv">30</span> <span class="co"># 繰り返し数</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>rAA<span class="ot">&lt;-</span><span class="fl">0.4</span> <span class="co"># 以下の4行は遷移核</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>rAB<span class="ot">&lt;-</span><span class="fl">0.6</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>rBB<span class="ot">&lt;-</span><span class="fl">0.1</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>rBA<span class="ot">&lt;-</span><span class="fl">0.9</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>naA<span class="ot">&lt;-</span><span class="fu">numeric</span>(nrp)</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>naB<span class="ot">&lt;-</span><span class="fu">numeric</span>(nrp)</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>nbA<span class="ot">&lt;-</span><span class="fu">numeric</span>(nrp)</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>nbB<span class="ot">&lt;-</span><span class="fu">numeric</span>(nrp)</span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>naA[<span class="dv">1</span>]<span class="ot">&lt;-</span>na<span class="sc">*</span>aAi</span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>naB[<span class="dv">1</span>]<span class="ot">&lt;-</span>na<span class="sc">*</span>aBi</span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>nbA[<span class="dv">1</span>]<span class="ot">&lt;-</span>nb<span class="sc">*</span>bAi</span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>nbB[<span class="dv">1</span>]<span class="ot">&lt;-</span>nb<span class="sc">*</span>bBi</span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(rp <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span>nrp){</span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>  naA[rp]<span class="ot">&lt;-</span>naA[rp<span class="dv">-1</span>]<span class="sc">*</span>rAA<span class="sc">+</span>naB[rp<span class="dv">-1</span>]<span class="sc">*</span>rBA</span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>  naB[rp]<span class="ot">&lt;-</span>naA[rp<span class="dv">-1</span>]<span class="sc">*</span>rAB<span class="sc">+</span>naB[rp<span class="dv">-1</span>]<span class="sc">*</span>rBB</span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>  nbA[rp]<span class="ot">&lt;-</span>nbA[rp<span class="dv">-1</span>]<span class="sc">*</span>rAA<span class="sc">+</span>nbB[rp<span class="dv">-1</span>]<span class="sc">*</span>rBA</span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>  nbB[rp]<span class="ot">&lt;-</span>nbA[rp<span class="dv">-1</span>]<span class="sc">*</span>rAB<span class="sc">+</span>nbB[rp<span class="dv">-1</span>]<span class="sc">*</span>rBB</span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a><span class="fu">layout</span>(<span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="at">ncol=</span><span class="dv">2</span>))</span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(naA, <span class="at">type=</span><span class="st">&#39;l&#39;</span>,<span class="at">col=</span><span class="st">&#39;red&#39;</span>,<span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="fl">1.0</span>))</span>
+<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">new=</span>T)</span>
+<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(naB, <span class="at">type=</span><span class="st">&#39;l&#39;</span>,<span class="at">col=</span><span class="st">&#39;blue&#39;</span>,<span class="at">xlab=</span><span class="st">&#39;&#39;</span>,<span class="at">ylab=</span><span class="st">&#39;&#39;</span>,<span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="fl">1.0</span>))</span>
+<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(nbA, <span class="at">type=</span><span class="st">&#39;l&#39;</span>,<span class="at">col=</span><span class="st">&#39;red&#39;</span>,<span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="fl">1.0</span>))</span>
+<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">new=</span>T)</span>
+<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(nbB, <span class="at">type=</span><span class="st">&#39;l&#39;</span>,<span class="at">col=</span><span class="st">&#39;blue&#39;</span>,<span class="at">xlab=</span><span class="st">&#39;&#39;</span>,<span class="at">ylab=</span><span class="st">&#39;&#39;</span>,<span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="fl">1.0</span>))</span></code></pre></div>
 <p><img src="baba_files/figure-html/mobile%20phone-1.png" width="768" /></p>
 </div>
 <div id="mcmcが目指すこと" class="section level2">
@@ -1131,29 +1133,45 @@
 <li>ここではランダムウォークMH法</li>
 <li>MH法のアルゴリズム
 <ul>
+<li>この例での変数の使い方
+<ul>
 <li>パラメータ<span class="math inline">\(\theta\)</span>の分布を生成</li>
 <li>t番目の乱数: <span class="math inline">\(\hat{\theta_t}\)</span></li>
 <li>初期値: <span class="math inline">\(\hat{\theta_1}\)</span></li>
-<li>事後分布: <span class="math inline">\(f(\theta|D)\)</span></li>
-<li>事前分布: <span class="math inline">\(f(\theta)\)</span></li>
-<li>尤度関数: <span class="math inline">\(f(D|\theta)\)</span></li>
-<li>カーネル: <span class="math inline">\(Kernel(\theta)\)</span></li>
-<li><span class="math inline">\(f(\theta|D)\propto f(D|\theta)f(\theta)=Kernel(\theta)\)</span> : 事後分布=尤度x事前分布<span class="math inline">\(\propto\)</span>カーネル</li>
-</ul>
+<li>事後分布: <span class="math inline">\(f(\theta|D)\)</span>
+<ul>
+<li>データ<span class="math inline">\(D\)</span>が得られたという条件のもとで、<span class="math inline">\(\theta\)</span>が取りうる値の確率分布</li>
+</ul></li>
+<li>事前分布: <span class="math inline">\(f(\theta)\)</span>
+<ul>
+<li>情報がない状態での<span class="math inline">\(\theta\)</span>の確率分布</li>
+</ul></li>
+<li>尤度関数: <span class="math inline">\(f(D|\theta)\)</span>
+<ul>
+<li><span class="math inline">\(\theta\)</span>がある確率分布に従うという条件のもとでデータ<span class="math inline">\(D\)</span>が得られることの尤もらしさ</li>
+</ul></li>
+<li>カーネル: <span class="math inline">\(Kernel(\theta)\)</span>
+<ul>
+<li><span class="math inline">\(f(\theta|D)\propto f(D|\theta)f(\theta)=Kernel(\theta)\)</span></li>
+<li>事後分布=尤度x事前分布<span class="math inline">\(\propto\)</span>カーネル</li>
+</ul></li>
+</ul></li>
+<li>手順
 <ol style="list-style-type: decimal">
 <li>連続一様分布などに従ってランダムに初期値を決める</li>
-<li><span class="math inline">\(平均0, 分散\sigma\)</span>の正規分布に従う乱数を生成, <span class="math inline">\(\hat{\theta}_2^{提案}=\hat{\theta}_1+乱数\)</span></li>
+<li>平均<span class="math inline">\(0\)</span>, 分散<span class="math inline">\(\sigma\)</span>の正規分布に従う乱数を生成, <span class="math inline">\(\hat{\theta}_2^{提案}=\hat{\theta}_1+乱数\)</span></li>
 <li><span class="math inline">\(f(\theta_1|D)\)</span>と<span class="math inline">\(f(\theta_2^{提案}|D)\)</span>の比を算出(<span class="math inline">\(rate\)</span>)。ただし<span class="math inline">\(rate=\frac{f(\hat{\theta}_2^{提案}|D)}{f(\hat{\theta}_1|D)}=\frac{Kernel(\hat{\theta}_2^{提案})}{Kernel(\hat{\theta_1})}\)</span></li>
 </ol>
 <ul>
-<li>ここ、本には「事後分布のカーネルがすでに得られているから、カーネルの比を取る的な書き方がされているけど、おそらく話としては、それぞれの<span class="math inline">\(\theta\)</span>のときの確率の比を取る（それには事後分布の確率密度関数を使う）というのが筋。確率が高ければ提案を採用するという話なので。そのとき、事後分布のままだと分母の正規化定数が邪魔なんだけど、それ消せるからカーネルの比でOKですよ、ということだと思う。</li>
+<li>ここ、本には「事後分布のカーネルがすでに得られているから、カーネルの比を取る的な書き方がされているけど、おそらく話としては、それぞれの<span class="math inline">\(\theta\)</span>のときの確率の比を取る（それには事後分布の確率密度関数が使える）というのが筋。確率が高ければ提案を採用するという話なので。そのとき、事後分布のままだと分母の正規化定数が邪魔なんだけど、定数だからそれを消したカーネルの比でOKですよ、ということだと思う。</li>
 </ul>
 <ol start="4" style="list-style-type: decimal">
 <li><span class="math inline">\(rate\)</span>が1より大きければ提案を採用、1より小さくても<span class="math inline">\(rate\)</span>の確率で採用。</li>
-</ol>
+</ol></li>
+<li>緑本のメトロポリス法との違い
 <ul>
-<li>緑本のメトロポリス法との違い</li>
 <li>乱数生成が確率1/2から正規分布に従う乱数になった、だけ?</li>
+</ul></li>
 </ul></li>
 </ul>
 </div>
@@ -1179,17 +1197,17 @@
 <span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (d <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(data)){</span>
 <span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>    kp[d]<span class="ot">&lt;-</span><span class="fu">exp</span>(<span class="sc">-</span>((data[d]<span class="sc">-</span>theta[rp])<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span><span class="dv">2</span>)<span class="sc">/</span><span class="fu">sqrt</span>(<span class="dv">2</span>)<span class="sc">*</span>pi</span>
 <span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>  knl[rp]<span class="ot">&lt;-</span><span class="fu">prod</span>(kp)<span class="sc">*</span><span class="fu">exp</span>(<span class="sc">-</span>(theta[rp]<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span><span class="dv">20000</span>))<span class="sc">/</span><span class="fu">sqrt</span>(<span class="dv">20000</span><span class="sc">*</span>pi)</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>  knl[rp]<span class="ot">&lt;-</span><span class="fu">prod</span>(kp)<span class="sc">*</span><span class="fu">exp</span>(<span class="sc">-</span>(theta[rp]<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span><span class="dv">20000</span>))<span class="sc">/</span><span class="fu">sqrt</span>(<span class="dv">20000</span><span class="sc">*</span>pi) <span class="co">#カーネルの計算</span></span>
 <span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (rp<span class="sc">&gt;</span><span class="dv">1</span>){</span>
-<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>    lr<span class="ot">&lt;-</span>knl[rp]<span class="sc">/</span>knl[rp<span class="dv">-1</span>]</span>
-<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="fu">runif</span>(<span class="dv">1</span>)<span class="sc">&gt;</span>lr){</span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>    lr<span class="ot">&lt;-</span>knl[rp]<span class="sc">/</span>knl[rp<span class="dv">-1</span>]  <span class="co"># カーネル比（rate）の算出</span></span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="fu">runif</span>(<span class="dv">1</span>)<span class="sc">&gt;</span>lr){ <span class="co"># 確率rateで提案thetaを採用</span></span>
 <span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>      <span class="co">#print(lr)</span></span>
 <span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>      theta[rp]<span class="ot">&lt;-</span>theta[rp<span class="dv">-1</span>]</span>
 <span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>      knl[rp]<span class="ot">&lt;-</span>knl[rp<span class="dv">-1</span>]</span>
 <span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>    }</span>
 <span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>  theta[rp<span class="sc">+</span><span class="dv">1</span>]<span class="ot">&lt;-</span>theta[rp]<span class="sc">+</span><span class="fu">rnorm</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>)</span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>  theta[rp<span class="sc">+</span><span class="dv">1</span>]<span class="ot">&lt;-</span>theta[rp]<span class="sc">+</span><span class="fu">rnorm</span>(<span class="dv">1</span>,m,v) <span class="co"># 次のthetaの生成, 平均m, 分散vの正規分布に従う乱数を前のthetaにたす</span></span>
 <span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(theta[<span class="dv">1</span><span class="sc">:</span>nrp],<span class="at">type=</span><span class="st">&#39;l&#39;</span>, <span class="at">main=</span><span class="fu">mean</span>(theta))</span>
 <span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(theta)</span></code></pre></div>
@@ -1297,29 +1315,37 @@
 <h1>1-7の補足: 緑本のMCMC</h1>
 <ul>
 <li><a href="https://www.amazon.co.jp/dp/400006973X">緑本</a> P.171 例題：種子の生存確率</li>
-<li>観測データ：<span class="math inline">\(N_i個の観察種子のうち、生きていて発芽能力があるものはy_i個、死んだ種子はN-y_i個」\)</span></li>
-<li><span class="math inline">\(N_iを8とし、20個体について調べる\)</span></li>
+<li>観測データ：<span class="math inline">\(N_i個\)</span>の観察種子のうち、生きていて発芽能力があるものは<span class="math inline">\(y_i個\)</span>、死んだ種子は<span class="math inline">\(N-y_i個\)</span>」</li>
+<li><span class="math inline">\(N_i\)</span>を<span class="math inline">\(8\)</span>とし、<span class="math inline">\(20\)</span>個体について調べる（8個の観察種子のうち、生きてるものは<span class="math inline">\(y_i\)</span>個、死んでるものは<span class="math inline">\(8-y_i\)</span>個。これを20本の植物について調べる）</li>
 <li><span class="math inline">\(\{y_1,y_2,...,y_{20}\}=\{4,3,4,5,5,2,3,1,4,0,1,5,5,6,5,4,4,5,3,4\}\)</span></li>
 <li>このとき、種子個体iの生存確率qは?</li>
-<li>ある個体<span class="math inline">\(i\)</span>の生存種子数が<span class="math inline">\(y_i\)</span>である確率（ヒストグラム（下図）を見ると過分散ではないので、二項分布と考える＝統計モデル、ただしパラメータqは不明なので、データからそれを求めたい）：<span class="math inline">\(p(y_i|q)={}_8 C_{y_1} \cdot q^{y_1} \cdot(1-q)^{8-{y_1}}\)</span></li>
-<li>尤度関数：<span class="math inline">\(L(q)=\prod_i p(y_i|q)\)</span> :パラメータq。qが変化すると尤度（モデルのもっともらしさ）が変化する。→尤度が最大になるqを求めればいい。これが真の値の推定値（頻度主義だから真の値がある）<span class="math inline">\(\hat{q}=最尤推定量\)</span></li>
-<li>対数尤度関数：<span class="math inline">\(logL(q) = \Sigma_i\{y_ilog\ q+(8-y_i)\ log(1-q)\}+定数\)</span></li>
-<li>過分散：通常の二項分布よりも分散が大きいこと。サンプルごとに傾向に違いがあるような場合に見られる。
+<li>ある個体<span class="math inline">\(i\)</span>の生存種子数が<span class="math inline">\(y_i\)</span>である確率（ヒストグラム（下図左）を見ると過分散ではないので、二項分布と考える＝統計モデル、ただしパラメータqは不明なので、データからそれを求めたい）：<span class="math inline">\(p(y_i|q)={}_8 C_{y_1} \cdot q^{y_1} \cdot(1-q)^{8-{y_1}}\)</span>
 <ul>
-<li>さらに脱線。尤度の説明もう一度。</li>
+<li>過分散：通常の（二項）分布よりも分散が大きいこと。サンプルごとに傾向に違いがあるような場合に見られる。</li>
+</ul></li>
+<li>尤度関数：<span class="math inline">\(L(q)=\prod_i p(y_i|q)\)</span>（パラメータqのときデータ<span class="math inline">\(y_i\)</span>が得られる確率の総乗） :パラメータq。qが変化すると尤度（モデルのもっともらしさ）が変化する。→尤度が最大になるqを求めればいい。これが真の値の推定値（頻度主義だから真の値がある）<span class="math inline">\(\hat{q}\)</span>（qハット）=最尤推定量</li>
+<li>対数尤度関数：<span class="math inline">\(logL(q) = \Sigma_i\{y_ilog\ q+(8-y_i)\ log(1-q)\}+定数\)</span>（下図右）</li>
+</ul>
+<blockquote>
+<ul>
+<li>さらに脱線。尤度の説明もう一度。
+<ul>
 <li>緑本2.4節</li>
 <li>尤度：あてはまりの良さ</li>
 <li><span class="math inline">\(\lambda=3.56\)</span>のポアソン分布に従う<span class="math inline">\(y_i\)</span>が<span class="math inline">\(\{y_1,y_2,y_3\}=\{2,2,4\}\)</span>であるときの尤度は<span class="math inline">\(p(y_1=2|\lambda=3.56)=0.180\)</span>, <span class="math inline">\(p(y_2=2|\lambda=3.56)=0.180\)</span> <span class="math inline">\(p(y_3=4|\lambda=3.56)=0.190\)</span>より、<span class="math inline">\(0.180\times0.180\times0.190=0.006156\)</span>となる</li>
-<li>一般化すると尤度<span class="math inline">\(L(\lambda)=\prod_{i}^{}p(yi|\lambda)=\prod_{i}\frac{\lambda^{y_i} exp(-\lambda)}{y_i!}\)</span>: <span class="math inline">\(尤度は平均\lambdaのポアソン分布におけるyiの確率の総乗として表される\)</span></li>
+<li>一般化すると尤度<span class="math inline">\(L(\lambda)=\prod_{i}^{}p(yi|\lambda)=\prod_{i}\frac{\lambda^{y_i} exp(-\lambda)}{y_i!}\)</span>: 尤度は平均<span class="math inline">\(\lambda\)</span>のポアソン分布における<span class="math inline">\(y_i\)</span>の確率の総乗として表される</li>
 </ul></li>
+</ul>
+</blockquote>
+<ul>
 <li>尤度関数を対数変換したとき、その値が最も大きい（＝0に近い）とき最も尤度が大きい（＝あてはまりがいい）</li>
 <li>対数尤度関数の傾きが0になるqを探す（緑本2.4節参照）＝対数尤度関数を偏微分する</li>
-<li>対数尤度関数をqで偏微分：<span class="math inline">\(\frac{\partial\ logL(q)}{\partial\ q} = \Sigma\{\frac{y_i}{q} - \frac{8-y_i}{1-q}\} = 0\)</span> ? で、ここから<span class="math inline">\(\hat{q}=\frac{\Sigma{y_i}}{8\times20} = \frac{73}{8\times20}=0.45625\)</span>になるらしい（<a href="https://hazm.at/mox/math/statistics/inferential/binomial-distribution.html" class="uri">https://hazm.at/mox/math/statistics/inferential/binomial-distribution.html</a>）</li>
+<li>対数尤度関数をqで偏微分：<span class="math inline">\(\frac{\partial\ logL(q)}{\partial\ q} = \Sigma\{\frac{y_i}{q} - \frac{8-y_i}{1-q}\} = 0\)</span> ? （全く自信ない）で、ここから<span class="math inline">\(\hat{q}=\frac{\Sigma{y_i}}{8\times20} = \frac{73}{8\times20}=0.45625\)</span>になるらしい（<a href="https://hazm.at/mox/math/statistics/inferential/binomial-distribution.html" class="uri">https://hazm.at/mox/math/statistics/inferential/binomial-distribution.html</a>）</li>
 <li>これで解析的に最尤推定値<span class="math inline">\(\hat{q}\)</span>を求めることができた!</li>
-<li>下の対数尤度関数のピークとなるところに一致。</li>
+<li>下の対数尤度関数のピークとなるところの<span class="math inline">\(q\)</span>の値ということ。</li>
 </ul>
-<div id="緑本の種子の例のヒストグラムと対数尤度関数" class="section level2">
-<h2>★緑本の種子の例のヒストグラムと対数尤度関数</h2>
+<div id="緑本の-種子の例のヒストグラムと対数尤度関数" class="section level2">
+<h2>★緑本の 「種子の例」のヒストグラムと対数尤度関数</h2>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">layout</span>(<span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="at">ncol=</span><span class="dv">2</span>))</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>data<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">4</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">5</span>,<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">3</span>,<span class="dv">4</span>)</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(data,<span class="at">breaks=</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span><span class="sc">:</span><span class="dv">7</span>))</span>
@@ -1328,34 +1354,34 @@
 <span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(q, <span class="fu">sapply</span>(q, logb), <span class="at">type=</span><span class="st">&#39;l&#39;</span>)</span></code></pre></div>
 <p><img src="baba_files/figure-html/unnamed-chunk-10-1.png" width="768" /></p>
 <ul>
-<li>ここまでは解析的に最尤推定量<span class="math inline">\(\hat{q}\)</span>を求めることができたけど、それができない場合はどうするか。分布がややこしかったりすると尤度関数はもっとややこしくて解けなくなることがある。
+<li>ここまでで、解析的に最尤推定量<span class="math inline">\(\hat{q}\)</span>を求めることができたけど、それができない場合はどうするか。分布がややこしかったりすると尤度関数はもっとややこしくて解けなくなることがある。
 <ul>
 <li>ここで、モンテカルロ法的なものが登場</li>
 </ul></li>
 <li>ふらふら試行錯誤による最尤推定（という例；緑本P173）
 <ul>
 <li>qを離散化→qを連続値ではなく0.01刻みの離散値と考える</li>
-<li>適当なqの初期値を決め、対数尤度を計算して評価。対数尤度関数に代入するだけ。パラメータはqだけだから計算可能。<span class="math inline">\(q=0.30の場合、-46.38になる\)</span>。</li>
+<li>適当なqの初期値を決め、対数尤度を計算して評価。対数尤度関数に代入するだけ。パラメータはqだけだから計算可能。<span class="math inline">\(q=0.30\)</span>の場合、<span class="math inline">\(-46.38\)</span>になる。</li>
 </ul></li>
 <li>以下は「ふらふら試行錯誤の最尤推定」手順
 <ol style="list-style-type: decimal">
-<li>qはとなりの値にしか変化できない-&gt;0.30スタートなら0.29か0.31</li>
-<li>となりのうちどちらを選ぶかはランダムに決定し、対数尤度が現在よりも大きければそちらに移動</li>
+<li>qはとなりの値にしか変化できない（ここで「となりの値」という考え方をするために、qを離散化したのだと思う）-&gt;0.30スタートなら0.29か0.31</li>
+<li>2つの値のうちどちらを選ぶかはランダムに決定し、対数尤度が現在よりも大きければそちらに移動</li>
 </ol>
 <ul>
-<li>0.31が選ばれた場合、対数尤度は-45.24となり、大きいから選択される -&gt; qは0.31になる</li>
+<li>0.31が選ばれた場合、対数尤度は-45.24となり、大きいから採用される -&gt; qは0.31になる</li>
 <li>仮に0.29が選ばれていれば、対数尤度は-47.62で小さくなってるので、qは0.30に戻る</li>
 </ul></li>
 <li>下、適当に実装してみた例。qの初期値(qi)の値を変えても同じ値に収束するのがわかる。
 <ul>
-<li>緑本ではqを0.01刻みで動かしてるけど、下では0.001刻みにしている。緑本の例のように100回では収束せず400回くらいかかってるけど、収束した値は当然より真の値に近づく。</li>
+<li>緑本ではqを0.01刻みで動かしてるけど、下では0.001刻みにしている。緑本の例のように100回では収束せず400回くらいかかってるけど、当然収束した値は、より真の値に近づく。</li>
 </ul></li>
 </ul>
 </div>
 <div id="ふらふら最尤推定" class="section level2">
 <h2>★ふらふら最尤推定</h2>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>nrp<span class="ot">&lt;-</span><span class="dv">1000</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>qi<span class="ot">&lt;-</span><span class="fl">0.800</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>qi<span class="ot">&lt;-</span><span class="fl">0.159</span></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>n<span class="ot">&lt;-</span><span class="dv">8</span></span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>data<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">4</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">5</span>,<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">3</span>,<span class="dv">4</span>)</span>
 <span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>logL<span class="ot">&lt;-</span><span class="fu">numeric</span>(nrp)</span>
@@ -1380,11 +1406,31 @@
 <span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>  }</span>
 <span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(q[<span class="dv">1</span><span class="sc">:</span>nrp],<span class="at">type=</span><span class="st">&#39;l&#39;</span>, <span class="at">main=</span>q[nrp])</span></code></pre></div>
-<p><img src="baba_files/figure-html/unnamed-chunk-11-1.png" width="60%" style="display: block; margin: auto;" /> - このように、ランダムに生成した値を仮のqとして尤度を計算、尤度が高くなる場合だけ値を変化させるという方法で最尤値を推定することができた。緑本に書いてるように、ここまでのアルゴリズムは分かりやすさだけを考えた非効率なもの。実際の最尤推定はもっと効率いいそうです。 - メトロポリス法（MCMCアルゴリズムの一つ） - ふらふら試行錯誤をちょっと修正 1. <span class="math inline">\(q\)</span>の初期値を決める(qi) 2. <span class="math inline">\(q\)</span>を増やすか減らすかをランダムに決める(<span class="math inline">\(q^新\)</span>) 3. 尤度を計算。大きくなってたら<span class="math inline">\(q^新\)</span>を採用 - — ここまではふらふら試行錯誤と同じ — 4. 尤度が小さくなる場合でも、確率<span class="math inline">\(r\)</span>で<span class="math inline">\(q\)</span>を<span class="math inline">\(q^真\)</span>に変更。<span class="math inline">\(r=\frac{L(q^新)}{L(q)}\)</span>。 - じゃあ実装してみよう。</p>
+<p><img src="baba_files/figure-html/unnamed-chunk-11-1.png" width="60%" style="display: block; margin: auto;" /></p>
+<ul>
+<li>このように、ランダムに生成した値を仮のqとして尤度を計算、尤度が高くなる場合だけ値を変化させるという方法で最尤値を推定することができた。緑本に書いてるように、ここまでのアルゴリズムは分かりやすさだけを考えた非効率なもの。実際の最尤推定はもっと効率いいそうです。</li>
+<li>これがモンテカルロ法（の一例）。</li>
+<li>メトロポリス法（MCMCアルゴリズムの一つ）
+<ul>
+<li>ふらふら試行錯誤をちょっと修正</li>
+</ul>
+<ol style="list-style-type: decimal">
+<li><span class="math inline">\(q\)</span>の初期値を決める(<span class="math inline">\(q_i\)</span>)</li>
+<li><span class="math inline">\(q\)</span>を増やすか減らすかをランダムに決め、新しい値を作る(<span class="math inline">\(q^新\)</span>とする)</li>
+<li>尤度を計算。大きくなってたら<span class="math inline">\(q^新\)</span>を採用する</li>
+</ol>
+<ul>
+<li>— ここまではふらふら試行錯誤と同じ —</li>
+</ul>
+<ol start="4" style="list-style-type: decimal">
+<li>尤度が小さくなる場合でも、確率<span class="math inline">\(r\)</span>で<span class="math inline">\(q^新\)</span>を採用して<span class="math inline">\(q\)</span>を<span class="math inline">\(q^新\)</span>に変更。そのときの確率は<span class="math inline">\(r=\frac{L(q^新)}{L(q)}\)</span>で計算する。尤度が高いほど採用される確率が高まる。手順3のように尤度が高くなっていれば確率が1より大きいから、必ず採用される。</li>
+</ol></li>
+<li>じゃあ実装してみよう。繰り返し回数(nrp)によってqの平均値は変わってくる。まずは10万回の例。</li>
+</ul>
 </div>
 <div id="メトロポリス法の実装例" class="section level2">
 <h2>★メトロポリス法の実装例</h2>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">layout</span>(<span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="at">ncol=</span><span class="dv">2</span>))</span>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">layout</span>(<span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="at">ncol=</span><span class="dv">1</span>))</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>nrp<span class="ot">&lt;-</span><span class="dv">100000</span></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>qi<span class="ot">&lt;-</span><span class="fl">0.30</span></span>
 <span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>n<span class="ot">&lt;-</span><span class="dv">8</span></span>
@@ -1417,18 +1463,26 @@
 <span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(q)</span></code></pre></div>
 <p><img src="baba_files/figure-html/unnamed-chunk-12-1.png" width="768" /></p>
 <ul>
-<li>とりあえず緑本の感じにはいってる。右側は生成したqのヒストグラム。
+<li>とりあえず緑本の感じにはなってるので実装例は良さそう。下図は生成したqのヒストグラム。
 <ul>
-<li>MCMCは一意の最尤値に収束するのではなく、変化する値の生成を行う</li>
+<li>MCMCは一意の最尤値に収束するのではなく、変化する値の生成を行う。ただし、だんだんと収束していくことには変わりはない。</li>
 </ul></li>
 <li>定常分布
 <ul>
-<li>上のようなマルコフ連鎖によって生成した変数q</li>
-<li>マルコフ連鎖が「一定の条件」<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>を満たしているとき、qは定常分布(<span class="math inline">\(p(q|y_i)\)</span>)という確率分布に従う</li>
-<li>ただし、上でやったのは尤度をもとにしたマルコフ連鎖によってたくさんの変数を生成しただけ</li>
-<li>十分な数、生成した変数の分布をみると、それは定常分布に近似する（上図）</li>
+<li>上のようなマルコフ連鎖によって生成した変数<span class="math inline">\(q\)</span>を考えたとき、
+<ul>
+<li>マルコフ連鎖が「一定の条件」<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>を満たしているとき、<span class="math inline">\(q\)</span>は定常分布(<span class="math inline">\(p(q|y_i)\)</span>)という確率分布に従う</li>
+<li>そのため、十分な回数生成した変数の分布は定常分布に近似してくれる（上図下。ただし、上図では定常分布は書いてない。緑本p179参照。回数が少ないと定常分布から離れたヒストグラムになる。）</li>
 <li>定常分布：<span class="math inline">\(p(q|y_i)=\frac{L(q)}{\Sigma_q L(q)} \propto L(q)\)</span></li>
-<li>二項分布というモデルとメトロポリス法によって、尤度に比例する<span class="math inline">\(q\)</span>の確率分布を推定できた、ということ</li>
+</ul></li>
+<li>ここまでの流れ
+<ul>
+<li>二項分布というモデルとメトロポリス法によって<span class="math inline">\(q\)</span>をたくさん生成すると、それは定常分布に近似する。
+<ul>
+<li>この例題では、定常分布は尤度に比例する</li>
+</ul></li>
+<li>定常分布は、あるデータに統計モデルを当てはめたときに<span class="math inline">\(q\)</span>がとる値の確率分布と解釈できる（緑本p184）←ただし、ここの理屈はちょっと自身がない</li>
+</ul></li>
 </ul></li>
 <li>ベイズへ
 <ul>
@@ -1437,10 +1491,10 @@
 <ol style="list-style-type: decimal">
 <li>植物の個体のうち生存しているものはいくつあるか</li>
 <li>事前分布をおく</li>
-<li>個数はパラメータqに従う二項分布と考え、20個体のデータから事後分布を作る。</li>
+<li>個数はパラメータ<span class="math inline">\(q\)</span>に従う二項分布と考え、20個体のデータから事後分布を作る。</li>
 </ol></li>
-<li>この事後分布は事前分布に尤度をかけたもの。事前分布はパラメータ<span class="math inline">\(q\)</span>（馬場本の例だと<span class="math inline">\(\theta\)</span>）の関数だけど、まあ一様分布を使ったりするし、ということで定数だとすると、定常分布と同じということになる</li>
-<li>ここまでの流れによって、MCMCの定常分布はベイズモデリングの事後分布であると言えることになる</li>
+<li>この事後分布は事前分布に尤度をかけたもの。事前分布はパラメータ<span class="math inline">\(q\)</span>（馬場本の例だと<span class="math inline">\(\theta\)</span>）の関数だけど、まあ一様分布を使ったりするし、ということで定数だとすると、事後分布＝定常分布ということになる</li>
+<li>ここまでの流れによって、MCMCで得られる定常分布はベイズモデリングの事後分布であると言えることになる</li>
 </ul></li>
 <li><a href="#mcmc%E3%81%A8%E7%B5%B1%E8%A8%88%E3%83%A2%E3%83%87%E3%83%AA%E3%83%B3%E3%82%B0%E3%81%AE%E9%96%A2%E3%82%8F%E3%82%8A">もとの場所に戻る</a></li>
 </ul>
@@ -1461,7 +1515,7 @@ $('a[href^=#]').click(function(){
 <div class="footnotes">
 <hr />
 <ol>
-<li id="fn1"><p>一定の条件に関する<a href="https://www.amazon.co.jp/dp/400730789X">文献</a>{:target="_blank"}<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn1"><p>一定の条件に関する<a href="https://www.amazon.co.jp/dp/400730789X">文献</a><a href="#fnref1" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
 </div>

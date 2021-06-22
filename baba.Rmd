@@ -561,6 +561,8 @@ plot(nbB, type='l',col='blue',xlab='',ylab='',ylim=c(0,1.0))
 layout(matrix(1:2, ncol=2))
 nrp<-2000
 data<-c(2.4,3.2,2.2,4.6,3.3)
+m<-0
+v<-1
 ti<-runif(1,min=-2,max=2) # -2から2の連続一様分布に従う乱数
 knl<-numeric(nrp)
 theta<-numeric(nrp)

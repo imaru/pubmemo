@@ -605,9 +605,9 @@ for (wf in 1:chain){
 par(new=F)
 for (wf in 1:chain){
   if (wf>1){
-    hist(theta[,wf], col=adjustcolor(wf, alpha.f=0.3), add=TRUE, breaks=seq(floor(min(theta)),ceiling(max(theta)),1))
+    hist(theta[,wf], col=adjustcolor(wf, alpha.f=0.3), add=TRUE, breaks=seq(floor(min(theta)),ceiling(max(theta)),0.5))
   }else{
-    hist(theta[,wf], col=adjustcolor(wf, alpha.f=0.3), breaks=seq(floor(min(theta)),ceiling(max(theta)),1))
+    hist(theta[,wf], col=adjustcolor(wf, alpha.f=0.3), breaks=seq(floor(min(theta)),ceiling(max(theta)),0.5))
   }
 }
 

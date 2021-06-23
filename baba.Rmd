@@ -564,7 +564,7 @@ nrp<-2000
 data<-c(2.4,3.2,2.2,4.6,3.3)
 m<-0
 v<-1
-chain<-5
+chain<-1
 #knl<-numeric(nrp)
 #theta<-numeric(nrp)
 knl<-matrix(0,nrow=nrp, ncol=chain)
@@ -597,17 +597,17 @@ for (nc in 1:chain){
 for (wf in 1:chain){
   if (wf>1){
     par(new=T)
-    plot(theta[1:nrp,wf],type='l', xlab='',ylab='', col=wf+1, ylim=(c(min(theta),max(theta))))
+    plot(theta[1:nrp,wf],type='l', xlab='',ylab='', col=wf, ylim=(c(min(theta),max(theta))))
   }else{
-    plot(theta[1:nrp,wf],type='l', main=mean(theta), col=wf+1, ylim=(c(min(theta),max(theta))))
+    plot(theta[1:nrp,wf],type='l', main=mean(theta), col=wf, ylim=(c(min(theta),max(theta))))
   }
 }
 par(new=F)
 for (wf in 1:chain){
   if (wf>1){
-    hist(theta[,wf], col=adjustcolor(wf+1, alpha.f=0.3), add=TRUE, breaks=seq(floor(min(theta)),ceiling(max(theta)),1))
+    hist(theta[,wf], col=adjustcolor(wf, alpha.f=0.3), add=TRUE, breaks=seq(floor(min(theta)),ceiling(max(theta)),1))
   }else{
-    hist(theta[,wf], col=adjustcolor(wf+1, alpha.f=0.3), breaks=seq(floor(min(theta)),ceiling(max(theta)),1))
+    hist(theta[,wf], col=adjustcolor(wf, alpha.f=0.3), breaks=seq(floor(min(theta)),ceiling(max(theta)),1))
   }
 }
 

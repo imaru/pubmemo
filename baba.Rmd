@@ -599,7 +599,7 @@ for (wf in 1:chain){
     par(new=T)
     plot(theta[1:nrp,wf],type='l', xlab='',ylab='', col=wf+1, ylim=(c(min(theta),max(theta))))
   }else{
-    plot(theta[1:nrp,wf],type='l', main=mean(theta[,wf]), col=wf+1, ylim=(c(min(theta),max(theta))))
+    plot(theta[1:nrp,wf],type='l', main=mean(theta), col=wf+1, ylim=(c(min(theta),max(theta))))
   }
 }
 par(new=F)

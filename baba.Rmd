@@ -564,30 +564,53 @@ nrp<-2000
 data<-c(2.4,3.2,2.2,4.6,3.3)
 m<-0
 v<-1
-ti<-runif(1,min=-2,max=2) # -2から2の連続一様分布に従う乱数
-knl<-numeric(nrp)
-theta<-numeric(nrp)
-theta[1]<-ti
+chain<-5
+#knl<-numeric(nrp)
+#theta<-numeric(nrp)
+knl<-matrix(0,nrow=nrp, ncol=chain)
+theta<-matrix(0,nrow=nrp,ncol=chain)
+
 ratio<-1
-for (rp in 1:nrp){
-  kp<-numeric(length(data))
-  for (d in 1:length(data)){
-    kp[d]<-exp(-((data[d]-theta[rp])^2)/2)/sqrt(2)*pi
-  }
-  knl[rp]<-prod(kp)*exp(-(theta[rp]^2/20000))/sqrt(20000*pi) #カーネルの計算
-  
-  if (rp>1){
-    lr<-knl[rp]/knl[rp-1]  # カーネル比（rate）の算出
-    if (runif(1)>lr){ # 確率rateで提案thetaを採用
-      #print(lr)
-      theta[rp]<-theta[rp-1]
-      knl[rp]<-knl[rp-1]
+for (nc in 1:chain){
+  theta[1, nc]<-runif(1,min=-2,max=2) # -2から2の連続一様分布に従う乱数
+  for (rp in 1:nrp){
+    kp<-numeric(length(data))
+    for (d in 1:length(data)){
+      kp[d]<-exp(-((data[d]-theta[rp,nc])^2)/2)/sqrt(2)*pi
     }
+    knl[rp,nc]<-prod(kp)*exp(-(theta[rp,nc]^2/20000))/sqrt(20000*pi) #カーネルの計算
+    
+    if (rp>1){
+      lr<-knl[rp,nc]/knl[rp-1,nc]  # カーネル比（rate）の算出
+      if (runif(1)>lr){ # 確率rateで提案thetaを採用
+        #print(lr)
+        theta[rp,nc]<-theta[rp-1,nc]
+        knl[rp,nc]<-knl[rp-1,nc]
+      }
+    }
+    if (rp<nrp){
+      theta[rp+1,nc]<-theta[rp,nc]+rnorm(1,m,v) # 次のthetaの生成, 平均m, 分散vの正規分布に従う乱数を前のthetaにたす
+    } 
   }
-  theta[rp+1]<-theta[rp]+rnorm(1,m,v) # 次のthetaの生成, 平均m, 分散vの正規分布に従う乱数を前のthetaにたす
 }
-plot(theta[1:nrp],type='l', main=mean(theta))
-hist(theta)
+
+for (wf in 1:chain){
+  if (wf>1){
+    par(new=T)
+    plot(theta[1:nrp,wf],type='l', xlab='',ylab='', col=wf+1, ylim=(c(min(theta),max(theta))))
+  }else{
+    plot(theta[1:nrp,wf],type='l', main=mean(theta[,wf]), col=wf+1, ylim=(c(min(theta),max(theta))))
+  }
+}
+par(new=F)
+for (wf in 1:chain){
+  if (wf>1){
+    hist(theta[,wf], col=adjustcolor(wf+1, alpha.f=0.3), add=TRUE, breaks=seq(floor(min(theta)),ceiling(max(theta)),1))
+  }else{
+    hist(theta[,wf], col=adjustcolor(wf+1, alpha.f=0.3), breaks=seq(floor(min(theta)),ceiling(max(theta)),1))
+  }
+}
+
 ```
 
 ## 11. MH法の欠点

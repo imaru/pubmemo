@@ -489,7 +489,7 @@ hist(rdata, breaks=12)
 # a地域とb地域では初期比が異なるけど、遷移核が同じならそのうち同じ値に収束するという例
 na<-1 # a地域人数
 nb<-1 # b地域人数
-aAi<-0.5 # a地域におけるA社初期比
+aAi<-0.9 # a地域におけるA社初期比
 aBi<-1-aAi # a地域におけるA社初期比
 bAi<-0.2 # b地域のA社初期比
 bBi<-1-bAi　# b地域のB社初期比
@@ -564,7 +564,7 @@ nrp<-2000
 data<-c(2.4,3.2,2.2,4.6,3.3)
 m<-0
 v<-1
-chain<-1
+chain<-4
 #knl<-numeric(nrp)
 #theta<-numeric(nrp)
 knl<-matrix(0,nrow=nrp, ncol=chain)
@@ -759,7 +759,7 @@ plot(q[1:nrp],type='l', main=q[nrp])
 ## ★メトロポリス法の実装例
 ```{r}
 layout(matrix(1:2, ncol=1))
-nrp<-100000
+nrp<-50000
 qi<-0.30
 n<-8
 data<-c(4,3,4,5,5,2,3,1,4,0,1,5,5,6,5,4,4,5,3,4)
@@ -826,3 +826,136 @@ $('a[href^=#]').click(function(){
   });
 });
 ```
+# 2章
+# 2-1章：Rの基本
+## 1. 目的と概要
+  * Rインストール
+  * 基本事項
+  * 応用
+  
+## 2. Rのインストール
+
+## 3. RStudioのインストール
+
+## 4. RStudioの使い方
+  * プロジェクトの作成
+  * スクリプトの作成
+
+## 5. 変数
+  * '<-'による代入
+  * print()や変数名で表示
+  * 因子型: 
+  
+## 6. 関数
+  * 引数
+
+## 7. ベクトル
+  * vector <- c(1,2,3,4,5)
+  * 1:10 等差数列
+
+## 8. 行列
+```{r}
+mtrx<-matrix(
+  data=1:10,
+  nrow=2,
+  byrow=F
+)
+rownames(mtrx)<-c('row1','row2')
+colnames(mtrx)<-c('c1','c2','c3','c4','c5')
+print(mtrx)
+```
+
+## 9. 配列
+  * arry<-array(data=1:30, dim=c(3,5,2))
+
+## 10. データフレーム
+  * 列ごとにっデータの種類を変えられる
+  * df <-data.frame()
+  * nrow(df)
+  
+## 11. リスト
+  * さらに上位構造としてのリスト
+  * lst <- list(
+          a=c(1,2,3),
+          b=mtrx,
+          c=df
+    )
+
+## 12. データの抽出
+  * []での抽出
+  * a<-matrix(data=1:10,nrow=2) でa[,1]のようにすれば特定列のみ、特定行のみ抽出
+  * a[1, 2:3]のようなことも可能
+  * dim()で要素数、dimnamesで要素名を調べる
+  * 行名や列名でも指定可能
+  * データフレームの場合、$で列名を指定可能
+  * head(df,n)、データフレームdfの先頭n行を表示
+  * listでも$を使える
+
+## 13. 時系列データ(ts)
+  * ts()
+```{r}
+df2 <- data.frame(
+  data=1:24
+)
+ts2<-ts(
+  df2, # 対象データ
+  start = c(2010,1), #開始年月
+  frequency=12 #頻度
+)
+print(ts2)
+
+```
+
+# 14. ファイルからのデータ読み込み
+  * read.csv()
+
+# 15. 乱数の生成
+  * rnorm(n=, mean=, sd=): 正規分布に従う乱数
+  * set.seed(): seedを設定すれば同じ乱数を生成できる
+  
+# 16. 繰り返し構文とforループ
+  * for (i in 1:3){}のような形
+  
+# 17. 外部パッケージの活用
+  * install.packages()
+  
+## 2-2章: データの要約
+# 2. 度数・度数分布・ヒストグラム
+  * hist()
+```{r}
+fish<-read.csv('2-2-1-fish.csv')
+hist(fish$length)
+```
+  
+# 3. カーネル密度推定
+  * ヒストグラムを滑らかに
+  * density()
+```{r}
+fish<-read.csv('2-2-1-fish.csv')
+plot(density(fish$length, adjust=1))
+
+```
+  
+# 4. 算術平均
+  * mean()
+
+# 5. 中央値・四分位点・パーセント点
+  * median()
+  * quautile(data, c(v1, v2))
+
+# 6. 今日分散とピアソンの積率相関係数
+  * 共分散: $\frac{1}{N} \Sigma^N_{i=1} (x_i-\bar{x})(y_i-\bar{y}))$
+  * ピアソンの積率相関係数: $\rho_{xy}=\frac{\Sigma^N_{i=1}(x_i-\bar{x})(y_i-\bar{y})}{\sqrt{\{\Sigma^N_{i=1}(x_i-\bar{x})^2\}\{\Sigma^N_{i=1}(y_i-\bar{y})^2\}}}$
+  * cor(varx, vary)
+
+# 7. 自己共分散・自己相関係数・これログラム
+  * jikosoukannkeisuu: 時系列データにおける過去のデータとの相関
+    * 1次：1時点前との相関
+    * 2次：2時点前との相関
+    * $\frac{1}{N}\Sigma^N_{i=1}(y_t-\bar{y})(y_{t-1}-\bar{y})$
+    * acf()
+```{r}
+acf(Nile)
+```
+    
+  

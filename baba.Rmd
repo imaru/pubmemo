@@ -943,7 +943,7 @@ plot(density(fish$length, adjust=1))
   * median()
   * quautile(data, c(v1, v2))
 
-# 6. 今日分散とピアソンの積率相関係数
+# 6. 共分散とピアソンの積率相関係数
   * 共分散: $\frac{1}{N} \Sigma^N_{i=1} (x_i-\bar{x})(y_i-\bar{y}))$
   * ピアソンの積率相関係数: $\rho_{xy}=\frac{\Sigma^N_{i=1}(x_i-\bar{x})(y_i-\bar{y})}{\sqrt{\{\Sigma^N_{i=1}(x_i-\bar{x})^2\}\{\Sigma^N_{i=1}(y_i-\bar{y})^2\}}}$
   * cor(varx, vary)

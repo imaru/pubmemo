@@ -1111,16 +1111,43 @@ print(p2)
   * stan関数
     * 引数はP118の通り
     * 実際にはMCMCサンプルは毎回異なるが、seed=1を指定することで固定。
+```{r}
+library(rstan)
+rstan_options(auto_write=TRUE)
+options(mc.cores=parallel::detectCores())
+
+file_beer_sales_1 <- read.csv("2-4-1-beer-sales-1.csv")
+
+sample_size<-nrow(file_beer_sales_1)
+data_list<-list(sales=file_beer_sales_1$sales, N=sample_size)
+
+mcmc_result<-stan(
+  file="2-4-1-calc.mean-variance.stan",
+  data=data_list,
+  seed=1,
+  chains=4,
+  iter=2000,
+  warmup=1000,
+  thin=1
+)
+```
 
 ## 13. 結果の確認
   * print()でmcmcの戻り値を表示
     * 求めるパラメータ, mu, sigma, lp__:対数事後確率
+```{r}
+print(mcmc_result, probs=c(0.025,0.5,0.975))
+```
+    
     
 ## 14. 収束の確認
   * traceplot関数でstan関数の戻り値を処理
   * 4回の結果（4つのチェーン）が重なっていればOK
   * traceplot(mcmc_result, inc_warmup=T)
     * バーンイン期間も表示
+```{r}
+traceplot(mcmc_result)
+```
   
 ## 15. ベクトル化
   * $sales[N] \sim normal(mu, sigma)$ をベクトルにする

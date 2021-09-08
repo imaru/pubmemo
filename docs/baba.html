@@ -2064,6 +2064,56 @@ $('a[href^=#]').click(function(){
 <li>実際にはMCMCサンプルは毎回異なるが、seed=1を指定することで固定。</li>
 </ul></li>
 </ul>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rstan)</span></code></pre></div>
+<pre><code>##  要求されたパッケージ StanHeaders をロード中です</code></pre>
+<pre><code>## 
+## rstan version 2.26.3 (Stan version 2.26.1)</code></pre>
+<pre><code>## For execution on a local, multicore CPU with excess RAM we recommend calling
+## options(mc.cores = parallel::detectCores()).
+## To avoid recompilation of unchanged Stan programs, we recommend calling
+## rstan_options(auto_write = TRUE)
+## For within-chain threading using `reduce_sum()` or `map_rect()` Stan functions,
+## change `threads_per_chain` option:
+## rstan_options(threads_per_chain = 1)</code></pre>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rstan_options</span>(<span class="at">auto_write=</span><span class="cn">TRUE</span>)</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">mc.cores=</span>parallel<span class="sc">::</span><span class="fu">detectCores</span>())</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>file_beer_sales_1 <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;2-4-1-beer-sales-1.csv&quot;</span>)</span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>sample_size<span class="ot">&lt;-</span><span class="fu">nrow</span>(file_beer_sales_1)</span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a>data_list<span class="ot">&lt;-</span><span class="fu">list</span>(<span class="at">sales=</span>file_beer_sales_1<span class="sc">$</span>sales, <span class="at">N=</span>sample_size)</span>
+<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a>mcmc_result<span class="ot">&lt;-</span><span class="fu">stan</span>(</span>
+<span id="cb41-10"><a href="#cb41-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">file=</span><span class="st">&quot;2-4-1-calc.mean-variance.stan&quot;</span>,</span>
+<span id="cb41-11"><a href="#cb41-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">data=</span>data_list,</span>
+<span id="cb41-12"><a href="#cb41-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">seed=</span><span class="dv">1</span>,</span>
+<span id="cb41-13"><a href="#cb41-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">chains=</span><span class="dv">4</span>,</span>
+<span id="cb41-14"><a href="#cb41-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">iter=</span><span class="dv">2000</span>,</span>
+<span id="cb41-15"><a href="#cb41-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">warmup=</span><span class="dv">1000</span>,</span>
+<span id="cb41-16"><a href="#cb41-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">thin=</span><span class="dv">1</span></span>
+<span id="cb41-17"><a href="#cb41-17" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<pre><code>## Trying to compile a simple C file</code></pre>
+<pre><code>## Running /usr/local/Cellar/r/4.1.1/lib/R/bin/R CMD SHLIB foo.c
+## clang -I&quot;/usr/local/Cellar/r/4.1.1/lib/R/include&quot; -DNDEBUG   -I&quot;/usr/local/lib/R/4.1/site-library/Rcpp/include/&quot;  -I&quot;/usr/local/lib/R/4.1/site-library/RcppEigen/include/&quot;  -I&quot;/usr/local/lib/R/4.1/site-library/RcppEigen/include/unsupported&quot;  -I&quot;/usr/local/lib/R/4.1/site-library/BH/include&quot; -I&quot;/usr/local/lib/R/4.1/site-library/StanHeaders/include/src/&quot;  -I&quot;/usr/local/lib/R/4.1/site-library/StanHeaders/include/&quot;  -I&quot;/usr/local/lib/R/4.1/site-library/RcppParallel/include/&quot;  -I&quot;/usr/local/lib/R/4.1/site-library/rstan/include&quot; -DEIGEN_NO_DEBUG  -DBOOST_DISABLE_ASSERTS  -DBOOST_PENDING_INTEGER_LOG2_HPP  -DSTAN_THREADS  -DUSE_STANC3 -DSTRICT_R_HEADERS  -DBOOST_PHOENIX_NO_VARIADIC_EXPRESSION  -DBOOST_NO_AUTO_PTR  -include &#39;/usr/local/lib/R/4.1/site-library/StanHeaders/include/stan/math/prim/fun/Eigen.hpp&#39;  -D_REENTRANT -DRCPP_PARALLEL_USE_TBB=1   -I/usr/local/opt/gettext/include -I/usr/local/opt/readline/include -I/usr/local/opt/xz/include -I/usr/local/include   -fPIC  -Wno-implicit-function-declaration  -c foo.c -o foo.o
+## In file included from &lt;built-in&gt;:1:
+## In file included from /usr/local/lib/R/4.1/site-library/StanHeaders/include/stan/math/prim/fun/Eigen.hpp:22:
+## In file included from /usr/local/lib/R/4.1/site-library/RcppEigen/include/Eigen/Dense:1:
+## In file included from /usr/local/lib/R/4.1/site-library/RcppEigen/include/Eigen/Core:88:
+## /usr/local/lib/R/4.1/site-library/RcppEigen/include/Eigen/src/Core/util/Macros.h:628:1: error: unknown type name &#39;namespace&#39;
+## namespace Eigen {
+## ^
+## /usr/local/lib/R/4.1/site-library/RcppEigen/include/Eigen/src/Core/util/Macros.h:628:16: error: expected &#39;;&#39; after top level declarator
+## namespace Eigen {
+##                ^
+##                ;
+## In file included from &lt;built-in&gt;:1:
+## In file included from /usr/local/lib/R/4.1/site-library/StanHeaders/include/stan/math/prim/fun/Eigen.hpp:22:
+## In file included from /usr/local/lib/R/4.1/site-library/RcppEigen/include/Eigen/Dense:1:
+## /usr/local/lib/R/4.1/site-library/RcppEigen/include/Eigen/Core:96:10: fatal error: &#39;complex&#39; file not found
+## #include &lt;complex&gt;
+##          ^~~~~~~~~
+## 3 errors generated.
+## make: *** [foo.o] Error 1</code></pre>
 </div>
 <div id="結果の確認" class="section level2">
 <h2>13. 結果の確認</h2>
@@ -2073,6 +2123,20 @@ $('a[href^=#]').click(function(){
 <li>求めるパラメータ, mu, sigma, lp__:対数事後確率</li>
 </ul></li>
 </ul>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(mcmc_result, <span class="at">probs=</span><span class="fu">c</span>(<span class="fl">0.025</span>,<span class="fl">0.5</span>,<span class="fl">0.975</span>))</span></code></pre></div>
+<pre><code>## Inference for Stan model: anon_model.
+## 4 chains, each with iter=2000; warmup=1000; thin=1; 
+## post-warmup draws per chain=1000, total post-warmup draws=4000.
+## 
+##          mean se_mean   sd    2.5%     50%   97.5% n_eff Rhat
+## mu     102.22    0.03 1.83   98.61  102.23  105.79  3283    1
+## sigma   18.19    0.02 1.27   15.93   18.12   20.98  2758    1
+## lp__  -336.43    0.02 0.96 -338.94 -336.13 -335.48  1905    1
+## 
+## Samples were drawn using NUTS(diag_e) at Wed Sep  8 14:24:14 2021.
+## For each parameter, n_eff is a crude measure of effective sample size,
+## and Rhat is the potential scale reduction factor on split chains (at 
+## convergence, Rhat=1).</code></pre>
 </div>
 <div id="収束の確認" class="section level2">
 <h2>14. 収束の確認</h2>
@@ -2084,6 +2148,8 @@ $('a[href^=#]').click(function(){
 <li>バーンイン期間も表示</li>
 </ul></li>
 </ul>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">traceplot</span>(mcmc_result)</span></code></pre></div>
+<p><img src="baba_files/figure-html/unnamed-chunk-27-1.png" width="768" /></p>
 </div>
 <div id="ベクトル化" class="section level2">
 <h2>15. ベクトル化</h2>

@@ -1044,5 +1044,5 @@ p2<-p+geom_point(aes(colour=group))
 p2+scale_x_continuous(limits=c(0,8))
 print(p2)
 ```
-    
-    
+
+# 2-4章 Stanの基本

@@ -353,6 +353,8 @@
             <li><a href="#stanと連携してmcmc実行">12. Stanと連携してMCMC実行</a></li>
             <li><a href="#結果の確認">13. 結果の確認</a></li>
             <li><a href="#収束の確認">14. 収束の確認</a></li>
+            <li><a href="#ベクトル化">15. ベクトル化</a></li>
+            <li><a href="#モデルの図式化">16. モデルの図式化</a></li>
             </ul></li>
             </ul>
           </div>
@@ -2077,56 +2079,34 @@ $('a[href^=#]').click(function(){
 <ul>
 <li>traceplot関数でstan関数の戻り値を処理</li>
 <li>4回の結果（4つのチェーン）が重なっていればOK</li>
+<li>traceplot(mcmc_result, inc_warmup=T)
+<ul>
+<li>バーンイン期間も表示</li>
+</ul></li>
 </ul>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&#39;2-4-Stanの基本.R&#39;</span>)</span></code></pre></div>
-<pre><code>##  要求されたパッケージ StanHeaders をロード中です</code></pre>
-<pre><code>## 
-## rstan version 2.26.3 (Stan version 2.26.1)</code></pre>
-<pre><code>## For execution on a local, multicore CPU with excess RAM we recommend calling
-## options(mc.cores = parallel::detectCores()).
-## To avoid recompilation of unchanged Stan programs, we recommend calling
-## rstan_options(auto_write = TRUE)
-## For within-chain threading using `reduce_sum()` or `map_rect()` Stan functions,
-## change `threads_per_chain` option:
-## rstan_options(threads_per_chain = 1)</code></pre>
-<pre><code>## recompiling to avoid crashing R session</code></pre>
-<pre><code>## Trying to compile a simple C file</code></pre>
-<pre><code>## Running /usr/local/Cellar/r/4.1.1/lib/R/bin/R CMD SHLIB foo.c
-## clang -I&quot;/usr/local/Cellar/r/4.1.1/lib/R/include&quot; -DNDEBUG   -I&quot;/usr/local/lib/R/4.1/site-library/Rcpp/include/&quot;  -I&quot;/usr/local/lib/R/4.1/site-library/RcppEigen/include/&quot;  -I&quot;/usr/local/lib/R/4.1/site-library/RcppEigen/include/unsupported&quot;  -I&quot;/usr/local/lib/R/4.1/site-library/BH/include&quot; -I&quot;/usr/local/lib/R/4.1/site-library/StanHeaders/include/src/&quot;  -I&quot;/usr/local/lib/R/4.1/site-library/StanHeaders/include/&quot;  -I&quot;/usr/local/lib/R/4.1/site-library/RcppParallel/include/&quot;  -I&quot;/usr/local/lib/R/4.1/site-library/rstan/include&quot; -DEIGEN_NO_DEBUG  -DBOOST_DISABLE_ASSERTS  -DBOOST_PENDING_INTEGER_LOG2_HPP  -DSTAN_THREADS  -DUSE_STANC3 -DSTRICT_R_HEADERS  -DBOOST_PHOENIX_NO_VARIADIC_EXPRESSION  -DBOOST_NO_AUTO_PTR  -include &#39;/usr/local/lib/R/4.1/site-library/StanHeaders/include/stan/math/prim/fun/Eigen.hpp&#39;  -D_REENTRANT -DRCPP_PARALLEL_USE_TBB=1   -I/usr/local/opt/gettext/include -I/usr/local/opt/readline/include -I/usr/local/opt/xz/include -I/usr/local/include   -fPIC  -Wno-implicit-function-declaration  -c foo.c -o foo.o
-## In file included from &lt;built-in&gt;:1:
-## In file included from /usr/local/lib/R/4.1/site-library/StanHeaders/include/stan/math/prim/fun/Eigen.hpp:22:
-## In file included from /usr/local/lib/R/4.1/site-library/RcppEigen/include/Eigen/Dense:1:
-## In file included from /usr/local/lib/R/4.1/site-library/RcppEigen/include/Eigen/Core:88:
-## /usr/local/lib/R/4.1/site-library/RcppEigen/include/Eigen/src/Core/util/Macros.h:628:1: error: unknown type name &#39;namespace&#39;
-## namespace Eigen {
-## ^
-## /usr/local/lib/R/4.1/site-library/RcppEigen/include/Eigen/src/Core/util/Macros.h:628:16: error: expected &#39;;&#39; after top level declarator
-## namespace Eigen {
-##                ^
-##                ;
-## In file included from &lt;built-in&gt;:1:
-## In file included from /usr/local/lib/R/4.1/site-library/StanHeaders/include/stan/math/prim/fun/Eigen.hpp:22:
-## In file included from /usr/local/lib/R/4.1/site-library/RcppEigen/include/Eigen/Dense:1:
-## /usr/local/lib/R/4.1/site-library/RcppEigen/include/Eigen/Core:96:10: fatal error: &#39;complex&#39; file not found
-## #include &lt;complex&gt;
-##          ^~~~~~~~~
-## 3 errors generated.
-## make: *** [foo.o] Error 1
-## Inference for Stan model: anon_model.
-## 4 chains, each with iter=2000; warmup=1000; thin=1; 
-## post-warmup draws per chain=1000, total post-warmup draws=4000.
-## 
-##          mean se_mean   sd    2.5%     50%   97.5% n_eff Rhat
-## mu     102.22    0.03 1.83   98.61  102.23  105.79  3283    1
-## sigma   18.19    0.02 1.27   15.93   18.12   20.98  2758    1
-## lp__  -336.43    0.02 0.96 -338.94 -336.13 -335.48  1905    1
-## 
-## Samples were drawn using NUTS(diag_e) at Wed Sep  8 13:45:41 2021.
-## For each parameter, n_eff is a crude measure of effective sample size,
-## and Rhat is the potential scale reduction factor on split chains (at 
-## convergence, Rhat=1).</code></pre>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">traceplot</span>(mcmc_result)</span></code></pre></div>
-<p><img src="baba_files/figure-html/unnamed-chunk-25-1.png" width="768" /></p>
+</div>
+<div id="ベクトル化" class="section level2">
+<h2>15. ベクトル化</h2>
+<ul>
+<li><span class="math inline">\(sales[N] \sim normal(mu, sigma)\)</span> をベクトルにする</li>
+<li><span class="math inline">\(sales \sim normal(mu, sigma)\)</span>
+<ul>
+<li>わずかに結果が変わる</li>
+</ul></li>
+</ul>
+</div>
+<div id="モデルの図式化" class="section level2">
+<h2>16. モデルの図式化</h2>
+<ul>
+<li>モデルの構造を図式化</li>
+<li>グラフィカルモデル
+<ul>
+<li>実際のデータ：四角形</li>
+<li>確率分布：円</li>
+<li>確率的な関係：波線</li>
+<li>確定的関係：実線</li>
+</ul></li>
+</ul>
 </div>
 </div>
 <div class="footnotes">

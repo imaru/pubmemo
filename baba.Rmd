@@ -1121,10 +1121,6 @@ print(p2)
   * 4回の結果（4つのチェーン）が重なっていればOK
   * traceplot(mcmc_result, inc_warmup=T)
     * バーンイン期間も表示
-```{r}
-source('2-4-Stanの基本.R')
-traceplot(mcmc_result)
-```
   
 ## 15. ベクトル化
   * $sales[N] \sim normal(mu, sigma)$ をベクトルにする
@@ -1138,3 +1134,5 @@ traceplot(mcmc_result)
     * 確率分布：円
     * 確率的な関係：波線
     * 確定的関係：実線
+    
+    

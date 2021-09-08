@@ -906,28 +906,29 @@ print(ts2)
 
 ```
 
-# 14. ファイルからのデータ読み込み
+## 14. ファイルからのデータ読み込み
   * read.csv()
 
-# 15. 乱数の生成
+## 15. 乱数の生成
   * rnorm(n=, mean=, sd=): 正規分布に従う乱数
   * set.seed(): seedを設定すれば同じ乱数を生成できる
   
-# 16. 繰り返し構文とforループ
+## 16. 繰り返し構文とforループ
   * for (i in 1:3){}のような形
   
-# 17. 外部パッケージの活用
+## 17. 外部パッケージの活用
   * install.packages()
   
-## 2-2章: データの要約
-# 2. 度数・度数分布・ヒストグラム
+# 2-2章: データの要約
+
+## 2. 度数・度数分布・ヒストグラム
   * hist()
 ```{r}
 fish<-read.csv('2-2-1-fish.csv')
 hist(fish$length)
 ```
   
-# 3. カーネル密度推定
+## 3. カーネル密度推定
   * ヒストグラムを滑らかに
   * density()
 ```{r}
@@ -936,19 +937,19 @@ plot(density(fish$length, adjust=1))
 
 ```
   
-# 4. 算術平均
+## 4. 算術平均
   * mean()
 
-# 5. 中央値・四分位点・パーセント点
+## 5. 中央値・四分位点・パーセント点
   * median()
   * quautile(data, c(v1, v2))
 
-# 6. 共分散とピアソンの積率相関係数
+## 6. 共分散とピアソンの積率相関係数
   * 共分散: $\frac{1}{N} \Sigma^N_{i=1} (x_i-\bar{x})(y_i-\bar{y}))$
   * ピアソンの積率相関係数: $\rho_{xy}=\frac{\Sigma^N_{i=1}(x_i-\bar{x})(y_i-\bar{y})}{\sqrt{\{\Sigma^N_{i=1}(x_i-\bar{x})^2\}\{\Sigma^N_{i=1}(y_i-\bar{y})^2\}}}$
   * cor(varx, vary)
 
-# 7. 自己共分散・自己相関係数・これログラム
+## 7. 自己共分散・自己相関係数・コレログラム
   * jikosoukannkeisuu: 時系列データにおける過去のデータとの相関
     * 1次：1時点前との相関
     * 2次：2時点前との相関
@@ -958,4 +959,90 @@ plot(density(fish$length, adjust=1))
 acf(Nile)
 ```
     
+# 2-3章 ggplot2によるデータの可視化
+
+## 2. ggplot2の基本
+  1. データフレームにする
+  2. ggolot関数でグラフのベースを作る
+  3. ベースにグラフを追加していく
+  4. グラフタイトルなどを追加していく
   
+## 3. データの読み込み
+## 4. ヒストグラムとカーネル密度推定
+## 5. グラフの重ね合わせと一覧表示
+```{r}
+library('ggplot2')
+fish <- read.csv('2-2-1-fish.csv')
+head(fish, n=3)
+ggplot(data=fish, mapping=aes(x=length))+geom_histogram(alpha=0.5, bins=20)+labs(title='ヒストグラム')
+```
+```{r}
+fish <- read.csv('2-2-1-fish.csv')
+head(fish, n=3)
+ggplot(data=fish, mapping=aes(x=length, y=..density..))+geom_histogram(alpha=0.5, bins=20)+geom_density(size=1.5)+labs(title='ヒストグラム')
+```
+```{r}
+library(gcookbook)
+library(gridExtra)
+p_hist<-ggplot(data=fish, mapping=aes(x=length))+geom_histogram(alpha=0.5, bins=20)+labs(title="ヒストグラム")
+p_density<-ggplot(data=fish, mappin=aes(x=length))+geom_density(size=1.5)+labs(title="カーネル密度推定")
+grid.arrange(p_hist, p_density, nrow=2)+theme(plot.title=element_text(family="Hirakaku"))
+```
+## 3.6 箱ひげ図とバイオリンプロット
+  * 箱ひげ図：四分位点、中央値　geom_boxplot
+  * バイオリンプロット geom_violin
+
+## 3.7 散布図
+  * 2変数間の関係 geom_point
+
+## 3.8 折れ線グラフ
+  * 時系列データ geom_line
+  
+# 2-3の補足：ggplot2の考え方(Rグラフィックブック付録A)
+
+## wideフォーマットとlongフォーマット
+  * 属性を縦と横に配置した表: wideフォーマット
+```{r}
+library(gcookbook)
+simpledat
+```
+    * データが複数の列に入る
+  * 1種類のデータは1列にまとまるべき
+    * reshapeパッケージ、melt()
+```{r}
+library(reshape2)
+longdat<-melt(simpledat)
+longdat
+```
+
+## ggplotの用語
+  * データ：視覚化の対象、変数で構成される
+  * 幾何オブジェクト：描画されるもの。データを表現したもの。
+  * エステティック属性：幾何オブジェクトの視覚的プロパティ（x, yの位置、線の色など）
+  * マッピング：「データの値をエステティック属性にマッピングする」
+  * スケール：データ空間の値とエステティック空間の値との関係。
+  * ガイド：目盛りやラベル
+  
+## 基本的な使い方
+  * ggplot(データ, エステティック属性)+描画オブジェクト
+    * ggplot(longdat, aes(x=xval, y=yval))
+      * xvalがx軸に、yvalがy軸にマッピングされる
+    * + geom_point()
+      * 上のものに幾何オブジェクトを足すと描画できる。この例では散布図。
+    * + geom_point(aes(colour=group))
+      * このようにエステティック属性としてcolourを指定すると指定した属性を色にマッピングできる。
+    * +scale_x_continuous(limits=c(0,8))
+      * xの範囲を広げる
+    * print(オブジェクト）
+      * オブジェクトを明示的に表示
+    * ここまでの例。
+```{r}
+library(ggplot2)
+dat <- data.frame(xval=1:4,yval=c(3,5,6,9), group=c("A", "B", "A", "B"))
+p<-ggplot(dat,aes(x=xval,y=yval))
+p2<-p+geom_point(aes(colour=group))
+p2+scale_x_continuous(limits=c(0,8))
+print(p2)
+```
+    
+    

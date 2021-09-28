@@ -355,6 +355,11 @@
             <li><a href="#収束の確認">14. 収束の確認</a></li>
             <li><a href="#ベクトル化">15. ベクトル化</a></li>
             <li><a href="#モデルの図式化">16. モデルの図式化</a></li>
+            <li><a href="#mcmcサンプルの抽出">3. MCMCサンプルの抽出</a></li>
+            <li><a href="#mcmcサンプルの代表値の計算">4. MCMCサンプルの代表値の計算</a></li>
+            <li><a href="#トレースプロットの描画">5. トレースプロットの描画</a></li>
+            <li><a href="#事後予測チェックの概要">10. 事後予測チェックの概要</a></li>
+            <li><a href="#事後予測チェックの対象となるデータとモデル">11. 事後予測チェックの対象となるデータとモデル</a></li>
             </ul></li>
             </ul>
           </div>
@@ -2133,7 +2138,7 @@ $('a[href^=#]').click(function(){
 ## sigma   18.19    0.02 1.27   15.93   18.12   20.98  2758    1
 ## lp__  -336.43    0.02 0.96 -338.94 -336.13 -335.48  1905    1
 ## 
-## Samples were drawn using NUTS(diag_e) at Wed Sep  8 14:24:14 2021.
+## Samples were drawn using NUTS(diag_e) at Tue Sep 28 18:27:54 2021.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).</code></pre>
@@ -2173,6 +2178,121 @@ $('a[href^=#]').click(function(){
 <li>確定的関係：実線</li>
 </ul></li>
 </ul>
+<p>#2-5章 MCMCの結果の評価 ## 2. MCMCの実行 * 4章と同じ解析を実行</p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>mcmc_result<span class="ot">&lt;-</span><span class="fu">stan</span>(</span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">file=</span><span class="st">&quot;2-4-1-calc.mean-variance3.stan&quot;</span>,</span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data=</span>data_list,</span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">seed=</span><span class="dv">1</span>,</span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">chains=</span><span class="dv">4</span>,</span>
+<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">iter=</span><span class="dv">2000</span>,</span>
+<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">warmup=</span><span class="dv">1000</span>,</span>
+<span id="cb47-8"><a href="#cb47-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">thin=</span><span class="dv">1</span></span>
+<span id="cb47-9"><a href="#cb47-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+</div>
+<div id="mcmcサンプルの抽出" class="section level2">
+<h2>3. MCMCサンプルの抽出</h2>
+<ul>
+<li>rstan::extract(): stanfitクラスからmcmcサンプルを抽出する</li>
+<li>mcmc_sample &lt;- rstan::extract(mcmc_result, permuted=FALSE)</li>
+<li>抜き出されたmcmc_sampleオブジェクトはarrayクラス、dimsは1000（iter数-wamup数), 4(chans数), 3(mu, sigma, lp__)となる。
+<ul>
+<li>dim_names(mcmc_samples)で確認できる</li>
+</ul></li>
+<li>mcmc_sample[]で要素を見ることができる</li>
+<li>mcmc_sample[,,mu]だと<span class="math inline">\(\mu\)</span>のMCMCサンプル全てを取り出せる</li>
+</ul>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>mcmc_sample<span class="ot">&lt;-</span>rstan<span class="sc">::</span><span class="fu">extract</span>(mcmc_result, <span class="at">permuted=</span><span class="cn">FALSE</span>)</span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(mcmc_sample)</span></code></pre></div>
+<pre><code>## [1] &quot;array&quot;</code></pre>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(mcmc_sample)</span></code></pre></div>
+<pre><code>## [1] 1000    4    3</code></pre>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dimnames</span>(mcmc_sample)</span></code></pre></div>
+<pre><code>## $iterations
+## NULL
+## 
+## $chains
+## [1] &quot;chain:1&quot; &quot;chain:2&quot; &quot;chain:3&quot; &quot;chain:4&quot;
+## 
+## $parameters
+## [1] &quot;mu&quot;    &quot;sigma&quot; &quot;lp__&quot;</code></pre>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>mcmc_sample[<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>),<span class="st">&quot;chain:1&quot;</span>,<span class="st">&quot;mu&quot;</span>]</span></code></pre></div>
+<pre><code>## [1] 104.0878 104.4901 102.4625 101.3802 102.5435 104.7143 100.2602 104.0725</code></pre>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(mcmc_sample[,,<span class="st">&quot;mu&quot;</span>])</span></code></pre></div>
+<pre><code>## [1] 1000    4</code></pre>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(mcmc_sample[,,<span class="st">&quot;mu&quot;</span>])</span></code></pre></div>
+<pre><code>## [1] &quot;matrix&quot; &quot;array&quot;</code></pre>
+</div>
+<div id="mcmcサンプルの代表値の計算" class="section level2">
+<h2>4. MCMCサンプルの代表値の計算</h2>
+<ul>
+<li>事後分布の代表値の計算</li>
+</ul>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>mu_mcmc_vec <span class="ot">&lt;-</span> <span class="fu">as.vector</span>(mcmc_sample[,,<span class="st">&quot;mu&quot;</span>])</span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(mu_mcmc_vec)</span></code></pre></div>
+<pre><code>## [1] 102.2262</code></pre>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(mu_mcmc_vec)</span></code></pre></div>
+<pre><code>## [1] 102.2221</code></pre>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(mu_mcmc_vec, <span class="at">probs=</span><span class="fu">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>))</span></code></pre></div>
+<pre><code>##     2.5%    97.5% 
+##  98.6053 105.7918</code></pre>
+</div>
+<div id="トレースプロットの描画" class="section level2">
+<h2>5. トレースプロットの描画</h2>
+<ul>
+<li>MCMCサンプルをもとにトレースプロットの描画</li>
+</ul>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggfortify)</span>
+<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(<span class="fu">ts</span>(mcmc_sample[,,<span class="st">&quot;mu&quot;</span>]),</span>
+<span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">facets =</span> F,</span>
+<span id="cb66-4"><a href="#cb66-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">&quot;mu&quot;</span>,</span>
+<span id="cb66-5"><a href="#cb66-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">main=</span> <span class="st">&quot;トレースプロット&quot;</span>)</span></code></pre></div>
+<p><img src="baba_files/figure-html/unnamed-chunk-31-1.png" width="768" /> 6. ggplot2による事後分布の可視化 * MCMCサンプルをまとめる＝パラメータの事後分布</p>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>mu_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(mu_mcmc_sample <span class="ot">&lt;-</span> mu_mcmc_vec)</span>
+<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>mu_df, <span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>mu_mcmc_sample))<span class="sc">+</span><span class="fu">geom_density</span>(<span class="at">size=</span><span class="fl">1.5</span>)</span></code></pre></div>
+<p><img src="baba_files/figure-html/unnamed-chunk-32-1.png" width="768" /> ## 7. bayesplotによる事後分布の可視化 * bayesplot便利</p>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(bayesplot)</span></code></pre></div>
+<pre><code>## This is bayesplot version 1.8.1</code></pre>
+<pre><code>## - Online documentation and vignettes at mc-stan.org/bayesplot</code></pre>
+<pre><code>## - bayesplot theme set to bayesplot::theme_default()</code></pre>
+<pre><code>##    * Does _not_ affect other ggplot2 plots</code></pre>
+<pre><code>##    * See ?bayesplot_theme_set for details on theme setting</code></pre>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mcmc_hist</span>(mcmc_sample, <span class="at">parc=</span><span class="fu">c</span>(<span class="st">&quot;mu&quot;</span>, <span class="st">&quot;sigma&quot;</span>))</span></code></pre></div>
+<pre><code>## Warning: The following arguments were unrecognized and ignored: parc</code></pre>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="baba_files/figure-html/unnamed-chunk-33-1.png" width="768" /></p>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mcmc_combo</span>(mcmc_sample, <span class="at">parc=</span><span class="fu">c</span>(<span class="st">&quot;mu&quot;</span>,<span class="st">&quot;sigma&quot;</span>))</span></code></pre></div>
+<p><img src="baba_files/figure-html/unnamed-chunk-33-2.png" width="768" /> ## 8. bayesplotによる事後分布の範囲の比較 ## 9. bayesplotによるMCMCサンプルの自己相関の評価 * コレログラムも描ける</p>
+</div>
+<div id="事後予測チェックの概要" class="section level2">
+<h2>10. 事後予測チェックの概要</h2>
+<ul>
+<li>推定されたモデルの総合的評価方法
+<ul>
+<li>例えば、仮定した事柄が現実的だったかどうか</li>
+</ul></li>
+<li>事後予測チェックとは？
+<ul>
+<li>統計モデル：観測したデータを生み出す確率的な過程を簡潔に記述したもの
+<ul>
+<li>ってことは、統計モデルをうまく推定できているなら、データとよく似たデータを生成できるはず</li>
+<li>モデルにしたがって観測データを擬似的に生成=事後予測分布/事後分布</li>
+<li>データと事後予測分布を比べる</li>
+<li>その方法の一つとしての「図示」</li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+<div id="事後予測チェックの対象となるデータとモデル" class="section level2">
+<h2>11. 事後予測チェックの対象となるデータとモデル</h2>
+<ul>
+<li>小動物の発見個体数
+<ul>
+<li>草原の中にランダムに個体が分布</li>
+<li>試行回数が大きく、発生確率が小さい二項分布＝ポアソン分布</li>
+<li>間違った分布として正規分布も考えてみる</li>
+</ul></li>
+</ul>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a>animal_num<span class="ot">&lt;-</span><span class="fu">read.csv</span>(<span class="st">&quot;2-5-1-animal-num.csv&quot;</span>)</span></code></pre></div>
 </div>
 </div>
 <div class="footnotes">

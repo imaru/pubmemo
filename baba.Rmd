@@ -1111,7 +1111,7 @@ print(p2)
   * stan関数
     * 引数はP118の通り
     * 実際にはMCMCサンプルは毎回異なるが、seed=1を指定することで固定。
-```{r}
+```{r, cache=FALSE}
 library(rstan)
 rstan_options(auto_write=TRUE)
 options(mc.cores=parallel::detectCores())
@@ -1162,4 +1162,88 @@ traceplot(mcmc_result)
     * 確率的な関係：波線
     * 確定的関係：実線
     
+#2-5章 MCMCの結果の評価
+## 2. MCMCの実行
+  * 4章と同じ解析を実行
+```{r cache=FALSE}
+mcmc_result<-stan(
+  file="2-4-1-calc.mean-variance3.stan",
+  data=data_list,
+  seed=1,
+  chains=4,
+  iter=2000,
+  warmup=1000,
+  thin=1
+)
+```
+ 
+## 3. MCMCサンプルの抽出
+  * rstan::extract(): stanfitクラスからmcmcサンプルを抽出する
+  * mcmc_sample <- rstan::extract(mcmc_result, permuted=FALSE)
+  * 抜き出されたmcmc_sampleオブジェクトはarrayクラス、dimsは1000（iter数-wamup数), 4(chans数), 3(mu, sigma, lp__)となる。
+    * dim_names(mcmc_samples)で確認できる
+  * mcmc_sample[]で要素を見ることができる
+  * mcmc_sample[,,mu]だと$\mu$のMCMCサンプル全てを取り出せる
+```{r}
+mcmc_sample<-rstan::extract(mcmc_result, permuted=FALSE)
+class(mcmc_sample)
+dim(mcmc_sample)
+dimnames(mcmc_sample)
+mcmc_sample[c(1:8),"chain:1","mu"]
+dim(mcmc_sample[,,"mu"])
+class(mcmc_sample[,,"mu"])
+```
+## 4. MCMCサンプルの代表値の計算
+  * 事後分布の代表値の計算
+```{r}
+mu_mcmc_vec <- as.vector(mcmc_sample[,,"mu"])
+median(mu_mcmc_vec)
+mean(mu_mcmc_vec)
+quantile(mu_mcmc_vec, probs=c(0.025, 0.975))
+```
+## 5. トレースプロットの描画
+  * MCMCサンプルをもとにトレースプロットの描画
+```{r}
+library(ggfortify)
+autoplot(ts(mcmc_sample[,,"mu"]),
+  facets = F,
+  ylab = "mu",
+  main= "トレースプロット")
+```
+  6. ggplot2による事後分布の可視化
+    * MCMCサンプルをまとめる＝パラメータの事後分布
+```{r}
+mu_df <- data.frame(mu_mcmc_sample <- mu_mcmc_vec)
+ggplot(data=mu_df, mapping=aes(x=mu_mcmc_sample))+geom_density(size=1.5)
+```
+## 7. bayesplotによる事後分布の可視化
+  * bayesplot便利
+```{r}
+library(bayesplot)
+mcmc_hist(mcmc_sample, parc=c("mu", "sigma"))
+mcmc_combo(mcmc_sample, parc=c("mu","sigma"))
+```
+## 8. bayesplotによる事後分布の範囲の比較
+## 9. bayesplotによるMCMCサンプルの自己相関の評価
+  * コレログラムも描ける
+  
+## 10. 事後予測チェックの概要
+  * 推定されたモデルの総合的評価方法
+    * 例えば、仮定した事柄が現実的だったかどうか
+  * 事後予測チェックとは？
+    * 統計モデル：観測したデータを生み出す確率的な過程を簡潔に記述したもの
+      * ってことは、統計モデルをうまく推定できているなら、データとよく似たデータを生成できるはず
+      * モデルにしたがって観測データを擬似的に生成=事後予測分布/事後分布
+      * データと事後予測分布を比べる
+      * その方法の一つとしての「図示」
+
+## 11. 事後予測チェックの対象となるデータとモデル
+  * 小動物の発見個体数
+    * 草原の中にランダムに個体が分布
+    * 試行回数が大きく、発生確率が小さい二項分布＝ポアソン分布
+    * 間違った分布として正規分布も考えてみる
+```{r}
+animal_num<-read.csv("2-5-1-animal-num.csv")
+```
     
+

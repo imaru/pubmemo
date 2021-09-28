@@ -1162,7 +1162,8 @@ traceplot(mcmc_result)
     * 確率的な関係：波線
     * 確定的関係：実線
     
-#2-5章 MCMCの結果の評価
+# 2-5章 MCMCの結果の評価
+
 ## 2. MCMCの実行
   * 4章と同じ解析を実行
 ```{r cache=FALSE}

@@ -355,6 +355,10 @@
             <li><a href="#収束の確認">14. 収束の確認</a></li>
             <li><a href="#ベクトル化">15. ベクトル化</a></li>
             <li><a href="#モデルの図式化">16. モデルの図式化</a></li>
+            </ul></li>
+            <li><a href="#章-mcmcの結果の評価">2-5章 MCMCの結果の評価</a>
+            <ul>
+            <li><a href="#mcmcの実行">2. MCMCの実行</a></li>
             <li><a href="#mcmcサンプルの抽出">3. MCMCサンプルの抽出</a></li>
             <li><a href="#mcmcサンプルの代表値の計算">4. MCMCサンプルの代表値の計算</a></li>
             <li><a href="#トレースプロットの描画">5. トレースプロットの描画</a></li>
@@ -1821,28 +1825,33 @@ $('a[href^=#]').click(function(){
 </div>
 <div id="グラフの重ね合わせと一覧表示" class="section level2">
 <h2>5. グラフの重ね合わせと一覧表示</h2>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&#39;ggplot2&#39;</span>)</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>fish <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&#39;2-2-1-fish.csv&#39;</span>)</span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(fish, <span class="at">n=</span><span class="dv">3</span>)</span></code></pre></div>
-<pre><code>##      length
-## 1  8.747092
-## 2 10.367287
-## 3  8.328743</code></pre>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>fish, <span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>length))<span class="sc">+</span><span class="fu">geom_histogram</span>(<span class="at">alpha=</span><span class="fl">0.5</span>, <span class="at">bins=</span><span class="dv">20</span>)<span class="sc">+</span><span class="fu">labs</span>(<span class="at">title=</span><span class="st">&#39;ヒストグラム&#39;</span>)</span></code></pre></div>
-<p><img src="baba_files/figure-html/unnamed-chunk-19-1.png" width="768" /></p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&#39;ggplot2&#39;</span>)</span></code></pre></div>
+<pre><code>## 
+##  次のパッケージを付け加えます: &#39;ggplot2&#39;</code></pre>
+<pre><code>##  以下のオブジェクトは &#39;.GlobalEnv&#39; によってマスクされています: 
+## 
+##      .data</code></pre>
 <div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>fish <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&#39;2-2-1-fish.csv&#39;</span>)</span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(fish, <span class="at">n=</span><span class="dv">3</span>)</span></code></pre></div>
 <pre><code>##      length
 ## 1  8.747092
 ## 2 10.367287
 ## 3  8.328743</code></pre>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>fish, <span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>length, <span class="at">y=</span>..density..))<span class="sc">+</span><span class="fu">geom_histogram</span>(<span class="at">alpha=</span><span class="fl">0.5</span>, <span class="at">bins=</span><span class="dv">20</span>)<span class="sc">+</span><span class="fu">geom_density</span>(<span class="at">size=</span><span class="fl">1.5</span>)<span class="sc">+</span><span class="fu">labs</span>(<span class="at">title=</span><span class="st">&#39;ヒストグラム&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>fish, <span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>length))<span class="sc">+</span><span class="fu">geom_histogram</span>(<span class="at">alpha=</span><span class="fl">0.5</span>, <span class="at">bins=</span><span class="dv">20</span>)<span class="sc">+</span><span class="fu">labs</span>(<span class="at">title=</span><span class="st">&#39;ヒストグラム&#39;</span>)</span></code></pre></div>
+<p><img src="baba_files/figure-html/unnamed-chunk-19-1.png" width="768" /></p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>fish <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&#39;2-2-1-fish.csv&#39;</span>)</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(fish, <span class="at">n=</span><span class="dv">3</span>)</span></code></pre></div>
+<pre><code>##      length
+## 1  8.747092
+## 2 10.367287
+## 3  8.328743</code></pre>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>fish, <span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>length, <span class="at">y=</span>..density..))<span class="sc">+</span><span class="fu">geom_histogram</span>(<span class="at">alpha=</span><span class="fl">0.5</span>, <span class="at">bins=</span><span class="dv">20</span>)<span class="sc">+</span><span class="fu">geom_density</span>(<span class="at">size=</span><span class="fl">1.5</span>)<span class="sc">+</span><span class="fu">labs</span>(<span class="at">title=</span><span class="st">&#39;ヒストグラム&#39;</span>)</span></code></pre></div>
 <p><img src="baba_files/figure-html/unnamed-chunk-20-1.png" width="768" /></p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gcookbook)</span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gridExtra)</span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>p_hist<span class="ot">&lt;-</span><span class="fu">ggplot</span>(<span class="at">data=</span>fish, <span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>length))<span class="sc">+</span><span class="fu">geom_histogram</span>(<span class="at">alpha=</span><span class="fl">0.5</span>, <span class="at">bins=</span><span class="dv">20</span>)<span class="sc">+</span><span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;ヒストグラム&quot;</span>)</span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>p_density<span class="ot">&lt;-</span><span class="fu">ggplot</span>(<span class="at">data=</span>fish, <span class="at">mappin=</span><span class="fu">aes</span>(<span class="at">x=</span>length))<span class="sc">+</span><span class="fu">geom_density</span>(<span class="at">size=</span><span class="fl">1.5</span>)<span class="sc">+</span><span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;カーネル密度推定&quot;</span>)</span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.arrange</span>(p_hist, p_density, <span class="at">nrow=</span><span class="dv">2</span>)<span class="sc">+</span><span class="fu">theme</span>(<span class="at">plot.title=</span><span class="fu">element_text</span>(<span class="at">family=</span><span class="st">&quot;Hirakaku&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gcookbook)</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gridExtra)</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>p_hist<span class="ot">&lt;-</span><span class="fu">ggplot</span>(<span class="at">data=</span>fish, <span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>length))<span class="sc">+</span><span class="fu">geom_histogram</span>(<span class="at">alpha=</span><span class="fl">0.5</span>, <span class="at">bins=</span><span class="dv">20</span>)<span class="sc">+</span><span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;ヒストグラム&quot;</span>)</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>p_density<span class="ot">&lt;-</span><span class="fu">ggplot</span>(<span class="at">data=</span>fish, <span class="at">mappin=</span><span class="fu">aes</span>(<span class="at">x=</span>length))<span class="sc">+</span><span class="fu">geom_density</span>(<span class="at">size=</span><span class="fl">1.5</span>)<span class="sc">+</span><span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;カーネル密度推定&quot;</span>)</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.arrange</span>(p_hist, p_density, <span class="at">nrow=</span><span class="dv">2</span>)<span class="sc">+</span><span class="fu">theme</span>(<span class="at">plot.title=</span><span class="fu">element_text</span>(<span class="at">family=</span><span class="st">&quot;Hirakaku&quot;</span>))</span></code></pre></div>
 <p><img src="baba_files/figure-html/unnamed-chunk-21-1.png" width="768" /></p>
 <pre><code>## NULL</code></pre>
 </div>
@@ -1873,8 +1882,8 @@ $('a[href^=#]').click(function(){
 <ul>
 <li>属性を縦と横に配置した表: wideフォーマット</li>
 </ul>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gcookbook)</span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>simpledat</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gcookbook)</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>simpledat</span></code></pre></div>
 <pre><code>##    A1 A2 A3
 ## B1 10  7 12
 ## B2  9 11  6</code></pre>
@@ -1885,9 +1894,9 @@ $('a[href^=#]').click(function(){
 <li>reshapeパッケージ、melt()</li>
 </ul></li>
 </ul>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(reshape2)</span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>longdat<span class="ot">&lt;-</span><span class="fu">melt</span>(simpledat)</span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>longdat</span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(reshape2)</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>longdat<span class="ot">&lt;-</span><span class="fu">melt</span>(simpledat)</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>longdat</span></code></pre></div>
 <pre><code>##   Var1 Var2 value
 ## 1   B1   A1    10
 ## 2   B2   A1     9
@@ -1935,13 +1944,13 @@ $('a[href^=#]').click(function(){
 <li>ここまでの例。</li>
 </ul></li>
 </ul>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">xval=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>,<span class="at">yval=</span><span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">9</span>), <span class="at">group=</span><span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>))</span>
-<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>p<span class="ot">&lt;-</span><span class="fu">ggplot</span>(dat,<span class="fu">aes</span>(<span class="at">x=</span>xval,<span class="at">y=</span>yval))</span>
-<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>p2<span class="ot">&lt;-</span>p<span class="sc">+</span><span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">colour=</span>group))</span>
-<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>p2<span class="sc">+</span><span class="fu">scale_x_continuous</span>(<span class="at">limits=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">8</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">xval=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>,<span class="at">yval=</span><span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">9</span>), <span class="at">group=</span><span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>))</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>p<span class="ot">&lt;-</span><span class="fu">ggplot</span>(dat,<span class="fu">aes</span>(<span class="at">x=</span>xval,<span class="at">y=</span>yval))</span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>p2<span class="ot">&lt;-</span>p<span class="sc">+</span><span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">colour=</span>group))</span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>p2<span class="sc">+</span><span class="fu">scale_x_continuous</span>(<span class="at">limits=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">8</span>))</span></code></pre></div>
 <p><img src="baba_files/figure-html/unnamed-chunk-24-1.png" width="768" /></p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(p2)</span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(p2)</span></code></pre></div>
 <p><img src="baba_files/figure-html/unnamed-chunk-24-2.png" width="768" /></p>
 </div>
 </div>
@@ -2069,7 +2078,7 @@ $('a[href^=#]').click(function(){
 <li>実際にはMCMCサンプルは毎回異なるが、seed=1を指定することで固定。</li>
 </ul></li>
 </ul>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rstan)</span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rstan)</span></code></pre></div>
 <pre><code>##  要求されたパッケージ StanHeaders をロード中です</code></pre>
 <pre><code>## 
 ## rstan version 2.26.3 (Stan version 2.26.1)</code></pre>
@@ -2080,23 +2089,23 @@ $('a[href^=#]').click(function(){
 ## For within-chain threading using `reduce_sum()` or `map_rect()` Stan functions,
 ## change `threads_per_chain` option:
 ## rstan_options(threads_per_chain = 1)</code></pre>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rstan_options</span>(<span class="at">auto_write=</span><span class="cn">TRUE</span>)</span>
-<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">mc.cores=</span>parallel<span class="sc">::</span><span class="fu">detectCores</span>())</span>
-<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>file_beer_sales_1 <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;2-4-1-beer-sales-1.csv&quot;</span>)</span>
-<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>sample_size<span class="ot">&lt;-</span><span class="fu">nrow</span>(file_beer_sales_1)</span>
-<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a>data_list<span class="ot">&lt;-</span><span class="fu">list</span>(<span class="at">sales=</span>file_beer_sales_1<span class="sc">$</span>sales, <span class="at">N=</span>sample_size)</span>
-<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a>mcmc_result<span class="ot">&lt;-</span><span class="fu">stan</span>(</span>
-<span id="cb41-10"><a href="#cb41-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">file=</span><span class="st">&quot;2-4-1-calc.mean-variance.stan&quot;</span>,</span>
-<span id="cb41-11"><a href="#cb41-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">data=</span>data_list,</span>
-<span id="cb41-12"><a href="#cb41-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">seed=</span><span class="dv">1</span>,</span>
-<span id="cb41-13"><a href="#cb41-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">chains=</span><span class="dv">4</span>,</span>
-<span id="cb41-14"><a href="#cb41-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">iter=</span><span class="dv">2000</span>,</span>
-<span id="cb41-15"><a href="#cb41-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">warmup=</span><span class="dv">1000</span>,</span>
-<span id="cb41-16"><a href="#cb41-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">thin=</span><span class="dv">1</span></span>
-<span id="cb41-17"><a href="#cb41-17" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rstan_options</span>(<span class="at">auto_write=</span><span class="cn">TRUE</span>)</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">mc.cores=</span>parallel<span class="sc">::</span><span class="fu">detectCores</span>())</span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>file_beer_sales_1 <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;2-4-1-beer-sales-1.csv&quot;</span>)</span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>sample_size<span class="ot">&lt;-</span><span class="fu">nrow</span>(file_beer_sales_1)</span>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a>data_list<span class="ot">&lt;-</span><span class="fu">list</span>(<span class="at">sales=</span>file_beer_sales_1<span class="sc">$</span>sales, <span class="at">N=</span>sample_size)</span>
+<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a>mcmc_result<span class="ot">&lt;-</span><span class="fu">stan</span>(</span>
+<span id="cb44-10"><a href="#cb44-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">file=</span><span class="st">&quot;2-4-1-calc.mean-variance.stan&quot;</span>,</span>
+<span id="cb44-11"><a href="#cb44-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">data=</span>data_list,</span>
+<span id="cb44-12"><a href="#cb44-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">seed=</span><span class="dv">1</span>,</span>
+<span id="cb44-13"><a href="#cb44-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">chains=</span><span class="dv">4</span>,</span>
+<span id="cb44-14"><a href="#cb44-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">iter=</span><span class="dv">2000</span>,</span>
+<span id="cb44-15"><a href="#cb44-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">warmup=</span><span class="dv">1000</span>,</span>
+<span id="cb44-16"><a href="#cb44-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">thin=</span><span class="dv">1</span></span>
+<span id="cb44-17"><a href="#cb44-17" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <pre><code>## Trying to compile a simple C file</code></pre>
 <pre><code>## Running /usr/local/Cellar/r/4.1.1/lib/R/bin/R CMD SHLIB foo.c
 ## clang -I&quot;/usr/local/Cellar/r/4.1.1/lib/R/include&quot; -DNDEBUG   -I&quot;/usr/local/lib/R/4.1/site-library/Rcpp/include/&quot;  -I&quot;/usr/local/lib/R/4.1/site-library/RcppEigen/include/&quot;  -I&quot;/usr/local/lib/R/4.1/site-library/RcppEigen/include/unsupported&quot;  -I&quot;/usr/local/lib/R/4.1/site-library/BH/include&quot; -I&quot;/usr/local/lib/R/4.1/site-library/StanHeaders/include/src/&quot;  -I&quot;/usr/local/lib/R/4.1/site-library/StanHeaders/include/&quot;  -I&quot;/usr/local/lib/R/4.1/site-library/RcppParallel/include/&quot;  -I&quot;/usr/local/lib/R/4.1/site-library/rstan/include&quot; -DEIGEN_NO_DEBUG  -DBOOST_DISABLE_ASSERTS  -DBOOST_PENDING_INTEGER_LOG2_HPP  -DSTAN_THREADS  -DUSE_STANC3 -DSTRICT_R_HEADERS  -DBOOST_PHOENIX_NO_VARIADIC_EXPRESSION  -DBOOST_NO_AUTO_PTR  -include &#39;/usr/local/lib/R/4.1/site-library/StanHeaders/include/stan/math/prim/fun/Eigen.hpp&#39;  -D_REENTRANT -DRCPP_PARALLEL_USE_TBB=1   -I/usr/local/opt/gettext/include -I/usr/local/opt/readline/include -I/usr/local/opt/xz/include -I/usr/local/include   -fPIC  -Wno-implicit-function-declaration  -c foo.c -o foo.o
@@ -2128,7 +2137,7 @@ $('a[href^=#]').click(function(){
 <li>求めるパラメータ, mu, sigma, lp__:対数事後確率</li>
 </ul></li>
 </ul>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(mcmc_result, <span class="at">probs=</span><span class="fu">c</span>(<span class="fl">0.025</span>,<span class="fl">0.5</span>,<span class="fl">0.975</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(mcmc_result, <span class="at">probs=</span><span class="fu">c</span>(<span class="fl">0.025</span>,<span class="fl">0.5</span>,<span class="fl">0.975</span>))</span></code></pre></div>
 <pre><code>## Inference for Stan model: anon_model.
 ## 4 chains, each with iter=2000; warmup=1000; thin=1; 
 ## post-warmup draws per chain=1000, total post-warmup draws=4000.
@@ -2138,7 +2147,7 @@ $('a[href^=#]').click(function(){
 ## sigma   18.19    0.02 1.27   15.93   18.12   20.98  2758    1
 ## lp__  -336.43    0.02 0.96 -338.94 -336.13 -335.48  1905    1
 ## 
-## Samples were drawn using NUTS(diag_e) at Tue Sep 28 18:27:54 2021.
+## Samples were drawn using NUTS(diag_e) at Tue Sep 28 18:33:34 2021.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).</code></pre>
@@ -2153,7 +2162,7 @@ $('a[href^=#]').click(function(){
 <li>バーンイン期間も表示</li>
 </ul></li>
 </ul>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">traceplot</span>(mcmc_result)</span></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">traceplot</span>(mcmc_result)</span></code></pre></div>
 <p><img src="baba_files/figure-html/unnamed-chunk-27-1.png" width="768" /></p>
 </div>
 <div id="ベクトル化" class="section level2">
@@ -2178,16 +2187,24 @@ $('a[href^=#]').click(function(){
 <li>確定的関係：実線</li>
 </ul></li>
 </ul>
-<p>#2-5章 MCMCの結果の評価 ## 2. MCMCの実行 * 4章と同じ解析を実行</p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>mcmc_result<span class="ot">&lt;-</span><span class="fu">stan</span>(</span>
-<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">file=</span><span class="st">&quot;2-4-1-calc.mean-variance3.stan&quot;</span>,</span>
-<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data=</span>data_list,</span>
-<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">seed=</span><span class="dv">1</span>,</span>
-<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">chains=</span><span class="dv">4</span>,</span>
-<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">iter=</span><span class="dv">2000</span>,</span>
-<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">warmup=</span><span class="dv">1000</span>,</span>
-<span id="cb47-8"><a href="#cb47-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">thin=</span><span class="dv">1</span></span>
-<span id="cb47-9"><a href="#cb47-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+</div>
+</div>
+<div id="章-mcmcの結果の評価" class="section level1">
+<h1>2-5章 MCMCの結果の評価</h1>
+<div id="mcmcの実行" class="section level2">
+<h2>2. MCMCの実行</h2>
+<ul>
+<li>4章と同じ解析を実行</li>
+</ul>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>mcmc_result<span class="ot">&lt;-</span><span class="fu">stan</span>(</span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">file=</span><span class="st">&quot;2-4-1-calc.mean-variance3.stan&quot;</span>,</span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data=</span>data_list,</span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">seed=</span><span class="dv">1</span>,</span>
+<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">chains=</span><span class="dv">4</span>,</span>
+<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">iter=</span><span class="dv">2000</span>,</span>
+<span id="cb50-7"><a href="#cb50-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">warmup=</span><span class="dv">1000</span>,</span>
+<span id="cb50-8"><a href="#cb50-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">thin=</span><span class="dv">1</span></span>
+<span id="cb50-9"><a href="#cb50-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 </div>
 <div id="mcmcサンプルの抽出" class="section level2">
 <h2>3. MCMCサンプルの抽出</h2>
@@ -2201,12 +2218,12 @@ $('a[href^=#]').click(function(){
 <li>mcmc_sample[]で要素を見ることができる</li>
 <li>mcmc_sample[,,mu]だと<span class="math inline">\(\mu\)</span>のMCMCサンプル全てを取り出せる</li>
 </ul>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>mcmc_sample<span class="ot">&lt;-</span>rstan<span class="sc">::</span><span class="fu">extract</span>(mcmc_result, <span class="at">permuted=</span><span class="cn">FALSE</span>)</span>
-<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(mcmc_sample)</span></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>mcmc_sample<span class="ot">&lt;-</span>rstan<span class="sc">::</span><span class="fu">extract</span>(mcmc_result, <span class="at">permuted=</span><span class="cn">FALSE</span>)</span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(mcmc_sample)</span></code></pre></div>
 <pre><code>## [1] &quot;array&quot;</code></pre>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(mcmc_sample)</span></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(mcmc_sample)</span></code></pre></div>
 <pre><code>## [1] 1000    4    3</code></pre>
-<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dimnames</span>(mcmc_sample)</span></code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dimnames</span>(mcmc_sample)</span></code></pre></div>
 <pre><code>## $iterations
 ## NULL
 ## 
@@ -2215,11 +2232,11 @@ $('a[href^=#]').click(function(){
 ## 
 ## $parameters
 ## [1] &quot;mu&quot;    &quot;sigma&quot; &quot;lp__&quot;</code></pre>
-<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>mcmc_sample[<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>),<span class="st">&quot;chain:1&quot;</span>,<span class="st">&quot;mu&quot;</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>mcmc_sample[<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>),<span class="st">&quot;chain:1&quot;</span>,<span class="st">&quot;mu&quot;</span>]</span></code></pre></div>
 <pre><code>## [1] 104.0878 104.4901 102.4625 101.3802 102.5435 104.7143 100.2602 104.0725</code></pre>
-<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(mcmc_sample[,,<span class="st">&quot;mu&quot;</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(mcmc_sample[,,<span class="st">&quot;mu&quot;</span>])</span></code></pre></div>
 <pre><code>## [1] 1000    4</code></pre>
-<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(mcmc_sample[,,<span class="st">&quot;mu&quot;</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(mcmc_sample[,,<span class="st">&quot;mu&quot;</span>])</span></code></pre></div>
 <pre><code>## [1] &quot;matrix&quot; &quot;array&quot;</code></pre>
 </div>
 <div id="mcmcサンプルの代表値の計算" class="section level2">
@@ -2227,12 +2244,12 @@ $('a[href^=#]').click(function(){
 <ul>
 <li>事後分布の代表値の計算</li>
 </ul>
-<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>mu_mcmc_vec <span class="ot">&lt;-</span> <span class="fu">as.vector</span>(mcmc_sample[,,<span class="st">&quot;mu&quot;</span>])</span>
-<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(mu_mcmc_vec)</span></code></pre></div>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a>mu_mcmc_vec <span class="ot">&lt;-</span> <span class="fu">as.vector</span>(mcmc_sample[,,<span class="st">&quot;mu&quot;</span>])</span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(mu_mcmc_vec)</span></code></pre></div>
 <pre><code>## [1] 102.2262</code></pre>
-<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(mu_mcmc_vec)</span></code></pre></div>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(mu_mcmc_vec)</span></code></pre></div>
 <pre><code>## [1] 102.2221</code></pre>
-<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(mu_mcmc_vec, <span class="at">probs=</span><span class="fu">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(mu_mcmc_vec, <span class="at">probs=</span><span class="fu">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>))</span></code></pre></div>
 <pre><code>##     2.5%    97.5% 
 ##  98.6053 105.7918</code></pre>
 </div>
@@ -2241,26 +2258,26 @@ $('a[href^=#]').click(function(){
 <ul>
 <li>MCMCサンプルをもとにトレースプロットの描画</li>
 </ul>
-<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggfortify)</span>
-<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(<span class="fu">ts</span>(mcmc_sample[,,<span class="st">&quot;mu&quot;</span>]),</span>
-<span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">facets =</span> F,</span>
-<span id="cb66-4"><a href="#cb66-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">&quot;mu&quot;</span>,</span>
-<span id="cb66-5"><a href="#cb66-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">main=</span> <span class="st">&quot;トレースプロット&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggfortify)</span>
+<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(<span class="fu">ts</span>(mcmc_sample[,,<span class="st">&quot;mu&quot;</span>]),</span>
+<span id="cb69-3"><a href="#cb69-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">facets =</span> F,</span>
+<span id="cb69-4"><a href="#cb69-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">&quot;mu&quot;</span>,</span>
+<span id="cb69-5"><a href="#cb69-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">main=</span> <span class="st">&quot;トレースプロット&quot;</span>)</span></code></pre></div>
 <p><img src="baba_files/figure-html/unnamed-chunk-31-1.png" width="768" /> 6. ggplot2による事後分布の可視化 * MCMCサンプルをまとめる＝パラメータの事後分布</p>
-<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>mu_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(mu_mcmc_sample <span class="ot">&lt;-</span> mu_mcmc_vec)</span>
-<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>mu_df, <span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>mu_mcmc_sample))<span class="sc">+</span><span class="fu">geom_density</span>(<span class="at">size=</span><span class="fl">1.5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a>mu_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(mu_mcmc_sample <span class="ot">&lt;-</span> mu_mcmc_vec)</span>
+<span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>mu_df, <span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>mu_mcmc_sample))<span class="sc">+</span><span class="fu">geom_density</span>(<span class="at">size=</span><span class="fl">1.5</span>)</span></code></pre></div>
 <p><img src="baba_files/figure-html/unnamed-chunk-32-1.png" width="768" /> ## 7. bayesplotによる事後分布の可視化 * bayesplot便利</p>
-<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(bayesplot)</span></code></pre></div>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(bayesplot)</span></code></pre></div>
 <pre><code>## This is bayesplot version 1.8.1</code></pre>
 <pre><code>## - Online documentation and vignettes at mc-stan.org/bayesplot</code></pre>
 <pre><code>## - bayesplot theme set to bayesplot::theme_default()</code></pre>
 <pre><code>##    * Does _not_ affect other ggplot2 plots</code></pre>
 <pre><code>##    * See ?bayesplot_theme_set for details on theme setting</code></pre>
-<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mcmc_hist</span>(mcmc_sample, <span class="at">parc=</span><span class="fu">c</span>(<span class="st">&quot;mu&quot;</span>, <span class="st">&quot;sigma&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mcmc_hist</span>(mcmc_sample, <span class="at">parc=</span><span class="fu">c</span>(<span class="st">&quot;mu&quot;</span>, <span class="st">&quot;sigma&quot;</span>))</span></code></pre></div>
 <pre><code>## Warning: The following arguments were unrecognized and ignored: parc</code></pre>
 <pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
 <p><img src="baba_files/figure-html/unnamed-chunk-33-1.png" width="768" /></p>
-<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mcmc_combo</span>(mcmc_sample, <span class="at">parc=</span><span class="fu">c</span>(<span class="st">&quot;mu&quot;</span>,<span class="st">&quot;sigma&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mcmc_combo</span>(mcmc_sample, <span class="at">parc=</span><span class="fu">c</span>(<span class="st">&quot;mu&quot;</span>,<span class="st">&quot;sigma&quot;</span>))</span></code></pre></div>
 <p><img src="baba_files/figure-html/unnamed-chunk-33-2.png" width="768" /> ## 8. bayesplotによる事後分布の範囲の比較 ## 9. bayesplotによるMCMCサンプルの自己相関の評価 * コレログラムも描ける</p>
 </div>
 <div id="事後予測チェックの概要" class="section level2">
@@ -2292,7 +2309,7 @@ $('a[href^=#]').click(function(){
 <li>間違った分布として正規分布も考えてみる</li>
 </ul></li>
 </ul>
-<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a>animal_num<span class="ot">&lt;-</span><span class="fu">read.csv</span>(<span class="st">&quot;2-5-1-animal-num.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a>animal_num<span class="ot">&lt;-</span><span class="fu">read.csv</span>(<span class="st">&quot;2-5-1-animal-num.csv&quot;</span>)</span></code></pre></div>
 </div>
 </div>
 <div class="footnotes">

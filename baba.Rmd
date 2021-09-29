@@ -1163,3 +1163,70 @@ traceplot(mcmc_result)
     * 確定的関係：実線
     
     
+# 2-6. Stanコーディングの詳細
+## 2. Stanファイルの構造
+  * Stanファイルの構成
+    * function
+    * data
+    * transformed data
+    * parameters
+    * transformed parameters
+    * model
+    * generated quntities
+    
+## 3. 変数の宣言
+  * 型と範囲
+    * int N
+    * real beta;
+    * real<lower=0> beta;
+    * int<lower=0, upper=1> range;
+  * ベクトル、配列の宣言
+    * ベクトル、行列
+      * 実数値型
+      * vector[3] retu;
+      * row_vector[10] gyou;
+      * matrix[3,2] mat;
+    * 配列
+      * ベクトルより柔軟、データ型を複数持てる
+      * int w[10];
+      * real x[3,4];
+      * vector[4] Y[2]; //4要素のベクトルを2つ持つ配列Y
+      * matrix[3,4] Z[5,6]; //3x4の行列を要素に持つ5x6の配列Z
+
+## 4. 代入
+  * transformed dataブロックやtransformed parametersブロック
+  * = 代入演算子
+  
+## 5. サンプリング文
+  * modelブロック
+  * ビール売上の例
+    * 売上平均値のパラメータ$\mu$, ばらつき$\sigma^2$
+    * 売上salesは平均$\mu$, ばらつき$\sigma^2$の正規分布からサンプリングされたと想定
+    * $sales \sim Normal(\mu, \sigma^2)$
+    * N: サンプルサイズとして
+      * model{
+        for (i in 1:N){
+          sales[i] ~ normal(mu, sigma)
+        }
+      }
+    * 左辺ではデータでも、未知のパラメータでもOK
+    * muとsigmaの事前分布は指定できる
+    * model{
+      mu ~ normal(0, 1000000);
+      sigma ~ normal(0, 1000000);
+      for (i in 1:N){
+        sales[i] ~ normal(mu, sigma);
+      }
+    }
+    * 事前分布を変えたときに結果（＝事後分布）がどう変わってくるかの確認作業：感度分析
+    
+## 6. 弱情報事前分布の設定
+  * パラメータの範囲が"ある程度"分かっているとき
+  * "やや狭い"事前分布
+    * 例えば-5から5が想定されるとして、
+      * uniform(-5, 5)のように範囲が厳格に決まった一様分布よりも
+      * normal(0, 5)のような緩やかに範囲が決められる決め方が良い
+        * t分布が使われたりもする 
+        * Prior Choice Recommendations参照
+
+        

@@ -1283,13 +1283,16 @@ autoplot(ts(mcmc_sample[,,"mu"]),
 ```
   6. ggplot2による事後分布の可視化
     * MCMCサンプルをまとめる＝パラメータの事後分布
-```{r}
+```{r ggplot2}
 mu_df <- data.frame(mu_mcmc_sample <- mu_mcmc_vec)
 ggplot(data=mu_df, mapping=aes(x=mu_mcmc_sample))+geom_density(size=1.5)
 ```
 ## 7. bayesplotによる事後分布の可視化
   * bayesplot便利
-```{r}
+```{r bayesplot combo}
+library(rstan)
+rstan_options(auto_write=TRUE)
+options(mc.cores=parallel::detectCores())
 library(bayesplot)
 mcmc_hist(mcmc_sample, parc=c("mu", "sigma"))
 mcmc_combo(mcmc_sample, parc=c("mu","sigma"))
@@ -1313,7 +1316,7 @@ mcmc_combo(mcmc_sample, parc=c("mu","sigma"))
     * 草原の中にランダムに個体が分布
     * 試行回数が大きく、発生確率が小さい二項分布＝ポアソン分布
     * 間違った分布として正規分布も考えてみる
-```{r}
+```{r anuma-num}
 animal_num<-read.csv("2-5-1-animal-num.csv")
 ```
 
@@ -1400,12 +1403,14 @@ animal_num<-read.csv("2-5-1-animal-num.csv")
         * ここでtargetはlp__(対数事後確率)
     }
 
-<<<<<<< HEAD
+
 ## 8. 平均値の差の評価とgenerated quantitiesブロック
   * モデル推定とは独立に乱数を得たい
-```{r}
+```{r mcmc_result6}
 library(ggplot2)
 library(rstan)
+rstan_options(auto_write=TRUE)
+options(mc.cores=parallel::detectCores())
 file_beer_sales_ab<-read.csv("2-6-1-beer-sales-ab.csv")
 ggplot(data=file_beer_sales_ab, mapping=aes(x=sales, y=..density.., color=beer_name, fill=beer_name))+geom_histogram(alpha=0.5,position="identity")+geom_density(alpha=0.5, size=0)
 sales_a<-file_beer_sales_ab$sales[1:100]
@@ -1422,8 +1427,108 @@ mcmc_result_6<-stan(file="2-6-5-difference-mean.stan",
 )
 print(mcmc_result_6, probs=c(0.025, 0.5, .0975))
 ```
+
+## 練習問題
+  * 異なる分散を仮定
+```{r prac1}
+library(rstan)
+rstan_options(auto_write=TRUE)
+options(mc.cores=parallel::detectCores())
+pdata<-read.csv("data_if.csv")
+xdata<-pdata[which(pdata$con=="X"),]
+ydata<-pdata[which(pdata$con=="Y"),]
+ggplot(data=pdata, mapping=aes(x=syakou, y=..density.., color=con, fill=con))+geom_histogram(alpha=0.5, position="identity")+geom_density(alpha=0.5, size=0)
+list_xy<-list(datax=xdata[,2],datay=ydata[,2],Nx=length(xdata[,2]),Ny=length(ydata[,2]))
+mcmc_p_res <- stan(file="2-6-5-pdata.stan",
+                   data=list_xy,
+                   seed=1
+)
+print(mcmc_p_res)
+library(bayesplot)
+mcmc_combo(mcmc_p_res, pars=c("mu_x", "mu_y", "sigma_x", "sigma_y", "diff"))
+```
+
+  * 同じ分散を仮定
+```{r prac2}
+library(rstan)
+rstan_options(auto_write=TRUE)
+options(mc.cores=parallel::detectCores())
+pdata<-read.csv("data_if.csv")
+xdata<-pdata[which(pdata$con=="X"),]
+ydata<-pdata[which(pdata$con=="Y"),]
+ggplot(data=pdata, mapping=aes(x=syakou, y=..density.., color=con, fill=con))+geom_histogram(alpha=0.5, position="identity")+geom_density(alpha=0.5, size=0)
+list_xy<-list(datax=xdata[,2],datay=ydata[,2],Nx=length(xdata[,2]),Ny=length(ydata[,2]))
+mcmc_p_res <- stan(file="2-6-5-pdata2.stan",
+                   data=list_xy,
+                   seed=1
+)
+print(mcmc_p_res)
+```
   
   
 =======
 >>>>>>> 67cc82a727112b43f9fb79d0287880101f491c00
 >>>>>>> 08ec01a1e6b1866de5d7fc69cb93fa44662f9ed5
+
+# 3章
+
+# 3-1章: 一般化線形モデルの基本
+## 1. 目的と概要
+  * 一般化線形モデル(GLM): 実践的モデル & 複雑なモデルの部品
+  * 確率分布、線形予測子、リンク関数
+  * リファレンス的に使える章
+
+## 2. 複雑なモデルを構築する際の手続きの標準化
+  * モデルをどう構築するか
+  * ビールの売り上げの例
+    * $y \sim Normal(\mu,\sigma^2)$
+    * これを複雑にしようとしたとき、"勝手に"やるばかりだと非効率かも
+    * 「モデルの方」「フレームワーク」
+  * 一般化線形モデルにおけるモデルの変更手続き
+    1. 確率分布を変える
+    2. 線形予測子を変える
+    3. リンク関数を変える
+
+## 3. 確率分布・線形予測子・リンク関数
+  * 確率分布
+    * 観測データを生む確率的過程を表現するためのもの。データに合わせて変える。
+      * ビールなら正規分布
+      * 小動物の数ならポアソン分布
+      * 購入比率なら二項分布
+  * 変数
+    * 応答変数・従属変数
+    * 説明変数
+  * 線形予測子
+    * 説明変数の線型結合
+  * リンク関数
+    * 応答変数と線形予測子を関係付けること
+  
+## 4. 一般線形モデルの例: 説明変数が無く、正規分布を仮定するモデル
+  * ビール売り上げの例
+    * 凡例
+      * $y_i$:売り上げデータ
+      * $\mu_i$: $y_i$の期待値
+      * $_i$: 何番目のデータか
+      * $g$: 恒等関数（$g(y)=y$となる関数=何も怒らない関数）
+    * 一般性系モデル
+      * $g(\mu_i)=\beta_0$
+      * $y_i \sim Normal(\mu, \sigma^2)$
+      * $\beta_0$が線形予測子、恒等関数$g()$がリンク関数
+    * 書き換え
+      * $\mu_i=\beta_0$
+      * $y_i \sim Normal(\mu, \sigma^2)$
+    * 従属変数の平均値$\mu_i$が値$\beta_0$をとることを想定したモデル
+    
+## 5. 単回帰モデル: 説明変数が1つだけあり、正規分布を仮定するモデル
+  * ビールの売り上げが気温$x$によって変化するというモデル
+    * $g(\mu_i)=\beta_0+\beta_1x_i$
+    * $y_i \sim Normal(\mu_i, sigma^2)$
+    * $\beta_0+\beta_1x_i$が線形予測子、恒等関数$g()$がリンク関数
+  * 書き換え
+    * $\mu_i = \beta_0 + \beta_1x_i$
+    * $y_i \sim Normal(\mu_i, sigma^2)$
+  * 気温$x$が1変化すると$\beta_1$増減する
+  * 単回帰モデル
+    * $\beta_0$を切片
+    * $\beta_1$を$x$の係数・傾き
+

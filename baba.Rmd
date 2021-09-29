@@ -1162,6 +1162,76 @@ traceplot(mcmc_result)
     * 確率的な関係：波線
     * 確定的関係：実線
     
+<<<<<<< HEAD
+    
+# 2-6. Stanコーディングの詳細
+## 2. Stanファイルの構造
+  * Stanファイルの構成
+    * function
+    * data
+    * transformed data
+    * parameters
+    * transformed parameters
+    * model
+    * generated quntities
+    
+## 3. 変数の宣言
+  * 型と範囲
+    * int N
+    * real beta;
+    * real<lower=0> beta;
+    * int<lower=0, upper=1> range;
+  * ベクトル、配列の宣言
+    * ベクトル、行列
+      * 実数値型
+      * vector[3] retu;
+      * row_vector[10] gyou;
+      * matrix[3,2] mat;
+    * 配列
+      * ベクトルより柔軟、データ型を複数持てる
+      * int w[10];
+      * real x[3,4];
+      * vector[4] Y[2]; //4要素のベクトルを2つ持つ配列Y
+      * matrix[3,4] Z[5,6]; //3x4の行列を要素に持つ5x6の配列Z
+
+## 4. 代入
+  * transformed dataブロックやtransformed parametersブロック
+  * = 代入演算子
+  
+## 5. サンプリング文
+  * modelブロック
+  * ビール売上の例
+    * 売上平均値のパラメータ$\mu$, ばらつき$\sigma^2$
+    * 売上salesは平均$\mu$, ばらつき$\sigma^2$の正規分布からサンプリングされたと想定
+    * $sales \sim Normal(\mu, \sigma^2)$
+    * N: サンプルサイズとして
+      * model{
+        for (i in 1:N){
+          sales[i] ~ normal(mu, sigma)
+        }
+      }
+    * 左辺ではデータでも、未知のパラメータでもOK
+    * muとsigmaの事前分布は指定できる
+    * model{
+      mu ~ normal(0, 1000000);
+      sigma ~ normal(0, 1000000);
+      for (i in 1:N){
+        sales[i] ~ normal(mu, sigma);
+      }
+    }
+    * 事前分布を変えたときに結果（＝事後分布）がどう変わってくるかの確認作業：感度分析
+    
+## 6. 弱情報事前分布の設定
+  * パラメータの範囲が"ある程度"分かっているとき
+  * "やや狭い"事前分布
+    * 例えば-5から5が想定されるとして、
+      * uniform(-5, 5)のように範囲が厳格に決まった一様分布よりも
+      * normal(0, 5)のような緩やかに範囲が決められる決め方が良い
+        * t分布が使われたりもする 
+        * Prior Choice Recommendations参照
+
+        
+=======
 # 2-5章 MCMCの結果の評価
 
 ## 2. MCMCの実行
@@ -1330,6 +1400,7 @@ animal_num<-read.csv("2-5-1-animal-num.csv")
         * ここでtargetはlp__(対数事後確率)
     }
 
+<<<<<<< HEAD
 ## 8. 平均値の差の評価とgenerated quantitiesブロック
   * モデル推定とは独立に乱数を得たい
 ```{r}
@@ -1353,3 +1424,6 @@ print(mcmc_result_6, probs=c(0.025, 0.5, .0975))
 ```
   
   
+=======
+>>>>>>> 67cc82a727112b43f9fb79d0287880101f491c00
+>>>>>>> 08ec01a1e6b1866de5d7fc69cb93fa44662f9ed5

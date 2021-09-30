@@ -1162,7 +1162,6 @@ traceplot(mcmc_result)
     * 確率的な関係：波線
     * 確定的関係：実線
     
-<<<<<<< HEAD
     
 # 2-6. Stanコーディングの詳細
 ## 2. Stanファイルの構造
@@ -1446,18 +1445,22 @@ mcmc_p_res <- stan(file="2-6-5-pdata.stan",
 print(mcmc_p_res)
 library(bayesplot)
 mcmc_combo(mcmc_p_res, pars=c("mu_x", "mu_y", "sigma_x", "sigma_y", "diff"))
+stan_hist(mcmc_p_res)
 ```
 
   * 同じ分散を仮定
 ```{r prac2}
 library(rstan)
+library(ggplot2)
 rstan_options(auto_write=TRUE)
 options(mc.cores=parallel::detectCores())
 pdata<-read.csv("data_if.csv")
 xdata<-pdata[which(pdata$con=="X"),]
 ydata<-pdata[which(pdata$con=="Y"),]
+
 ggplot(data=pdata, mapping=aes(x=syakou, y=..density.., color=con, fill=con))+geom_histogram(alpha=0.5, position="identity")+geom_density(alpha=0.5, size=0)
 list_xy<-list(datax=xdata[,2],datay=ydata[,2],Nx=length(xdata[,2]),Ny=length(ydata[,2]))
+
 mcmc_p_res <- stan(file="2-6-5-pdata2.stan",
                    data=list_xy,
                    seed=1
@@ -1465,10 +1468,7 @@ mcmc_p_res <- stan(file="2-6-5-pdata2.stan",
 print(mcmc_p_res)
 ```
   
-  
-=======
->>>>>>> 67cc82a727112b43f9fb79d0287880101f491c00
->>>>>>> 08ec01a1e6b1866de5d7fc69cb93fa44662f9ed5
+
 
 # 3章
 

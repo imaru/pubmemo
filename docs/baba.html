@@ -389,6 +389,9 @@
             <li><a href="#確率分布線形予測子リンク関数">3. 確率分布・線形予測子・リンク関数</a></li>
             <li><a href="#一般線形モデルの例-説明変数が無く正規分布を仮定するモデル">4. 一般線形モデルの例: 説明変数が無く、正規分布を仮定するモデル</a></li>
             <li><a href="#単回帰モデル-説明変数が1つだけあり正規分布を仮定するモデル">5. 単回帰モデル: 説明変数が1つだけあり、正規分布を仮定するモデル</a></li>
+            <li><a href="#分散分析モデルダミー変数を利用するモデル">6. 分散分析モデル：ダミー変数を利用するモデル</a></li>
+            <li><a href="#正規線形モデル正規分布を仮定するモデル">7. 正規線形モデル：正規分布を仮定するモデル</a></li>
+            <li><a href="#ポアソン回帰モデル">8. ポアソン回帰モデル</a></li>
             </ul></li>
             </ul>
           </div>
@@ -2141,7 +2144,7 @@ $('a[href^=#]').click(function(){
 ## sigma   18.19    0.02 1.27   15.93   18.12   20.98  2758    1
 ## lp__  -336.43    0.02 0.96 -338.94 -336.13 -335.48  1905    1
 ## 
-## Samples were drawn using NUTS(diag_e) at Thu Sep 30 12:45:32 2021.
+## Samples were drawn using NUTS(diag_e) at Fri Oct  8 15:49:54 2021.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).</code></pre>
@@ -2552,7 +2555,7 @@ $('a[href^=#]').click(function(){
 ## diff      66.66    0.05 3.50   59.84   66.67   62.19  4094    1
 ## lp__    -719.42    0.03 1.45 -723.21 -719.07 -721.34  2249    1
 ## 
-## Samples were drawn using NUTS(diag_e) at Thu Sep 30 12:45:35 2021.
+## Samples were drawn using NUTS(diag_e) at Fri Oct  8 15:49:58 2021.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).</code></pre>
@@ -2589,7 +2592,7 @@ $('a[href^=#]').click(function(){
 ## diff      2.58    0.01 0.32   1.94   2.37   2.58   2.80   3.22  3643    1
 ## lp__    -32.31    0.04 1.48 -35.98 -33.01 -31.98 -31.25 -30.48  1552    1
 ## 
-## Samples were drawn using NUTS(diag_e) at Thu Sep 30 12:45:37 2021.
+## Samples were drawn using NUTS(diag_e) at Fri Oct  8 15:49:59 2021.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).</code></pre>
@@ -2631,7 +2634,7 @@ $('a[href^=#]').click(function(){
 ## diff    2.58    0.01 0.32   1.94   2.37   2.58   2.79   3.19  3575    1
 ## lp__  -32.07    0.03 1.26 -35.38 -32.66 -31.74 -31.15 -30.63  1686    1
 ## 
-## Samples were drawn using NUTS(diag_e) at Thu Sep 30 12:45:39 2021.
+## Samples were drawn using NUTS(diag_e) at Fri Oct  8 15:50:01 2021.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).</code></pre>
@@ -2741,6 +2744,73 @@ $('a[href^=#]').click(function(){
 <ul>
 <li><span class="math inline">\(\beta_0\)</span>を切片</li>
 <li><span class="math inline">\(\beta_1\)</span>を<span class="math inline">\(x\)</span>の係数・傾き</li>
+</ul></li>
+<li>単回帰モデルを使うことで..
+<ul>
+<li>説明変数と従属変数の関係の考察</li>
+<li>従属変数の予測</li>
+</ul></li>
+</ul>
+</div>
+<div id="分散分析モデルダミー変数を利用するモデル" class="section level2">
+<h2>6. 分散分析モデル：ダミー変数を利用するモデル</h2>
+<ul>
+<li>説明変数が質的変数のとき
+<ul>
+<li>ダミー変数を使う必要性
+<ul>
+<li>ダミー変数：0 / 1</li>
+<li>晴れ・雨・曇りを表現する
+<ul>
+<li>晴れ：0/1</li>
+<li>雨: 0/1</li>
+</ul></li>
+<li>状態-1の変数
+<ul>
+<li>1 0 -&gt; 晴れ</li>
+<li>0 1 -&gt; 雨</li>
+<li>0 0 -&gt; 曇り</li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li>ビールの例
+<ul>
+<li>売上が天気の影響を受ける
+<ul>
+<li><span class="math inline">\(x_1\)</span>:晴れなら1, <span class="math inline">\(x_2\)</span>: 雨なら1, <span class="math inline">\(g()\)</span>: 恒等関数
+<ul>
+<li><span class="math inline">\(g(\mu_i)=\beta_0+\beta_1x_{i1}+\beta_{i2}\)</span></li>
+<li>y Normal(_i, ^2)</li>
+</ul></li>
+<li>書き換え
+<ul>
+<li><span class="math inline">\(\mu_i=\beta_0+\beta_1x_{i1}+\beta_{i2}\)</span></li>
+</ul></li>
+<li>分散分析モデル
+<ul>
+<li>説明変数が質的データ</li>
+<li>確率分布として正規分布</li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+<div id="正規線形モデル正規分布を仮定するモデル" class="section level2">
+<h2>7. 正規線形モデル：正規分布を仮定するモデル</h2>
+<ul>
+<li>単回帰モデルも分散分析モデルも含まれる</li>
+<li>リンク関数は恒等関数</li>
+<li>確率分布は正規分布</li>
+<li>説明変数は量的だけ（単回帰モデル）、質的だけ（分散分析モデル）、両方とも（？）</li>
+</ul>
+</div>
+<div id="ポアソン回帰モデル" class="section level2">
+<h2>8. ポアソン回帰モデル</h2>
+<ul>
+<li>魚の釣果尾数のモデル化
+<ul>
+<li>あまり釣れないし生の数のみ、ポアソン分布に従う</li>
+<li>分布のパラメータ<span class="math inline">\(\lambda\)</span>は気温と天気の影響を受ける</li>
 </ul></li>
 </ul>
 </div>

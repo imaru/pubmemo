@@ -2151,7 +2151,7 @@ $('a[href^=#]').click(function(){
 ## sigma   18.19    0.02 1.27   15.93   18.12   20.98  2758    1
 ## lp__  -336.43    0.02 0.96 -338.94 -336.13 -335.48  1905    1
 ## 
-## Samples were drawn using NUTS(diag_e) at Wed Oct 13 13:10:17 2021.
+## Samples were drawn using NUTS(diag_e) at Wed Oct 20 09:03:03 2021.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).</code></pre>
@@ -2562,7 +2562,7 @@ $('a[href^=#]').click(function(){
 ## diff      66.66    0.05 3.50   59.84   66.67   62.19  4094    1
 ## lp__    -719.42    0.03 1.45 -723.21 -719.07 -721.34  2249    1
 ## 
-## Samples were drawn using NUTS(diag_e) at Wed Oct 13 13:10:20 2021.
+## Samples were drawn using NUTS(diag_e) at Wed Oct 20 09:03:07 2021.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).</code></pre>
@@ -2599,7 +2599,7 @@ $('a[href^=#]').click(function(){
 ## diff      2.58    0.01 0.32   1.94   2.37   2.58   2.80   3.22  3643    1
 ## lp__    -32.31    0.04 1.48 -35.98 -33.01 -31.98 -31.25 -30.48  1552    1
 ## 
-## Samples were drawn using NUTS(diag_e) at Wed Oct 13 13:10:21 2021.
+## Samples were drawn using NUTS(diag_e) at Wed Oct 20 09:03:08 2021.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).</code></pre>
@@ -2641,7 +2641,7 @@ $('a[href^=#]').click(function(){
 ## diff    2.58    0.01 0.32   1.94   2.37   2.58   2.79   3.19  3575    1
 ## lp__  -32.07    0.03 1.26 -35.38 -32.66 -31.74 -31.15 -30.63  1686    1
 ## 
-## Samples were drawn using NUTS(diag_e) at Wed Oct 13 13:10:24 2021.
+## Samples were drawn using NUTS(diag_e) at Wed Oct 20 09:03:10 2021.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).</code></pre>
@@ -2738,13 +2738,13 @@ $('a[href^=#]').click(function(){
 <li>ビールの売り上げが気温<span class="math inline">\(x\)</span>によって変化するというモデル
 <ul>
 <li><span class="math inline">\(g(\mu_i)=\beta_0+\beta_1x_i\)</span></li>
-<li><span class="math inline">\(y_i \sim Normal(\mu_i, sigma^2)\)</span></li>
+<li><span class="math inline">\(y_i \sim Normal(\mu_i, \sigma^2)\)</span></li>
 <li><span class="math inline">\(\beta_0+\beta_1x_i\)</span>が線形予測子、恒等関数<span class="math inline">\(g()\)</span>がリンク関数</li>
 </ul></li>
 <li>書き換え
 <ul>
 <li><span class="math inline">\(\mu_i = \beta_0 + \beta_1x_i\)</span></li>
-<li><span class="math inline">\(y_i \sim Normal(\mu_i, sigma^2)\)</span></li>
+<li><span class="math inline">\(y_i \sim Normal(\mu_i, \sigma^2)\)</span></li>
 </ul></li>
 <li>気温<span class="math inline">\(x\)</span>が1変化すると<span class="math inline">\(\beta_1\)</span>増減する</li>
 <li>単回帰モデル
@@ -3014,12 +3014,12 @@ $('a[href^=#]').click(function(){
 ## post-warmup draws per chain=1000, total post-warmup draws=4000.
 ## 
 ##               mean se_mean   sd     2.5%      50%    97.5% n_eff Rhat
-## Intercept    -3.79    0.00 0.16    -4.11    -3.79    -3.49  1520    1
-## b_basic       0.03    0.00 0.01     0.00     0.03     0.06  1813    1
-## b_senior     -0.01    0.00 0.01    -0.04    -0.01     0.02  1604    1
-## lp__      -2140.15    0.04 1.24 -2143.22 -2139.80 -2138.76  1238    1
+## Intercept    -3.79    0.00 0.16    -4.11    -3.79    -3.48  1543    1
+## b_basic       0.03    0.00 0.01     0.00     0.03     0.06  2031    1
+## b_senior     -0.01    0.00 0.01    -0.04    -0.01     0.02  1573    1
+## lp__      -2140.12    0.03 1.20 -2143.29 -2139.80 -2138.76  1566    1
 ## 
-## Samples were drawn using NUTS(diag_e) at Wed Oct 13 13:10:25 2021.
+## Samples were drawn using NUTS(diag_e) at Wed Oct 20 09:03:11 2021.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).</code></pre>

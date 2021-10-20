@@ -1522,11 +1522,11 @@ print(mcmc_p_res)
 ## 5. 単回帰モデル: 説明変数が1つだけあり、正規分布を仮定するモデル
   * ビールの売り上げが気温$x$によって変化するというモデル
     * $g(\mu_i)=\beta_0+\beta_1x_i$
-    * $y_i \sim Normal(\mu_i, sigma^2)$
+    * $y_i \sim Normal(\mu_i, \sigma^2)$
     * $\beta_0+\beta_1x_i$が線形予測子、恒等関数$g()$がリンク関数
   * 書き換え
     * $\mu_i = \beta_0 + \beta_1x_i$
-    * $y_i \sim Normal(\mu_i, sigma^2)$
+    * $y_i \sim Normal(\mu_i, \sigma^2)$
   * 気温$x$が1変化すると$\beta_1$増減する
   * 単回帰モデル
     * $\beta_0$を切片

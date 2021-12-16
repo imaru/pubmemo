@@ -358,6 +358,15 @@
             <li><a href="#章-モデルを用いた予測">3-3章: モデルを用いた予測</a>
             <ul>
             <li><a href="#分析の準備-2">2. 分析の準備</a></li>
+            <li><a href="#単回帰モデルにおける予測の考え方">3. 単回帰モデルにおける予測の考え方</a></li>
+            <li><a href="#予測のためのデータの整理">4. 予測のためのデータの整理</a></li>
+            <li><a href="#予測のためのstanファイルの修正">5. 予測のためのStanファイルの修正</a></li>
+            <li><a href="#mcmcの実行-1">6. MCMCの実行</a></li>
+            <li><a href="#予測分布の可視化">7. 予測分布の可視化</a></li>
+            </ul></li>
+            <li><a href="#章-デザイン行列を用いた一般化線形モデルの推定">3-4章: デザイン行列を用いた一般化線形モデルの推定</a>
+            <ul>
+            <li><a href="#分析の準備-3">2. 分析の準備</a></li>
             </ul></li>
             </ul>
           </div>
@@ -2110,7 +2119,7 @@ mcmc_result&lt;-stan(
 ## sigma   18.19    0.02 1.27   15.93   18.12   20.98  2758    1
 ## lp__  -336.43    0.02 0.96 -338.94 -336.13 -335.48  1905    1
 ## 
-## Samples were drawn using NUTS(diag_e) at Tue Dec 14 10:08:21 2021.
+## Samples were drawn using NUTS(diag_e) at Thu Dec 16 11:59:56 2021.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).</code></pre>
@@ -2521,7 +2530,7 @@ print(mcmc_result_6, probs=c(0.025, 0.5, .0975))</code></pre>
 ## diff      66.66    0.05 3.50   59.84   66.67   62.19  4094    1
 ## lp__    -719.42    0.03 1.45 -723.21 -719.07 -721.34  2249    1
 ## 
-## Samples were drawn using NUTS(diag_e) at Tue Dec 14 10:08:25 2021.
+## Samples were drawn using NUTS(diag_e) at Thu Dec 16 11:59:59 2021.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).</code></pre>
@@ -2558,7 +2567,7 @@ print(mcmc_p_res)</code></pre>
 ## diff      2.58    0.01 0.32   1.94   2.37   2.58   2.80   3.22  3643    1
 ## lp__    -32.31    0.04 1.48 -35.98 -33.01 -31.98 -31.25 -30.48  1552    1
 ## 
-## Samples were drawn using NUTS(diag_e) at Tue Dec 14 10:08:26 2021.
+## Samples were drawn using NUTS(diag_e) at Thu Dec 16 12:00:00 2021.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).</code></pre>
@@ -2600,7 +2609,7 @@ print(mcmc_p_res)</code></pre>
 ## diff    2.58    0.01 0.32   1.94   2.37   2.58   2.79   3.19  3575    1
 ## lp__  -32.07    0.03 1.26 -35.38 -32.66 -31.74 -31.15 -30.63  1686    1
 ## 
-## Samples were drawn using NUTS(diag_e) at Tue Dec 14 10:08:28 2021.
+## Samples were drawn using NUTS(diag_e) at Thu Dec 16 12:00:02 2021.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).</code></pre>
@@ -2973,12 +2982,12 @@ print(mr,probs=c(0.025,0.5,0.975))</code></pre>
 ## post-warmup draws per chain=1000, total post-warmup draws=4000.
 ## 
 ##               mean se_mean   sd     2.5%      50%    97.5% n_eff Rhat
-## Intercept    -3.80    0.01 0.17    -4.13    -3.79    -3.48  1004 1.00
-## b_basic       0.03    0.00 0.01     0.00     0.03     0.06  1637 1.01
-## b_senior     -0.01    0.00 0.01    -0.04    -0.01     0.02  1152 1.00
-## lp__      -2140.17    0.04 1.24 -2143.47 -2139.86 -2138.77  1154 1.00
+## Intercept    -3.79    0.00 0.16    -4.09    -3.79    -3.47  1404    1
+## b_basic       0.03    0.00 0.01     0.00     0.03     0.06  1773    1
+## b_senior     -0.01    0.00 0.01    -0.04    -0.01     0.02  1675    1
+## lp__      -2140.10    0.03 1.21 -2143.22 -2139.79 -2138.74  1259    1
 ## 
-## Samples were drawn using NUTS(diag_e) at Tue Dec 14 10:08:29 2021.
+## Samples were drawn using NUTS(diag_e) at Thu Dec 16 12:00:03 2021.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).</code></pre>
@@ -3050,7 +3059,7 @@ parameters{
   real&lt;lower=0&gt; sigma;
 }
 model{
-  sales ~ normal(Intercept+beta*temperature, sigma);
+  sales ~ normal(Intercept+beta * temperature, sigma);
 }</code></pre>
 </div>
 <div id="mcmcの実行-2.7-事後分布の可視化" class="section level2">
@@ -3066,7 +3075,7 @@ data_list&lt;-list(
 )
 mr&lt;-rstan::sampling(beer, data=data_list, seed=1)
 print(mr, probs=c(0.025, 0.5, 0.975))</code></pre>
-<pre><code>## Inference for Stan model: bf1c9a3e913cfa0cd94db51e057552c4.
+<pre><code>## Inference for Stan model: 31d2b526651ec414e920d1821baf3500.
 ## 4 chains, each with iter=2000; warmup=1000; thin=1; 
 ## post-warmup draws per chain=1000, total post-warmup draws=4000.
 ## 
@@ -3076,7 +3085,7 @@ print(mr, probs=c(0.025, 0.5, 0.975))</code></pre>
 ## sigma       17.07    0.03 1.21   14.89   16.96   19.67  1629    1
 ## lp__      -330.07    0.03 1.20 -333.26 -329.75 -328.73  1288    1
 ## 
-## Samples were drawn using NUTS(diag_e) at Tue Dec 14 10:08:47 2021.
+## Samples were drawn using NUTS(diag_e) at Thu Dec 16 12:00:22 2021.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).</code></pre>
@@ -3354,9 +3363,64 @@ plot(x,y,type=&#39;l&#39;)</code></pre>
 <h1>3-3章: モデルを用いた予測</h1>
 <div id="分析の準備-2" class="section level2">
 <h2>2. 分析の準備</h2>
+</div>
+<div id="単回帰モデルにおける予測の考え方" class="section level2">
+<h2>3. 単回帰モデルにおける予測の考え方</h2>
 <ul>
-<li></li>
+<li>モデル: <span class="math inline">\(sales_i \sim Normal(Intercept + beta \times temperature_i, sigma^2)\)</span></li>
+<li>モデル推定で切片とベータが分かっていれば、ある気温の売り上げを計算できる
+<ul>
+<li>ただし、その切片は単に「分布の代表値」</li>
+</ul></li>
 </ul>
+</div>
+<div id="予測のためのデータの整理" class="section level2">
+<h2>4. 予測のためのデータの整理</h2>
+<ul>
+<li>予測したい気温のリストを作成</li>
+</ul>
+</div>
+<div id="予測のためのstanファイルの修正" class="section level2">
+<h2>5. 予測のためのStanファイルの修正</h2>
+<ul>
+<li>generated quantitiesブロックを作成
+<ul>
+<li>事後予測分布を取得</li>
+</ul></li>
+</ul>
+</div>
+<div id="mcmcの実行-1" class="section level2">
+<h2>6. MCMCの実行</h2>
+<ul>
+<li>モデル推定と事後予測分布が得られる</li>
+</ul>
+</div>
+<div id="予測分布の可視化" class="section level2">
+<h2>7. 予測分布の可視化</h2>
+<ul>
+<li>beyesplotパッケージなどで図示
+<ul>
+<li>正規表現を使うための引数: regex_pars</li>
+</ul></li>
+<li>95%予測区間</li>
+<li>予測分布</li>
+</ul>
+</div>
+</div>
+<div id="章-デザイン行列を用いた一般化線形モデルの推定" class="section level1">
+<h1>3-4章: デザイン行列を用いた一般化線形モデルの推定</h1>
+<div id="分析の準備-3" class="section level2">
+<h2>2. 分析の準備</h2>
+<ul>
+<li>beerの例</li>
+</ul>
+<pre class="r"><code>library(rstan)
+library(bayesplot)
+rstan_options(auto_write = TRUE)
+options(mc.cores = parallel::detectCores())
+
+beer&lt;-read.csv(&quot;3-2-1-beer-sales-2.csv&quot;)
+sample_size &lt;- nrow(beer)</code></pre>
 </div>
 </div>
 <div class="footnotes">

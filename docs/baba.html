@@ -367,6 +367,10 @@
             <li><a href="#章-デザイン行列を用いた一般化線形モデルの推定">3-4章: デザイン行列を用いた一般化線形モデルの推定</a>
             <ul>
             <li><a href="#分析の準備-3">2. 分析の準備</a></li>
+            <li><a href="#デザイン行列を使ったモデルの数学的な表現">3. デザイン行列を使ったモデルの数学的な表現</a></li>
+            <li><a href="#formula構文を用いたデザイン行列の作成">4. formula構文を用いたデザイン行列の作成</a></li>
+            <li><a href="#デザイン行列を使うためのstanファイルの設定">5. デザイン行列を使うためのStanファイルの設定</a></li>
+            <li><a href="#mcmcの実行-2">6. MCMCの実行</a></li>
             </ul></li>
             </ul>
           </div>
@@ -2119,7 +2123,7 @@ mcmc_result&lt;-stan(
 ## sigma   18.19    0.02 1.27   15.93   18.12   20.98  2758    1
 ## lp__  -336.43    0.02 0.96 -338.94 -336.13 -335.48  1905    1
 ## 
-## Samples were drawn using NUTS(diag_e) at Thu Dec 16 12:01:36 2021.
+## Samples were drawn using NUTS(diag_e) at Thu Dec 16 17:07:44 2021.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).</code></pre>
@@ -2530,7 +2534,7 @@ print(mcmc_result_6, probs=c(0.025, 0.5, .0975))</code></pre>
 ## diff      66.66    0.05 3.50   59.84   66.67   62.19  4094    1
 ## lp__    -719.42    0.03 1.45 -723.21 -719.07 -721.34  2249    1
 ## 
-## Samples were drawn using NUTS(diag_e) at Thu Dec 16 12:01:40 2021.
+## Samples were drawn using NUTS(diag_e) at Thu Dec 16 17:07:48 2021.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).</code></pre>
@@ -2567,7 +2571,7 @@ print(mcmc_p_res)</code></pre>
 ## diff      2.58    0.01 0.32   1.94   2.37   2.58   2.80   3.22  3643    1
 ## lp__    -32.31    0.04 1.48 -35.98 -33.01 -31.98 -31.25 -30.48  1552    1
 ## 
-## Samples were drawn using NUTS(diag_e) at Thu Dec 16 12:01:40 2021.
+## Samples were drawn using NUTS(diag_e) at Thu Dec 16 17:07:49 2021.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).</code></pre>
@@ -2609,7 +2613,7 @@ print(mcmc_p_res)</code></pre>
 ## diff    2.58    0.01 0.32   1.94   2.37   2.58   2.79   3.19  3575    1
 ## lp__  -32.07    0.03 1.26 -35.38 -32.66 -31.74 -31.15 -30.63  1686    1
 ## 
-## Samples were drawn using NUTS(diag_e) at Thu Dec 16 12:01:42 2021.
+## Samples were drawn using NUTS(diag_e) at Thu Dec 16 17:07:51 2021.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).</code></pre>
@@ -2987,7 +2991,7 @@ print(mr,probs=c(0.025,0.5,0.975))</code></pre>
 ## b_senior     -0.01    0.00 0.01    -0.04    -0.01     0.02  1409    1
 ## lp__      -2140.14    0.03 1.22 -2143.28 -2139.80 -2138.75  1225    1
 ## 
-## Samples were drawn using NUTS(diag_e) at Thu Dec 16 12:01:43 2021.
+## Samples were drawn using NUTS(diag_e) at Thu Dec 16 17:07:52 2021.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).</code></pre>
@@ -3085,7 +3089,7 @@ print(mr, probs=c(0.025, 0.5, 0.975))</code></pre>
 ## sigma       17.07    0.03 1.21   14.89   16.96   19.67  1629    1
 ## lp__      -330.07    0.03 1.20 -333.26 -329.75 -328.73  1288    1
 ## 
-## Samples were drawn using NUTS(diag_e) at Thu Dec 16 12:01:45 2021.
+## Samples were drawn using NUTS(diag_e) at Thu Dec 16 17:07:54 2021.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).</code></pre>
@@ -3419,8 +3423,87 @@ library(bayesplot)
 rstan_options(auto_write = TRUE)
 options(mc.cores = parallel::detectCores())
 
-beer&lt;-read.csv(&quot;3-2-1-beer-sales-2.csv&quot;)
+beerf&lt;-read.csv(&quot;3-2-1-beer-sales-2.csv&quot;)
 sample_size &lt;- nrow(beer)</code></pre>
+</div>
+<div id="デザイン行列を使ったモデルの数学的な表現" class="section level2">
+<h2>3. デザイン行列を使ったモデルの数学的な表現</h2>
+<ul>
+<li>ビールの売り上げ
+<ul>
+<li><span class="math inline">\(\mu_i = \beta_0 + \beta_1x_i\)</span></li>
+<li><span class="math inline">\(y_i \sim Normal(\mu_i, \sigma^2)\)</span></li>
+</ul></li>
+<li>ここで期待値のベクトル<span class="math inline">\(\boldsymbol{\mu}\)</span>, デザイン行列<span class="math inline">\(\boldsymbol{X}\)</span>とすると、
+<ul>
+<li><span class="math inline">\(\boldsymbol{\mu} = \boldsymbol{X\beta}\)</span></li>
+</ul></li>
+</ul>
+</div>
+<div id="formula構文を用いたデザイン行列の作成" class="section level2">
+<h2>4. formula構文を用いたデザイン行列の作成</h2>
+<ul>
+<li>formula記法</li>
+<li><span class="math inline">\(formula(応答変数 \sim 説明変数)\)</span></li>
+<li>model.matrix関数</li>
+</ul>
+<pre class="r"><code>flm &lt;- formula(sales ~ temperature)
+X &lt;- model.matrix(flm, beerf)</code></pre>
+</div>
+<div id="デザイン行列を使うためのstanファイルの設定" class="section level2">
+<h2>5. デザイン行列を使うためのStanファイルの設定</h2>
+<ul>
+<li>stanファイルを修正する</li>
+</ul>
+<pre class="stan"><code>data{
+  int N;
+  int K;
+  vector[N] Y;
+  matrix[N, K] X;
+}
+
+parameters{
+  vector[K] b;
+  real&lt;lower = 0&gt; sigma;
+}
+
+transformed parameters{
+  vector[N] mu = X * b;
+}
+
+model{
+  Y ~ normal(mu, sigma);
+}</code></pre>
+</div>
+<div id="mcmcの実行-2" class="section level2">
+<h2>6. MCMCの実行</h2>
+<pre class="r"><code>N &lt;- nrow(beerf)
+K &lt;- 2
+Y &lt;- beerf$sales
+dl &lt;- list(N = N, K = K, Y = Y, X = X)
+
+res&lt;-rstan::sampling(beer_design, data=dl, seed=1)
+print(res, probs = c(0.025, 0.5, 0.975))</code></pre>
+<pre><code>## Inference for Stan model: 61434762f6b0fcc57b85a34f69371a85.
+## 4 chains, each with iter=2000; warmup=1000; thin=1; 
+## post-warmup draws per chain=1000, total post-warmup draws=4000.
+## 
+##            mean se_mean   sd    2.5%     50%   97.5% n_eff Rhat
+## b[1]      20.78    0.17 5.89    9.31   20.74   32.27  1247    1
+## b[2]       2.48    0.01 0.29    1.91    2.47    3.04  1245    1
+## sigma     17.06    0.03 1.25   14.89   16.97   19.67  1514    1
+## mu[1]     54.71    0.06 2.42   49.93   54.73   59.44  1670    1
+## mu[2]     80.22    0.04 2.13   76.14   80.18   84.42  2926    1
+## mu[3]     74.03    0.03 1.80   70.57   73.98   77.47  4418    1
+## mu[4]     53.96    0.06 2.48   49.08   54.00   58.82  1632    1
+## mu[5]     92.35    0.07 3.16   86.30   92.28   98.66  1805    1
+## mu[6]     92.35    0.07 3.16   86.30   92.28   98.66  1805    1
+##  [ reached getOption(&quot;max.print&quot;) -- 95 行を無視しました ] 
+## 
+## Samples were drawn using NUTS(diag_e) at Thu Dec 16 17:08:12 2021.
+## For each parameter, n_eff is a crude measure of effective sample size,
+## and Rhat is the potential scale reduction factor on split chains (at 
+## convergence, Rhat=1).</code></pre>
 </div>
 </div>
 <div class="footnotes">

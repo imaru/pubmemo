@@ -1943,9 +1943,63 @@ library(bayesplot)
 rstan_options(auto_write = TRUE)
 options(mc.cores = parallel::detectCores())
 
-beer<-read.csv("3-2-1-beer-sales-2.csv")
+beerf<-read.csv("3-2-1-beer-sales-2.csv")
 sample_size <- nrow(beer)
 
 ```
-  
+
+## 3. デザイン行列を使ったモデルの数学的な表現
+  * ビールの売り上げ
+    * $\mu_i = \beta_0 + \beta_1x_i$
+    * $y_i \sim Normal(\mu_i, \sigma^2)$
+  * ここで期待値のベクトル$\boldsymbol{\mu}$, デザイン行列$\boldsymbol{X}$とすると、
+    * $\boldsymbol{\mu} = \boldsymbol{X\beta}$
     
+## 4. formula構文を用いたデザイン行列の作成
+  * formula記法
+  * $formula(応答変数 \sim 説明変数)$
+  * model.matrix関数
+  
+```{r}
+flm <- formula(sales ~ temperature)
+X <- model.matrix(flm, beerf)
+```
+
+## 5. デザイン行列を使うためのStanファイルの設定
+  * stanファイルを修正する
+```{stan output.var='beer_design'}
+data{
+  int N;
+  int K;
+  vector[N] Y;
+  matrix[N, K] X;
+}
+
+parameters{
+  vector[K] b;
+  real<lower = 0> sigma;
+}
+
+transformed parameters{
+  vector[N] mu = X * b;
+}
+
+model{
+  Y ~ normal(mu, sigma);
+}
+```
+
+## 6. MCMCの実行
+
+```{r beer_design}
+N <- nrow(beerf)
+K <- 2
+Y <- beerf$sales
+dl <- list(N = N, K = K, Y = Y, X = X)
+
+res<-rstan::sampling(beer_design, data=dl, seed=1)
+print(res, probs = c(0.025, 0.5, 0.975))
+
+```
+
+  

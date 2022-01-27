@@ -372,6 +372,16 @@
             <li><a href="#デザイン行列を使うためのstanファイルの設定">5. デザイン行列を使うためのStanファイルの設定</a></li>
             <li><a href="#mcmcの実行-2">6. MCMCの実行</a></li>
             </ul></li>
+            <li><a href="#brmsの使い方">3-5. brmsの使い方</a>
+            <ul>
+            <li><a href="#brmsとは">2. brmsとは</a></li>
+            <li><a href="#本書での実装の方針">3. 本書での実装の方針</a></li>
+            <li><a href="#分析の準備-4">4. 分析の準備</a></li>
+            <li><a href="#brmsによる単回帰モデルの推定">5. brmsによる単回帰モデルの推定</a></li>
+            <li><a href="#brmsの基本的な使い方">6. brmsの基本的な使い方</a></li>
+            <li><a href="#事前分布の変更">7. 事前分布の変更</a></li>
+            <li><a href="#補足brmsの基本的な仕組み">8. 補足：brmsの基本的な仕組み</a></li>
+            </ul></li>
             </ul>
           </div>
           <div data-position="sidebar:post-end" class="InjectedComponents"><div class="dark-theme-toggler"><div class="toggle "><div class="toggle-track"><div class="toggle-track-check"><img  src="data:image/png;base64,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" role="presentation" style="pointer-events: none;" width="16" height="16"></div> <div class="toggle-track-x"><img src="data:image/png;base64,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" role="presentation" style="pointer-events: none;" width="16" height="16"></div></div> <div class="toggle-thumb"></div></div> <input type="checkbox" aria-label="Switch between Dark and Default theme" class="toggler-screen-reader-only"></div></div>
@@ -2123,7 +2133,7 @@ mcmc_result&lt;-stan(
 ## sigma   18.19    0.02 1.27   15.93   18.12   20.98  2758    1
 ## lp__  -336.43    0.02 0.96 -338.94 -336.13 -335.48  1905    1
 ## 
-## Samples were drawn using NUTS(diag_e) at Thu Dec 16 17:07:44 2021.
+## Samples were drawn using NUTS(diag_e) at Wed Jan 26 15:50:56 2022.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).</code></pre>
@@ -2534,7 +2544,7 @@ print(mcmc_result_6, probs=c(0.025, 0.5, .0975))</code></pre>
 ## diff      66.66    0.05 3.50   59.84   66.67   62.19  4094    1
 ## lp__    -719.42    0.03 1.45 -723.21 -719.07 -721.34  2249    1
 ## 
-## Samples were drawn using NUTS(diag_e) at Thu Dec 16 17:07:48 2021.
+## Samples were drawn using NUTS(diag_e) at Wed Jan 26 15:51:00 2022.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).</code></pre>
@@ -2571,7 +2581,7 @@ print(mcmc_p_res)</code></pre>
 ## diff      2.58    0.01 0.32   1.94   2.37   2.58   2.80   3.22  3643    1
 ## lp__    -32.31    0.04 1.48 -35.98 -33.01 -31.98 -31.25 -30.48  1552    1
 ## 
-## Samples were drawn using NUTS(diag_e) at Thu Dec 16 17:07:49 2021.
+## Samples were drawn using NUTS(diag_e) at Wed Jan 26 15:51:01 2022.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).</code></pre>
@@ -2613,7 +2623,7 @@ print(mcmc_p_res)</code></pre>
 ## diff    2.58    0.01 0.32   1.94   2.37   2.58   2.79   3.19  3575    1
 ## lp__  -32.07    0.03 1.26 -35.38 -32.66 -31.74 -31.15 -30.63  1686    1
 ## 
-## Samples were drawn using NUTS(diag_e) at Thu Dec 16 17:07:51 2021.
+## Samples were drawn using NUTS(diag_e) at Wed Jan 26 15:51:03 2022.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).</code></pre>
@@ -2986,12 +2996,12 @@ print(mr,probs=c(0.025,0.5,0.975))</code></pre>
 ## post-warmup draws per chain=1000, total post-warmup draws=4000.
 ## 
 ##               mean se_mean   sd     2.5%      50%    97.5% n_eff Rhat
-## Intercept    -3.78    0.00 0.16    -4.09    -3.78    -3.47  1184    1
-## b_basic       0.03    0.00 0.01     0.00     0.03     0.06  1365    1
-## b_senior     -0.01    0.00 0.01    -0.04    -0.01     0.02  1409    1
-## lp__      -2140.14    0.03 1.22 -2143.28 -2139.80 -2138.75  1225    1
+## Intercept    -3.79    0.00 0.16    -4.10    -3.79    -3.46  1200    1
+## b_basic       0.03    0.00 0.01     0.00     0.03     0.05  1610    1
+## b_senior     -0.01    0.00 0.01    -0.04    -0.01     0.02  1490    1
+## lp__      -2140.14    0.03 1.21 -2143.27 -2139.82 -2138.76  1310    1
 ## 
-## Samples were drawn using NUTS(diag_e) at Thu Dec 16 17:07:52 2021.
+## Samples were drawn using NUTS(diag_e) at Wed Jan 26 15:51:04 2022.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).</code></pre>
@@ -3079,7 +3089,7 @@ data_list&lt;-list(
 )
 mr&lt;-rstan::sampling(beer, data=data_list, seed=1)
 print(mr, probs=c(0.025, 0.5, 0.975))</code></pre>
-<pre><code>## Inference for Stan model: stan-15b92a320b5d.
+<pre><code>## Inference for Stan model: 31d2b526651ec414e920d1821baf3500.
 ## 4 chains, each with iter=2000; warmup=1000; thin=1; 
 ## post-warmup draws per chain=1000, total post-warmup draws=4000.
 ## 
@@ -3089,7 +3099,7 @@ print(mr, probs=c(0.025, 0.5, 0.975))</code></pre>
 ## sigma       17.07    0.03 1.21   14.89   16.96   19.67  1629    1
 ## lp__      -330.07    0.03 1.20 -333.26 -329.75 -328.73  1288    1
 ## 
-## Samples were drawn using NUTS(diag_e) at Thu Dec 16 17:07:54 2021.
+## Samples were drawn using NUTS(diag_e) at Wed Jan 26 15:51:21 2022.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).</code></pre>
@@ -3498,12 +3508,308 @@ print(res, probs = c(0.025, 0.5, 0.975))</code></pre>
 ## mu[4]     53.96    0.06 2.48   49.08   54.00   58.82  1632    1
 ## mu[5]     92.35    0.07 3.16   86.30   92.28   98.66  1805    1
 ## mu[6]     92.35    0.07 3.16   86.30   92.28   98.66  1805    1
-##  [ reached getOption(&quot;max.print&quot;) -- 95 行を無視しました ] 
+## mu[7]     51.98    0.07 2.65   46.75   52.02   57.17  1548    1
+## mu[8]     86.90    0.06 2.66   81.78   86.88   92.22  2101    1
+## mu[9]     68.82    0.03 1.72   65.37   68.80   72.08  4166    1
+## mu[10]    72.79    0.03 1.77   69.37   72.74   76.15  4592    1
+## mu[11]    73.04    0.03 1.77   69.61   72.99   76.42  4560    1
+## mu[12]    57.43    0.05 2.21   53.05   57.44   61.74  1856    1
+## mu[13]    83.19    0.05 2.35   78.66   83.19   87.83  2461    1
+## mu[14]    54.46    0.06 2.44   49.65   54.48   59.23  1657    1
+## mu[15]    65.61    0.03 1.78   62.11   65.59   69.04  3239    1
+## mu[16]    87.90    0.06 2.75   82.61   87.85   93.36  2031    1
+## mu[17]    93.84    0.08 3.31   87.49   93.77  100.46  1752    1
+## mu[18]    56.69    0.05 2.27   52.21   56.69   61.10  1797    1
+## mu[19]    67.59    0.03 1.74   64.13   67.57   70.89  3815    1
+## mu[20]    49.26    0.08 2.90   43.55   49.27   54.90  1465    1
+## mu[21]    78.24    0.03 2.00   74.42   78.22   82.17  3370    1
+## mu[22]    64.86    0.03 1.80   61.31   64.84   68.38  3041    1
+## mu[23]    86.90    0.06 2.66   81.78   86.88   92.22  2101    1
+## mu[24]    52.97    0.06 2.57   47.95   53.01   58.00  1587    1
+## mu[25]    62.63    0.04 1.89   58.86   62.64   66.26  2548    1
+## mu[26]    69.82    0.03 1.72   66.40   69.79   73.07  4401    1
+## mu[27]    52.97    0.06 2.57   47.95   53.01   58.00  1587    1
+## mu[28]    63.13    0.04 1.87   59.40   63.14   66.73  2644    1
+## mu[29]    93.34    0.08 3.26   87.09   93.27   99.88  1768    1
+## mu[30]    51.98    0.07 2.65   46.75   52.02   57.17  1548    1
+## mu[31]    46.04    0.09 3.21   39.71   46.06   52.27  1399    1
+## mu[32]    53.72    0.06 2.50   48.80   53.75   58.61  1620    1
+## mu[33]    85.67    0.05 2.55   80.71   85.64   90.71  2201    1
+## mu[34]    88.64    0.06 2.81   83.21   88.61   94.22  1985    1
+## mu[35]    71.05    0.03 1.73   67.65   71.01   74.34  4614    1
+## mu[36]    76.50    0.03 1.91   72.88   76.48   80.20  3867    1
+## mu[37]    87.40    0.06 2.70   82.18   87.36   92.80  2065    1
+## mu[38]    59.66    0.05 2.06   55.55   59.67   63.65  2084    1
+## mu[39]    78.48    0.04 2.02   74.63   78.47   82.44  3311    1
+## mu[40]    52.97    0.06 2.57   47.95   53.01   58.00  1587    1
+## mu[41]    94.09    0.08 3.33   87.69   94.02  100.75  1743    1
+## mu[42]    60.16    0.04 2.03   56.11   60.17   64.07  2147    1
+## mu[43]    51.24    0.07 2.72   45.89   51.26   56.52  1522    1
+## mu[44]    53.72    0.06 2.50   48.80   53.75   58.61  1620    1
+## mu[45]    92.35    0.07 3.16   86.30   92.28   98.66  1805    1
+## mu[46]    84.92    0.05 2.49   80.07   84.89   89.82  2270    1
+## mu[47]    93.84    0.08 3.31   87.49   93.77  100.46  1752    1
+## mu[48]    62.88    0.04 1.88   59.11   62.89   66.48  2595    1
+## mu[49]    70.31    0.03 1.73   66.90   70.26   73.57  4507    1
+## mu[50]    85.67    0.05 2.55   80.71   85.64   90.71  2201    1
+## mu[51]    45.79    0.09 3.23   39.40   45.81   52.07  1395    1
+## mu[52]    46.29    0.09 3.18   40.01   46.30   52.49  1403    1
+## mu[53]    79.47    0.04 2.08   75.48   79.45   83.54  3083    1
+## mu[54]    91.61    0.07 3.09   85.65   91.54   97.75  1835    1
+## mu[55]    59.17    0.05 2.09   55.00   59.18   63.22  2026    1
+## mu[56]    85.67    0.05 2.55   80.71   85.64   90.71  2201    1
+## mu[57]    84.43    0.05 2.45   79.65   84.40   89.25  2320    1
+## mu[58]    94.58    0.08 3.38   88.09   94.51  101.37  1728    1
+## mu[59]    76.01    0.03 1.88   72.42   75.98   79.64  3987    1
+## mu[60]    80.71    0.04 2.16   76.55   80.68   84.96  2829    1
+## mu[61]    83.68    0.05 2.39   79.07   83.68   88.41  2401    1
+## mu[62]    89.38    0.07 2.88   83.83   89.36   95.10  1942    1
+## mu[63]    76.50    0.03 1.91   72.88   76.48   80.20  3867    1
+## mu[64]    58.42    0.05 2.14   54.16   58.45   62.59  1947    1
+## mu[65]    88.14    0.06 2.77   82.82   88.10   93.64  2015    1
+## mu[66]    67.09    0.03 1.74   63.64   67.06   70.45  3668    1
+## mu[67]    64.86    0.03 1.80   61.31   64.84   68.38  3041    1
+## mu[68]    68.33    0.03 1.73   64.88   68.31   71.59  4031    1
+## mu[69]    56.44    0.05 2.29   51.93   56.44   60.89  1779    1
+## mu[70]    48.76    0.08 2.95   42.95   48.78   54.47  1453    1
+## mu[71]    59.17    0.05 2.09   55.00   59.18   63.22  2026    1
+## mu[72]    60.90    0.04 1.99   56.96   60.91   64.73  2253    1
+## mu[73]    47.53    0.08 3.06   41.48   47.55   53.48  1426    1
+## mu[74]    54.71    0.06 2.42   49.93   54.73   59.44  1670    1
+## mu[75]    54.71    0.06 2.42   49.93   54.73   59.44  1670    1
+## mu[76]    82.94    0.05 2.33   78.46   82.93   87.53  2492    1
+## mu[77]    59.91    0.04 2.04   55.84   59.92   63.86  2115    1
+## mu[78]    88.64    0.06 2.81   83.21   88.61   94.22  1985    1
+## mu[79]    65.61    0.03 1.78   62.11   65.59   69.04  3239    1
+## mu[80]    74.03    0.03 1.80   70.57   73.98   77.47  4418    1
+## mu[81]    62.88    0.04 1.88   59.11   62.89   66.48  2595    1
+## mu[82]    78.73    0.04 2.03   74.83   78.72   82.73  3252    1
+## mu[83]    46.78    0.08 3.14   40.59   46.80   52.87  1412    1
+## mu[84]    65.36    0.03 1.79   61.86   65.34   68.81  3171    1
+## mu[85]    55.45    0.06 2.36   50.79   55.47   60.05  1714    1
+## mu[86]    87.90    0.06 2.75   82.61   87.85   93.36  2031    1
+## mu[87]    93.59    0.08 3.28   87.29   93.52  100.17  1760    1
+## mu[88]    61.64    0.04 1.94   57.75   61.66   65.35  2372    1
+## mu[89]    81.95    0.04 2.25   77.64   81.94   86.37  2628    1
+## mu[90]    62.39    0.04 1.91   58.60   62.40   66.03  2502    1
+## mu[91]    93.84    0.08 3.31   87.49   93.77  100.46  1752    1
+## mu[92]    65.11    0.03 1.79   61.60   65.10   68.59  3106    1
+## mu[93]    64.37    0.03 1.82   60.80   64.37   67.88  2919    1
+## mu[94]    73.28    0.03 1.78   69.87   73.24   76.70  4531    1
+## mu[95]    68.58    0.03 1.73   65.12   68.56   71.83  4099    1
+## mu[96]    55.20    0.06 2.38   50.49   55.22   59.83  1699    1
+## mu[97]    66.60    0.03 1.75   63.14   66.57   69.98  3522    1
+## mu[98]    50.25    0.07 2.81   44.73   50.27   55.68  1492    1
+## mu[99]    51.24    0.07 2.72   45.89   51.26   56.52  1522    1
+## mu[100]   67.34    0.03 1.74   63.89   67.32   70.67  3742    1
+## lp__    -330.17    0.04 1.26 -333.43 -329.85 -328.74  1154    1
 ## 
-## Samples were drawn using NUTS(diag_e) at Thu Dec 16 17:08:12 2021.
+## Samples were drawn using NUTS(diag_e) at Wed Jan 26 15:51:38 2022.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).</code></pre>
+</div>
+</div>
+<div id="brmsの使い方" class="section level1">
+<h1>3-5. brmsの使い方</h1>
+<div id="brmsとは" class="section level2">
+<h2>2. brmsとは</h2>
+<ul>
+<li>Stanを使ったベイジアン回帰モデル</li>
+</ul>
+</div>
+<div id="本書での実装の方針" class="section level2">
+<h2>3. 本書での実装の方針</h2>
+</div>
+<div id="分析の準備-4" class="section level2">
+<h2>4. 分析の準備</h2>
+<ul>
+<li>brmsパッケージが必要</li>
+</ul>
+<pre class="r"><code>library(rstan)
+library(brms)</code></pre>
+<pre><code>##  要求されたパッケージ Rcpp をロード中です</code></pre>
+<pre><code>## Loading &#39;brms&#39; package (version 2.16.3). Useful instructions
+## can be found by typing help(&#39;brms&#39;). A more detailed introduction
+## to the package is available through vignette(&#39;brms_overview&#39;).</code></pre>
+<pre><code>## 
+##  次のパッケージを付け加えます: &#39;brms&#39;</code></pre>
+<pre><code>##  以下のオブジェクトは &#39;package:rstan&#39; からマスクされています: 
+## 
+##      loo</code></pre>
+<pre><code>##  以下のオブジェクトは &#39;package:stats&#39; からマスクされています: 
+## 
+##      ar</code></pre>
+<pre class="r"><code>rstan_options(auto_write = TRUE)
+options(mc.cores = parallel::detectCores())
+
+beersf&lt;-read.csv(&#39;3-2-1-beer-sales-2.csv&#39;)</code></pre>
+</div>
+<div id="brmsによる単回帰モデルの推定" class="section level2">
+<h2>5. brmsによる単回帰モデルの推定</h2>
+<ul>
+<li>Stanファイル不要</li>
+<li>指定が必要なもの
+<ul>
+<li>線形予測子</li>
+<li>確率分布</li>
+<li>リンク関数</li>
+</ul></li>
+<li>結果
+<ul>
+<li>切片、係数</li>
+<li>Estimate: 点推定値</li>
+</ul></li>
+<li>as.mcmc(): MCMCサンプル取得</li>
+<li>plot(): 事後分布、トレースプロットの図示</li>
+</ul>
+<pre class="r"><code>lm_brms&lt;-brm(
+  formula = sales ~ temperature,
+  family = gaussian(link=&#39;identity&#39;),
+  data = beersf,
+  seed = 1
+)</code></pre>
+<pre><code>## Compiling Stan program...</code></pre>
+<pre><code>## Trying to compile a simple C file</code></pre>
+<pre><code>## Running /usr/local/Cellar/r/4.1.2/lib/R/bin/R CMD SHLIB foo.c
+## clang -I&quot;/usr/local/Cellar/r/4.1.2/lib/R/include&quot; -DNDEBUG   -I&quot;/usr/local/lib/R/4.1/site-library/Rcpp/include/&quot;  -I&quot;/usr/local/lib/R/4.1/site-library/RcppEigen/include/&quot;  -I&quot;/usr/local/lib/R/4.1/site-library/RcppEigen/include/unsupported&quot;  -I&quot;/usr/local/lib/R/4.1/site-library/BH/include&quot; -I&quot;/Users/imaru/Library/R/x86_64/4.1/library/StanHeaders/include/src/&quot;  -I&quot;/Users/imaru/Library/R/x86_64/4.1/library/StanHeaders/include/&quot;  -I&quot;/usr/local/lib/R/4.1/site-library/RcppParallel/include/&quot;  -I&quot;/Users/imaru/Library/R/x86_64/4.1/library/rstan/include&quot; -DEIGEN_NO_DEBUG  -DBOOST_DISABLE_ASSERTS  -DBOOST_PENDING_INTEGER_LOG2_HPP  -DSTAN_THREADS  -DBOOST_NO_AUTO_PTR  -include &#39;/Users/imaru/Library/R/x86_64/4.1/library/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp&#39;  -D_REENTRANT -DRCPP_PARALLEL_USE_TBB=1   -I/usr/local/opt/gettext/include -I/usr/local/opt/readline/include -I/usr/local/opt/xz/include -I/usr/local/include -I/usr/local/opt/tbb/include   -fPIC  -Wno-implicit-function-declaration  -c foo.c -o foo.o
+## In file included from &lt;built-in&gt;:1:
+## In file included from /Users/imaru/Library/R/x86_64/4.1/library/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp:13:
+## In file included from /usr/local/lib/R/4.1/site-library/RcppEigen/include/Eigen/Dense:1:
+## In file included from /usr/local/lib/R/4.1/site-library/RcppEigen/include/Eigen/Core:88:
+## /usr/local/lib/R/4.1/site-library/RcppEigen/include/Eigen/src/Core/util/Macros.h:628:1: error: unknown type name &#39;namespace&#39;
+## namespace Eigen {
+## ^
+## /usr/local/lib/R/4.1/site-library/RcppEigen/include/Eigen/src/Core/util/Macros.h:628:16: error: expected &#39;;&#39; after top level declarator
+## namespace Eigen {
+##                ^
+##                ;
+## In file included from &lt;built-in&gt;:1:
+## In file included from /Users/imaru/Library/R/x86_64/4.1/library/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp:13:
+## In file included from /usr/local/lib/R/4.1/site-library/RcppEigen/include/Eigen/Dense:1:
+## /usr/local/lib/R/4.1/site-library/RcppEigen/include/Eigen/Core:96:10: fatal error: &#39;complex&#39; file not found
+## #include &lt;complex&gt;
+##          ^~~~~~~~~
+## 3 errors generated.
+## make: *** [foo.o] Error 1</code></pre>
+<pre><code>## Start sampling</code></pre>
+<pre class="r"><code>print(lm_brms)</code></pre>
+<pre><code>##  Family: gaussian 
+##   Links: mu = identity; sigma = identity 
+## Formula: sales ~ temperature 
+##    Data: beersf (Number of observations: 100) 
+##   Draws: 4 chains, each with iter = 2000; warmup = 1000; thin = 1;
+##          total post-warmup draws = 4000
+## 
+## Population-Level Effects: 
+##             Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+## Intercept      21.24      6.05     9.47    33.16 1.00     3658     2784
+## temperature     2.46      0.29     1.89     3.01 1.00     3850     3069
+## 
+## Family Specific Parameters: 
+##       Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+## sigma    17.02      1.24    14.82    19.63 1.00     4060     3003
+## 
+## Draws were sampled using sampling(NUTS). For each parameter, Bulk_ESS
+## and Tail_ESS are effective sample size measures, and Rhat is the potential
+## scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
+<pre class="r"><code># as.mcmc(lm_brms, combine_chains = TRUE)
+plot(lm_brms)</code></pre>
+<p><img src="baba_files/figure-html/unnamed-chunk-43-1.png" width="768" /></p>
+</div>
+<div id="brmsの基本的な使い方" class="section level2">
+<h2>6. brmsの基本的な使い方</h2>
+<ul>
+<li>bf(): formulaをbrmの外で定義可能
+<ul>
+<li>lm_formula &lt;- bf(sales ~ temperature) など</li>
+</ul></li>
+<li>familyに使える分布
+<ul>
+<li>gaussian()</li>
+<li>binomial()</li>
+<li>poisson()</li>
+<li>などなど</li>
+<li>Rで関数実行すると標準で指定されているlink関数が表示される</li>
+</ul></li>
+</ul>
+</div>
+<div id="事前分布の変更" class="section level2">
+<h2>7. 事前分布の変更</h2>
+<ul>
+<li>prior_summary(): 事前分布一覧の表示</li>
+</ul>
+<pre class="r"><code>prior_summary(lm_brms)</code></pre>
+<pre><code>##                   prior     class        coef group resp dpar nlpar bound
+##                  (flat)         b                                        
+##                  (flat)         b temperature                            
+##  student_t(3, 71.5, 20) Intercept                                        
+##     student_t(3, 0, 20)     sigma                                        
+##        source
+##       default
+##  (vectorized)
+##       default
+##       default</code></pre>
+<ul>
+<li>一覧
+<ul>
+<li>flatは一様分布?</li>
+<li>切片には自由度3、中心位置71.5、分布の裾の広さ20のstudent t分布を使ってるということ</li>
+<li>sigmaの分布は中心0、広さ20</li>
+</ul></li>
+<li>事前分布を変更したい場合</li>
+</ul>
+<pre class="r"><code>lm_brms2 &lt;- brm(
+  formula=sales~temperature,
+  family = gaussian(),
+  data = beersf,
+  seed = 1,
+  prior=c(set_prior(&quot;&quot;,class=&quot;Intercept&quot;),
+          set_prior(&quot;&quot;,class=&quot;sigma&quot;))
+)</code></pre>
+<pre><code>## Compiling Stan program...</code></pre>
+<pre><code>## Trying to compile a simple C file</code></pre>
+<pre><code>## Running /usr/local/Cellar/r/4.1.2/lib/R/bin/R CMD SHLIB foo.c
+## clang -I&quot;/usr/local/Cellar/r/4.1.2/lib/R/include&quot; -DNDEBUG   -I&quot;/usr/local/lib/R/4.1/site-library/Rcpp/include/&quot;  -I&quot;/usr/local/lib/R/4.1/site-library/RcppEigen/include/&quot;  -I&quot;/usr/local/lib/R/4.1/site-library/RcppEigen/include/unsupported&quot;  -I&quot;/usr/local/lib/R/4.1/site-library/BH/include&quot; -I&quot;/Users/imaru/Library/R/x86_64/4.1/library/StanHeaders/include/src/&quot;  -I&quot;/Users/imaru/Library/R/x86_64/4.1/library/StanHeaders/include/&quot;  -I&quot;/usr/local/lib/R/4.1/site-library/RcppParallel/include/&quot;  -I&quot;/Users/imaru/Library/R/x86_64/4.1/library/rstan/include&quot; -DEIGEN_NO_DEBUG  -DBOOST_DISABLE_ASSERTS  -DBOOST_PENDING_INTEGER_LOG2_HPP  -DSTAN_THREADS  -DBOOST_NO_AUTO_PTR  -include &#39;/Users/imaru/Library/R/x86_64/4.1/library/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp&#39;  -D_REENTRANT -DRCPP_PARALLEL_USE_TBB=1   -I/usr/local/opt/gettext/include -I/usr/local/opt/readline/include -I/usr/local/opt/xz/include -I/usr/local/include -I/usr/local/opt/tbb/include   -fPIC  -Wno-implicit-function-declaration  -c foo.c -o foo.o
+## In file included from &lt;built-in&gt;:1:
+## In file included from /Users/imaru/Library/R/x86_64/4.1/library/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp:13:
+## In file included from /usr/local/lib/R/4.1/site-library/RcppEigen/include/Eigen/Dense:1:
+## In file included from /usr/local/lib/R/4.1/site-library/RcppEigen/include/Eigen/Core:88:
+## /usr/local/lib/R/4.1/site-library/RcppEigen/include/Eigen/src/Core/util/Macros.h:628:1: error: unknown type name &#39;namespace&#39;
+## namespace Eigen {
+## ^
+## /usr/local/lib/R/4.1/site-library/RcppEigen/include/Eigen/src/Core/util/Macros.h:628:16: error: expected &#39;;&#39; after top level declarator
+## namespace Eigen {
+##                ^
+##                ;
+## In file included from &lt;built-in&gt;:1:
+## In file included from /Users/imaru/Library/R/x86_64/4.1/library/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp:13:
+## In file included from /usr/local/lib/R/4.1/site-library/RcppEigen/include/Eigen/Dense:1:
+## /usr/local/lib/R/4.1/site-library/RcppEigen/include/Eigen/Core:96:10: fatal error: &#39;complex&#39; file not found
+## #include &lt;complex&gt;
+##          ^~~~~~~~~
+## 3 errors generated.
+## make: *** [foo.o] Error 1</code></pre>
+<pre><code>## Start sampling</code></pre>
+<pre class="r"><code>prior_summary(lm_brms2)</code></pre>
+<pre><code>##   prior     class        coef group resp dpar nlpar bound       source
+##  (flat)         b                                              default
+##  (flat)         b temperature                             (vectorized)
+##  (flat) Intercept                                                 user
+##  (flat)     sigma                                                 user</code></pre>
+<ul>
+<li>stanコードの抽出
+<ul>
+<li>stancode(lm_brms2)</li>
+</ul></li>
+<li>データの抽出
+<ul>
+<li>standata(lm_brms2)</li>
+</ul></li>
+</ul>
+</div>
+<div id="補足brmsの基本的な仕組み" class="section level2">
+<h2>8. 補足：brmsの基本的な仕組み</h2>
 </div>
 </div>
 <div class="footnotes">

@@ -2002,4 +2002,94 @@ print(res, probs = c(0.025, 0.5, 0.975))
 
 ```
 
+# 3-5. brmsの使い方
+## 2. brmsとは
+  * Stanを使ったベイジアン回帰モデル
   
+## 3. 本書での実装の方針
+## 4. 分析の準備
+  * brmsパッケージが必要
+  
+```{r}
+library(rstan)
+library(brms)
+rstan_options(auto_write = TRUE)
+options(mc.cores = parallel::detectCores())
+
+beersf<-read.csv('3-2-1-beer-sales-2.csv')
+```
+## 5. brmsによる単回帰モデルの推定
+  * Stanファイル不要
+  * 指定が必要なもの
+    * 線形予測子
+    * 確率分布
+    * リンク関数
+  * 結果
+    * 切片、係数
+    * Estimate: 点推定値
+  * as.mcmc(): MCMCサンプル取得
+  * plot(): 事後分布、トレースプロットの図示
+
+```{r}
+lm_brms<-brm(
+  formula = sales ~ temperature,
+  family = gaussian(link='identity'),
+  data = beersf,
+  seed = 1
+)
+print(lm_brms)
+# as.mcmc(lm_brms, combine_chains = TRUE)
+plot(lm_brms)
+```
+  
+## 6. brmsの基本的な使い方
+  * bf(): formulaをbrmの外で定義可能
+    * lm_formula <- bf(sales ~ temperature) など
+  * familyに使える分布
+    * gaussian()
+    * binomial()
+    * poisson()
+    * などなど
+    * Rで関数実行すると標準で指定されているlink関数が表示される
+  
+## 7. 事前分布の変更
+  * prior_summary(): 事前分布一覧の表示
+  
+```{r}
+prior_summary(lm_brms)
+```
+  
+  * 一覧
+    * flatは一様分布?
+    * 切片には自由度3、中心位置71.5、分布の裾の広さ20のstudent t分布を使ってるということ
+    * sigmaの分布は中心0、広さ20
+  * 事前分布を変更したい場合
+  
+```{r}
+lm_brms2 <- brm(
+  formula=sales~temperature,
+  family = gaussian(),
+  data = beersf,
+  seed = 1,
+  prior=c(set_prior("",class="Intercept"),
+          set_prior("",class="sigma"))
+)
+prior_summary(lm_brms2)
+```
+  
+  * stanコードの抽出
+    * stancode(lm_brms2)
+  * データの抽出
+    * standata(lm_brms2)
+    
+## 8. 補足：brmsの基本的な仕組み
+  * make_stancode関数で Stanコードを生成
+  * make_standata関数でデータを生成
+  
+## 9. 補足：make_stancode関数によるStanコードの作成
+  * データ、パラメータはベクトル化
+  * modelはサンプリング文ではなく、対数密度加算文として記述される
+    * なぜ対数密度加算文か
+      * 2部6章ではサンプリング文を基本として、対数密度加算文でも書けると説明
+      * 実際には、Stan内部では対数密度の加算をしていて、それを理解しやすいようにサンプリング文でも書けるということらしい（[Stanマニュアル: 対数密度加算文](https://github.com/stan-ja/stan-ja/blob/master/part02/chap05/chap05.md#53-対数密度加算文)）。
+      * 対数密度加算文で使う target の意味が良く分からなかったけど、これは変数ではなく、Stanであらかじめ決められた対数密度を示すものらしい。以前はlp__(log probability)という変数だった?

@@ -479,10 +479,8 @@ plot(density(fish$length, adjust=1))</code></pre>
 </div>
 <div id="グラフの重ね合わせと一覧表示" class="section level2">
 <h2>5. グラフの重ね合わせと一覧表示</h2>
-<pre class="r"><code>library(&#39;ggplot2&#39;)</code></pre>
-<pre><code>## Warning in register(): Can&#39;t find generic `scale_type` in package ggplot2 to
-## register S3 method.</code></pre>
-<pre class="r"><code>fish &lt;- read.csv(&#39;2-2-1-fish.csv&#39;)
+<pre class="r"><code>library(&#39;ggplot2&#39;)
+fish &lt;- read.csv(&#39;2-2-1-fish.csv&#39;)
 head(fish, n=3)</code></pre>
 <pre><code>##      length
 ## 1  8.747092
@@ -729,14 +727,8 @@ p2+scale_x_continuous(limits=c(0,8))</code></pre>
 <li>実際にはMCMCサンプルは毎回異なるが、seed=1を指定することで固定。</li>
 </ul></li>
 </ul>
-<pre class="r"><code>library(rstan)</code></pre>
-<pre><code>##  要求されたパッケージ StanHeaders をロード中です</code></pre>
-<pre><code>## rstan (Version 2.21.3, GitRev: 2e1f913d3ca3)</code></pre>
-<pre><code>## For execution on a local, multicore CPU with excess RAM we recommend calling
-## options(mc.cores = parallel::detectCores()).
-## To avoid recompilation of unchanged Stan programs, we recommend calling
-## rstan_options(auto_write = TRUE)</code></pre>
-<pre class="r"><code>rstan_options(auto_write=TRUE)
+<pre class="r"><code>library(rstan)
+rstan_options(auto_write=TRUE)
 options(mc.cores=parallel::detectCores())
 
 file_beer_sales_1 &lt;- read.csv(&quot;2-4-1-beer-sales-1.csv&quot;)
@@ -772,7 +764,7 @@ mcmc_result&lt;-stan(
 ## sigma   18.19    0.02 1.27   15.93   18.12   20.98  2758    1
 ## lp__  -336.43    0.02 0.96 -338.94 -336.13 -335.48  1905    1
 ## 
-## Samples were drawn using NUTS(diag_e) at Thu Jan 27 11:16:21 2022.
+## Samples were drawn using NUTS(diag_e) at Tue Feb  1 14:11:05 2022.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).</code></pre>
@@ -788,7 +780,7 @@ mcmc_result&lt;-stan(
 </ul></li>
 </ul>
 <pre class="r"><code>traceplot(mcmc_result)</code></pre>
-<p><img src="baba2_files/figure-html/unnamed-chunk-14-1.png" width="768" /></p>
+<p><img src="baba2_files/figure-html/unnamed-chunk-13-1.png" width="768" /></p>
 </div>
 <div id="ベクトル化" class="section level2">
 <h2>15. ベクトル化</h2>
@@ -979,20 +971,15 @@ autoplot(ts(mcmc_sample[,,&quot;mu&quot;]),
   facets = F,
   ylab = &quot;mu&quot;,
   main= &quot;トレースプロット&quot;)</code></pre>
-<p><img src="baba2_files/figure-html/unnamed-chunk-18-1.png" width="768" /> 6. ggplot2による事後分布の可視化 * MCMCサンプルをまとめる＝パラメータの事後分布</p>
+<p><img src="baba2_files/figure-html/unnamed-chunk-17-1.png" width="768" /> 6. ggplot2による事後分布の可視化 * MCMCサンプルをまとめる＝パラメータの事後分布</p>
 <pre class="r"><code>mu_df &lt;- data.frame(mu_mcmc_sample &lt;- mu_mcmc_vec)
 ggplot(data=mu_df, mapping=aes(x=mu_mcmc_sample))+geom_density(size=1.5)</code></pre>
 <p><img src="baba2_files/figure-html/ggplot2-1.png" width="768" /> ## 7. bayesplotによる事後分布の可視化 * bayesplot便利</p>
 <pre class="r"><code>library(rstan)
 rstan_options(auto_write=TRUE)
 options(mc.cores=parallel::detectCores())
-library(bayesplot)</code></pre>
-<pre><code>## This is bayesplot version 1.8.1</code></pre>
-<pre><code>## - Online documentation and vignettes at mc-stan.org/bayesplot</code></pre>
-<pre><code>## - bayesplot theme set to bayesplot::theme_default()</code></pre>
-<pre><code>##    * Does _not_ affect other ggplot2 plots</code></pre>
-<pre><code>##    * See ?bayesplot_theme_set for details on theme setting</code></pre>
-<pre class="r"><code>mcmc_hist(mcmc_sample, parc=c(&quot;mu&quot;, &quot;sigma&quot;))</code></pre>
+library(bayesplot)
+mcmc_hist(mcmc_sample, parc=c(&quot;mu&quot;, &quot;sigma&quot;))</code></pre>
 <pre><code>## Warning: The following arguments were unrecognized and ignored: parc</code></pre>
 <pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
 <p><img src="baba2_files/figure-html/bayesplot%20combo-1.png" width="768" /></p>
@@ -1183,7 +1170,7 @@ print(mcmc_result_6, probs=c(0.025, 0.5, .0975))</code></pre>
 ## diff      66.66    0.05 3.50   59.84   66.67   62.19  4094    1
 ## lp__    -719.42    0.03 1.45 -723.21 -719.07 -721.34  2249    1
 ## 
-## Samples were drawn using NUTS(diag_e) at Thu Jan 27 11:16:39 2022.
+## Samples were drawn using NUTS(diag_e) at Tue Feb  1 14:11:09 2022.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).</code></pre>
@@ -1220,7 +1207,7 @@ print(mcmc_p_res)</code></pre>
 ## diff      2.58    0.01 0.32   1.94   2.37   2.58   2.80   3.22  3643    1
 ## lp__    -32.31    0.04 1.48 -35.98 -33.01 -31.98 -31.25 -30.48  1552    1
 ## 
-## Samples were drawn using NUTS(diag_e) at Thu Jan 27 11:16:54 2022.
+## Samples were drawn using NUTS(diag_e) at Tue Feb  1 14:11:09 2022.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).</code></pre>
@@ -1262,7 +1249,7 @@ print(mcmc_p_res)</code></pre>
 ## diff    2.58    0.01 0.32   1.94   2.37   2.58   2.79   3.19  3575    1
 ## lp__  -32.07    0.03 1.26 -35.38 -32.66 -31.74 -31.15 -30.63  1686    1
 ## 
-## Samples were drawn using NUTS(diag_e) at Thu Jan 27 11:17:10 2022.
+## Samples were drawn using NUTS(diag_e) at Tue Feb  1 14:11:11 2022.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).</code></pre>

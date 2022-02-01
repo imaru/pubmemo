@@ -597,136 +597,27 @@ A %*% C</code></pre>
 <li>imrlab.stan</li>
 </ul>
 <pre class="r"><code>DATA&lt;-read.csv(&#39;imrlab.csv&#39;)
-library(rstan)</code></pre>
-<pre><code>##  要求されたパッケージ StanHeaders をロード中です</code></pre>
-<pre><code>##  要求されたパッケージ ggplot2 をロード中です</code></pre>
-<pre><code>## Warning in register(): Can&#39;t find generic `scale_type` in package ggplot2 to
-## register S3 method.</code></pre>
-<pre><code>## rstan (Version 2.21.3, GitRev: 2e1f913d3ca3)</code></pre>
-<pre><code>## For execution on a local, multicore CPU with excess RAM we recommend calling
-## options(mc.cores = parallel::detectCores()).
-## To avoid recompilation of unchanged Stan programs, we recommend calling
-## rstan_options(auto_write = TRUE)</code></pre>
-<pre class="r"><code>data_list&lt;-list(population=DATA[,1], applicant=DATA[,2],basic=DATA[,3],senior=DATA[,4], N=9)
+library(rstan)
+data_list&lt;-list(population=DATA[,1], applicant=DATA[,2],basic=DATA[,3],senior=DATA[,4], N=9)
 mr &lt;- stan(
   file=&quot;imrlab.stan&quot;,
   data=data_list,
   iter=2000,
   warmup=1000,
   thin=1
-)</code></pre>
-<pre><code>## 
-## SAMPLING FOR MODEL &#39;imrlab&#39; NOW (CHAIN 1).
-## Chain 1: 
-## Chain 1: Gradient evaluation took 1.6e-05 seconds
-## Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 0.16 seconds.
-## Chain 1: Adjust your expectations accordingly!
-## Chain 1: 
-## Chain 1: 
-## Chain 1: Iteration:    1 / 2000 [  0%]  (Warmup)
-## Chain 1: Iteration:  200 / 2000 [ 10%]  (Warmup)
-## Chain 1: Iteration:  400 / 2000 [ 20%]  (Warmup)
-## Chain 1: Iteration:  600 / 2000 [ 30%]  (Warmup)
-## Chain 1: Iteration:  800 / 2000 [ 40%]  (Warmup)
-## Chain 1: Iteration: 1000 / 2000 [ 50%]  (Warmup)
-## Chain 1: Iteration: 1001 / 2000 [ 50%]  (Sampling)
-## Chain 1: Iteration: 1200 / 2000 [ 60%]  (Sampling)
-## Chain 1: Iteration: 1400 / 2000 [ 70%]  (Sampling)
-## Chain 1: Iteration: 1600 / 2000 [ 80%]  (Sampling)
-## Chain 1: Iteration: 1800 / 2000 [ 90%]  (Sampling)
-## Chain 1: Iteration: 2000 / 2000 [100%]  (Sampling)
-## Chain 1: 
-## Chain 1:  Elapsed Time: 0.042303 seconds (Warm-up)
-## Chain 1:                0.043685 seconds (Sampling)
-## Chain 1:                0.085988 seconds (Total)
-## Chain 1: 
-## 
-## SAMPLING FOR MODEL &#39;imrlab&#39; NOW (CHAIN 2).
-## Chain 2: 
-## Chain 2: Gradient evaluation took 5e-06 seconds
-## Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 0.05 seconds.
-## Chain 2: Adjust your expectations accordingly!
-## Chain 2: 
-## Chain 2: 
-## Chain 2: Iteration:    1 / 2000 [  0%]  (Warmup)
-## Chain 2: Iteration:  200 / 2000 [ 10%]  (Warmup)
-## Chain 2: Iteration:  400 / 2000 [ 20%]  (Warmup)
-## Chain 2: Iteration:  600 / 2000 [ 30%]  (Warmup)
-## Chain 2: Iteration:  800 / 2000 [ 40%]  (Warmup)
-## Chain 2: Iteration: 1000 / 2000 [ 50%]  (Warmup)
-## Chain 2: Iteration: 1001 / 2000 [ 50%]  (Sampling)
-## Chain 2: Iteration: 1200 / 2000 [ 60%]  (Sampling)
-## Chain 2: Iteration: 1400 / 2000 [ 70%]  (Sampling)
-## Chain 2: Iteration: 1600 / 2000 [ 80%]  (Sampling)
-## Chain 2: Iteration: 1800 / 2000 [ 90%]  (Sampling)
-## Chain 2: Iteration: 2000 / 2000 [100%]  (Sampling)
-## Chain 2: 
-## Chain 2:  Elapsed Time: 0.046774 seconds (Warm-up)
-## Chain 2:                0.040094 seconds (Sampling)
-## Chain 2:                0.086868 seconds (Total)
-## Chain 2: 
-## 
-## SAMPLING FOR MODEL &#39;imrlab&#39; NOW (CHAIN 3).
-## Chain 3: 
-## Chain 3: Gradient evaluation took 5e-06 seconds
-## Chain 3: 1000 transitions using 10 leapfrog steps per transition would take 0.05 seconds.
-## Chain 3: Adjust your expectations accordingly!
-## Chain 3: 
-## Chain 3: 
-## Chain 3: Iteration:    1 / 2000 [  0%]  (Warmup)
-## Chain 3: Iteration:  200 / 2000 [ 10%]  (Warmup)
-## Chain 3: Iteration:  400 / 2000 [ 20%]  (Warmup)
-## Chain 3: Iteration:  600 / 2000 [ 30%]  (Warmup)
-## Chain 3: Iteration:  800 / 2000 [ 40%]  (Warmup)
-## Chain 3: Iteration: 1000 / 2000 [ 50%]  (Warmup)
-## Chain 3: Iteration: 1001 / 2000 [ 50%]  (Sampling)
-## Chain 3: Iteration: 1200 / 2000 [ 60%]  (Sampling)
-## Chain 3: Iteration: 1400 / 2000 [ 70%]  (Sampling)
-## Chain 3: Iteration: 1600 / 2000 [ 80%]  (Sampling)
-## Chain 3: Iteration: 1800 / 2000 [ 90%]  (Sampling)
-## Chain 3: Iteration: 2000 / 2000 [100%]  (Sampling)
-## Chain 3: 
-## Chain 3:  Elapsed Time: 0.040225 seconds (Warm-up)
-## Chain 3:                0.042368 seconds (Sampling)
-## Chain 3:                0.082593 seconds (Total)
-## Chain 3: 
-## 
-## SAMPLING FOR MODEL &#39;imrlab&#39; NOW (CHAIN 4).
-## Chain 4: 
-## Chain 4: Gradient evaluation took 5e-06 seconds
-## Chain 4: 1000 transitions using 10 leapfrog steps per transition would take 0.05 seconds.
-## Chain 4: Adjust your expectations accordingly!
-## Chain 4: 
-## Chain 4: 
-## Chain 4: Iteration:    1 / 2000 [  0%]  (Warmup)
-## Chain 4: Iteration:  200 / 2000 [ 10%]  (Warmup)
-## Chain 4: Iteration:  400 / 2000 [ 20%]  (Warmup)
-## Chain 4: Iteration:  600 / 2000 [ 30%]  (Warmup)
-## Chain 4: Iteration:  800 / 2000 [ 40%]  (Warmup)
-## Chain 4: Iteration: 1000 / 2000 [ 50%]  (Warmup)
-## Chain 4: Iteration: 1001 / 2000 [ 50%]  (Sampling)
-## Chain 4: Iteration: 1200 / 2000 [ 60%]  (Sampling)
-## Chain 4: Iteration: 1400 / 2000 [ 70%]  (Sampling)
-## Chain 4: Iteration: 1600 / 2000 [ 80%]  (Sampling)
-## Chain 4: Iteration: 1800 / 2000 [ 90%]  (Sampling)
-## Chain 4: Iteration: 2000 / 2000 [100%]  (Sampling)
-## Chain 4: 
-## Chain 4:  Elapsed Time: 0.044794 seconds (Warm-up)
-## Chain 4:                0.0412 seconds (Sampling)
-## Chain 4:                0.085994 seconds (Total)
-## Chain 4:</code></pre>
-<pre class="r"><code>print(mr,probs=c(0.025,0.5,0.975))</code></pre>
+)
+print(mr,probs=c(0.025,0.5,0.975))</code></pre>
 <pre><code>## Inference for Stan model: imrlab.
 ## 4 chains, each with iter=2000; warmup=1000; thin=1; 
 ## post-warmup draws per chain=1000, total post-warmup draws=4000.
 ## 
 ##               mean se_mean   sd     2.5%      50%    97.5% n_eff Rhat
-## Intercept    -3.79    0.00 0.16    -4.10    -3.78    -3.48  1592    1
-## b_basic       0.03    0.00 0.01     0.00     0.03     0.06  1818    1
-## b_senior     -0.01    0.00 0.01    -0.04    -0.01     0.02  1764    1
-## lp__      -2140.15    0.03 1.20 -2143.29 -2139.84 -2138.76  1425    1
+## Intercept    -3.79    0.00 0.16    -4.13    -3.78    -3.47  1329    1
+## b_basic       0.03    0.00 0.01     0.00     0.03     0.06  1631    1
+## b_senior     -0.01    0.00 0.01    -0.04    -0.01     0.02  1496    1
+## lp__      -2140.15    0.04 1.30 -2143.53 -2139.77 -2138.76  1263    1
 ## 
-## Samples were drawn using NUTS(diag_e) at Thu Jan 27 11:18:27 2022.
+## Samples were drawn using NUTS(diag_e) at Tue Feb  1 14:11:13 2022.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).</code></pre>
@@ -756,13 +647,8 @@ mr &lt;- stan(
 <pre class="r"><code>rstan_options(auto_write=TRUE)
 options(mc.cores=parallel::detectCores())
 library(rstan)
-library(bayesplot)</code></pre>
-<pre><code>## This is bayesplot version 1.8.1</code></pre>
-<pre><code>## - Online documentation and vignettes at mc-stan.org/bayesplot</code></pre>
-<pre><code>## - bayesplot theme set to bayesplot::theme_default()</code></pre>
-<pre><code>##    * Does _not_ affect other ggplot2 plots</code></pre>
-<pre><code>##    * See ?bayesplot_theme_set for details on theme setting</code></pre>
-<pre class="r"><code>bs2&lt;-read.csv(&#39;3-2-1-beer-sales-2.csv&#39;)
+library(bayesplot)
+bs2&lt;-read.csv(&#39;3-2-1-beer-sales-2.csv&#39;)
 sample_size&lt;-nrow(bs2)
 ggplot(bs2, aes(x=temperature, y=sales)) + geom_point()+labs(title=&#39;ビールの売り上げと気温の関係&#39;)</code></pre>
 <p><img src="baba3_files/figure-html/unnamed-chunk-5-1.png" width="768" /></p>
@@ -829,7 +715,7 @@ print(mr, probs=c(0.025, 0.5, 0.975))</code></pre>
 ## sigma       17.07    0.03 1.21   14.89   16.96   19.67  1629    1
 ## lp__      -330.07    0.03 1.20 -333.26 -329.75 -328.73  1288    1
 ## 
-## Samples were drawn using NUTS(diag_e) at Thu Jan 27 11:18:43 2022.
+## Samples were drawn using NUTS(diag_e) at Tue Feb  1 14:11:14 2022.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).</code></pre>
@@ -1164,7 +1050,7 @@ rstan_options(auto_write = TRUE)
 options(mc.cores = parallel::detectCores())
 
 beerf&lt;-read.csv(&quot;3-2-1-beer-sales-2.csv&quot;)
-sample_size &lt;- nrow(beer)</code></pre>
+sample_size &lt;- nrow(beerf)</code></pre>
 </div>
 <div id="デザイン行列を使ったモデルの数学的な表現" class="section level2">
 <h2>3. デザイン行列を使ったモデルの数学的な表現</h2>
@@ -1238,103 +1124,9 @@ print(res, probs = c(0.025, 0.5, 0.975))</code></pre>
 ## mu[4]     53.96    0.06 2.48   49.08   54.00   58.82  1632    1
 ## mu[5]     92.35    0.07 3.16   86.30   92.28   98.66  1805    1
 ## mu[6]     92.35    0.07 3.16   86.30   92.28   98.66  1805    1
-## mu[7]     51.98    0.07 2.65   46.75   52.02   57.17  1548    1
-## mu[8]     86.90    0.06 2.66   81.78   86.88   92.22  2101    1
-## mu[9]     68.82    0.03 1.72   65.37   68.80   72.08  4166    1
-## mu[10]    72.79    0.03 1.77   69.37   72.74   76.15  4592    1
-## mu[11]    73.04    0.03 1.77   69.61   72.99   76.42  4560    1
-## mu[12]    57.43    0.05 2.21   53.05   57.44   61.74  1856    1
-## mu[13]    83.19    0.05 2.35   78.66   83.19   87.83  2461    1
-## mu[14]    54.46    0.06 2.44   49.65   54.48   59.23  1657    1
-## mu[15]    65.61    0.03 1.78   62.11   65.59   69.04  3239    1
-## mu[16]    87.90    0.06 2.75   82.61   87.85   93.36  2031    1
-## mu[17]    93.84    0.08 3.31   87.49   93.77  100.46  1752    1
-## mu[18]    56.69    0.05 2.27   52.21   56.69   61.10  1797    1
-## mu[19]    67.59    0.03 1.74   64.13   67.57   70.89  3815    1
-## mu[20]    49.26    0.08 2.90   43.55   49.27   54.90  1465    1
-## mu[21]    78.24    0.03 2.00   74.42   78.22   82.17  3370    1
-## mu[22]    64.86    0.03 1.80   61.31   64.84   68.38  3041    1
-## mu[23]    86.90    0.06 2.66   81.78   86.88   92.22  2101    1
-## mu[24]    52.97    0.06 2.57   47.95   53.01   58.00  1587    1
-## mu[25]    62.63    0.04 1.89   58.86   62.64   66.26  2548    1
-## mu[26]    69.82    0.03 1.72   66.40   69.79   73.07  4401    1
-## mu[27]    52.97    0.06 2.57   47.95   53.01   58.00  1587    1
-## mu[28]    63.13    0.04 1.87   59.40   63.14   66.73  2644    1
-## mu[29]    93.34    0.08 3.26   87.09   93.27   99.88  1768    1
-## mu[30]    51.98    0.07 2.65   46.75   52.02   57.17  1548    1
-## mu[31]    46.04    0.09 3.21   39.71   46.06   52.27  1399    1
-## mu[32]    53.72    0.06 2.50   48.80   53.75   58.61  1620    1
-## mu[33]    85.67    0.05 2.55   80.71   85.64   90.71  2201    1
-## mu[34]    88.64    0.06 2.81   83.21   88.61   94.22  1985    1
-## mu[35]    71.05    0.03 1.73   67.65   71.01   74.34  4614    1
-## mu[36]    76.50    0.03 1.91   72.88   76.48   80.20  3867    1
-## mu[37]    87.40    0.06 2.70   82.18   87.36   92.80  2065    1
-## mu[38]    59.66    0.05 2.06   55.55   59.67   63.65  2084    1
-## mu[39]    78.48    0.04 2.02   74.63   78.47   82.44  3311    1
-## mu[40]    52.97    0.06 2.57   47.95   53.01   58.00  1587    1
-## mu[41]    94.09    0.08 3.33   87.69   94.02  100.75  1743    1
-## mu[42]    60.16    0.04 2.03   56.11   60.17   64.07  2147    1
-## mu[43]    51.24    0.07 2.72   45.89   51.26   56.52  1522    1
-## mu[44]    53.72    0.06 2.50   48.80   53.75   58.61  1620    1
-## mu[45]    92.35    0.07 3.16   86.30   92.28   98.66  1805    1
-## mu[46]    84.92    0.05 2.49   80.07   84.89   89.82  2270    1
-## mu[47]    93.84    0.08 3.31   87.49   93.77  100.46  1752    1
-## mu[48]    62.88    0.04 1.88   59.11   62.89   66.48  2595    1
-## mu[49]    70.31    0.03 1.73   66.90   70.26   73.57  4507    1
-## mu[50]    85.67    0.05 2.55   80.71   85.64   90.71  2201    1
-## mu[51]    45.79    0.09 3.23   39.40   45.81   52.07  1395    1
-## mu[52]    46.29    0.09 3.18   40.01   46.30   52.49  1403    1
-## mu[53]    79.47    0.04 2.08   75.48   79.45   83.54  3083    1
-## mu[54]    91.61    0.07 3.09   85.65   91.54   97.75  1835    1
-## mu[55]    59.17    0.05 2.09   55.00   59.18   63.22  2026    1
-## mu[56]    85.67    0.05 2.55   80.71   85.64   90.71  2201    1
-## mu[57]    84.43    0.05 2.45   79.65   84.40   89.25  2320    1
-## mu[58]    94.58    0.08 3.38   88.09   94.51  101.37  1728    1
-## mu[59]    76.01    0.03 1.88   72.42   75.98   79.64  3987    1
-## mu[60]    80.71    0.04 2.16   76.55   80.68   84.96  2829    1
-## mu[61]    83.68    0.05 2.39   79.07   83.68   88.41  2401    1
-## mu[62]    89.38    0.07 2.88   83.83   89.36   95.10  1942    1
-## mu[63]    76.50    0.03 1.91   72.88   76.48   80.20  3867    1
-## mu[64]    58.42    0.05 2.14   54.16   58.45   62.59  1947    1
-## mu[65]    88.14    0.06 2.77   82.82   88.10   93.64  2015    1
-## mu[66]    67.09    0.03 1.74   63.64   67.06   70.45  3668    1
-## mu[67]    64.86    0.03 1.80   61.31   64.84   68.38  3041    1
-## mu[68]    68.33    0.03 1.73   64.88   68.31   71.59  4031    1
-## mu[69]    56.44    0.05 2.29   51.93   56.44   60.89  1779    1
-## mu[70]    48.76    0.08 2.95   42.95   48.78   54.47  1453    1
-## mu[71]    59.17    0.05 2.09   55.00   59.18   63.22  2026    1
-## mu[72]    60.90    0.04 1.99   56.96   60.91   64.73  2253    1
-## mu[73]    47.53    0.08 3.06   41.48   47.55   53.48  1426    1
-## mu[74]    54.71    0.06 2.42   49.93   54.73   59.44  1670    1
-## mu[75]    54.71    0.06 2.42   49.93   54.73   59.44  1670    1
-## mu[76]    82.94    0.05 2.33   78.46   82.93   87.53  2492    1
-## mu[77]    59.91    0.04 2.04   55.84   59.92   63.86  2115    1
-## mu[78]    88.64    0.06 2.81   83.21   88.61   94.22  1985    1
-## mu[79]    65.61    0.03 1.78   62.11   65.59   69.04  3239    1
-## mu[80]    74.03    0.03 1.80   70.57   73.98   77.47  4418    1
-## mu[81]    62.88    0.04 1.88   59.11   62.89   66.48  2595    1
-## mu[82]    78.73    0.04 2.03   74.83   78.72   82.73  3252    1
-## mu[83]    46.78    0.08 3.14   40.59   46.80   52.87  1412    1
-## mu[84]    65.36    0.03 1.79   61.86   65.34   68.81  3171    1
-## mu[85]    55.45    0.06 2.36   50.79   55.47   60.05  1714    1
-## mu[86]    87.90    0.06 2.75   82.61   87.85   93.36  2031    1
-## mu[87]    93.59    0.08 3.28   87.29   93.52  100.17  1760    1
-## mu[88]    61.64    0.04 1.94   57.75   61.66   65.35  2372    1
-## mu[89]    81.95    0.04 2.25   77.64   81.94   86.37  2628    1
-## mu[90]    62.39    0.04 1.91   58.60   62.40   66.03  2502    1
-## mu[91]    93.84    0.08 3.31   87.49   93.77  100.46  1752    1
-## mu[92]    65.11    0.03 1.79   61.60   65.10   68.59  3106    1
-## mu[93]    64.37    0.03 1.82   60.80   64.37   67.88  2919    1
-## mu[94]    73.28    0.03 1.78   69.87   73.24   76.70  4531    1
-## mu[95]    68.58    0.03 1.73   65.12   68.56   71.83  4099    1
-## mu[96]    55.20    0.06 2.38   50.49   55.22   59.83  1699    1
-## mu[97]    66.60    0.03 1.75   63.14   66.57   69.98  3522    1
-## mu[98]    50.25    0.07 2.81   44.73   50.27   55.68  1492    1
-## mu[99]    51.24    0.07 2.72   45.89   51.26   56.52  1522    1
-## mu[100]   67.34    0.03 1.74   63.89   67.32   70.67  3742    1
-## lp__    -330.17    0.04 1.26 -333.43 -329.85 -328.74  1154    1
+##  [ reached getOption(&quot;max.print&quot;) -- 95 行を無視しました ] 
 ## 
-## Samples were drawn using NUTS(diag_e) at Thu Jan 27 11:19:01 2022.
+## Samples were drawn using NUTS(diag_e) at Tue Feb  1 14:11:16 2022.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).</code></pre>
@@ -1357,20 +1149,8 @@ print(res, probs = c(0.025, 0.5, 0.975))</code></pre>
 <li>brmsパッケージが必要</li>
 </ul>
 <pre class="r"><code>library(rstan)
-library(brms)</code></pre>
-<pre><code>##  要求されたパッケージ Rcpp をロード中です</code></pre>
-<pre><code>## Loading &#39;brms&#39; package (version 2.16.3). Useful instructions
-## can be found by typing help(&#39;brms&#39;). A more detailed introduction
-## to the package is available through vignette(&#39;brms_overview&#39;).</code></pre>
-<pre><code>## 
-##  次のパッケージを付け加えます: &#39;brms&#39;</code></pre>
-<pre><code>##  以下のオブジェクトは &#39;package:rstan&#39; からマスクされています: 
-## 
-##      loo</code></pre>
-<pre><code>##  以下のオブジェクトは &#39;package:stats&#39; からマスクされています: 
-## 
-##      ar</code></pre>
-<pre class="r"><code>rstan_options(auto_write = TRUE)
+library(brms)
+rstan_options(auto_write = TRUE)
 options(mc.cores = parallel::detectCores())
 
 beersf&lt;-read.csv(&#39;3-2-1-beer-sales-2.csv&#39;)</code></pre>

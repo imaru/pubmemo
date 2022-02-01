@@ -1746,14 +1746,15 @@ model{
 
 ```{r beer, eval=TRUE}
 library(bayesplot)
+library(rstan)
 data_list<-list(
   N=sample_size,
   sales=bs2$sales,
   temperature=bs2$temperature
 )
-mr<-rstan::sampling(beer, data=data_list, seed=1)
+mr<-rstan::sampling(beer, data = data_list, seed = 1)
 print(mr, probs=c(0.025, 0.5, 0.975))
-mcs<-rstan::extract(mr, permuted=FALSE)
+mcs<-rstan::extract(mr, permuted = FALSE)
 mcmc_combo(
   mcs,
   parc=c("Intercept","beta","sigma")

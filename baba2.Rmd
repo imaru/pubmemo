@@ -292,7 +292,7 @@ print(p2)
   * stan関数
     * 引数はP118の通り
     * 実際にはMCMCサンプルは毎回異なるが、seed=1を指定することで固定。
-```{r, cache=FALSE}
+```{r aaa, cache=FALSE}
 library(rstan)
 rstan_options(auto_write=TRUE)
 options(mc.cores=parallel::detectCores())

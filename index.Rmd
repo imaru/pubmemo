@@ -6,5 +6,5 @@ output:
     highlight: kate
     css: mycss.css
 ---
-- [馬場本](./baba.html)
+- [馬場本](./baba1.html)
 - [心理科学科技術部](./psytech.html)

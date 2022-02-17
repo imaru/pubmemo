@@ -647,5 +647,12 @@ new_data <- data.frame(temperature = 20)
 fitted(lm_brms, new_data)
 
 ```
-  
+```{r}
+set.seed(1)
+predict(lm_brms, new_data)
+
+```
+  * fitted(事後平均値とベイズ信用区間)、predict(事後平均値とベイズ予測区間)の違い
+    * fitted/信用区間：推定されたパラメータの範囲
+    * predict/予測区間：推定されたモデルから得られるデータの範囲（サンプリング誤差も含む）
   

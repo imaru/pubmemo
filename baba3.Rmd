@@ -629,3 +629,23 @@ prior_summary(lm_brms2)
       * 2部6章ではサンプリング文を基本として、対数密度加算文でも書けると説明
       * 実際には、Stan内部では対数密度の加算をしていて、それを理解しやすいようにサンプリング文でも書けるということらしい（[Stanマニュアル: 対数密度加算文](https://github.com/stan-ja/stan-ja/blob/master/part02/chap05/chap05.md#53-対数密度加算文)）。
       * 対数密度加算文で使う target の意味が良く分からなかったけど、これは変数ではなく、Stanであらかじめ決められた対数密度を示すものらしい。以前はlp__(log probability)という変数だった?
+  * generated quantitiesでは標準化をもとに戻す処理。標準化後の切片ー平均*効果
+
+## 10. 補足：make_standata関数による、Stanに渡すデータの作成
+
+## 11. 補足：rstanでbrmsの結果を再現する
+
+## 12. brmsによる事後分布の可視化
+  * パラメータで正規表現使用可能
+    * ^ は文字列の先頭を示す正規表現
+    * stanplot()関数
+    
+## 13. brmsによる予測
+  * 予測
+```{r}
+new_data <- data.frame(temperature = 20)
+fitted(lm_brms, new_data)
+
+```
+  
+  

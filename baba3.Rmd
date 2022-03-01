@@ -656,3 +656,42 @@ predict(lm_brms, new_data)
     * fitted/信用区間：推定されたパラメータの範囲
     * predict/予測区間：推定されたモデルから得られるデータの範囲（サンプリング誤差も含む）
   
+## 14. 補足：predict関数を使わない予測の実装
+  * 手順の確認のための実装
+  * fittedとpredictの違いも分かりやすい
+    1. as.mcmc()でMCMCサンプル取り出し
+    2. 取り出したMCMCサンプルの切片と傾きを使って予測値を算出し、モデルを作る
+    3. 作成したモデルを使って予測値の生成
+    
+## 15. 回帰直線の図示
+  * 可視化のため
+  * marginal_effects()関数で作成可能
+  * 回帰直線＋信用区間  
+  * 回帰直線＋予測区間
+  * 引数effectを追加することで、特定の説明変数に注目した図示が可能
+  
+## 反応時間練習問題
+
+```{r}
+library(brms)
+dat_mr=read.table("mentalrotation.csv",header = TRUE,sep = ",")
+sort(unique(dat_mr$angle))
+dat_mr$angle=dat_mr$angle/180*pi
+hist(dat_mr$rt,xlim=c(0,5),breaks=20)
+formula_mr <- bf(rt ~ angle)
+#fit <- brm(
+#  formula = formula_mr,
+#  family = exgaussian(link="identity", link_sigma = "log", link_beta = "log"),
+#  data = dat_mr, 
+#  seed = 1) 
+fit <- brm(
+  formula = formula_mr,
+  family = shifted_lognormal(),
+  data = dat_mr, 
+  seed = 1) 
+set.seed(1)
+eff_predict_mr <- marginal_effects(fit, method="predict")
+plot(eff_predict_mr, points = TRUE)
+```
+
+# 

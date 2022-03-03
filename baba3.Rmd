@@ -686,12 +686,231 @@ formula_mr <- bf(rt ~ angle)
 #  seed = 1) 
 fit <- brm(
   formula = formula_mr,
-  family = shifted_lognormal(),
+  family = shifted_lognormal(link="identity", link_sigma = "log"),
   data = dat_mr, 
   seed = 1) 
 set.seed(1)
-eff_predict_mr <- marginal_effects(fit, method="predict")
+eff_predict_mr <- conditional_effects(fit, method="predict")
 plot(eff_predict_mr, points = TRUE)
+fit
 ```
 
-# 
+# 3-6章: ダミー変数と分散分析モデル
+## 2. モデルの構造
+  * 質的説明変数：ダミー変数
+  * 例
+    * ビールの売り上げ$y_i$
+    * 天気$x_{i1}$, $x_{i2}$
+    * 売り上げは正規分布($\mu_i$,$\sigma$)に従う
+    * $\mu_i=\beta_0+\beta_1x_{i1}+\beta_2x_{i2}$
+    * $y_i \sim Normal(\mu_i, \sigma^2)$
+    
+```{r}
+library(ggplot2)
+sales_w<-read.csv('3-6-1-beer-sales-3.csv')
+ggplot(data=sales_w, mapping=aes(x=weather, y=sales))+geom_violin()+geom_point(aes(color=weather))+labs(title='beer sales ans weather')
+```
+    
+## 5. brmsによる分散分析モデルの推定
+```{r}
+library(brms)
+anova_brms<-brm(
+  formula=sales~weather,
+  family=gaussian(link="log"),
+  data=sales_w,
+  seed=1,
+  prior=c(set_prior("", class="Intercept"),
+          set_prior("", class="sigma"))
+)
+
+anova_brms
+
+eff<-conditional_effects(anova_brms)
+plot(eff, points=FALSE)
+```
+
+## 6. 補足: 分散分析モデルのデザイン行列
+```{r}
+formula_anova<-formula(sales~weather)
+design_mat<-model.matrix(formula_anova, sales_w)
+
+data_list<-list(
+  N=nrow(sales_w),
+  K=3,
+  Y=sales_w$sales,
+  X=design_mat
+)
+
+library(rstan)
+anova_stan<-rstan::sampling(beer_design,
+                            data=data_list,
+                            seed=1
+)
+```
+
+# 3-7: 正規線形モデル
+## 2. モデルの構造
+  * 正規線形モデル：リンク関数が恒等関数であるモデルの総称
+  * ここで使うモデル
+    * $売り上げ=晴れ＋雨＋気温$
+    * $\mu_i=\beta_0+\beta_1x_{i1}+\beta_2x_{i2}+\beta_3x_{i3}$
+    * $y_i\sim Normal(\mu_i, \sigma^2)$
+
+## 3. 分析の準備
+  * いつもの
+```{r}
+library(rstan)
+library(brms)
+rstan_options(auto_write=TRUE)
+options(mc.cores=parallel::detectCores())
+```
+  
+## 4. データの読み込み
+  * 天気と気温が売り上げに影響するというモデルのためのデータ
+```{r}
+data37<-read.csv('3-7-1-beer-sales-4.csv')
+summary(data37)
+
+ggplot(data=data37,
+       mapping=aes(x=temperature, y=sales))+
+      geom_point(aes(color=weather))+labs(title="effect of temperature and weather on beer sales")
+```
+
+## 5. brmsによる正規線形モデルの推定
+```{r}
+brms37<-brm(
+  formula = sales ~ weather + temperature,
+  family = gaussian(),
+  data = data37,
+  seed = 1,
+  prior = c(set_prior("", class="Intercept"),
+            set_prior("", class="sigma"))
+)
+brms37
+eff<-conditional_effects(brms37, effect="temperature:weather")
+plot(eff, points=TRUE)
+eff_pre<-conditional_effects(brms37, effect="temperature:weather", method="predict")
+plot(eff_pre, points=TRUE)
+```
+
+  * weathersunnyの推定値が29.45（信用区間は0をまたがない）: 晴れの日には＋29万円の効果
+  * temperatureの推定値が2.55（信用区間は0をまたがない）：気温1℃で2.55万円増加
+ 
+ ## 6. 補足：正規線形モデルのデザイン行列（Stanによる解析）
+  * まずはbrmsによる解析からstanファイルを生成してみる
+  
+```{r}
+stancode(brms37)
+```
+  
+  * 続いて3部4章のStanファイル
+  
+```{stan output.var='stan37'}
+data{
+  int N;
+  int K; //デザイン行列列数
+  vector[N] Y; //売り上げを代入するベクトル
+  matrix[N, K] X; //デザイン行列
+}
+parameters{
+  vector[K] b;
+  real<lower=0> sigma;
+}
+model{
+  vector[N] mu = X * b;
+  Y ~ normal(mu, sigma);
+}
+```
+
+  * Stanコードを実行
+  
+```{r stan37}
+# デザイン行列
+formula37<-formula(sales ~ weather + temperature)
+mtx37<-model.matrix(formula37, data37) ## data37はcsvファイルを読み込んだデータ
+
+standata37<-list(
+  N=nrow(data37),
+  K=4, # 切片、天気雨、天気晴れ、気温
+  Y=data37$sales,
+  X=mtx37
+)
+
+library(rstan)
+stanres37<-rstan::sampling(stan37,
+                           data=standata37,
+                           seed=1)
+stanres37
+
+```
+  * brmsとほぼ同じ結果になった
+
+# 3-8: ポアソン回帰モデル
+## 2. モデルの構造
+  * ポアソン分布：離散型で0以上の整数データのとき
+    * パラメータ$\lambda$
+    * 期待値も分散も$\lambda$
+    * リンク関数は$log$
+  * ここでの例
+    * 釣り
+    * 釣果＝天気＋気温
+      * ただしポアソン分布を考えるので
+      * $log(\lambda) = \beta_0 + \beta_1x_1 + \beta_2x_2$
+        * これは多分、$\lambda_i = exp(\beta_0 + \beta_1x_1 + \beta_2x_2)$と同じ（と、3-1でも書いた。緑本にはこう書いてある。）
+      * $y_i \sim Poiss(\lambda_i)$
+      * 一応馬場本の式
+        * $\lambda = \beta_0 + \beta_1x_1 + \beta_2x_2$
+        * $y_i \sim Poiss(exp(\lambda_i))$
+
+## 3. 分析の準備
+  * いつもの
+```{r}
+library(rstan)
+library(brms)
+rstan_options(auto_write=TRUE)
+options(mc.cores=parallel::detectCores())
+```
+  
+## 4. データの読み込みと可視化
+```{r}
+data38<-read.csv("3-8-1-fish-num-1.csv")
+summary(data38)
+ggplot(data=data38,
+       mapping=aes(x=temperature, y=fish_num))+
+  geom_point(aes(color=weather))+
+  labs(title="effect of temperature and weather on num of fishes")
+```
+
+## 5. brmsによるポアソン回帰モデルの推定
+  * 正規線形モデルとほぼ同じだけど、sigmaの事前分布の指定がない（推定しないから）
+  
+```{r}
+brms38<-brm(
+  formula = fish_num ~ weather + temperature,
+  family=poisson(),
+  data=data38,
+  seed=1,
+  prior=c(set_prior("",class="Intercept"))
+)
+brms38
+```
+
+## 6. 推定されたモデルの解釈
+  * weathersunnyの推定値は-0.60
+    * ただし、exp(-0.60)=0.5488
+    * 晴れると0.54倍になる
+  * temperatureは0.08
+    * exp(0.08)=1.0832
+    * 晴れると微妙に増える
+  * 釣果数の期待値$\lambda=exp(-.78-0.60 \times 晴れかどうか+0.08 \times 気温)$
+  
+## 7. 回帰曲線の図示
+  * 95%ベイズ信用区間つき
+```{r}
+eff38<-conditional_effects(brms38,
+                          effects="temperature:weather") # weatherを前にすれば横軸がweatherになる
+plot(eff38, points=TRUE)
+```
+  
+  
+  

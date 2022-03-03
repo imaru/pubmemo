@@ -208,7 +208,7 @@
             <li><a href="#分析の準備-4">3. 分析の準備</a></li>
             <li><a href="#データの読み込み">4. データの読み込み</a></li>
             <li><a href="#brmsによる正規線形モデルの推定">5. brmsによる正規線形モデルの推定</a></li>
-<<<<<<< HEAD
+            <li><a href="#補足正規線形モデルのデザイン行列stanによる解析">6. 補足：正規線形モデルのデザイン行列（Stanによる解析）</a></li>
             </ul></li>
             <li><a href="#ポアソン回帰モデル-2">3-8: ポアソン回帰モデル</a>
             <ul>
@@ -218,8 +218,6 @@
             <li><a href="#brmsによるポアソン回帰モデルの推定">5. brmsによるポアソン回帰モデルの推定</a></li>
             <li><a href="#推定されたモデルの解釈">6. 推定されたモデルの解釈</a></li>
             <li><a href="#回帰曲線の図示">7. 回帰曲線の図示</a></li>
-=======
->>>>>>> 60959dcc6ba85f26124076823f6149ab60075072
             </ul></li>
             </ul>
           </div>
@@ -637,136 +635,19 @@ mr &lt;- stan(
   iter=2000,
   warmup=1000,
   thin=1
-<<<<<<< HEAD
 )
 print(mr,probs=c(0.025,0.5,0.975))</code></pre>
-=======
-)</code></pre>
-<pre><code>## 
-## SAMPLING FOR MODEL &#39;imrlab&#39; NOW (CHAIN 1).
-## Chain 1: 
-## Chain 1: Gradient evaluation took 1.4e-05 seconds
-## Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 0.14 seconds.
-## Chain 1: Adjust your expectations accordingly!
-## Chain 1: 
-## Chain 1: 
-## Chain 1: Iteration:    1 / 2000 [  0%]  (Warmup)
-## Chain 1: Iteration:  200 / 2000 [ 10%]  (Warmup)
-## Chain 1: Iteration:  400 / 2000 [ 20%]  (Warmup)
-## Chain 1: Iteration:  600 / 2000 [ 30%]  (Warmup)
-## Chain 1: Iteration:  800 / 2000 [ 40%]  (Warmup)
-## Chain 1: Iteration: 1000 / 2000 [ 50%]  (Warmup)
-## Chain 1: Iteration: 1001 / 2000 [ 50%]  (Sampling)
-## Chain 1: Iteration: 1200 / 2000 [ 60%]  (Sampling)
-## Chain 1: Iteration: 1400 / 2000 [ 70%]  (Sampling)
-## Chain 1: Iteration: 1600 / 2000 [ 80%]  (Sampling)
-## Chain 1: Iteration: 1800 / 2000 [ 90%]  (Sampling)
-## Chain 1: Iteration: 2000 / 2000 [100%]  (Sampling)
-## Chain 1: 
-## Chain 1:  Elapsed Time: 0.044481 seconds (Warm-up)
-## Chain 1:                0.040186 seconds (Sampling)
-## Chain 1:                0.084667 seconds (Total)
-## Chain 1: 
-## 
-## SAMPLING FOR MODEL &#39;imrlab&#39; NOW (CHAIN 2).
-## Chain 2: 
-## Chain 2: Gradient evaluation took 5e-06 seconds
-## Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 0.05 seconds.
-## Chain 2: Adjust your expectations accordingly!
-## Chain 2: 
-## Chain 2: 
-## Chain 2: Iteration:    1 / 2000 [  0%]  (Warmup)
-## Chain 2: Iteration:  200 / 2000 [ 10%]  (Warmup)
-## Chain 2: Iteration:  400 / 2000 [ 20%]  (Warmup)
-## Chain 2: Iteration:  600 / 2000 [ 30%]  (Warmup)
-## Chain 2: Iteration:  800 / 2000 [ 40%]  (Warmup)
-## Chain 2: Iteration: 1000 / 2000 [ 50%]  (Warmup)
-## Chain 2: Iteration: 1001 / 2000 [ 50%]  (Sampling)
-## Chain 2: Iteration: 1200 / 2000 [ 60%]  (Sampling)
-## Chain 2: Iteration: 1400 / 2000 [ 70%]  (Sampling)
-## Chain 2: Iteration: 1600 / 2000 [ 80%]  (Sampling)
-## Chain 2: Iteration: 1800 / 2000 [ 90%]  (Sampling)
-## Chain 2: Iteration: 2000 / 2000 [100%]  (Sampling)
-## Chain 2: 
-## Chain 2:  Elapsed Time: 0.043381 seconds (Warm-up)
-## Chain 2:                0.039323 seconds (Sampling)
-## Chain 2:                0.082704 seconds (Total)
-## Chain 2: 
-## 
-## SAMPLING FOR MODEL &#39;imrlab&#39; NOW (CHAIN 3).
-## Chain 3: 
-## Chain 3: Gradient evaluation took 6e-06 seconds
-## Chain 3: 1000 transitions using 10 leapfrog steps per transition would take 0.06 seconds.
-## Chain 3: Adjust your expectations accordingly!
-## Chain 3: 
-## Chain 3: 
-## Chain 3: Iteration:    1 / 2000 [  0%]  (Warmup)
-## Chain 3: Iteration:  200 / 2000 [ 10%]  (Warmup)
-## Chain 3: Iteration:  400 / 2000 [ 20%]  (Warmup)
-## Chain 3: Iteration:  600 / 2000 [ 30%]  (Warmup)
-## Chain 3: Iteration:  800 / 2000 [ 40%]  (Warmup)
-## Chain 3: Iteration: 1000 / 2000 [ 50%]  (Warmup)
-## Chain 3: Iteration: 1001 / 2000 [ 50%]  (Sampling)
-## Chain 3: Iteration: 1200 / 2000 [ 60%]  (Sampling)
-## Chain 3: Iteration: 1400 / 2000 [ 70%]  (Sampling)
-## Chain 3: Iteration: 1600 / 2000 [ 80%]  (Sampling)
-## Chain 3: Iteration: 1800 / 2000 [ 90%]  (Sampling)
-## Chain 3: Iteration: 2000 / 2000 [100%]  (Sampling)
-## Chain 3: 
-## Chain 3:  Elapsed Time: 0.048537 seconds (Warm-up)
-## Chain 3:                0.04904 seconds (Sampling)
-## Chain 3:                0.097577 seconds (Total)
-## Chain 3: 
-## 
-## SAMPLING FOR MODEL &#39;imrlab&#39; NOW (CHAIN 4).
-## Chain 4: Rejecting initial value:
-## Chain 4:   Log probability evaluates to log(0), i.e. negative infinity.
-## Chain 4:   Stan can&#39;t start sampling from this initial value.
-## Chain 4: 
-## Chain 4: Gradient evaluation took 6e-06 seconds
-## Chain 4: 1000 transitions using 10 leapfrog steps per transition would take 0.06 seconds.
-## Chain 4: Adjust your expectations accordingly!
-## Chain 4: 
-## Chain 4: 
-## Chain 4: Iteration:    1 / 2000 [  0%]  (Warmup)
-## Chain 4: Iteration:  200 / 2000 [ 10%]  (Warmup)
-## Chain 4: Iteration:  400 / 2000 [ 20%]  (Warmup)
-## Chain 4: Iteration:  600 / 2000 [ 30%]  (Warmup)
-## Chain 4: Iteration:  800 / 2000 [ 40%]  (Warmup)
-## Chain 4: Iteration: 1000 / 2000 [ 50%]  (Warmup)
-## Chain 4: Iteration: 1001 / 2000 [ 50%]  (Sampling)
-## Chain 4: Iteration: 1200 / 2000 [ 60%]  (Sampling)
-## Chain 4: Iteration: 1400 / 2000 [ 70%]  (Sampling)
-## Chain 4: Iteration: 1600 / 2000 [ 80%]  (Sampling)
-## Chain 4: Iteration: 1800 / 2000 [ 90%]  (Sampling)
-## Chain 4: Iteration: 2000 / 2000 [100%]  (Sampling)
-## Chain 4: 
-## Chain 4:  Elapsed Time: 0.046209 seconds (Warm-up)
-## Chain 4:                0.042225 seconds (Sampling)
-## Chain 4:                0.088434 seconds (Total)
-## Chain 4:</code></pre>
-<pre class="r"><code>print(mr,probs=c(0.025,0.5,0.975))</code></pre>
->>>>>>> 60959dcc6ba85f26124076823f6149ab60075072
 <pre><code>## Inference for Stan model: imrlab.
 ## 4 chains, each with iter=2000; warmup=1000; thin=1; 
 ## post-warmup draws per chain=1000, total post-warmup draws=4000.
 ## 
 ##               mean se_mean   sd     2.5%      50%    97.5% n_eff Rhat
-<<<<<<< HEAD
 ## Intercept    -3.79    0.00 0.16    -4.10    -3.79    -3.47  1506    1
 ## b_basic       0.03    0.00 0.01     0.00     0.03     0.06  1803    1
 ## b_senior     -0.01    0.00 0.01    -0.04    -0.01     0.02  1773    1
 ## lp__      -2140.15    0.04 1.24 -2143.48 -2139.83 -2138.76  1244    1
 ## 
-## Samples were drawn using NUTS(diag_e) at Thu Mar  3 18:13:39 2022.
-=======
-## Intercept    -3.80    0.00 0.16    -4.12    -3.80    -3.49  1284    1
-## b_basic       0.03    0.00 0.01     0.00     0.03     0.06  1767    1
-## b_senior     -0.01    0.00 0.01    -0.04    -0.01     0.02  1446    1
-## lp__      -2140.16    0.04 1.24 -2143.35 -2139.82 -2138.75  1056    1
-## 
-## Samples were drawn using NUTS(diag_e) at Thu Mar  3 17:28:32 2022.
->>>>>>> 60959dcc6ba85f26124076823f6149ab60075072
+## Samples were drawn using NUTS(diag_e) at Thu Mar  3 18:44:53 2022.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).</code></pre>
@@ -864,11 +745,7 @@ print(mr, probs=c(0.025, 0.5, 0.975))</code></pre>
 ## sigma       17.07    0.03 1.21   14.89   16.96   19.67  1629    1
 ## lp__      -330.07    0.03 1.20 -333.26 -329.75 -328.73  1288    1
 ## 
-<<<<<<< HEAD
-## Samples were drawn using NUTS(diag_e) at Thu Mar  3 18:13:56 2022.
-=======
-## Samples were drawn using NUTS(diag_e) at Thu Mar  3 17:28:49 2022.
->>>>>>> 60959dcc6ba85f26124076823f6149ab60075072
+## Samples were drawn using NUTS(diag_e) at Thu Mar  3 18:45:09 2022.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).</code></pre>
@@ -1279,11 +1156,7 @@ print(res, probs = c(0.025, 0.5, 0.975))</code></pre>
 ## mu[6]     92.35    0.07 3.16   86.30   92.28   98.66  1805    1
 ##  [ reached getOption(&quot;max.print&quot;) -- 95 行を無視しました ] 
 ## 
-<<<<<<< HEAD
-## Samples were drawn using NUTS(diag_e) at Thu Mar  3 18:14:14 2022.
-=======
-## Samples were drawn using NUTS(diag_e) at Thu Mar  3 17:29:07 2022.
->>>>>>> 60959dcc6ba85f26124076823f6149ab60075072
+## Samples were drawn using NUTS(diag_e) at Thu Mar  3 18:45:26 2022.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).</code></pre>
@@ -1827,7 +1700,12 @@ plot(eff_pre, points=TRUE)</code></pre>
 <li>weathersunnyの推定値が29.45（信用区間は0をまたがない）: 晴れの日には＋29万円の効果</li>
 <li>temperatureの推定値が2.55（信用区間は0をまたがない）：気温1℃で2.55万円増加</li>
 </ul>
-<p>## 6. 補足：正規線形モデルのデザイン行列（Stanによる解析） * まずはbrmsによる解析からstanファイルを生成してみる</p>
+</div>
+<div id="補足正規線形モデルのデザイン行列stanによる解析" class="section level2">
+<h2>6. 補足：正規線形モデルのデザイン行列（Stanによる解析）</h2>
+<ul>
+<li>まずはbrmsによる解析からstanファイルを生成してみる</li>
+</ul>
 <pre class="r"><code>stancode(brms37)</code></pre>
 <pre><code>## // generated with brms 2.16.3
 ## functions {
@@ -1914,11 +1792,7 @@ stanres37</code></pre>
 ## sigma   16.05    0.02 0.96   14.36   15.39   15.99   16.65   18.09  2741    1
 ## lp__  -487.95    0.04 1.65 -492.03 -488.75 -487.59 -486.75 -485.82  1515    1
 ## 
-<<<<<<< HEAD
-## Samples were drawn using NUTS(diag_e) at Thu Mar  3 18:15:48 2022.
-=======
-## Samples were drawn using NUTS(diag_e) at Thu Mar  3 17:30:44 2022.
->>>>>>> 60959dcc6ba85f26124076823f6149ab60075072
+## Samples were drawn using NUTS(diag_e) at Thu Mar  3 18:47:01 2022.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).</code></pre>
@@ -1926,7 +1800,6 @@ stanres37</code></pre>
 <li>brmsとほぼ同じ結果になった</li>
 </ul>
 </div>
-<<<<<<< HEAD
 </div>
 <div id="ポアソン回帰モデル-2" class="section level1">
 <h1>3-8: ポアソン回帰モデル</h1>
@@ -2065,9 +1938,16 @@ summary(data38)</code></pre>
                           effects=&quot;temperature:weather&quot;) # weatherを前にすれば横軸がweatherになる
 plot(eff38, points=TRUE)</code></pre>
 <p><img src="baba3_files/figure-html/unnamed-chunk-29-1.png" width="768" /></p>
+<ul>
+<li>予測区間
+<ul>
+<li>過分散となることがある
+<ul>
+<li>期待値と分散が一つのパラメータで決まるから、とあるけど、なぜ？</li>
+</ul></li>
+</ul></li>
+</ul>
 </div>
-=======
->>>>>>> 60959dcc6ba85f26124076823f6149ab60075072
 </div>
 </div>
 

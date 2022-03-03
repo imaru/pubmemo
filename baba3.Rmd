@@ -911,6 +911,10 @@ eff38<-conditional_effects(brms38,
                           effects="temperature:weather") # weatherを前にすれば横軸がweatherになる
 plot(eff38, points=TRUE)
 ```
-  
+
+  * 予測区間
+    * 過分散となることがある
+      * 期待値と分散が一つのパラメータで決まるから、とあるけど、なぜ？
+      
   
   

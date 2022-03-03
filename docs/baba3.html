@@ -194,6 +194,20 @@
             <li><a href="#brmsによる予測">13. brmsによる予測</a></li>
             <li><a href="#補足predict関数を使わない予測の実装">14. 補足：predict関数を使わない予測の実装</a></li>
             <li><a href="#回帰直線の図示">15. 回帰直線の図示</a></li>
+            <li><a href="#反応時間練習問題">反応時間練習問題</a></li>
+            </ul></li>
+            <li><a href="#章-ダミー変数と分散分析モデル">3-6章: ダミー変数と分散分析モデル</a>
+            <ul>
+            <li><a href="#モデルの構造-1">2. モデルの構造</a></li>
+            <li><a href="#brmsによる分散分析モデルの推定">5. brmsによる分散分析モデルの推定</a></li>
+            <li><a href="#補足-分散分析モデルのデザイン行列">6. 補足: 分散分析モデルのデザイン行列</a></li>
+            </ul></li>
+            <li><a href="#正規線形モデル">3-7: 正規線形モデル</a>
+            <ul>
+            <li><a href="#モデルの構造-2">2. モデルの構造</a></li>
+            <li><a href="#分析の準備-4">3. 分析の準備</a></li>
+            <li><a href="#データの読み込み">4. データの読み込み</a></li>
+            <li><a href="#brmsによる正規線形モデルの推定">5. brmsによる正規線形モデルの推定</a></li>
             </ul></li>
             </ul>
           </div>
@@ -624,8 +638,8 @@ mr &lt;- stan(
 <pre><code>## 
 ## SAMPLING FOR MODEL &#39;imrlab&#39; NOW (CHAIN 1).
 ## Chain 1: 
-## Chain 1: Gradient evaluation took 1.5e-05 seconds
-## Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 0.15 seconds.
+## Chain 1: Gradient evaluation took 1.4e-05 seconds
+## Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 0.14 seconds.
 ## Chain 1: Adjust your expectations accordingly!
 ## Chain 1: 
 ## Chain 1: 
@@ -642,15 +656,12 @@ mr &lt;- stan(
 ## Chain 1: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 ## Chain 1: Iteration: 2000 / 2000 [100%]  (Sampling)
 ## Chain 1: 
-## Chain 1:  Elapsed Time: 0.046903 seconds (Warm-up)
-## Chain 1:                0.042331 seconds (Sampling)
-## Chain 1:                0.089234 seconds (Total)
+## Chain 1:  Elapsed Time: 0.044481 seconds (Warm-up)
+## Chain 1:                0.040186 seconds (Sampling)
+## Chain 1:                0.084667 seconds (Total)
 ## Chain 1: 
 ## 
 ## SAMPLING FOR MODEL &#39;imrlab&#39; NOW (CHAIN 2).
-## Chain 2: Rejecting initial value:
-## Chain 2:   Log probability evaluates to log(0), i.e. negative infinity.
-## Chain 2:   Stan can&#39;t start sampling from this initial value.
 ## Chain 2: 
 ## Chain 2: Gradient evaluation took 5e-06 seconds
 ## Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 0.05 seconds.
@@ -670,9 +681,9 @@ mr &lt;- stan(
 ## Chain 2: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 ## Chain 2: Iteration: 2000 / 2000 [100%]  (Sampling)
 ## Chain 2: 
-## Chain 2:  Elapsed Time: 0.045227 seconds (Warm-up)
-## Chain 2:                0.036723 seconds (Sampling)
-## Chain 2:                0.08195 seconds (Total)
+## Chain 2:  Elapsed Time: 0.043381 seconds (Warm-up)
+## Chain 2:                0.039323 seconds (Sampling)
+## Chain 2:                0.082704 seconds (Total)
 ## Chain 2: 
 ## 
 ## SAMPLING FOR MODEL &#39;imrlab&#39; NOW (CHAIN 3).
@@ -695,15 +706,18 @@ mr &lt;- stan(
 ## Chain 3: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 ## Chain 3: Iteration: 2000 / 2000 [100%]  (Sampling)
 ## Chain 3: 
-## Chain 3:  Elapsed Time: 0.046011 seconds (Warm-up)
-## Chain 3:                0.046236 seconds (Sampling)
-## Chain 3:                0.092247 seconds (Total)
+## Chain 3:  Elapsed Time: 0.048537 seconds (Warm-up)
+## Chain 3:                0.04904 seconds (Sampling)
+## Chain 3:                0.097577 seconds (Total)
 ## Chain 3: 
 ## 
 ## SAMPLING FOR MODEL &#39;imrlab&#39; NOW (CHAIN 4).
+## Chain 4: Rejecting initial value:
+## Chain 4:   Log probability evaluates to log(0), i.e. negative infinity.
+## Chain 4:   Stan can&#39;t start sampling from this initial value.
 ## Chain 4: 
-## Chain 4: Gradient evaluation took 7e-06 seconds
-## Chain 4: 1000 transitions using 10 leapfrog steps per transition would take 0.07 seconds.
+## Chain 4: Gradient evaluation took 6e-06 seconds
+## Chain 4: 1000 transitions using 10 leapfrog steps per transition would take 0.06 seconds.
 ## Chain 4: Adjust your expectations accordingly!
 ## Chain 4: 
 ## Chain 4: 
@@ -720,9 +734,9 @@ mr &lt;- stan(
 ## Chain 4: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 ## Chain 4: Iteration: 2000 / 2000 [100%]  (Sampling)
 ## Chain 4: 
-## Chain 4:  Elapsed Time: 0.04785 seconds (Warm-up)
-## Chain 4:                0.048514 seconds (Sampling)
-## Chain 4:                0.096364 seconds (Total)
+## Chain 4:  Elapsed Time: 0.046209 seconds (Warm-up)
+## Chain 4:                0.042225 seconds (Sampling)
+## Chain 4:                0.088434 seconds (Total)
 ## Chain 4:</code></pre>
 <pre class="r"><code>print(mr,probs=c(0.025,0.5,0.975))</code></pre>
 <pre><code>## Inference for Stan model: imrlab.
@@ -730,12 +744,12 @@ mr &lt;- stan(
 ## post-warmup draws per chain=1000, total post-warmup draws=4000.
 ## 
 ##               mean se_mean   sd     2.5%      50%    97.5% n_eff Rhat
-## Intercept    -3.79    0.00 0.16    -4.10    -3.79    -3.48  1450    1
-## b_basic       0.03    0.00 0.01     0.00     0.03     0.06  1755    1
-## b_senior     -0.01    0.00 0.01    -0.04    -0.01     0.02  1537    1
-## lp__      -2140.16    0.03 1.21 -2143.27 -2139.87 -2138.77  1409    1
+## Intercept    -3.80    0.00 0.16    -4.12    -3.80    -3.49  1284    1
+## b_basic       0.03    0.00 0.01     0.00     0.03     0.06  1767    1
+## b_senior     -0.01    0.00 0.01    -0.04    -0.01     0.02  1446    1
+## lp__      -2140.16    0.04 1.24 -2143.35 -2139.82 -2138.75  1056    1
 ## 
-## Samples were drawn using NUTS(diag_e) at Mon Feb 21 12:16:03 2022.
+## Samples were drawn using NUTS(diag_e) at Thu Mar  3 17:28:32 2022.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).</code></pre>
@@ -838,7 +852,7 @@ print(mr, probs=c(0.025, 0.5, 0.975))</code></pre>
 ## sigma       17.07    0.03 1.21   14.89   16.96   19.67  1629    1
 ## lp__      -330.07    0.03 1.20 -333.26 -329.75 -328.73  1288    1
 ## 
-## Samples were drawn using NUTS(diag_e) at Mon Feb 21 12:16:22 2022.
+## Samples were drawn using NUTS(diag_e) at Thu Mar  3 17:28:49 2022.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).</code></pre>
@@ -1343,7 +1357,7 @@ print(res, probs = c(0.025, 0.5, 0.975))</code></pre>
 ## mu[100]   67.34    0.03 1.74   63.89   67.32   70.67  3742    1
 ## lp__    -330.17    0.04 1.26 -333.43 -329.85 -328.74  1154    1
 ## 
-## Samples were drawn using NUTS(diag_e) at Mon Feb 21 12:16:40 2022.
+## Samples were drawn using NUTS(diag_e) at Thu Mar  3 17:29:07 2022.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).</code></pre>
@@ -1409,6 +1423,28 @@ beersf&lt;-read.csv(&#39;3-2-1-beer-sales-2.csv&#39;)</code></pre>
   seed = 1
 )</code></pre>
 <pre><code>## Compiling Stan program...</code></pre>
+<pre><code>## Trying to compile a simple C file</code></pre>
+<pre><code>## Running /usr/local/Cellar/r/4.1.2/lib/R/bin/R CMD SHLIB foo.c
+## clang -I&quot;/usr/local/Cellar/r/4.1.2/lib/R/include&quot; -DNDEBUG   -I&quot;/usr/local/lib/R/4.1/site-library/Rcpp/include/&quot;  -I&quot;/usr/local/lib/R/4.1/site-library/RcppEigen/include/&quot;  -I&quot;/usr/local/lib/R/4.1/site-library/RcppEigen/include/unsupported&quot;  -I&quot;/usr/local/lib/R/4.1/site-library/BH/include&quot; -I&quot;/Users/imaru/Library/R/x86_64/4.1/library/StanHeaders/include/src/&quot;  -I&quot;/Users/imaru/Library/R/x86_64/4.1/library/StanHeaders/include/&quot;  -I&quot;/usr/local/lib/R/4.1/site-library/RcppParallel/include/&quot;  -I&quot;/Users/imaru/Library/R/x86_64/4.1/library/rstan/include&quot; -DEIGEN_NO_DEBUG  -DBOOST_DISABLE_ASSERTS  -DBOOST_PENDING_INTEGER_LOG2_HPP  -DSTAN_THREADS  -DBOOST_NO_AUTO_PTR  -include &#39;/Users/imaru/Library/R/x86_64/4.1/library/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp&#39;  -D_REENTRANT -DRCPP_PARALLEL_USE_TBB=1   -I/usr/local/opt/gettext/include -I/usr/local/opt/readline/include -I/usr/local/opt/xz/include -I/usr/local/include   -fPIC  -Wno-implicit-function-declaration  -c foo.c -o foo.o
+## In file included from &lt;built-in&gt;:1:
+## In file included from /Users/imaru/Library/R/x86_64/4.1/library/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp:13:
+## In file included from /usr/local/lib/R/4.1/site-library/RcppEigen/include/Eigen/Dense:1:
+## In file included from /usr/local/lib/R/4.1/site-library/RcppEigen/include/Eigen/Core:88:
+## /usr/local/lib/R/4.1/site-library/RcppEigen/include/Eigen/src/Core/util/Macros.h:628:1: error: unknown type name &#39;namespace&#39;
+## namespace Eigen {
+## ^
+## /usr/local/lib/R/4.1/site-library/RcppEigen/include/Eigen/src/Core/util/Macros.h:628:16: error: expected &#39;;&#39; after top level declarator
+## namespace Eigen {
+##                ^
+##                ;
+## In file included from &lt;built-in&gt;:1:
+## In file included from /Users/imaru/Library/R/x86_64/4.1/library/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp:13:
+## In file included from /usr/local/lib/R/4.1/site-library/RcppEigen/include/Eigen/Dense:1:
+## /usr/local/lib/R/4.1/site-library/RcppEigen/include/Eigen/Core:96:10: fatal error: &#39;complex&#39; file not found
+## #include &lt;complex&gt;
+##          ^~~~~~~~~
+## 3 errors generated.
+## make: *** [foo.o] Error 1</code></pre>
 <pre><code>## Start sampling</code></pre>
 <pre class="r"><code>print(lm_brms)</code></pre>
 <pre><code>##  Family: gaussian 
@@ -1485,6 +1521,28 @@ plot(lm_brms)</code></pre>
           set_prior(&quot;&quot;,class=&quot;sigma&quot;))
 )</code></pre>
 <pre><code>## Compiling Stan program...</code></pre>
+<pre><code>## Trying to compile a simple C file</code></pre>
+<pre><code>## Running /usr/local/Cellar/r/4.1.2/lib/R/bin/R CMD SHLIB foo.c
+## clang -I&quot;/usr/local/Cellar/r/4.1.2/lib/R/include&quot; -DNDEBUG   -I&quot;/usr/local/lib/R/4.1/site-library/Rcpp/include/&quot;  -I&quot;/usr/local/lib/R/4.1/site-library/RcppEigen/include/&quot;  -I&quot;/usr/local/lib/R/4.1/site-library/RcppEigen/include/unsupported&quot;  -I&quot;/usr/local/lib/R/4.1/site-library/BH/include&quot; -I&quot;/Users/imaru/Library/R/x86_64/4.1/library/StanHeaders/include/src/&quot;  -I&quot;/Users/imaru/Library/R/x86_64/4.1/library/StanHeaders/include/&quot;  -I&quot;/usr/local/lib/R/4.1/site-library/RcppParallel/include/&quot;  -I&quot;/Users/imaru/Library/R/x86_64/4.1/library/rstan/include&quot; -DEIGEN_NO_DEBUG  -DBOOST_DISABLE_ASSERTS  -DBOOST_PENDING_INTEGER_LOG2_HPP  -DSTAN_THREADS  -DBOOST_NO_AUTO_PTR  -include &#39;/Users/imaru/Library/R/x86_64/4.1/library/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp&#39;  -D_REENTRANT -DRCPP_PARALLEL_USE_TBB=1   -I/usr/local/opt/gettext/include -I/usr/local/opt/readline/include -I/usr/local/opt/xz/include -I/usr/local/include   -fPIC  -Wno-implicit-function-declaration  -c foo.c -o foo.o
+## In file included from &lt;built-in&gt;:1:
+## In file included from /Users/imaru/Library/R/x86_64/4.1/library/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp:13:
+## In file included from /usr/local/lib/R/4.1/site-library/RcppEigen/include/Eigen/Dense:1:
+## In file included from /usr/local/lib/R/4.1/site-library/RcppEigen/include/Eigen/Core:88:
+## /usr/local/lib/R/4.1/site-library/RcppEigen/include/Eigen/src/Core/util/Macros.h:628:1: error: unknown type name &#39;namespace&#39;
+## namespace Eigen {
+## ^
+## /usr/local/lib/R/4.1/site-library/RcppEigen/include/Eigen/src/Core/util/Macros.h:628:16: error: expected &#39;;&#39; after top level declarator
+## namespace Eigen {
+##                ^
+##                ;
+## In file included from &lt;built-in&gt;:1:
+## In file included from /Users/imaru/Library/R/x86_64/4.1/library/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp:13:
+## In file included from /usr/local/lib/R/4.1/site-library/RcppEigen/include/Eigen/Dense:1:
+## /usr/local/lib/R/4.1/site-library/RcppEigen/include/Eigen/Core:96:10: fatal error: &#39;complex&#39; file not found
+## #include &lt;complex&gt;
+##          ^~~~~~~~~
+## 3 errors generated.
+## make: *** [foo.o] Error 1</code></pre>
 <pre><code>## Start sampling</code></pre>
 <pre class="r"><code>prior_summary(lm_brms2)</code></pre>
 <pre><code>##   prior     class        coef group resp dpar nlpar bound       source
@@ -1584,6 +1642,358 @@ predict(lm_brms, new_data)</code></pre>
 </li>
 <li>回帰直線＋予測区間</li>
 <li>引数effectを追加することで、特定の説明変数に注目した図示が可能</li>
+</ul>
+</div>
+<div id="反応時間練習問題" class="section level2">
+<h2>反応時間練習問題</h2>
+<pre class="r"><code>library(brms)
+dat_mr=read.table(&quot;mentalrotation.csv&quot;,header = TRUE,sep = &quot;,&quot;)
+sort(unique(dat_mr$angle))</code></pre>
+<pre><code>## [1]   0  40  80 120 160</code></pre>
+<pre class="r"><code>dat_mr$angle=dat_mr$angle/180*pi
+hist(dat_mr$rt,xlim=c(0,5),breaks=20)</code></pre>
+<p><img src="baba3_files/figure-html/unnamed-chunk-17-1.png" width="768" /></p>
+<pre class="r"><code>formula_mr &lt;- bf(rt ~ angle)
+#fit &lt;- brm(
+#  formula = formula_mr,
+#  family = exgaussian(link=&quot;identity&quot;, link_sigma = &quot;log&quot;, link_beta = &quot;log&quot;),
+#  data = dat_mr, 
+#  seed = 1) 
+fit &lt;- brm(
+  formula = formula_mr,
+  family = shifted_lognormal(link=&quot;identity&quot;, link_sigma = &quot;log&quot;),
+  data = dat_mr, 
+  seed = 1) </code></pre>
+<pre><code>## Compiling Stan program...</code></pre>
+<pre><code>## Trying to compile a simple C file</code></pre>
+<pre><code>## Running /usr/local/Cellar/r/4.1.2/lib/R/bin/R CMD SHLIB foo.c
+## clang -I&quot;/usr/local/Cellar/r/4.1.2/lib/R/include&quot; -DNDEBUG   -I&quot;/usr/local/lib/R/4.1/site-library/Rcpp/include/&quot;  -I&quot;/usr/local/lib/R/4.1/site-library/RcppEigen/include/&quot;  -I&quot;/usr/local/lib/R/4.1/site-library/RcppEigen/include/unsupported&quot;  -I&quot;/usr/local/lib/R/4.1/site-library/BH/include&quot; -I&quot;/Users/imaru/Library/R/x86_64/4.1/library/StanHeaders/include/src/&quot;  -I&quot;/Users/imaru/Library/R/x86_64/4.1/library/StanHeaders/include/&quot;  -I&quot;/usr/local/lib/R/4.1/site-library/RcppParallel/include/&quot;  -I&quot;/Users/imaru/Library/R/x86_64/4.1/library/rstan/include&quot; -DEIGEN_NO_DEBUG  -DBOOST_DISABLE_ASSERTS  -DBOOST_PENDING_INTEGER_LOG2_HPP  -DSTAN_THREADS  -DBOOST_NO_AUTO_PTR  -include &#39;/Users/imaru/Library/R/x86_64/4.1/library/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp&#39;  -D_REENTRANT -DRCPP_PARALLEL_USE_TBB=1   -I/usr/local/opt/gettext/include -I/usr/local/opt/readline/include -I/usr/local/opt/xz/include -I/usr/local/include   -fPIC  -Wno-implicit-function-declaration  -c foo.c -o foo.o
+## In file included from &lt;built-in&gt;:1:
+## In file included from /Users/imaru/Library/R/x86_64/4.1/library/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp:13:
+## In file included from /usr/local/lib/R/4.1/site-library/RcppEigen/include/Eigen/Dense:1:
+## In file included from /usr/local/lib/R/4.1/site-library/RcppEigen/include/Eigen/Core:88:
+## /usr/local/lib/R/4.1/site-library/RcppEigen/include/Eigen/src/Core/util/Macros.h:628:1: error: unknown type name &#39;namespace&#39;
+## namespace Eigen {
+## ^
+## /usr/local/lib/R/4.1/site-library/RcppEigen/include/Eigen/src/Core/util/Macros.h:628:16: error: expected &#39;;&#39; after top level declarator
+## namespace Eigen {
+##                ^
+##                ;
+## In file included from &lt;built-in&gt;:1:
+## In file included from /Users/imaru/Library/R/x86_64/4.1/library/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp:13:
+## In file included from /usr/local/lib/R/4.1/site-library/RcppEigen/include/Eigen/Dense:1:
+## /usr/local/lib/R/4.1/site-library/RcppEigen/include/Eigen/Core:96:10: fatal error: &#39;complex&#39; file not found
+## #include &lt;complex&gt;
+##          ^~~~~~~~~
+## 3 errors generated.
+## make: *** [foo.o] Error 1</code></pre>
+<pre><code>## Start sampling</code></pre>
+<pre class="r"><code>set.seed(1)
+eff_predict_mr &lt;- conditional_effects(fit, method=&quot;predict&quot;)
+plot(eff_predict_mr, points = TRUE)</code></pre>
+<p><img src="baba3_files/figure-html/unnamed-chunk-17-2.png" width="768" /></p>
+<pre class="r"><code>fit</code></pre>
+<pre><code>##  Family: shifted_lognormal 
+##   Links: mu = identity; sigma = identity; ndt = identity 
+## Formula: rt ~ angle 
+##    Data: dat_mr (Number of observations: 3202) 
+##   Draws: 4 chains, each with iter = 2000; warmup = 1000; thin = 1;
+##          total post-warmup draws = 4000
+## 
+## Population-Level Effects: 
+##           Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+## Intercept    -0.90      0.03    -0.96    -0.83 1.00     1104     1406
+## angle         0.40      0.01     0.38     0.43 1.00     1556     1657
+## 
+## Family Specific Parameters: 
+##       Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+## sigma     0.55      0.01     0.53     0.57 1.00     1169     1489
+## ndt       0.34      0.01     0.32     0.36 1.00     1069     1420
+## 
+## Draws were sampled using sampling(NUTS). For each parameter, Bulk_ESS
+## and Tail_ESS are effective sample size measures, and Rhat is the potential
+## scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
+</div>
+</div>
+<div id="章-ダミー変数と分散分析モデル" class="section level1">
+<h1>3-6章: ダミー変数と分散分析モデル</h1>
+<div id="モデルの構造-1" class="section level2">
+<h2>2. モデルの構造</h2>
+<ul>
+<li>質的説明変数：ダミー変数</li>
+<li>例
+<ul>
+<li>ビールの売り上げ<span class="math inline">\(y_i\)</span></li>
+<li>天気<span class="math inline">\(x_{i1}\)</span>, <span class="math inline">\(x_{i2}\)</span></li>
+<li>売り上げは正規分布(<span class="math inline">\(\mu_i\)</span>,<span class="math inline">\(\sigma\)</span>)に従う</li>
+<li><span class="math inline">\(\mu_i=\beta_0+\beta_1x_{i1}+\beta_2x_{i2}\)</span></li>
+<li><span class="math inline">\(y_i \sim Normal(\mu_i, \sigma^2)\)</span></li>
+</ul></li>
+</ul>
+<pre class="r"><code>library(ggplot2)
+sales_w&lt;-read.csv(&#39;3-6-1-beer-sales-3.csv&#39;)
+ggplot(data=sales_w, mapping=aes(x=weather, y=sales))+geom_violin()+geom_point(aes(color=weather))+labs(title=&#39;beer sales ans weather&#39;)</code></pre>
+<p><img src="baba3_files/figure-html/unnamed-chunk-18-1.png" width="768" /></p>
+</div>
+<div id="brmsによる分散分析モデルの推定" class="section level2">
+<h2>5. brmsによる分散分析モデルの推定</h2>
+<pre class="r"><code>library(brms)
+anova_brms&lt;-brm(
+  formula=sales~weather,
+  family=gaussian(link=&quot;log&quot;),
+  data=sales_w,
+  seed=1,
+  prior=c(set_prior(&quot;&quot;, class=&quot;Intercept&quot;),
+          set_prior(&quot;&quot;, class=&quot;sigma&quot;))
+)</code></pre>
+<pre><code>## Compiling Stan program...</code></pre>
+<pre><code>## Trying to compile a simple C file</code></pre>
+<pre><code>## Running /usr/local/Cellar/r/4.1.2/lib/R/bin/R CMD SHLIB foo.c
+## clang -I&quot;/usr/local/Cellar/r/4.1.2/lib/R/include&quot; -DNDEBUG   -I&quot;/usr/local/lib/R/4.1/site-library/Rcpp/include/&quot;  -I&quot;/usr/local/lib/R/4.1/site-library/RcppEigen/include/&quot;  -I&quot;/usr/local/lib/R/4.1/site-library/RcppEigen/include/unsupported&quot;  -I&quot;/usr/local/lib/R/4.1/site-library/BH/include&quot; -I&quot;/Users/imaru/Library/R/x86_64/4.1/library/StanHeaders/include/src/&quot;  -I&quot;/Users/imaru/Library/R/x86_64/4.1/library/StanHeaders/include/&quot;  -I&quot;/usr/local/lib/R/4.1/site-library/RcppParallel/include/&quot;  -I&quot;/Users/imaru/Library/R/x86_64/4.1/library/rstan/include&quot; -DEIGEN_NO_DEBUG  -DBOOST_DISABLE_ASSERTS  -DBOOST_PENDING_INTEGER_LOG2_HPP  -DSTAN_THREADS  -DBOOST_NO_AUTO_PTR  -include &#39;/Users/imaru/Library/R/x86_64/4.1/library/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp&#39;  -D_REENTRANT -DRCPP_PARALLEL_USE_TBB=1   -I/usr/local/opt/gettext/include -I/usr/local/opt/readline/include -I/usr/local/opt/xz/include -I/usr/local/include   -fPIC  -Wno-implicit-function-declaration  -c foo.c -o foo.o
+## In file included from &lt;built-in&gt;:1:
+## In file included from /Users/imaru/Library/R/x86_64/4.1/library/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp:13:
+## In file included from /usr/local/lib/R/4.1/site-library/RcppEigen/include/Eigen/Dense:1:
+## In file included from /usr/local/lib/R/4.1/site-library/RcppEigen/include/Eigen/Core:88:
+## /usr/local/lib/R/4.1/site-library/RcppEigen/include/Eigen/src/Core/util/Macros.h:628:1: error: unknown type name &#39;namespace&#39;
+## namespace Eigen {
+## ^
+## /usr/local/lib/R/4.1/site-library/RcppEigen/include/Eigen/src/Core/util/Macros.h:628:16: error: expected &#39;;&#39; after top level declarator
+## namespace Eigen {
+##                ^
+##                ;
+## In file included from &lt;built-in&gt;:1:
+## In file included from /Users/imaru/Library/R/x86_64/4.1/library/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp:13:
+## In file included from /usr/local/lib/R/4.1/site-library/RcppEigen/include/Eigen/Dense:1:
+## /usr/local/lib/R/4.1/site-library/RcppEigen/include/Eigen/Core:96:10: fatal error: &#39;complex&#39; file not found
+## #include &lt;complex&gt;
+##          ^~~~~~~~~
+## 3 errors generated.
+## make: *** [foo.o] Error 1</code></pre>
+<pre><code>## Start sampling</code></pre>
+<pre class="r"><code>anova_brms</code></pre>
+<pre><code>##  Family: gaussian 
+##   Links: mu = log; sigma = identity 
+## Formula: sales ~ weather 
+##    Data: sales_w (Number of observations: 150) 
+##   Draws: 4 chains, each with iter = 2000; warmup = 1000; thin = 1;
+##          total post-warmup draws = 4000
+## 
+## Population-Level Effects: 
+##              Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+## Intercept        4.14      0.04     4.06     4.21 1.00     3100     2245
+## weatherrainy    -0.01      0.05    -0.11     0.10 1.00     3159     2479
+## weathersunny     0.28      0.05     0.18     0.37 1.00     3344     2411
+## 
+## Family Specific Parameters: 
+##       Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+## sigma    16.94      1.04    15.09    19.18 1.00     3877     2704
+## 
+## Draws were sampled using sampling(NUTS). For each parameter, Bulk_ESS
+## and Tail_ESS are effective sample size measures, and Rhat is the potential
+## scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
+<pre class="r"><code>eff&lt;-conditional_effects(anova_brms)
+plot(eff, points=FALSE)</code></pre>
+<p><img src="baba3_files/figure-html/unnamed-chunk-19-1.png" width="768" /></p>
+</div>
+<div id="補足-分散分析モデルのデザイン行列" class="section level2">
+<h2>6. 補足: 分散分析モデルのデザイン行列</h2>
+<pre class="r"><code>formula_anova&lt;-formula(sales~weather)
+design_mat&lt;-model.matrix(formula_anova, sales_w)
+
+data_list&lt;-list(
+  N=nrow(sales_w),
+  K=3,
+  Y=sales_w$sales,
+  X=design_mat
+)
+
+library(rstan)
+anova_stan&lt;-rstan::sampling(beer_design,
+                            data=data_list,
+                            seed=1
+)</code></pre>
+</div>
+</div>
+<div id="正規線形モデル" class="section level1">
+<h1>3-7: 正規線形モデル</h1>
+<div id="モデルの構造-2" class="section level2">
+<h2>2. モデルの構造</h2>
+<ul>
+<li>正規線形モデル：リンク関数が恒等関数であるモデルの総称</li>
+<li>ここで使うモデル
+<ul>
+<li><span class="math inline">\(売り上げ=晴れ＋雨＋気温\)</span></li>
+<li><span class="math inline">\(\mu_i=\beta_0+\beta_1x_{i1}+\beta_2x_{i2}+\beta_3x_{i3}\)</span></li>
+<li><span class="math inline">\(y_i\sim Normal(\mu_i, \sigma^2)\)</span></li>
+</ul></li>
+</ul>
+</div>
+<div id="分析の準備-4" class="section level2">
+<h2>3. 分析の準備</h2>
+<ul>
+<li>いつもの</li>
+</ul>
+<pre class="r"><code>library(rstan)
+library(brms)
+rstan_options(auto_write=TRUE)
+options(mc.cores=parallel::detectCores())</code></pre>
+</div>
+<div id="データの読み込み" class="section level2">
+<h2>4. データの読み込み</h2>
+<ul>
+<li>天気と気温が売り上げに影響するというモデルのためのデータ</li>
+</ul>
+<pre class="r"><code>data37&lt;-read.csv(&#39;3-7-1-beer-sales-4.csv&#39;)
+summary(data37)</code></pre>
+<pre><code>##      sales          weather           temperature   
+##  Min.   : 26.06   Length:150         Min.   :10.10  
+##  1st Qu.: 61.19   Class :character   1st Qu.:14.82  
+##  Median : 80.55   Mode  :character   Median :19.00  
+##  Mean   : 79.58                      Mean   :19.91  
+##  3rd Qu.: 96.11                      3rd Qu.:25.35  
+##  Max.   :137.57                      Max.   :29.80</code></pre>
+<pre class="r"><code>ggplot(data=data37,
+       mapping=aes(x=temperature, y=sales))+
+      geom_point(aes(color=weather))+labs(title=&quot;effect of temperature and weather on beer sales&quot;)</code></pre>
+<p><img src="baba3_files/figure-html/unnamed-chunk-22-1.png" width="768" /></p>
+</div>
+<div id="brmsによる正規線形モデルの推定" class="section level2">
+<h2>5. brmsによる正規線形モデルの推定</h2>
+<pre class="r"><code>brms37&lt;-brm(
+  formula = sales ~ weather + temperature,
+  family = gaussian(),
+  data = data37,
+  seed = 1,
+  prior = c(set_prior(&quot;&quot;, class=&quot;Intercept&quot;),
+            set_prior(&quot;&quot;, class=&quot;sigma&quot;))
+)</code></pre>
+<pre><code>## Compiling Stan program...</code></pre>
+<pre><code>## Start sampling</code></pre>
+<pre class="r"><code>brms37</code></pre>
+<pre><code>##  Family: gaussian 
+##   Links: mu = identity; sigma = identity 
+## Formula: sales ~ weather + temperature 
+##    Data: data37 (Number of observations: 150) 
+##   Draws: 4 chains, each with iter = 2000; warmup = 1000; thin = 1;
+##          total post-warmup draws = 4000
+## 
+## Population-Level Effects: 
+##              Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+## Intercept       20.22      5.00    10.25    30.16 1.00     4702     2446
+## weatherrainy    -3.51      3.16    -9.84     2.81 1.00     4491     3314
+## weathersunny    29.45      3.19    23.29    35.60 1.00     4266     3036
+## temperature      2.55      0.22     2.10     2.98 1.00     4292     2734
+## 
+## Family Specific Parameters: 
+##       Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+## sigma    16.07      0.96    14.29    18.08 1.00     4621     2692
+## 
+## Draws were sampled using sampling(NUTS). For each parameter, Bulk_ESS
+## and Tail_ESS are effective sample size measures, and Rhat is the potential
+## scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
+<pre class="r"><code>eff&lt;-conditional_effects(brms37, effect=&quot;temperature:weather&quot;)
+plot(eff, points=TRUE)</code></pre>
+<p><img src="baba3_files/figure-html/unnamed-chunk-23-1.png" width="768" /></p>
+<pre class="r"><code>eff_pre&lt;-conditional_effects(brms37, effect=&quot;temperature:weather&quot;, method=&quot;predict&quot;)
+plot(eff_pre, points=TRUE)</code></pre>
+<p><img src="baba3_files/figure-html/unnamed-chunk-23-2.png" width="768" /></p>
+<ul>
+<li>weathersunnyの推定値が29.45（信用区間は0をまたがない）: 晴れの日には＋29万円の効果</li>
+<li>temperatureの推定値が2.55（信用区間は0をまたがない）：気温1℃で2.55万円増加</li>
+</ul>
+<p>## 6. 補足：正規線形モデルのデザイン行列（Stanによる解析） * まずはbrmsによる解析からstanファイルを生成してみる</p>
+<pre class="r"><code>stancode(brms37)</code></pre>
+<pre><code>## // generated with brms 2.16.3
+## functions {
+## }
+## data {
+##   int&lt;lower=1&gt; N;  // total number of observations
+##   vector[N] Y;  // response variable
+##   int&lt;lower=1&gt; K;  // number of population-level effects
+##   matrix[N, K] X;  // population-level design matrix
+##   int prior_only;  // should the likelihood be ignored?
+## }
+## transformed data {
+##   int Kc = K - 1;
+##   matrix[N, Kc] Xc;  // centered version of X without an intercept
+##   vector[Kc] means_X;  // column means of X before centering
+##   for (i in 2:K) {
+##     means_X[i - 1] = mean(X[, i]);
+##     Xc[, i - 1] = X[, i] - means_X[i - 1];
+##   }
+## }
+## parameters {
+##   vector[Kc] b;  // population-level effects
+##   real Intercept;  // temporary intercept for centered predictors
+##   real&lt;lower=0&gt; sigma;  // dispersion parameter
+## }
+## transformed parameters {
+## }
+## model {
+##   // likelihood including constants
+##   if (!prior_only) {
+##     target += normal_id_glm_lpdf(Y | Xc, Intercept, b, sigma);
+##   }
+##   // priors including constants
+## }
+## generated quantities {
+##   // actual population-level intercept
+##   real b_Intercept = Intercept - dot_product(means_X, b);
+## }</code></pre>
+<ul>
+<li>続いて3部4章のStanファイル</li>
+</ul>
+<pre class="stan"><code>data{
+  int N;
+  int K; //デザイン行列列数
+  vector[N] Y; //売り上げを代入するベクトル
+  matrix[N, K] X; //デザイン行列
+}
+parameters{
+  vector[K] b;
+  real&lt;lower=0&gt; sigma;
+}
+model{
+  vector[N] mu = X * b;
+  Y ~ normal(mu, sigma);
+}</code></pre>
+<ul>
+<li>Stanコードを実行</li>
+</ul>
+<pre class="r"><code># デザイン行列
+formula37&lt;-formula(sales ~ weather + temperature)
+mtx37&lt;-model.matrix(formula37, data37) ## data37はcsvファイルを読み込んだデータ
+
+standata37&lt;-list(
+  N=nrow(data37),
+  K=4, # 切片、天気雨、天気晴れ、気温
+  Y=data37$sales,
+  X=mtx37
+)
+
+library(rstan)
+stanres37&lt;-rstan::sampling(stan37,
+                           data=standata37,
+                           seed=1)
+stanres37</code></pre>
+<pre><code>## Inference for Stan model: 18eae6a6d0f7ded641090096a30443de.
+## 4 chains, each with iter=2000; warmup=1000; thin=1; 
+## post-warmup draws per chain=1000, total post-warmup draws=4000.
+## 
+##          mean se_mean   sd    2.5%     25%     50%     75%   97.5% n_eff Rhat
+## b[1]    20.12    0.11 5.01   10.21   16.84   20.08   23.38   30.08  1947    1
+## b[2]    -3.53    0.06 3.20   -9.80   -5.64   -3.53   -1.41    2.96  2514    1
+## b[3]    29.46    0.06 3.19   23.33   27.29   29.39   31.61   35.94  2432    1
+## b[4]     2.55    0.00 0.22    2.12    2.41    2.55    2.69    2.99  2215    1
+## sigma   16.05    0.02 0.96   14.36   15.39   15.99   16.65   18.09  2741    1
+## lp__  -487.95    0.04 1.65 -492.03 -488.75 -487.59 -486.75 -485.82  1515    1
+## 
+## Samples were drawn using NUTS(diag_e) at Thu Mar  3 17:30:44 2022.
+## For each parameter, n_eff is a crude measure of effective sample size,
+## and Rhat is the potential scale reduction factor on split chains (at 
+## convergence, Rhat=1).</code></pre>
+<ul>
+<li>brmsとほぼ同じ結果になった</li>
 </ul>
 </div>
 </div>

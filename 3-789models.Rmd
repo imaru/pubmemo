@@ -1,8 +1,11 @@
 ---
-title: "3-789models"
+title: '馬場本3/10'
 author: "Toshihide Imaruoka"
-date: "3/9/2022"
-output: html_document
+output:
+  rmdformats::downcute:
+    highlight: kate
+    css: mycss.css
+    dev: "ragg_png"
 ---
 # 3-7: 正規線形モデル
 ## 2. モデルの構造
@@ -398,3 +401,5 @@ print(resmtx39)
 
 ##9. 補足: 試行回数が常に1の場合
   * そういうときは二項分布ではなくベルヌーイ分布を使おうね、という話
+  
+  

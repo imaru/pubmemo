@@ -652,12 +652,12 @@ print(mr,probs=c(0.025,0.5,0.975))</code></pre>
 ## post-warmup draws per chain=1000, total post-warmup draws=4000.
 ## 
 ##               mean se_mean   sd     2.5%      50%    97.5% n_eff Rhat
-## Intercept    -3.79    0.00 0.16    -4.10    -3.79    -3.47  1506    1
-## b_basic       0.03    0.00 0.01     0.00     0.03     0.06  1803    1
-## b_senior     -0.01    0.00 0.01    -0.04    -0.01     0.02  1773    1
-## lp__      -2140.15    0.04 1.24 -2143.48 -2139.83 -2138.76  1244    1
+## Intercept    -3.79    0.00 0.17    -4.11    -3.79    -3.46  1415    1
+## b_basic       0.03    0.00 0.01     0.00     0.03     0.06  1624    1
+## b_senior     -0.01    0.00 0.02    -0.04    -0.01     0.02  1567    1
+## lp__      -2140.19    0.04 1.24 -2143.42 -2139.88 -2138.77  1203    1
 ## 
-## Samples were drawn using NUTS(diag_e) at Wed Mar  9 15:14:21 2022.
+## Samples were drawn using NUTS(diag_e) at Wed Mar  9 18:16:41 2022.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).</code></pre>
@@ -755,7 +755,7 @@ print(mr, probs=c(0.025, 0.5, 0.975))</code></pre>
 ## sigma       17.07    0.03 1.21   14.89   16.96   19.67  1629    1
 ## lp__      -330.07    0.03 1.20 -333.26 -329.75 -328.73  1288    1
 ## 
-## Samples were drawn using NUTS(diag_e) at Wed Mar  9 15:14:38 2022.
+## Samples were drawn using NUTS(diag_e) at Wed Mar  9 18:16:57 2022.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).</code></pre>
@@ -1166,7 +1166,7 @@ print(res, probs = c(0.025, 0.5, 0.975))</code></pre>
 ## mu[6]     92.35    0.07 3.16   86.30   92.28   98.66  1805    1
 ##  [ reached getOption(&quot;max.print&quot;) -- 95 行を無視しました ] 
 ## 
-## Samples were drawn using NUTS(diag_e) at Wed Mar  9 15:14:55 2022.
+## Samples were drawn using NUTS(diag_e) at Wed Mar  9 18:17:15 2022.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).</code></pre>
@@ -1189,20 +1189,8 @@ print(res, probs = c(0.025, 0.5, 0.975))</code></pre>
 <li>brmsパッケージが必要</li>
 </ul>
 <pre class="r"><code>library(rstan)
-library(brms)</code></pre>
-<pre><code>##  要求されたパッケージ Rcpp をロード中です</code></pre>
-<pre><code>## Loading &#39;brms&#39; package (version 2.16.3). Useful instructions
-## can be found by typing help(&#39;brms&#39;). A more detailed introduction
-## to the package is available through vignette(&#39;brms_overview&#39;).</code></pre>
-<pre><code>## 
-##  次のパッケージを付け加えます: &#39;brms&#39;</code></pre>
-<pre><code>##  以下のオブジェクトは &#39;package:rstan&#39; からマスクされています: 
-## 
-##      loo</code></pre>
-<pre><code>##  以下のオブジェクトは &#39;package:stats&#39; からマスクされています: 
-## 
-##      ar</code></pre>
-<pre class="r"><code>rstan_options(auto_write = TRUE)
+library(brms)
+rstan_options(auto_write = TRUE)
 options(mc.cores = parallel::detectCores())
 
 beersf&lt;-read.csv(&#39;3-2-1-beer-sales-2.csv&#39;)</code></pre>
@@ -1330,28 +1318,6 @@ plot(lm_brms)</code></pre>
           set_prior(&quot;&quot;,class=&quot;sigma&quot;))
 )</code></pre>
 <pre><code>## Compiling Stan program...</code></pre>
-<pre><code>## Trying to compile a simple C file</code></pre>
-<pre><code>## Running /usr/local/Cellar/r/4.1.2/lib/R/bin/R CMD SHLIB foo.c
-## clang -I&quot;/usr/local/Cellar/r/4.1.2/lib/R/include&quot; -DNDEBUG   -I&quot;/usr/local/lib/R/4.1/site-library/Rcpp/include/&quot;  -I&quot;/usr/local/lib/R/4.1/site-library/RcppEigen/include/&quot;  -I&quot;/usr/local/lib/R/4.1/site-library/RcppEigen/include/unsupported&quot;  -I&quot;/usr/local/lib/R/4.1/site-library/BH/include&quot; -I&quot;/Users/imaru/Library/R/x86_64/4.1/library/StanHeaders/include/src/&quot;  -I&quot;/Users/imaru/Library/R/x86_64/4.1/library/StanHeaders/include/&quot;  -I&quot;/usr/local/lib/R/4.1/site-library/RcppParallel/include/&quot;  -I&quot;/Users/imaru/Library/R/x86_64/4.1/library/rstan/include&quot; -DEIGEN_NO_DEBUG  -DBOOST_DISABLE_ASSERTS  -DBOOST_PENDING_INTEGER_LOG2_HPP  -DSTAN_THREADS  -DBOOST_NO_AUTO_PTR  -include &#39;/Users/imaru/Library/R/x86_64/4.1/library/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp&#39;  -D_REENTRANT -DRCPP_PARALLEL_USE_TBB=1   -I/usr/local/opt/gettext/include -I/usr/local/opt/readline/include -I/usr/local/opt/xz/include -I/usr/local/include   -fPIC  -Wno-implicit-function-declaration  -c foo.c -o foo.o
-## In file included from &lt;built-in&gt;:1:
-## In file included from /Users/imaru/Library/R/x86_64/4.1/library/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp:13:
-## In file included from /usr/local/lib/R/4.1/site-library/RcppEigen/include/Eigen/Dense:1:
-## In file included from /usr/local/lib/R/4.1/site-library/RcppEigen/include/Eigen/Core:88:
-## /usr/local/lib/R/4.1/site-library/RcppEigen/include/Eigen/src/Core/util/Macros.h:628:1: error: unknown type name &#39;namespace&#39;
-## namespace Eigen {
-## ^
-## /usr/local/lib/R/4.1/site-library/RcppEigen/include/Eigen/src/Core/util/Macros.h:628:16: error: expected &#39;;&#39; after top level declarator
-## namespace Eigen {
-##                ^
-##                ;
-## In file included from &lt;built-in&gt;:1:
-## In file included from /Users/imaru/Library/R/x86_64/4.1/library/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp:13:
-## In file included from /usr/local/lib/R/4.1/site-library/RcppEigen/include/Eigen/Dense:1:
-## /usr/local/lib/R/4.1/site-library/RcppEigen/include/Eigen/Core:96:10: fatal error: &#39;complex&#39; file not found
-## #include &lt;complex&gt;
-##          ^~~~~~~~~
-## 3 errors generated.
-## make: *** [foo.o] Error 1</code></pre>
 <pre><code>## Start sampling</code></pre>
 <pre class="r"><code>prior_summary(lm_brms2)</code></pre>
 <pre><code>##   prior     class        coef group resp dpar nlpar bound       source
@@ -1802,7 +1768,7 @@ stanres37</code></pre>
 ## sigma   16.05    0.02 0.96   14.36   15.39   15.99   16.65   18.09  2741    1
 ## lp__  -487.95    0.04 1.65 -492.03 -488.75 -487.59 -486.75 -485.82  1515    1
 ## 
-## Samples were drawn using NUTS(diag_e) at Wed Mar  9 15:16:31 2022.
+## Samples were drawn using NUTS(diag_e) at Wed Mar  9 18:18:19 2022.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).</code></pre>
@@ -1882,28 +1848,6 @@ summary(data38)</code></pre>
   prior=c(set_prior(&quot;&quot;,class=&quot;Intercept&quot;))
 )</code></pre>
 <pre><code>## Compiling Stan program...</code></pre>
-<pre><code>## Trying to compile a simple C file</code></pre>
-<pre><code>## Running /usr/local/Cellar/r/4.1.2/lib/R/bin/R CMD SHLIB foo.c
-## clang -I&quot;/usr/local/Cellar/r/4.1.2/lib/R/include&quot; -DNDEBUG   -I&quot;/usr/local/lib/R/4.1/site-library/Rcpp/include/&quot;  -I&quot;/usr/local/lib/R/4.1/site-library/RcppEigen/include/&quot;  -I&quot;/usr/local/lib/R/4.1/site-library/RcppEigen/include/unsupported&quot;  -I&quot;/usr/local/lib/R/4.1/site-library/BH/include&quot; -I&quot;/Users/imaru/Library/R/x86_64/4.1/library/StanHeaders/include/src/&quot;  -I&quot;/Users/imaru/Library/R/x86_64/4.1/library/StanHeaders/include/&quot;  -I&quot;/usr/local/lib/R/4.1/site-library/RcppParallel/include/&quot;  -I&quot;/Users/imaru/Library/R/x86_64/4.1/library/rstan/include&quot; -DEIGEN_NO_DEBUG  -DBOOST_DISABLE_ASSERTS  -DBOOST_PENDING_INTEGER_LOG2_HPP  -DSTAN_THREADS  -DBOOST_NO_AUTO_PTR  -include &#39;/Users/imaru/Library/R/x86_64/4.1/library/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp&#39;  -D_REENTRANT -DRCPP_PARALLEL_USE_TBB=1   -I/usr/local/opt/gettext/include -I/usr/local/opt/readline/include -I/usr/local/opt/xz/include -I/usr/local/include   -fPIC  -Wno-implicit-function-declaration  -c foo.c -o foo.o
-## In file included from &lt;built-in&gt;:1:
-## In file included from /Users/imaru/Library/R/x86_64/4.1/library/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp:13:
-## In file included from /usr/local/lib/R/4.1/site-library/RcppEigen/include/Eigen/Dense:1:
-## In file included from /usr/local/lib/R/4.1/site-library/RcppEigen/include/Eigen/Core:88:
-## /usr/local/lib/R/4.1/site-library/RcppEigen/include/Eigen/src/Core/util/Macros.h:628:1: error: unknown type name &#39;namespace&#39;
-## namespace Eigen {
-## ^
-## /usr/local/lib/R/4.1/site-library/RcppEigen/include/Eigen/src/Core/util/Macros.h:628:16: error: expected &#39;;&#39; after top level declarator
-## namespace Eigen {
-##                ^
-##                ;
-## In file included from &lt;built-in&gt;:1:
-## In file included from /Users/imaru/Library/R/x86_64/4.1/library/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp:13:
-## In file included from /usr/local/lib/R/4.1/site-library/RcppEigen/include/Eigen/Dense:1:
-## /usr/local/lib/R/4.1/site-library/RcppEigen/include/Eigen/Core:96:10: fatal error: &#39;complex&#39; file not found
-## #include &lt;complex&gt;
-##          ^~~~~~~~~
-## 3 errors generated.
-## make: *** [foo.o] Error 1</code></pre>
 <pre><code>## Start sampling</code></pre>
 <pre class="r"><code>brms38</code></pre>
 <pre><code>##  Family: poisson 
@@ -2022,7 +1966,7 @@ print(res38)</code></pre>
 ## b_sunny    -0.58    0.00 0.17  -0.91  -0.70  -0.58  -0.47  -0.26  1978    1
 ## lp__      -37.73    0.03 1.25 -40.98 -38.28 -37.41 -36.85 -36.33  1344    1
 ## 
-## Samples were drawn using NUTS(diag_e) at Wed Mar  9 15:17:06 2022.
+## Samples were drawn using NUTS(diag_e) at Wed Mar  9 18:18:23 2022.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).</code></pre>
@@ -2066,7 +2010,7 @@ print(resmtx38)</code></pre>
 ## b[3]   0.08    0.00 0.01   0.06   0.08   0.08   0.09   0.10  1414    1
 ## lp__ -37.65    0.03 1.19 -40.79 -38.17 -37.35 -36.79 -36.32  1416    1
 ## 
-## Samples were drawn using NUTS(diag_e) at Wed Mar  9 15:17:22 2022.
+## Samples were drawn using NUTS(diag_e) at Wed Mar  9 18:18:23 2022.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).</code></pre>
@@ -2124,28 +2068,6 @@ summary(dat39)</code></pre>
   prior=c(set_prior(&quot;&quot;, class=&quot;Intercept&quot;))
 )</code></pre>
 <pre><code>## Compiling Stan program...</code></pre>
-<pre><code>## Trying to compile a simple C file</code></pre>
-<pre><code>## Running /usr/local/Cellar/r/4.1.2/lib/R/bin/R CMD SHLIB foo.c
-## clang -I&quot;/usr/local/Cellar/r/4.1.2/lib/R/include&quot; -DNDEBUG   -I&quot;/usr/local/lib/R/4.1/site-library/Rcpp/include/&quot;  -I&quot;/usr/local/lib/R/4.1/site-library/RcppEigen/include/&quot;  -I&quot;/usr/local/lib/R/4.1/site-library/RcppEigen/include/unsupported&quot;  -I&quot;/usr/local/lib/R/4.1/site-library/BH/include&quot; -I&quot;/Users/imaru/Library/R/x86_64/4.1/library/StanHeaders/include/src/&quot;  -I&quot;/Users/imaru/Library/R/x86_64/4.1/library/StanHeaders/include/&quot;  -I&quot;/usr/local/lib/R/4.1/site-library/RcppParallel/include/&quot;  -I&quot;/Users/imaru/Library/R/x86_64/4.1/library/rstan/include&quot; -DEIGEN_NO_DEBUG  -DBOOST_DISABLE_ASSERTS  -DBOOST_PENDING_INTEGER_LOG2_HPP  -DSTAN_THREADS  -DBOOST_NO_AUTO_PTR  -include &#39;/Users/imaru/Library/R/x86_64/4.1/library/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp&#39;  -D_REENTRANT -DRCPP_PARALLEL_USE_TBB=1   -I/usr/local/opt/gettext/include -I/usr/local/opt/readline/include -I/usr/local/opt/xz/include -I/usr/local/include   -fPIC  -Wno-implicit-function-declaration  -c foo.c -o foo.o
-## In file included from &lt;built-in&gt;:1:
-## In file included from /Users/imaru/Library/R/x86_64/4.1/library/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp:13:
-## In file included from /usr/local/lib/R/4.1/site-library/RcppEigen/include/Eigen/Dense:1:
-## In file included from /usr/local/lib/R/4.1/site-library/RcppEigen/include/Eigen/Core:88:
-## /usr/local/lib/R/4.1/site-library/RcppEigen/include/Eigen/src/Core/util/Macros.h:628:1: error: unknown type name &#39;namespace&#39;
-## namespace Eigen {
-## ^
-## /usr/local/lib/R/4.1/site-library/RcppEigen/include/Eigen/src/Core/util/Macros.h:628:16: error: expected &#39;;&#39; after top level declarator
-## namespace Eigen {
-##                ^
-##                ;
-## In file included from &lt;built-in&gt;:1:
-## In file included from /Users/imaru/Library/R/x86_64/4.1/library/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp:13:
-## In file included from /usr/local/lib/R/4.1/site-library/RcppEigen/include/Eigen/Dense:1:
-## /usr/local/lib/R/4.1/site-library/RcppEigen/include/Eigen/Core:96:10: fatal error: &#39;complex&#39; file not found
-## #include &lt;complex&gt;
-##          ^~~~~~~~~
-## 3 errors generated.
-## make: *** [foo.o] Error 1</code></pre>
 <pre><code>## Start sampling</code></pre>
 <pre class="r"><code>print(brms39)</code></pre>
 <pre><code>##  Family: binomial 
@@ -2276,7 +2198,7 @@ print(resmtx39)</code></pre>
 ## b[3]    0.72    0.00 0.05    0.61    0.68    0.72    0.76    0.82   727    1
 ## lp__ -303.25    0.03 1.15 -306.14 -303.81 -302.99 -302.39 -301.85  1505    1
 ## 
-## Samples were drawn using NUTS(diag_e) at Wed Mar  9 15:17:58 2022.
+## Samples were drawn using NUTS(diag_e) at Wed Mar  9 18:18:27 2022.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).</code></pre>

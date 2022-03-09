@@ -218,6 +218,16 @@
             <li><a href="#brmsによるポアソン回帰モデルの推定">5. brmsによるポアソン回帰モデルの推定</a></li>
             <li><a href="#推定されたモデルの解釈">6. 推定されたモデルの解釈</a></li>
             <li><a href="#回帰曲線の図示">7. 回帰曲線の図示</a></li>
+            <li><a href="#補足ポアソン回帰モデルのためのstanファイルの実装">8. 補足：ポアソン回帰モデルのためのStanファイルの実装</a></li>
+            </ul></li>
+            <li><a href="#ロジスティック回帰モデル">3-9. ロジスティック回帰モデル</a>
+            <ul>
+            <li><a href="#モデルの構造-4">2. モデルの構造</a></li>
+            <li><a href="#分析の準備-6">3. 分析の準備</a></li>
+            <li><a href="#データの読み込みと可視化-1">4. データの読み込みと可視化</a></li>
+            <li><a href="#brmsによるロジスティック回帰モデルの推定">5. brmsによるロジスティック回帰モデルの推定</a></li>
+            <li><a href="#回帰曲線の図示-1">7. 回帰曲線の図示</a></li>
+            <li><a href="#補足-ロジスティック回帰のためのstanファイルの実装">8. 補足: ロジスティック回帰のためのStanファイルの実装</a></li>
             </ul></li>
             </ul>
           </div>
@@ -647,7 +657,7 @@ print(mr,probs=c(0.025,0.5,0.975))</code></pre>
 ## b_senior     -0.01    0.00 0.01    -0.04    -0.01     0.02  1773    1
 ## lp__      -2140.15    0.04 1.24 -2143.48 -2139.83 -2138.76  1244    1
 ## 
-## Samples were drawn using NUTS(diag_e) at Thu Mar  3 18:44:53 2022.
+## Samples were drawn using NUTS(diag_e) at Wed Mar  9 15:14:21 2022.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).</code></pre>
@@ -745,7 +755,7 @@ print(mr, probs=c(0.025, 0.5, 0.975))</code></pre>
 ## sigma       17.07    0.03 1.21   14.89   16.96   19.67  1629    1
 ## lp__      -330.07    0.03 1.20 -333.26 -329.75 -328.73  1288    1
 ## 
-## Samples were drawn using NUTS(diag_e) at Thu Mar  3 18:45:09 2022.
+## Samples were drawn using NUTS(diag_e) at Wed Mar  9 15:14:38 2022.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).</code></pre>
@@ -1156,7 +1166,7 @@ print(res, probs = c(0.025, 0.5, 0.975))</code></pre>
 ## mu[6]     92.35    0.07 3.16   86.30   92.28   98.66  1805    1
 ##  [ reached getOption(&quot;max.print&quot;) -- 95 行を無視しました ] 
 ## 
-## Samples were drawn using NUTS(diag_e) at Thu Mar  3 18:45:26 2022.
+## Samples were drawn using NUTS(diag_e) at Wed Mar  9 15:14:55 2022.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).</code></pre>
@@ -1621,7 +1631,7 @@ anova_stan&lt;-rstan::sampling(beer_design,
 <li>正規線形モデル：リンク関数が恒等関数であるモデルの総称</li>
 <li>ここで使うモデル
 <ul>
-<li><span class="math inline">\(売り上げ=晴れ＋雨＋気温\)</span></li>
+<li><span class="math inline">\(売り上げの平均値=晴れ＋雨＋気温\)</span></li>
 <li><span class="math inline">\(\mu_i=\beta_0+\beta_1x_{i1}+\beta_2x_{i2}+\beta_3x_{i3}\)</span></li>
 <li><span class="math inline">\(y_i\sim Normal(\mu_i, \sigma^2)\)</span></li>
 </ul></li>
@@ -1640,7 +1650,7 @@ options(mc.cores=parallel::detectCores())</code></pre>
 <div id="データの読み込み" class="section level2">
 <h2>4. データの読み込み</h2>
 <ul>
-<li>天気と気温が売り上げに影響するというモデルのためのデータ</li>
+<li>天気と気温が売り上げの平均値に影響するというモデルのためのデータ</li>
 </ul>
 <pre class="r"><code>data37&lt;-read.csv(&#39;3-7-1-beer-sales-4.csv&#39;)
 summary(data37)</code></pre>
@@ -1792,7 +1802,7 @@ stanres37</code></pre>
 ## sigma   16.05    0.02 0.96   14.36   15.39   15.99   16.65   18.09  2741    1
 ## lp__  -487.95    0.04 1.65 -492.03 -488.75 -487.59 -486.75 -485.82  1515    1
 ## 
-## Samples were drawn using NUTS(diag_e) at Thu Mar  3 18:47:01 2022.
+## Samples were drawn using NUTS(diag_e) at Wed Mar  9 15:16:31 2022.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).</code></pre>
@@ -1820,10 +1830,10 @@ stanres37</code></pre>
 <li>ただしポアソン分布を考えるので</li>
 <li><span class="math inline">\(log(\lambda) = \beta_0 + \beta_1x_1 + \beta_2x_2\)</span>
 <ul>
-<li>これは多分、<span class="math inline">\(\lambda_i = exp(\beta_0 + \beta_1x_1 + \beta_2x_2)\)</span>と同じ（と、3-1でも書いた。緑本にはこう書いてある。）</li>
+<li><span class="math inline">\(個人的には\lambda_i = exp(\beta_0 + \beta_1x_1 + \beta_2x_2)\)</span>の方が理解しやすい（と、3-1でも書いた。緑本にはこう書いてある。）</li>
 </ul></li>
 <li><span class="math inline">\(y_i \sim Poiss(\lambda_i)\)</span></li>
-<li>一応馬場本の式
+<li>馬場本では<span class="math inline">\(log(\lambda)=\)</span>の式もあって、下の式もあるのが分かりにくい感じがする
 <ul>
 <li><span class="math inline">\(\lambda = \beta_0 + \beta_1x_1 + \beta_2x_2\)</span></li>
 <li><span class="math inline">\(y_i \sim Poiss(exp(\lambda_i))\)</span></li>
@@ -1916,10 +1926,13 @@ summary(data38)</code></pre>
 <div id="推定されたモデルの解釈" class="section level2">
 <h2>6. 推定されたモデルの解釈</h2>
 <ul>
-<li>weathersunnyの推定値は-0.60
+<li>weathersunnyの係数の推定値は-0.60
 <ul>
 <li>ただし、exp(-0.60)=0.5488</li>
-<li>晴れると0.54倍になる</li>
+<li>晴れると0.54倍になる
+<ul>
+<li>倍でいいの？と思ったけど、expの中の足し算は掛け算。</li>
+</ul></li>
 </ul></li>
 <li>temperatureは0.08
 <ul>
@@ -1944,9 +1957,330 @@ plot(eff38, points=TRUE)</code></pre>
 <li>過分散となることがある
 <ul>
 <li>期待値と分散が一つのパラメータで決まるから、とあるけど、なぜ？</li>
+<li>緑本で「過分散」を調べてみる
+<ul>
+<li>P149脚注: 「現実のカウントデータでは平均よりも分散の方が大きくなる場合がほとんどです。詳しくは7.6節（以下略）」</li>
+<li>P165 7.6節: ここでは過分散の原因として個体差を挙げている。種子数の例を使っていて、本来正規分布する植物の大きさが観測されていないため、という理屈。緑本的にはここから一般化線形混合モデル（GLMM）を使うという流れ。</li>
+<li>馬場本でも第4分階層ベイズ（一般化線形混合モデル）と進む</li>
+</ul></li>
 </ul></li>
 </ul></li>
 </ul>
+<pre class="r"><code>set.seed(1)
+eff_pre38&lt;-conditional_effects(brms38,
+                              method=&#39;predict&#39;,
+                              effects=&#39;temperature:weather&#39;,
+                              probs=c(0.05, 0.995))</code></pre>
+<pre><code>## Warning: Argument &#39;probs&#39; is deprecated. Please use &#39;prob&#39; instead.</code></pre>
+<pre class="r"><code>plot(eff_pre38, points=TRUE)</code></pre>
+<p><img src="baba3_files/figure-html/unnamed-chunk-30-1.png" width="768" /></p>
+</div>
+<div id="補足ポアソン回帰モデルのためのstanファイルの実装" class="section level2">
+<h2>8. 補足：ポアソン回帰モデルのためのStanファイルの実装</h2>
+<ul>
+<li>ここでもStanファイルから実行してみる</li>
+</ul>
+<pre class="stan"><code>data{
+  int N;
+  int fish_num[N];
+  vector[N] temp;
+  vector[N] sunny;
+}
+parameters{
+  real Intercept;
+  real b_temp;
+  real b_sunny;
+}
+model{
+  vector[N] lambda=exp(Intercept + b_sunny*sunny + b_temp*temp);
+  fish_num~poisson(lambda);
+}</code></pre>
+<ul>
+<li>上のStanファイルを実行
+<ul>
+<li>下の計算ではデータからダミー変数を作ったけど、それをやる必要はない？</li>
+</ul></li>
+</ul>
+<pre class="r"><code>data38&lt;-read.csv(&#39;3-8-1-fish-num-1.csv&#39;) #データ読み込み
+data38$sunny&lt;-as.integer(data38$weather==&#39;sunny&#39;) # 晴れの日ダミー変数作成
+standata38&lt;-list(  # Stanに渡すためにリストにまとめる
+  N=nrow(data38),
+  fish_num=data38$fish_num,
+  temp=data38$temp,
+  sunny=data38$sunny
+)
+
+res38&lt;-rstan::sampling(stan38, data=standata38, seed=1)
+print(res38)</code></pre>
+<pre><code>## Inference for Stan model: e329c84b9dafccadcdc4bd4254c33f37.
+## 4 chains, each with iter=2000; warmup=1000; thin=1; 
+## post-warmup draws per chain=1000, total post-warmup draws=4000.
+## 
+##             mean se_mean   sd   2.5%    25%    50%    75%  97.5% n_eff Rhat
+## Intercept  -0.81    0.01 0.25  -1.31  -0.97  -0.80  -0.64  -0.34  1114    1
+## b_temp      0.08    0.00 0.01   0.06   0.08   0.08   0.09   0.10  1083    1
+## b_sunny    -0.58    0.00 0.17  -0.91  -0.70  -0.58  -0.47  -0.26  1978    1
+## lp__      -37.73    0.03 1.25 -40.98 -38.28 -37.41 -36.85 -36.33  1344    1
+## 
+## Samples were drawn using NUTS(diag_e) at Wed Mar  9 15:17:06 2022.
+## For each parameter, n_eff is a crude measure of effective sample size,
+## and Rhat is the potential scale reduction factor on split chains (at 
+## convergence, Rhat=1).</code></pre>
+<ul>
+<li>デザイン行列バージョンも一応。</li>
+</ul>
+<pre class="stan"><code>data{
+  int N;
+  int K;
+  int Y[N];
+  matrix[N, K] X;
+}
+parameters{
+  vector[K] b;
+}
+model{
+  vector[N] lambda = X * b;
+  Y ~ poisson_log(lambda);
+}</code></pre>
+<ul>
+<li>この下で使ってるformula関数、model.matrix関数が結構謎。model.matrixは名義尺度のweatherからダミー変数weathersunnyを自動的に生成しているように見える。</li>
+</ul>
+<pre class="r"><code>data38&lt;-read.csv(&#39;3-8-1-fish-num-1.csv&#39;) #データ読み込み
+formula38&lt;-formula(fish_num~weather+temperature)
+mtx38&lt;-model.matrix(formula38, data38)
+standatamtx38&lt;-list(
+  N=nrow(data38),
+  K=3,
+  Y=data38$fish_num,
+  X=mtx38
+)
+resmtx38&lt;-rstan::sampling(modelmtx38, data=standatamtx38, seed=1)
+print(resmtx38)</code></pre>
+<pre><code>## Inference for Stan model: 4c43339f9706b3c93aef14ebdf915da2.
+## 4 chains, each with iter=2000; warmup=1000; thin=1; 
+## post-warmup draws per chain=1000, total post-warmup draws=4000.
+## 
+##        mean se_mean   sd   2.5%    25%    50%    75%  97.5% n_eff Rhat
+## b[1]  -0.79    0.01 0.24  -1.28  -0.96  -0.78  -0.63  -0.36  1328    1
+## b[2]  -0.59    0.00 0.16  -0.92  -0.70  -0.59  -0.48  -0.26  1751    1
+## b[3]   0.08    0.00 0.01   0.06   0.08   0.08   0.09   0.10  1414    1
+## lp__ -37.65    0.03 1.19 -40.79 -38.17 -37.35 -36.79 -36.32  1416    1
+## 
+## Samples were drawn using NUTS(diag_e) at Wed Mar  9 15:17:22 2022.
+## For each parameter, n_eff is a crude measure of effective sample size,
+## and Rhat is the potential scale reduction factor on split chains (at 
+## convergence, Rhat=1).</code></pre>
+</div>
+</div>
+<div id="ロジスティック回帰モデル" class="section level1">
+<h1>3-9. ロジスティック回帰モデル</h1>
+<div id="モデルの構造-4" class="section level2">
+<h2>2. モデルの構造</h2>
+<ul>
+<li>2値データ</li>
+<li>種子が発芽するかしないか
+<ul>
+<li>発芽率<span class="math inline">\(p\)</span></li>
+<li>確率分布：二項分布</li>
+<li>リンク関数：ロジット関数</li>
+<li><span class="math inline">\(p_i\)</span>: 発芽確率</li>
+<li><span class="math inline">\(y_i\)</span>: 10粒中の発芽数</li>
+<li><span class="math inline">\(x_{i1}\)</span>: 日当たり有無のダミー変数</li>
+<li><span class="math inline">\(x_{i2}\)</span>: 栄養素量</li>
+<li><span class="math inline">\(p_i = logostic(\beta_0+\beta_1x_{i1}+\beta_2{xi})\)</span> :パラメータ<span class="math inline">\(p\)</span>は0から1の間で変化するロジスティック関数に従う</li>
+<li><span class="math inline">\(y_i\sim Binom(10, p_i)\)</span></li>
+</ul></li>
+</ul>
+</div>
+<div id="分析の準備-6" class="section level2">
+<h2>3. 分析の準備</h2>
+<pre class="r"><code>library(rstan)
+library(brms)
+rstan_options(auto_write=TRUE)
+options(mc.cores=parallel::detectCores())</code></pre>
+</div>
+<div id="データの読み込みと可視化-1" class="section level2">
+<h2>4. データの読み込みと可視化</h2>
+<pre class="r"><code>dat39&lt;-read.csv(&#39;3-9-1-germination.csv&#39;)
+summary(dat39)</code></pre>
+<pre><code>##   germination         size       solar             nutrition   
+##  Min.   : 0.00   Min.   :10   Length:100         Min.   : 1.0  
+##  1st Qu.: 0.00   1st Qu.:10   Class :character   1st Qu.: 3.0  
+##  Median : 1.00   Median :10   Mode  :character   Median : 5.5  
+##  Mean   : 2.83   Mean   :10                      Mean   : 5.5  
+##  3rd Qu.: 4.00   3rd Qu.:10                      3rd Qu.: 8.0  
+##  Max.   :10.00   Max.   :10                      Max.   :10.0</code></pre>
+<pre class="r"><code>ggplot(data=dat39, 
+       mapping=aes(x=nutrition, y=germination, color=solar)) + geom_point() + labs(title=&#39;relation between germination and solar and nutrition&#39;)</code></pre>
+<p><img src="baba3_files/figure-html/unnamed-chunk-34-1.png" width="768" /></p>
+</div>
+<div id="brmsによるロジスティック回帰モデルの推定" class="section level2">
+<h2>5. brmsによるロジスティック回帰モデルの推定</h2>
+<pre class="r"><code>brms39&lt;-brm(
+  germination | trials(size) ~ solar + nutrition,
+  family = binomial(),
+  data=dat39,
+  seed=1,
+  prior=c(set_prior(&quot;&quot;, class=&quot;Intercept&quot;))
+)</code></pre>
+<pre><code>## Compiling Stan program...</code></pre>
+<pre><code>## Trying to compile a simple C file</code></pre>
+<pre><code>## Running /usr/local/Cellar/r/4.1.2/lib/R/bin/R CMD SHLIB foo.c
+## clang -I&quot;/usr/local/Cellar/r/4.1.2/lib/R/include&quot; -DNDEBUG   -I&quot;/usr/local/lib/R/4.1/site-library/Rcpp/include/&quot;  -I&quot;/usr/local/lib/R/4.1/site-library/RcppEigen/include/&quot;  -I&quot;/usr/local/lib/R/4.1/site-library/RcppEigen/include/unsupported&quot;  -I&quot;/usr/local/lib/R/4.1/site-library/BH/include&quot; -I&quot;/Users/imaru/Library/R/x86_64/4.1/library/StanHeaders/include/src/&quot;  -I&quot;/Users/imaru/Library/R/x86_64/4.1/library/StanHeaders/include/&quot;  -I&quot;/usr/local/lib/R/4.1/site-library/RcppParallel/include/&quot;  -I&quot;/Users/imaru/Library/R/x86_64/4.1/library/rstan/include&quot; -DEIGEN_NO_DEBUG  -DBOOST_DISABLE_ASSERTS  -DBOOST_PENDING_INTEGER_LOG2_HPP  -DSTAN_THREADS  -DBOOST_NO_AUTO_PTR  -include &#39;/Users/imaru/Library/R/x86_64/4.1/library/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp&#39;  -D_REENTRANT -DRCPP_PARALLEL_USE_TBB=1   -I/usr/local/opt/gettext/include -I/usr/local/opt/readline/include -I/usr/local/opt/xz/include -I/usr/local/include   -fPIC  -Wno-implicit-function-declaration  -c foo.c -o foo.o
+## In file included from &lt;built-in&gt;:1:
+## In file included from /Users/imaru/Library/R/x86_64/4.1/library/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp:13:
+## In file included from /usr/local/lib/R/4.1/site-library/RcppEigen/include/Eigen/Dense:1:
+## In file included from /usr/local/lib/R/4.1/site-library/RcppEigen/include/Eigen/Core:88:
+## /usr/local/lib/R/4.1/site-library/RcppEigen/include/Eigen/src/Core/util/Macros.h:628:1: error: unknown type name &#39;namespace&#39;
+## namespace Eigen {
+## ^
+## /usr/local/lib/R/4.1/site-library/RcppEigen/include/Eigen/src/Core/util/Macros.h:628:16: error: expected &#39;;&#39; after top level declarator
+## namespace Eigen {
+##                ^
+##                ;
+## In file included from &lt;built-in&gt;:1:
+## In file included from /Users/imaru/Library/R/x86_64/4.1/library/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp:13:
+## In file included from /usr/local/lib/R/4.1/site-library/RcppEigen/include/Eigen/Dense:1:
+## /usr/local/lib/R/4.1/site-library/RcppEigen/include/Eigen/Core:96:10: fatal error: &#39;complex&#39; file not found
+## #include &lt;complex&gt;
+##          ^~~~~~~~~
+## 3 errors generated.
+## make: *** [foo.o] Error 1</code></pre>
+<pre><code>## Start sampling</code></pre>
+<pre class="r"><code>print(brms39)</code></pre>
+<pre><code>##  Family: binomial 
+##   Links: mu = logit 
+## Formula: germination | trials(size) ~ solar + nutrition 
+##    Data: dat39 (Number of observations: 100) 
+##   Draws: 4 chains, each with iter = 2000; warmup = 1000; thin = 1;
+##          total post-warmup draws = 4000
+## 
+## Population-Level Effects: 
+##               Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+## Intercept        -8.01      0.51    -9.06    -7.06 1.00     1471     1545
+## solarsunshine     4.04      0.29     3.50     4.62 1.00     1803     1951
+## nutrition         0.72      0.05     0.62     0.83 1.00     1737     1944
+## 
+## Draws were sampled using sampling(NUTS). For each parameter, Bulk_ESS
+## and Tail_ESS are effective sample size measures, and Rhat is the potential
+## scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
+<ul>
+<li>結果
+<ul>
+<li>solarsunshineの効果あり</li>
+<li>nutritionの効果あり</li>
+</ul></li>
+<li>ただし、係数の解釈に注意が必要（リンク関数がロジット関数だから）</li>
+<li>オッズ比：<span class="math inline">\(オッズ=\frac{p}{1-p}\)</span></li>
+<li>ロジスティック回帰モデルの係数＝対数オッズ比
+<ul>
+<li>係数にexp()をかけるとオッズ比になる</li>
+</ul></li>
+<li>例を使ってオッズ比の説明 *日光と栄養素が発芽に与える影響。データ3つ。
+<ul>
+<li>やってみる</li>
+</ul></li>
+</ul>
+<pre class="r"><code>egdata&lt;-data.frame(
+  solar=c(&#39;shade&#39;,&#39;sunshine&#39;,&#39;sunshine&#39;),
+  nutrition=c(2,2,3),
+  size=c(10,10,10)
+)
+egdata</code></pre>
+<pre><code>##      solar nutrition size
+## 1    shade         2   10
+## 2 sunshine         2   10
+## 3 sunshine         3   10</code></pre>
+<pre class="r"><code>linear_fit&lt;-fitted(brms39, egdata, scale=&#39;linear&#39;)[,1] # 最後の[,1]は1列目のみという意味
+fit&lt;-1/(1+exp(-linear_fit))
+fit</code></pre>
+<pre><code>## [1] 0.00139586 0.07375353 0.14043054</code></pre>
+<pre><code>* ここまでやったこと
+  * データ（日照の有無、栄養素の量、個数を指定）
+  * fitted関数を使って、データに対してさっき推定したモデルを適用、線形予測子の予測値を知る（linear_fitted）。
+    * fitted関数についてはちょっと調べてみたけど、詳細は不明。&#39;linear&#39;ではなく&#39;response&#39;を指定するとロジスティック関数に入れた値に近い値が出てくるけど、ちょっと違う。
+  * 線形予測子が出す値をロジスティック関数に与えることで、各データに対する発芽率が得られる（fit）。</code></pre>
+<pre class="r"><code>odds_1 &lt;- fit[1]/(1-fit[1])
+odds_2 &lt;- fit[2]/(1-fit[2])
+odds_3 &lt;- fit[3]/(1-fit[3])</code></pre>
+<ul>
+<li>この後、オッズ比を算出する
+<ul>
+<li>odds_2/odds_1: 1と2の違いは日照の有無なので、日照によって成功率がどう変わるかが分かることになる</li>
+<li>で、この値が日照の係数のexpと同じと言っている</li>
+</ul></li>
+</ul>
+<pre class="r"><code>odds_2/odds_1</code></pre>
+<pre><code>## [1] 56.96496</code></pre>
+<pre class="r"><code>coef&lt;-fixef(brms39)[,1] 
+exp(coef[&quot;solarsunshine&quot;])</code></pre>
+<pre><code>## solarsunshine 
+##      56.96496</code></pre>
+<ul>
+<li>確かに同じになる</li>
+</ul>
+</div>
+<div id="回帰曲線の図示-1" class="section level2">
+<h2>7. 回帰曲線の図示</h2>
+<ul>
+<li>図示。これまで同様。ただし、引数conditionsが必要（本のサポートページに記述あり）。</li>
+</ul>
+<pre class="r"><code>eff&lt;-conditional_effects(brms39, effects=&#39;nutrition:solar&#39;, conditions=data.frame(size=10))
+plot(eff, points=TRUE)</code></pre>
+<p><img src="baba3_files/figure-html/unnamed-chunk-39-1.png" width="768" /></p>
+<ul>
+<li>せっかくなので予測区間も書いてみる</li>
+</ul>
+<pre class="r"><code>eff_pre&lt;-conditional_effects(brms39, effects=&#39;nutrition:solar&#39;, conditions=data.frame(size=10), method=&#39;predict&#39;)
+plot(eff_pre, points=TRUE)</code></pre>
+<p><img src="baba3_files/figure-html/unnamed-chunk-40-1.png" width="768" /> * ポアソン回帰同様、こちらもギザギザに。二項分布に従う乱数は整数だからという解釈でOK？ * ところで、「○○回帰モデル」命名の謎 * ポアソン分布に従うデータのモデル推定を、リンク関数を対数関数で実施する（線形予測子をexpで処理）→これをポアソン回帰と呼ぶ * 二項分布に従うデータのモデル推定を、リンク関数をロジット関数で実施する（線形予測子をlogisticで処理）→これをロジスティック回帰と呼ぶ * なんで？</p>
+</div>
+<div id="補足-ロジスティック回帰のためのstanファイルの実装" class="section level2">
+<h2>8. 補足: ロジスティック回帰のためのStanファイルの実装</h2>
+<ul>
+<li>Stanでもやってみる。デザイン行列で。</li>
+</ul>
+<pre class="stan"><code>data{
+  int N;
+  int K;
+  int Y[N];
+  int binom_size[N];
+  matrix[N, K] X;
+}
+parameters{
+  vector[K] b;
+}
+model{
+  vector[N] prob = X * b;
+  Y ~ binomial_logit(binom_size, prob); #binomial_logitには引数2つ必要
+}</code></pre>
+<pre class="r"><code>dat39&lt;-read.csv(&#39;3-9-1-germination.csv&#39;)
+formula39&lt;-formula(germination|size~solar+nutrition)
+mtx39&lt;-model.matrix(formula39, dat39)
+standatamtx39&lt;-list(
+  N=nrow(dat39),
+  K=3,
+  binom_size=dat39$size,
+  Y=dat39$germination,
+  X=mtx39
+)
+resmtx39&lt;-rstan::sampling(stanmodel39, data=standatamtx39, seed=1)
+print(resmtx39)</code></pre>
+<pre><code>## Inference for Stan model: eece9cdab6a9b9c6fb30c3ecedf18040.
+## 4 chains, each with iter=2000; warmup=1000; thin=1; 
+## post-warmup draws per chain=1000, total post-warmup draws=4000.
+## 
+##         mean se_mean   sd    2.5%     25%     50%     75%   97.5% n_eff Rhat
+## b[1]   -7.99    0.02 0.51   -8.98   -8.35   -7.97   -7.61   -7.04   662    1
+## b[2]    4.02    0.01 0.29    3.48    3.82    4.01    4.22    4.60   806    1
+## b[3]    0.72    0.00 0.05    0.61    0.68    0.72    0.76    0.82   727    1
+## lp__ -303.25    0.03 1.15 -306.14 -303.81 -302.99 -302.39 -301.85  1505    1
+## 
+## Samples were drawn using NUTS(diag_e) at Wed Mar  9 15:17:58 2022.
+## For each parameter, n_eff is a crude measure of effective sample size,
+## and Rhat is the potential scale reduction factor on split chains (at 
+## convergence, Rhat=1).</code></pre>
+<p>##9. 補足: 試行回数が常に1の場合 * そういうときは二項分布ではなくベルヌーイ分布を使おうね、という話</p>
 </div>
 </div>
 </div>

@@ -146,6 +146,7 @@
             <li><a href="#回帰曲線の図示-1">7. 回帰曲線の図示</a></li>
             <li><a href="#補足-ロジスティック回帰のためのstanファイルの実装">8. 補足: ロジスティック回帰のためのStanファイルの実装</a></li>
             <li><a href="#補足-試行回数が常に1の場合">9. 補足: 試行回数が常に1の場合</a></li>
+            <li><a href="#練習">練習</a></li>
             </ul></li>
             </ul>
           </div>
@@ -423,7 +424,7 @@ stanres37</code></pre>
 ## sigma   16.05    0.02 0.96   14.36   15.39   15.99   16.65   18.09  2741    1
 ## lp__  -487.95    0.04 1.65 -492.03 -488.75 -487.59 -486.75 -485.82  1515    1
 ## 
-## Samples were drawn using NUTS(diag_e) at Wed Mar  9 18:30:40 2022.
+## Samples were drawn using NUTS(diag_e) at Thu Mar 10 13:25:02 2022.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).</code></pre>
@@ -643,7 +644,7 @@ print(res38)</code></pre>
 ## b_sunny    -0.58    0.00 0.17  -0.91  -0.70  -0.58  -0.47  -0.26  1978    1
 ## lp__      -37.73    0.03 1.25 -40.98 -38.28 -37.41 -36.85 -36.33  1344    1
 ## 
-## Samples were drawn using NUTS(diag_e) at Wed Mar  9 18:31:14 2022.
+## Samples were drawn using NUTS(diag_e) at Thu Mar 10 13:25:37 2022.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).</code></pre>
@@ -687,7 +688,7 @@ print(resmtx38)</code></pre>
 ## b[3]   0.08    0.00 0.01   0.06   0.08   0.08   0.09   0.10  1414    1
 ## lp__ -37.65    0.03 1.19 -40.79 -38.17 -37.35 -36.79 -36.32  1416    1
 ## 
-## Samples were drawn using NUTS(diag_e) at Wed Mar  9 18:31:31 2022.
+## Samples were drawn using NUTS(diag_e) at Thu Mar 10 13:25:54 2022.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).</code></pre>
@@ -901,7 +902,7 @@ print(resmtx39)</code></pre>
 ## b[3]    0.72    0.00 0.05    0.61    0.68    0.72    0.76    0.82   727    1
 ## lp__ -303.25    0.03 1.15 -306.14 -303.81 -302.99 -302.39 -301.85  1505    1
 ## 
-## Samples were drawn using NUTS(diag_e) at Wed Mar  9 18:32:08 2022.
+## Samples were drawn using NUTS(diag_e) at Thu Mar 10 13:26:31 2022.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).</code></pre>
@@ -911,6 +912,89 @@ print(resmtx39)</code></pre>
 <ul>
 <li>そういうときは二項分布ではなくベルヌーイ分布を使おうね、という話</li>
 </ul>
+</div>
+<div id="練習" class="section level2">
+<h2>練習</h2>
+<ul>
+<li>今年の基礎実験2の視覚探索実験の結果
+<ul>
+<li>2要因（セットサイズ、難易度）</li>
+<li>従属変数：反応時間（秒）</li>
+<li></li>
+</ul></li>
+</ul>
+<pre class="r"><code>library(brms)
+library(tidyverse)</code></pre>
+<pre><code>## ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──</code></pre>
+<pre><code>## ✓ tibble  3.1.6     ✓ dplyr   1.0.7
+## ✓ tidyr   1.1.4     ✓ stringr 1.4.0
+## ✓ readr   2.1.2     ✓ forcats 0.5.1
+## ✓ purrr   0.3.4</code></pre>
+<pre><code>## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+## x tidyr::extract() masks rstan::extract()
+## x dplyr::filter()  masks stats::filter()
+## x dplyr::lag()     masks stats::lag()</code></pre>
+<pre class="r"><code>dat&lt;-read.csv(&#39;vsres.csv&#39;, check.names=FALSE)
+longdat&lt;-dat %&gt;% pivot_longer(!ID, names_to = c(&quot;dif&quot;,&quot;ss&quot;), values_to = &quot;RT&quot;, names_sep = &#39; &#39;)
+ggplot(data=longdat, mapping=aes(x=ss,y=RT,color=dif))+geom_violin()</code></pre>
+<p><img src="3-789models_files/figure-html/unnamed-chunk-22-1.png" width="768" /></p>
+<pre class="r"><code>brmvs&lt;-brm(
+  RT ~ ss + dif,
+  family = shifted_lognormal(),
+  data = longdat,
+  prior=c(set_prior(&quot;&quot;, class=&quot;Intercept&quot;, &quot;&quot;),
+          set_prior(&quot;&quot;, class=&quot;sigma&quot;))
+)</code></pre>
+<pre><code>## Compiling Stan program...</code></pre>
+<pre><code>## Trying to compile a simple C file</code></pre>
+<pre><code>## Running /usr/local/Cellar/r/4.1.2/lib/R/bin/R CMD SHLIB foo.c
+## clang -I&quot;/usr/local/Cellar/r/4.1.2/lib/R/include&quot; -DNDEBUG   -I&quot;/usr/local/lib/R/4.1/site-library/Rcpp/include/&quot;  -I&quot;/usr/local/lib/R/4.1/site-library/RcppEigen/include/&quot;  -I&quot;/usr/local/lib/R/4.1/site-library/RcppEigen/include/unsupported&quot;  -I&quot;/usr/local/lib/R/4.1/site-library/BH/include&quot; -I&quot;/Users/imaru/Library/R/x86_64/4.1/library/StanHeaders/include/src/&quot;  -I&quot;/Users/imaru/Library/R/x86_64/4.1/library/StanHeaders/include/&quot;  -I&quot;/usr/local/lib/R/4.1/site-library/RcppParallel/include/&quot;  -I&quot;/Users/imaru/Library/R/x86_64/4.1/library/rstan/include&quot; -DEIGEN_NO_DEBUG  -DBOOST_DISABLE_ASSERTS  -DBOOST_PENDING_INTEGER_LOG2_HPP  -DSTAN_THREADS  -DBOOST_NO_AUTO_PTR  -include &#39;/Users/imaru/Library/R/x86_64/4.1/library/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp&#39;  -D_REENTRANT -DRCPP_PARALLEL_USE_TBB=1   -I/usr/local/opt/gettext/include -I/usr/local/opt/readline/include -I/usr/local/opt/xz/include -I/usr/local/include   -fPIC  -Wno-implicit-function-declaration  -c foo.c -o foo.o
+## In file included from &lt;built-in&gt;:1:
+## In file included from /Users/imaru/Library/R/x86_64/4.1/library/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp:13:
+## In file included from /usr/local/lib/R/4.1/site-library/RcppEigen/include/Eigen/Dense:1:
+## In file included from /usr/local/lib/R/4.1/site-library/RcppEigen/include/Eigen/Core:88:
+## /usr/local/lib/R/4.1/site-library/RcppEigen/include/Eigen/src/Core/util/Macros.h:628:1: error: unknown type name &#39;namespace&#39;
+## namespace Eigen {
+## ^
+## /usr/local/lib/R/4.1/site-library/RcppEigen/include/Eigen/src/Core/util/Macros.h:628:16: error: expected &#39;;&#39; after top level declarator
+## namespace Eigen {
+##                ^
+##                ;
+## In file included from &lt;built-in&gt;:1:
+## In file included from /Users/imaru/Library/R/x86_64/4.1/library/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp:13:
+## In file included from /usr/local/lib/R/4.1/site-library/RcppEigen/include/Eigen/Dense:1:
+## /usr/local/lib/R/4.1/site-library/RcppEigen/include/Eigen/Core:96:10: fatal error: &#39;complex&#39; file not found
+## #include &lt;complex&gt;
+##          ^~~~~~~~~
+## 3 errors generated.
+## make: *** [foo.o] Error 1</code></pre>
+<pre><code>## Start sampling</code></pre>
+<pre class="r"><code>brmvs</code></pre>
+<pre><code>##  Family: shifted_lognormal 
+##   Links: mu = identity; sigma = identity; ndt = identity 
+## Formula: RT ~ ss + dif 
+##    Data: longdat (Number of observations: 120) 
+##   Draws: 4 chains, each with iter = 2000; warmup = 1000; thin = 1;
+##          total post-warmup draws = 4000
+## 
+## Population-Level Effects: 
+##           Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+## Intercept    -0.26      0.07    -0.40    -0.13 1.00     2291     2673
+## ss18          0.25      0.08     0.10     0.40 1.00     2370     2221
+## ss6          -0.25      0.07    -0.40    -0.11 1.00     2339     2830
+## diflow       -1.61      0.12    -1.84    -1.38 1.00     1104     1535
+## 
+## Family Specific Parameters: 
+##       Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+## sigma     0.33      0.03     0.27     0.40 1.00     1130     1818
+## ndt       0.37      0.02     0.33     0.41 1.01      946     1112
+## 
+## Draws were sampled using sampling(NUTS). For each parameter, Bulk_ESS
+## and Tail_ESS are effective sample size measures, and Rhat is the potential
+## scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
+<pre class="r"><code>eff&lt;-conditional_effects(brmvs, effects=&#39;ss:dif&#39;)
+plot(eff,points=TRUE)</code></pre>
+<p><img src="3-789models_files/figure-html/unnamed-chunk-22-2.png" width="768" /></p>
 </div>
 </div>
 </div>

@@ -228,6 +228,7 @@
             <li><a href="#brmsによるロジスティック回帰モデルの推定">5. brmsによるロジスティック回帰モデルの推定</a></li>
             <li><a href="#回帰曲線の図示-1">7. 回帰曲線の図示</a></li>
             <li><a href="#補足-ロジスティック回帰のためのstanファイルの実装">8. 補足: ロジスティック回帰のためのStanファイルの実装</a></li>
+            <li><a href="#補足-試行回数が常に1の場合">9. 補足: 試行回数が常に1の場合</a></li>
             </ul></li>
             </ul>
           </div>
@@ -652,12 +653,12 @@ print(mr,probs=c(0.025,0.5,0.975))</code></pre>
 ## post-warmup draws per chain=1000, total post-warmup draws=4000.
 ## 
 ##               mean se_mean   sd     2.5%      50%    97.5% n_eff Rhat
-## Intercept    -3.79    0.00 0.17    -4.11    -3.79    -3.46  1415    1
-## b_basic       0.03    0.00 0.01     0.00     0.03     0.06  1624    1
-## b_senior     -0.01    0.00 0.02    -0.04    -0.01     0.02  1567    1
-## lp__      -2140.19    0.04 1.24 -2143.42 -2139.88 -2138.77  1203    1
+## Intercept    -3.79    0.00 0.16    -4.10    -3.79    -3.47  1255 1.00
+## b_basic       0.03    0.00 0.01     0.00     0.03     0.06  1857 1.00
+## b_senior     -0.01    0.00 0.01    -0.04    -0.01     0.02  1261 1.01
+## lp__      -2140.16    0.04 1.25 -2143.36 -2139.83 -2138.75  1095 1.01
 ## 
-## Samples were drawn using NUTS(diag_e) at Wed Mar  9 18:32:22 2022.
+## Samples were drawn using NUTS(diag_e) at Thu Mar 10 13:27:05 2022.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).</code></pre>
@@ -755,7 +756,7 @@ print(mr, probs=c(0.025, 0.5, 0.975))</code></pre>
 ## sigma       17.07    0.03 1.21   14.89   16.96   19.67  1629    1
 ## lp__      -330.07    0.03 1.20 -333.26 -329.75 -328.73  1288    1
 ## 
-## Samples were drawn using NUTS(diag_e) at Wed Mar  9 18:32:38 2022.
+## Samples were drawn using NUTS(diag_e) at Thu Mar 10 13:27:21 2022.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).</code></pre>
@@ -1166,7 +1167,7 @@ print(res, probs = c(0.025, 0.5, 0.975))</code></pre>
 ## mu[6]     92.35    0.07 3.16   86.30   92.28   98.66  1805    1
 ##  [ reached getOption(&quot;max.print&quot;) -- 95 行を無視しました ] 
 ## 
-## Samples were drawn using NUTS(diag_e) at Wed Mar  9 18:32:56 2022.
+## Samples were drawn using NUTS(diag_e) at Thu Mar 10 13:27:39 2022.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).</code></pre>
@@ -1768,7 +1769,7 @@ stanres37</code></pre>
 ## sigma   16.05    0.02 0.96   14.36   15.39   15.99   16.65   18.09  2741    1
 ## lp__  -487.95    0.04 1.65 -492.03 -488.75 -487.59 -486.75 -485.82  1515    1
 ## 
-## Samples were drawn using NUTS(diag_e) at Wed Mar  9 18:34:00 2022.
+## Samples were drawn using NUTS(diag_e) at Thu Mar 10 13:28:45 2022.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).</code></pre>
@@ -1966,7 +1967,7 @@ print(res38)</code></pre>
 ## b_sunny    -0.58    0.00 0.17  -0.91  -0.70  -0.58  -0.47  -0.26  1978    1
 ## lp__      -37.73    0.03 1.25 -40.98 -38.28 -37.41 -36.85 -36.33  1344    1
 ## 
-## Samples were drawn using NUTS(diag_e) at Wed Mar  9 18:34:03 2022.
+## Samples were drawn using NUTS(diag_e) at Thu Mar 10 13:28:48 2022.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).</code></pre>
@@ -2010,7 +2011,7 @@ print(resmtx38)</code></pre>
 ## b[3]   0.08    0.00 0.01   0.06   0.08   0.08   0.09   0.10  1414    1
 ## lp__ -37.65    0.03 1.19 -40.79 -38.17 -37.35 -36.79 -36.32  1416    1
 ## 
-## Samples were drawn using NUTS(diag_e) at Wed Mar  9 18:34:04 2022.
+## Samples were drawn using NUTS(diag_e) at Thu Mar 10 13:28:49 2022.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).</code></pre>
@@ -2117,11 +2118,17 @@ egdata</code></pre>
 fit&lt;-1/(1+exp(-linear_fit))
 fit</code></pre>
 <pre><code>## [1] 0.00139586 0.07375353 0.14043054</code></pre>
-<pre><code>* ここまでやったこと
-  * データ（日照の有無、栄養素の量、個数を指定）
-  * fitted関数を使って、データに対してさっき推定したモデルを適用、線形予測子の予測値を知る（linear_fitted）。
-    * fitted関数についてはちょっと調べてみたけど、詳細は不明。&#39;linear&#39;ではなく&#39;response&#39;を指定するとロジスティック関数に入れた値に近い値が出てくるけど、ちょっと違う。
-  * 線形予測子が出す値をロジスティック関数に与えることで、各データに対する発芽率が得られる（fit）。</code></pre>
+<ul>
+<li>ここまでやったこと
+<ul>
+<li>データ（日照の有無、栄養素の量、個数を指定）</li>
+<li>fitted関数を使って、データに対してさっき推定したモデルを適用、線形予測子の予測値を知る（linear_fitted）。
+<ul>
+<li>fitted関数についてはちょっと調べてみたけど、詳細は不明。’linear’ではなく’response’を指定するとロジスティック関数に入れた値に近い値が出てくるけど、ちょっと違う。</li>
+</ul></li>
+<li>線形予測子が出す値をロジスティック関数に与えることで、各データに対する発芽率が得られる（fit）。</li>
+</ul></li>
+</ul>
 <pre class="r"><code>odds_1 &lt;- fit[1]/(1-fit[1])
 odds_2 &lt;- fit[2]/(1-fit[2])
 odds_3 &lt;- fit[3]/(1-fit[3])</code></pre>
@@ -2155,7 +2162,16 @@ plot(eff, points=TRUE)</code></pre>
 </ul>
 <pre class="r"><code>eff_pre&lt;-conditional_effects(brms39, effects=&#39;nutrition:solar&#39;, conditions=data.frame(size=10), method=&#39;predict&#39;)
 plot(eff_pre, points=TRUE)</code></pre>
-<p><img src="baba3_files/figure-html/unnamed-chunk-40-1.png" width="768" /> * ポアソン回帰同様、こちらもギザギザに。二項分布に従う乱数は整数だからという解釈でOK？ * ところで、「○○回帰モデル」命名の謎 * ポアソン分布に従うデータのモデル推定を、リンク関数を対数関数で実施する（線形予測子をexpで処理）→これをポアソン回帰と呼ぶ * 二項分布に従うデータのモデル推定を、リンク関数をロジット関数で実施する（線形予測子をlogisticで処理）→これをロジスティック回帰と呼ぶ * なんで？</p>
+<p><img src="baba3_files/figure-html/unnamed-chunk-40-1.png" width="768" /></p>
+<ul>
+<li>ポアソン回帰同様、こちらもギザギザに。二項分布に従う乱数は整数だからという解釈でOK？</li>
+<li>ところで、「○○回帰モデル」命名の謎
+<ul>
+<li>ポアソン分布に従うデータのモデル推定を、リンク関数を対数関数で実施する（線形予測子をexpで処理）→これをポアソン回帰と呼ぶ</li>
+<li>二項分布に従うデータのモデル推定を、リンク関数をロジット関数で実施する（線形予測子をlogisticで処理）→これをロジスティック回帰と呼ぶ</li>
+<li>なんで？</li>
+</ul></li>
+</ul>
 </div>
 <div id="補足-ロジスティック回帰のためのstanファイルの実装" class="section level2">
 <h2>8. 補足: ロジスティック回帰のためのStanファイルの実装</h2>
@@ -2198,11 +2214,16 @@ print(resmtx39)</code></pre>
 ## b[3]    0.72    0.00 0.05    0.61    0.68    0.72    0.76    0.82   727    1
 ## lp__ -303.25    0.03 1.15 -306.14 -303.81 -302.99 -302.39 -301.85  1505    1
 ## 
-## Samples were drawn using NUTS(diag_e) at Wed Mar  9 18:34:08 2022.
+## Samples were drawn using NUTS(diag_e) at Thu Mar 10 13:28:52 2022.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).</code></pre>
-<p>##9. 補足: 試行回数が常に1の場合 * そういうときは二項分布ではなくベルヌーイ分布を使おうね、という話</p>
+</div>
+<div id="補足-試行回数が常に1の場合" class="section level2">
+<h2>9. 補足: 試行回数が常に1の場合</h2>
+<ul>
+<li>そういうときは二項分布ではなくベルヌーイ分布を使おうね、という話</li>
+</ul>
 </div>
 </div>
 </div>

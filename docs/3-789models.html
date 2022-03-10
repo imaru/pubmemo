@@ -424,7 +424,7 @@ stanres37</code></pre>
 ## sigma   16.05    0.02 0.96   14.36   15.39   15.99   16.65   18.09  2741    1
 ## lp__  -487.95    0.04 1.65 -492.03 -488.75 -487.59 -486.75 -485.82  1515    1
 ## 
-## Samples were drawn using NUTS(diag_e) at Thu Mar 10 13:40:58 2022.
+## Samples were drawn using NUTS(diag_e) at Thu Mar 10 16:24:34 2022.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).</code></pre>
@@ -644,7 +644,7 @@ print(res38)</code></pre>
 ## b_sunny    -0.58    0.00 0.17  -0.91  -0.70  -0.58  -0.47  -0.26  1978    1
 ## lp__      -37.73    0.03 1.25 -40.98 -38.28 -37.41 -36.85 -36.33  1344    1
 ## 
-## Samples were drawn using NUTS(diag_e) at Thu Mar 10 13:41:32 2022.
+## Samples were drawn using NUTS(diag_e) at Thu Mar 10 16:25:15 2022.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).</code></pre>
@@ -688,7 +688,7 @@ print(resmtx38)</code></pre>
 ## b[3]   0.08    0.00 0.01   0.06   0.08   0.08   0.09   0.10  1414    1
 ## lp__ -37.65    0.03 1.19 -40.79 -38.17 -37.35 -36.79 -36.32  1416    1
 ## 
-## Samples were drawn using NUTS(diag_e) at Thu Mar 10 13:41:48 2022.
+## Samples were drawn using NUTS(diag_e) at Thu Mar 10 16:25:35 2022.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).</code></pre>
@@ -859,7 +859,16 @@ plot(eff, points=TRUE)</code></pre>
 </ul>
 <pre class="r"><code>eff_pre&lt;-conditional_effects(brms39, effects=&#39;nutrition:solar&#39;, conditions=data.frame(size=10), method=&#39;predict&#39;)
 plot(eff_pre, points=TRUE)</code></pre>
-<p><img src="3-789models_files/figure-html/unnamed-chunk-20-1.png" width="768" /> * ポアソン回帰同様、こちらもギザギザに。二項分布に従う乱数は整数だからという解釈でOK？ * ところで、「○○回帰モデル」命名の謎 * ポアソン分布に従うデータのモデル推定を、リンク関数を対数関数で実施する（線形予測子をexpで処理）→これをポアソン回帰と呼ぶ * 二項分布に従うデータのモデル推定を、リンク関数をロジット関数で実施する（線形予測子をlogisticで処理）→これをロジスティック回帰と呼ぶ * なんで？</p>
+<p><img src="3-789models_files/figure-html/unnamed-chunk-20-1.png" width="768" /></p>
+<ul>
+<li>ポアソン回帰同様、こちらもギザギザに。二項分布に従う乱数は整数だからという解釈でOK？</li>
+<li>ところで、「○○回帰モデル」命名の謎
+<ul>
+<li>ポアソン分布に従うデータのモデル推定を、リンク関数を対数関数で実施する（線形予測子をexpで処理）→これをポアソン回帰と呼ぶ</li>
+<li>二項分布に従うデータのモデル推定を、リンク関数をロジット関数で実施する（線形予測子をlogisticで処理）→これをロジスティック回帰と呼ぶ</li>
+<li>なんで？</li>
+</ul></li>
+</ul>
 </div>
 <div id="補足-ロジスティック回帰のためのstanファイルの実装" class="section level2">
 <h2>8. 補足: ロジスティック回帰のためのStanファイルの実装</h2>
@@ -902,7 +911,7 @@ print(resmtx39)</code></pre>
 ## b[3]    0.72    0.00 0.05    0.61    0.68    0.72    0.76    0.82   727    1
 ## lp__ -303.25    0.03 1.15 -306.14 -303.81 -302.99 -302.39 -301.85  1505    1
 ## 
-## Samples were drawn using NUTS(diag_e) at Thu Mar 10 13:42:24 2022.
+## Samples were drawn using NUTS(diag_e) at Thu Mar 10 16:26:17 2022.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).</code></pre>
@@ -943,8 +952,7 @@ ggplot(data=longdat, mapping=aes(x=ss,y=RT,color=dif))+geom_violin()</code></pre
   RT ~ ss + dif,
   family = shifted_lognormal(),
   data = longdat,
-  prior=c(set_prior(&quot;&quot;, class=&quot;Intercept&quot;, &quot;&quot;),
-          set_prior(&quot;&quot;, class=&quot;sigma&quot;))
+  prior=NULL
 )</code></pre>
 <pre><code>## Compiling Stan program...</code></pre>
 <pre><code>## Trying to compile a simple C file</code></pre>
@@ -980,15 +988,15 @@ ggplot(data=longdat, mapping=aes(x=ss,y=RT,color=dif))+geom_violin()</code></pre
 ## 
 ## Population-Level Effects: 
 ##           Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-## Intercept    -0.26      0.07    -0.39    -0.14 1.00     2272     2649
-## ss18          0.25      0.07     0.10     0.40 1.00     2293     2431
-## ss6          -0.25      0.07    -0.40    -0.11 1.00     2338     2651
-## diflow       -1.61      0.12    -1.83    -1.38 1.00     1225     1663
+## Intercept    -0.26      0.07    -0.39    -0.13 1.00     2557     3032
+## ss18          0.24      0.08     0.10     0.40 1.00     2305     2373
+## ss6          -0.26      0.08    -0.41    -0.11 1.00     2325     2060
+## diflow       -1.61      0.12    -1.84    -1.37 1.01     1097     1566
 ## 
 ## Family Specific Parameters: 
 ##       Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-## sigma     0.33      0.03     0.27     0.40 1.01     1260     1864
-## ndt       0.37      0.02     0.33     0.40 1.01     1090     1355
+## sigma     0.33      0.03     0.27     0.40 1.00     1291     1629
+## ndt       0.37      0.02     0.33     0.40 1.00     1038     1198
 ## 
 ## Draws were sampled using sampling(NUTS). For each parameter, Bulk_ESS
 ## and Tail_ESS are effective sample size measures, and Rhat is the potential

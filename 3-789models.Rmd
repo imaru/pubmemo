@@ -361,6 +361,7 @@ plot(eff, points=TRUE)
 eff_pre<-conditional_effects(brms39, effects='nutrition:solar', conditions=data.frame(size=10), method='predict')
 plot(eff_pre, points=TRUE)
 ```
+
   * ポアソン回帰同様、こちらもギザギザに。二項分布に従う乱数は整数だからという解釈でOK？
   * ところで、「○○回帰モデル」命名の謎
     * ポアソン分布に従うデータのモデル推定を、リンク関数を対数関数で実施する（線形予測子をexpで処理）→これをポアソン回帰と呼ぶ
@@ -422,8 +423,7 @@ brmvs<-brm(
   RT ~ ss + dif,
   family = shifted_lognormal(),
   data = longdat,
-  prior=c(set_prior("", class="Intercept", ""),
-          set_prior("", class="sigma"))
+  prior=NULL
 )
 brmvs
 eff<-conditional_effects(brmvs, effects='ss:dif')

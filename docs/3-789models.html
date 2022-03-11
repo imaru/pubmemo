@@ -173,13 +173,16 @@
         <a href="index.html">Home</a>
       </li>
       <li>
-        <a href="baba1.html">馬場本1章</a>
+        <a href="baba1.html">馬場本1部</a>
       </li>
       <li>
-        <a href="baba2.html">馬場本2章</a>
+        <a href="baba2.html">馬場本2部</a>
       </li>
       <li>
-        <a href="baba3.html">馬場本3章</a>
+        <a href="baba3.html">馬場本3部</a>
+      </li>
+      <li>
+        <a href="baba4.html">馬場本4部</a>
       </li>
       <li>
         <a href="psytech.html">技術部</a>
@@ -424,7 +427,7 @@ stanres37</code></pre>
 ## sigma   16.05    0.02 0.96   14.36   15.39   15.99   16.65   18.09  2741    1
 ## lp__  -487.95    0.04 1.65 -492.03 -488.75 -487.59 -486.75 -485.82  1515    1
 ## 
-## Samples were drawn using NUTS(diag_e) at Thu Mar 10 16:24:34 2022.
+## Samples were drawn using NUTS(diag_e) at Fri Mar 11 16:33:11 2022.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).</code></pre>
@@ -644,7 +647,7 @@ print(res38)</code></pre>
 ## b_sunny    -0.58    0.00 0.17  -0.91  -0.70  -0.58  -0.47  -0.26  1978    1
 ## lp__      -37.73    0.03 1.25 -40.98 -38.28 -37.41 -36.85 -36.33  1344    1
 ## 
-## Samples were drawn using NUTS(diag_e) at Thu Mar 10 16:25:15 2022.
+## Samples were drawn using NUTS(diag_e) at Fri Mar 11 16:33:45 2022.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).</code></pre>
@@ -688,7 +691,7 @@ print(resmtx38)</code></pre>
 ## b[3]   0.08    0.00 0.01   0.06   0.08   0.08   0.09   0.10  1414    1
 ## lp__ -37.65    0.03 1.19 -40.79 -38.17 -37.35 -36.79 -36.32  1416    1
 ## 
-## Samples were drawn using NUTS(diag_e) at Thu Mar 10 16:25:35 2022.
+## Samples were drawn using NUTS(diag_e) at Fri Mar 11 16:34:02 2022.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).</code></pre>
@@ -911,7 +914,7 @@ print(resmtx39)</code></pre>
 ## b[3]    0.72    0.00 0.05    0.61    0.68    0.72    0.76    0.82   727    1
 ## lp__ -303.25    0.03 1.15 -306.14 -303.81 -302.99 -302.39 -301.85  1505    1
 ## 
-## Samples were drawn using NUTS(diag_e) at Thu Mar 10 16:26:17 2022.
+## Samples were drawn using NUTS(diag_e) at Fri Mar 11 16:34:38 2022.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).</code></pre>
@@ -988,15 +991,15 @@ ggplot(data=longdat, mapping=aes(x=ss,y=RT,color=dif))+geom_violin()</code></pre
 ## 
 ## Population-Level Effects: 
 ##           Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-## Intercept    -0.26      0.07    -0.39    -0.13 1.00     2557     3032
-## ss18          0.24      0.08     0.10     0.40 1.00     2305     2373
-## ss6          -0.26      0.08    -0.41    -0.11 1.00     2325     2060
-## diflow       -1.61      0.12    -1.84    -1.37 1.01     1097     1566
+## Intercept    -0.26      0.07    -0.39    -0.13 1.00     2607     2683
+## ss18          0.25      0.08     0.10     0.40 1.00     2474     2454
+## ss6          -0.25      0.08    -0.40    -0.11 1.00     2124     2374
+## diflow       -1.61      0.12    -1.84    -1.37 1.00     1253     1468
 ## 
 ## Family Specific Parameters: 
 ##       Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-## sigma     0.33      0.03     0.27     0.40 1.00     1291     1629
-## ndt       0.37      0.02     0.33     0.40 1.00     1038     1198
+## sigma     0.33      0.04     0.27     0.41 1.00     1377     1847
+## ndt       0.37      0.02     0.33     0.41 1.01     1099     1213
 ## 
 ## Draws were sampled using sampling(NUTS). For each parameter, Bulk_ESS
 ## and Tail_ESS are effective sample size measures, and Rhat is the potential

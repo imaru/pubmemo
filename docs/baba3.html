@@ -8,7 +8,7 @@
         <meta name="author" content="Toshihide Imaruoka" />
     
     
-    <title>馬場本</title>
+    <title>馬場本3</title>
 
         <script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
         <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -119,7 +119,7 @@
         <div class="Sidebar">
           <div class="SidebarItems" id="toc">
             <ul>
-            <li><a href="#章">3章</a></li>
+            <li><a href="#部">3部</a></li>
             <li><a href="#章-一般化線形モデルの基本">3-1章: 一般化線形モデルの基本</a>
             <ul>
             <li><a href="#目的と概要">1. 目的と概要</a></li>
@@ -230,6 +230,19 @@
             <li><a href="#補足-ロジスティック回帰のためのstanファイルの実装">8. 補足: ロジスティック回帰のためのStanファイルの実装</a></li>
             <li><a href="#補足-試行回数が常に1の場合">9. 補足: 試行回数が常に1の場合</a></li>
             </ul></li>
+            <li><a href="#練習">練習</a></li>
+            <li><a href="#交互作用">3-10. 交互作用</a>
+            <ul>
+            <li><a href="#交互作用と主効果">2. 交互作用と主効果</a></li>
+            <li><a href="#一般化線形モデルにおける交互作用の取り扱い">3. 一般化線形モデルにおける交互作用の取り扱い</a></li>
+            <li><a href="#分析の準備-7">4. 分析の準備</a></li>
+            <li><a href="#カテゴリxカテゴリ-モデル化">5. カテゴリxカテゴリ: モデル化</a></li>
+            <li><a href="#カテゴリxカテゴリ係数の解釈">6. カテゴリxカテゴリ：係数の解釈</a></li>
+            <li><a href="#カテゴリxカテゴリ-モデルの図示">7. カテゴリxカテゴリ: モデルの図示</a></li>
+            <li><a href="#カテゴリx数量モデル化">8. カテゴリx数量：モデル化</a></li>
+            <li><a href="#カテゴリx数量モデルの図示">10. カテゴリx数量：モデルの図示</a></li>
+            <li><a href="#数量x数量モデル化">11. 数量x数量：モデル化</a></li>
+            </ul></li>
             </ul>
           </div>
           <div data-position="sidebar:post-end" class="InjectedComponents"><div class="dark-theme-toggler"><div class="toggle "><div class="toggle-track"><div class="toggle-track-check"><img  src="data:image/png;base64,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" role="presentation" style="pointer-events: none;" width="16" height="16"></div> <div class="toggle-track-x"><img src="data:image/png;base64,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" role="presentation" style="pointer-events: none;" width="16" height="16"></div></div> <div class="toggle-thumb"></div></div> <input type="checkbox" aria-label="Switch between Dark and Default theme" class="toggler-screen-reader-only"></div></div>
@@ -255,13 +268,16 @@
         <a href="index.html">Home</a>
       </li>
       <li>
-        <a href="baba1.html">馬場本1章</a>
+        <a href="baba1.html">馬場本1部</a>
       </li>
       <li>
-        <a href="baba2.html">馬場本2章</a>
+        <a href="baba2.html">馬場本2部</a>
       </li>
       <li>
-        <a href="baba3.html">馬場本3章</a>
+        <a href="baba3.html">馬場本3部</a>
+      </li>
+      <li>
+        <a href="baba4.html">馬場本4部</a>
       </li>
       <li>
         <a href="psytech.html">技術部</a>
@@ -274,7 +290,7 @@
         </div><!--/.container -->
       </div><!--/.navbar -->
         
-      <h1 class="title">馬場本</h1>
+      <h1 class="title">馬場本3</h1>
       
       <p class="authors">
            <span class="glyphicon glyphicon-user"></span> Toshihide Imaruoka
@@ -286,8 +302,8 @@
    
 <!-- Don't indent these lines or it will mess pre blocks indentation --> 
 <div class="page-content has-page-title">
-<div id="章" class="section level1">
-<h1>3章</h1>
+<div id="部" class="section level1">
+<h1>3部</h1>
 </div>
 <div id="章-一般化線形モデルの基本" class="section level1">
 <h1>3-1章: 一般化線形モデルの基本</h1>
@@ -658,7 +674,7 @@ print(mr,probs=c(0.025,0.5,0.975))</code></pre>
 ## b_senior     -0.01    0.00 0.01    -0.04    -0.01     0.02  1261 1.01
 ## lp__      -2140.16    0.04 1.25 -2143.36 -2139.83 -2138.75  1095 1.01
 ## 
-## Samples were drawn using NUTS(diag_e) at Thu Mar 10 16:26:57 2022.
+## Samples were drawn using NUTS(diag_e) at Fri Mar 11 16:35:12 2022.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).</code></pre>
@@ -756,7 +772,7 @@ print(mr, probs=c(0.025, 0.5, 0.975))</code></pre>
 ## sigma       17.07    0.03 1.21   14.89   16.96   19.67  1629    1
 ## lp__      -330.07    0.03 1.20 -333.26 -329.75 -328.73  1288    1
 ## 
-## Samples were drawn using NUTS(diag_e) at Thu Mar 10 16:27:15 2022.
+## Samples were drawn using NUTS(diag_e) at Fri Mar 11 16:35:29 2022.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).</code></pre>
@@ -1167,7 +1183,7 @@ print(res, probs = c(0.025, 0.5, 0.975))</code></pre>
 ## mu[6]     92.35    0.07 3.16   86.30   92.28   98.66  1805    1
 ##  [ reached getOption(&quot;max.print&quot;) -- 95 行を無視しました ] 
 ## 
-## Samples were drawn using NUTS(diag_e) at Thu Mar 10 16:27:35 2022.
+## Samples were drawn using NUTS(diag_e) at Fri Mar 11 16:35:46 2022.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).</code></pre>
@@ -1769,7 +1785,7 @@ stanres37</code></pre>
 ## sigma   16.05    0.02 0.96   14.36   15.39   15.99   16.65   18.09  2741    1
 ## lp__  -487.95    0.04 1.65 -492.03 -488.75 -487.59 -486.75 -485.82  1515    1
 ## 
-## Samples were drawn using NUTS(diag_e) at Thu Mar 10 16:28:41 2022.
+## Samples were drawn using NUTS(diag_e) at Fri Mar 11 16:36:52 2022.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).</code></pre>
@@ -1967,7 +1983,7 @@ print(res38)</code></pre>
 ## b_sunny    -0.58    0.00 0.17  -0.91  -0.70  -0.58  -0.47  -0.26  1978    1
 ## lp__      -37.73    0.03 1.25 -40.98 -38.28 -37.41 -36.85 -36.33  1344    1
 ## 
-## Samples were drawn using NUTS(diag_e) at Thu Mar 10 16:28:44 2022.
+## Samples were drawn using NUTS(diag_e) at Fri Mar 11 16:36:55 2022.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).</code></pre>
@@ -2011,7 +2027,7 @@ print(resmtx38)</code></pre>
 ## b[3]   0.08    0.00 0.01   0.06   0.08   0.08   0.09   0.10  1414    1
 ## lp__ -37.65    0.03 1.19 -40.79 -38.17 -37.35 -36.79 -36.32  1416    1
 ## 
-## Samples were drawn using NUTS(diag_e) at Thu Mar 10 16:28:45 2022.
+## Samples were drawn using NUTS(diag_e) at Fri Mar 11 16:36:56 2022.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).</code></pre>
@@ -2214,7 +2230,7 @@ print(resmtx39)</code></pre>
 ## b[3]    0.72    0.00 0.05    0.61    0.68    0.72    0.76    0.82   727    1
 ## lp__ -303.25    0.03 1.15 -306.14 -303.81 -302.99 -302.39 -301.85  1505    1
 ## 
-## Samples were drawn using NUTS(diag_e) at Thu Mar 10 16:28:49 2022.
+## Samples were drawn using NUTS(diag_e) at Fri Mar 11 16:36:59 2022.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).</code></pre>
@@ -2223,6 +2239,331 @@ print(resmtx39)</code></pre>
 <h2>9. 補足: 試行回数が常に1の場合</h2>
 <ul>
 <li>そういうときは二項分布ではなくベルヌーイ分布を使おうね、という話</li>
+</ul>
+</div>
+</div>
+<div id="練習" class="section level1">
+<h1>練習</h1>
+<ul>
+<li>今年の基礎実験2の視覚探索実験の結果
+<ul>
+<li>2要因（セットサイズ、難易度）</li>
+<li>従属変数：反応時間（秒）</li>
+<li>データ：vsres.csv</li>
+</ul></li>
+</ul>
+<pre class="r"><code>library(brms)
+library(tidyverse)
+dat&lt;-read.csv(&#39;vsres.csv&#39;, check.names=FALSE)</code></pre>
+<pre class="r"><code>longdat&lt;-dat %&gt;% pivot_longer(!ID, names_to = c(&quot;dif&quot;,&quot;ss&quot;), values_to = &quot;RT&quot;, names_sep = &#39; &#39;)
+ggplot(data=longdat, mapping=aes(x=ss,y=RT,color=dif))+geom_violin()</code></pre>
+<p><img src="baba3_files/figure-html/unnamed-chunk-43-1.png" width="768" /></p>
+<pre class="r"><code>brmvs&lt;-brm(
+  RT ~ ss + dif,
+  family = shifted_lognormal(),
+  data = longdat,
+  prior=NULL
+)</code></pre>
+<pre><code>## Compiling Stan program...</code></pre>
+<pre><code>## Start sampling</code></pre>
+<pre class="r"><code>brmvs</code></pre>
+<pre><code>##  Family: shifted_lognormal 
+##   Links: mu = identity; sigma = identity; ndt = identity 
+## Formula: RT ~ ss + dif 
+##    Data: longdat (Number of observations: 120) 
+##   Draws: 4 chains, each with iter = 2000; warmup = 1000; thin = 1;
+##          total post-warmup draws = 4000
+## 
+## Population-Level Effects: 
+##           Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+## Intercept    -0.26      0.07    -0.39    -0.13 1.00     2457     2678
+## ss18          0.24      0.08     0.10     0.40 1.00     2107     2299
+## ss6          -0.25      0.08    -0.41    -0.11 1.00     2407     2534
+## diflow       -1.60      0.12    -1.83    -1.37 1.00     1150     1359
+## 
+## Family Specific Parameters: 
+##       Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+## sigma     0.33      0.03     0.27     0.40 1.00     1289     1722
+## ndt       0.37      0.02     0.33     0.40 1.00     1024     1258
+## 
+## Draws were sampled using sampling(NUTS). For each parameter, Bulk_ESS
+## and Tail_ESS are effective sample size measures, and Rhat is the potential
+## scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
+<pre class="r"><code>eff&lt;-conditional_effects(brmvs, effects=&#39;ss:dif&#39;)
+plot(eff,points=TRUE)</code></pre>
+<p><img src="baba3_files/figure-html/unnamed-chunk-43-2.png" width="768" /></p>
+</div>
+<div id="交互作用" class="section level1">
+<h1>3-10. 交互作用</h1>
+<div id="交互作用と主効果" class="section level2">
+<h2>2. 交互作用と主効果</h2>
+<ul>
+<li>主効果、交互作用</li>
+</ul>
+</div>
+<div id="一般化線形モデルにおける交互作用の取り扱い" class="section level2">
+<h2>3. 一般化線形モデルにおける交互作用の取り扱い</h2>
+<ul>
+<li>説明変数同士の積を線形予測子に追加</li>
+</ul>
+</div>
+<div id="分析の準備-7" class="section level2">
+<h2>4. 分析の準備</h2>
+<pre class="r"><code>library(rstan)
+library(brms)
+rstan_options(auto_write=TRUE)
+options(mc.cores=parallel::detectCores())</code></pre>
+</div>
+<div id="カテゴリxカテゴリ-モデル化" class="section level2">
+<h2>5. カテゴリxカテゴリ: モデル化</h2>
+<pre class="r"><code>dat&lt;-read.csv(&#39;3-10-1-interaction-1.csv&#39;)
+summary(dat)</code></pre>
+<pre><code>##      sales        publicity            bargen         
+##  Min.   : 55.7   Length:100         Length:100        
+##  1st Qu.:108.8   Class :character   Class :character  
+##  Median :124.3   Mode  :character   Mode  :character  
+##  Mean   :127.2                                        
+##  3rd Qu.:148.5                                        
+##  Max.   :191.7</code></pre>
+<pre class="r"><code>brms310&lt;-brm(
+  formula=sales~publicity*bargen, # publicity+bargen+publicity:bargenでもOK
+  family=gaussian(),
+  data=dat,
+  seed=1,
+  prior=NULL
+)</code></pre>
+<pre><code>## Compiling Stan program...</code></pre>
+<pre><code>## Trying to compile a simple C file</code></pre>
+<pre><code>## Running /usr/local/Cellar/r/4.1.2/lib/R/bin/R CMD SHLIB foo.c
+## clang -I&quot;/usr/local/Cellar/r/4.1.2/lib/R/include&quot; -DNDEBUG   -I&quot;/usr/local/lib/R/4.1/site-library/Rcpp/include/&quot;  -I&quot;/usr/local/lib/R/4.1/site-library/RcppEigen/include/&quot;  -I&quot;/usr/local/lib/R/4.1/site-library/RcppEigen/include/unsupported&quot;  -I&quot;/usr/local/lib/R/4.1/site-library/BH/include&quot; -I&quot;/Users/imaru/Library/R/x86_64/4.1/library/StanHeaders/include/src/&quot;  -I&quot;/Users/imaru/Library/R/x86_64/4.1/library/StanHeaders/include/&quot;  -I&quot;/usr/local/lib/R/4.1/site-library/RcppParallel/include/&quot;  -I&quot;/Users/imaru/Library/R/x86_64/4.1/library/rstan/include&quot; -DEIGEN_NO_DEBUG  -DBOOST_DISABLE_ASSERTS  -DBOOST_PENDING_INTEGER_LOG2_HPP  -DSTAN_THREADS  -DBOOST_NO_AUTO_PTR  -include &#39;/Users/imaru/Library/R/x86_64/4.1/library/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp&#39;  -D_REENTRANT -DRCPP_PARALLEL_USE_TBB=1   -I/usr/local/opt/gettext/include -I/usr/local/opt/readline/include -I/usr/local/opt/xz/include -I/usr/local/include   -fPIC  -Wno-implicit-function-declaration  -c foo.c -o foo.o
+## In file included from &lt;built-in&gt;:1:
+## In file included from /Users/imaru/Library/R/x86_64/4.1/library/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp:13:
+## In file included from /usr/local/lib/R/4.1/site-library/RcppEigen/include/Eigen/Dense:1:
+## In file included from /usr/local/lib/R/4.1/site-library/RcppEigen/include/Eigen/Core:88:
+## /usr/local/lib/R/4.1/site-library/RcppEigen/include/Eigen/src/Core/util/Macros.h:628:1: error: unknown type name &#39;namespace&#39;
+## namespace Eigen {
+## ^
+## /usr/local/lib/R/4.1/site-library/RcppEigen/include/Eigen/src/Core/util/Macros.h:628:16: error: expected &#39;;&#39; after top level declarator
+## namespace Eigen {
+##                ^
+##                ;
+## In file included from &lt;built-in&gt;:1:
+## In file included from /Users/imaru/Library/R/x86_64/4.1/library/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp:13:
+## In file included from /usr/local/lib/R/4.1/site-library/RcppEigen/include/Eigen/Dense:1:
+## /usr/local/lib/R/4.1/site-library/RcppEigen/include/Eigen/Core:96:10: fatal error: &#39;complex&#39; file not found
+## #include &lt;complex&gt;
+##          ^~~~~~~~~
+## 3 errors generated.
+## make: *** [foo.o] Error 1</code></pre>
+<pre><code>## Start sampling</code></pre>
+<pre class="r"><code>brms310</code></pre>
+<pre><code>##  Family: gaussian 
+##   Links: mu = identity; sigma = identity 
+## Formula: sales ~ publicity * bargen 
+##    Data: dat (Number of observations: 100) 
+##   Draws: 4 chains, each with iter = 2000; warmup = 1000; thin = 1;
+##          total post-warmup draws = 4000
+## 
+## Population-Level Effects: 
+##                                          Estimate Est.Error l-95% CI u-95% CI
+## Intercept                                  103.31      3.76    96.04   110.76
+## publicityto_implement                        9.98      5.35    -0.43    20.29
+## bargento_implement                          27.28      5.31    17.01    37.52
+## publicityto_implement:bargento_implement    20.75      7.65     5.34    35.67
+##                                          Rhat Bulk_ESS Tail_ESS
+## Intercept                                1.00     2088     2664
+## publicityto_implement                    1.00     1935     2564
+## bargento_implement                       1.00     1985     2749
+## publicityto_implement:bargento_implement 1.00     1786     2316
+## 
+## Family Specific Parameters: 
+##       Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+## sigma    18.41      1.32    16.09    21.29 1.00     3738     3108
+## 
+## Draws were sampled using sampling(NUTS). For each parameter, Bulk_ESS
+## and Tail_ESS are effective sample size measures, and Rhat is the potential
+## scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
+</div>
+<div id="カテゴリxカテゴリ係数の解釈" class="section level2">
+<h2>6. カテゴリxカテゴリ：係数の解釈</h2>
+<ul>
+<li>係数の意味を確認するための仮想データ
+<ul>
+<li>1/0を代入して確認してるだけ</li>
+</ul></li>
+</ul>
+</div>
+<div id="カテゴリxカテゴリ-モデルの図示" class="section level2">
+<h2>7. カテゴリxカテゴリ: モデルの図示</h2>
+<ul>
+<li>図示する</li>
+</ul>
+<pre class="r"><code>eff&lt;-conditional_effects(brms310, effects=&#39;publicity:bargen&#39;)
+plot(eff, points=TRUE)</code></pre>
+<p><img src="baba3_files/figure-html/unnamed-chunk-47-1.png" width="768" /></p>
+</div>
+<div id="カテゴリx数量モデル化" class="section level2">
+<h2>8. カテゴリx数量：モデル化</h2>
+<ul>
+<li><span class="math inline">\(売り上げ\sim publicity + temperature + publicity:temper\)</span></li>
+</ul>
+<pre class="r"><code>dat2&lt;-read.csv(&#39;3-10-2-interaction-2.csv&#39;)
+summary(dat2)</code></pre>
+<pre><code>##      sales         publicity          temperature    
+##  Min.   : 25.90   Length:100         Min.   : 0.400  
+##  1st Qu.: 79.67   Class :character   1st Qu.: 9.725  
+##  Median :109.50   Mode  :character   Median :14.650  
+##  Mean   :123.47                      Mean   :15.539  
+##  3rd Qu.:154.45                      3rd Qu.:23.025  
+##  Max.   :263.30                      Max.   :29.800</code></pre>
+<ul>
+<li>brmrでモデル化</li>
+</ul>
+<pre class="r"><code>brms310_2&lt;-brm(
+  formula=sales~publicity*temperature,
+  family=gaussian(),
+  data=dat2,
+  seed=1,
+  prior=NULL
+)</code></pre>
+<pre><code>## Compiling Stan program...</code></pre>
+<pre><code>## Trying to compile a simple C file</code></pre>
+<pre><code>## Running /usr/local/Cellar/r/4.1.2/lib/R/bin/R CMD SHLIB foo.c
+## clang -I&quot;/usr/local/Cellar/r/4.1.2/lib/R/include&quot; -DNDEBUG   -I&quot;/usr/local/lib/R/4.1/site-library/Rcpp/include/&quot;  -I&quot;/usr/local/lib/R/4.1/site-library/RcppEigen/include/&quot;  -I&quot;/usr/local/lib/R/4.1/site-library/RcppEigen/include/unsupported&quot;  -I&quot;/usr/local/lib/R/4.1/site-library/BH/include&quot; -I&quot;/Users/imaru/Library/R/x86_64/4.1/library/StanHeaders/include/src/&quot;  -I&quot;/Users/imaru/Library/R/x86_64/4.1/library/StanHeaders/include/&quot;  -I&quot;/usr/local/lib/R/4.1/site-library/RcppParallel/include/&quot;  -I&quot;/Users/imaru/Library/R/x86_64/4.1/library/rstan/include&quot; -DEIGEN_NO_DEBUG  -DBOOST_DISABLE_ASSERTS  -DBOOST_PENDING_INTEGER_LOG2_HPP  -DSTAN_THREADS  -DBOOST_NO_AUTO_PTR  -include &#39;/Users/imaru/Library/R/x86_64/4.1/library/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp&#39;  -D_REENTRANT -DRCPP_PARALLEL_USE_TBB=1   -I/usr/local/opt/gettext/include -I/usr/local/opt/readline/include -I/usr/local/opt/xz/include -I/usr/local/include   -fPIC  -Wno-implicit-function-declaration  -c foo.c -o foo.o
+## In file included from &lt;built-in&gt;:1:
+## In file included from /Users/imaru/Library/R/x86_64/4.1/library/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp:13:
+## In file included from /usr/local/lib/R/4.1/site-library/RcppEigen/include/Eigen/Dense:1:
+## In file included from /usr/local/lib/R/4.1/site-library/RcppEigen/include/Eigen/Core:88:
+## /usr/local/lib/R/4.1/site-library/RcppEigen/include/Eigen/src/Core/util/Macros.h:628:1: error: unknown type name &#39;namespace&#39;
+## namespace Eigen {
+## ^
+## /usr/local/lib/R/4.1/site-library/RcppEigen/include/Eigen/src/Core/util/Macros.h:628:16: error: expected &#39;;&#39; after top level declarator
+## namespace Eigen {
+##                ^
+##                ;
+## In file included from &lt;built-in&gt;:1:
+## In file included from /Users/imaru/Library/R/x86_64/4.1/library/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp:13:
+## In file included from /usr/local/lib/R/4.1/site-library/RcppEigen/include/Eigen/Dense:1:
+## /usr/local/lib/R/4.1/site-library/RcppEigen/include/Eigen/Core:96:10: fatal error: &#39;complex&#39; file not found
+## #include &lt;complex&gt;
+##          ^~~~~~~~~
+## 3 errors generated.
+## make: *** [foo.o] Error 1</code></pre>
+<pre><code>## Start sampling</code></pre>
+<pre class="r"><code>brms310_2</code></pre>
+<pre><code>##  Family: gaussian 
+##   Links: mu = identity; sigma = identity 
+## Formula: sales ~ publicity * temperature 
+##    Data: dat2 (Number of observations: 100) 
+##   Draws: 4 chains, each with iter = 2000; warmup = 1000; thin = 1;
+##          total post-warmup draws = 4000
+## 
+## Population-Level Effects: 
+##                                   Estimate Est.Error l-95% CI u-95% CI Rhat
+## Intercept                            42.94      5.91    31.50    54.45 1.00
+## publicityto_implement                17.26      8.31     0.77    33.72 1.00
+## temperature                           2.59      0.33     1.95     3.23 1.00
+## publicityto_implement:temperature     4.20      0.48     3.29     5.16 1.00
+##                                   Bulk_ESS Tail_ESS
+## Intercept                             2249     2584
+## publicityto_implement                 1986     2140
+## temperature                           2313     2484
+## publicityto_implement:temperature     2019     2343
+## 
+## Family Specific Parameters: 
+##       Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+## sigma    18.76      1.36    16.34    21.56 1.00     3079     2730
+## 
+## Draws were sampled using sampling(NUTS). For each parameter, Bulk_ESS
+## and Tail_ESS are effective sample size measures, and Rhat is the potential
+## scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
+<ul>
+<li>これもデータを渡してみて確認してる</li>
+</ul>
+</div>
+<div id="カテゴリx数量モデルの図示" class="section level2">
+<h2>10. カテゴリx数量：モデルの図示</h2>
+<ul>
+<li>図で示す</li>
+</ul>
+<pre class="r"><code>eff2&lt;-conditional_effects(brms310_2,
+                          effect=&#39;temperature:publicity&#39;
+                        )
+plot(eff2, points=TRUE)</code></pre>
+<p><img src="baba3_files/figure-html/unnamed-chunk-50-1.png" width="768" /></p>
+</div>
+<div id="数量x数量モデル化" class="section level2">
+<h2>11. 数量x数量：モデル化</h2>
+<ul>
+<li>話としては同じ</li>
+</ul>
+<pre class="r"><code>dat3&lt;-read.csv(&#39;3-10-3-interaction-3.csv&#39;)
+summary(dat3)</code></pre>
+<pre><code>##      sales          product          clerk     
+##  Min.   : 35.5   Min.   :10.00   Min.   :1.00  
+##  1st Qu.:116.7   1st Qu.:19.00   1st Qu.:3.00  
+##  Median :178.7   Median :28.00   Median :4.00  
+##  Mean   :204.0   Mean   :29.66   Mean   :4.86  
+##  3rd Qu.:280.6   3rd Qu.:41.00   3rd Qu.:7.00  
+##  Max.   :487.2   Max.   :50.00   Max.   :9.00</code></pre>
+<pre class="r"><code>brms310_3&lt;-brm(
+  formula=sales~product*clerk,
+  family=gaussian(),
+  data=dat3,
+  seed=1,
+  prior = NULL
+)</code></pre>
+<pre><code>## Compiling Stan program...</code></pre>
+<pre><code>## Trying to compile a simple C file</code></pre>
+<pre><code>## Running /usr/local/Cellar/r/4.1.2/lib/R/bin/R CMD SHLIB foo.c
+## clang -I&quot;/usr/local/Cellar/r/4.1.2/lib/R/include&quot; -DNDEBUG   -I&quot;/usr/local/lib/R/4.1/site-library/Rcpp/include/&quot;  -I&quot;/usr/local/lib/R/4.1/site-library/RcppEigen/include/&quot;  -I&quot;/usr/local/lib/R/4.1/site-library/RcppEigen/include/unsupported&quot;  -I&quot;/usr/local/lib/R/4.1/site-library/BH/include&quot; -I&quot;/Users/imaru/Library/R/x86_64/4.1/library/StanHeaders/include/src/&quot;  -I&quot;/Users/imaru/Library/R/x86_64/4.1/library/StanHeaders/include/&quot;  -I&quot;/usr/local/lib/R/4.1/site-library/RcppParallel/include/&quot;  -I&quot;/Users/imaru/Library/R/x86_64/4.1/library/rstan/include&quot; -DEIGEN_NO_DEBUG  -DBOOST_DISABLE_ASSERTS  -DBOOST_PENDING_INTEGER_LOG2_HPP  -DSTAN_THREADS  -DBOOST_NO_AUTO_PTR  -include &#39;/Users/imaru/Library/R/x86_64/4.1/library/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp&#39;  -D_REENTRANT -DRCPP_PARALLEL_USE_TBB=1   -I/usr/local/opt/gettext/include -I/usr/local/opt/readline/include -I/usr/local/opt/xz/include -I/usr/local/include   -fPIC  -Wno-implicit-function-declaration  -c foo.c -o foo.o
+## In file included from &lt;built-in&gt;:1:
+## In file included from /Users/imaru/Library/R/x86_64/4.1/library/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp:13:
+## In file included from /usr/local/lib/R/4.1/site-library/RcppEigen/include/Eigen/Dense:1:
+## In file included from /usr/local/lib/R/4.1/site-library/RcppEigen/include/Eigen/Core:88:
+## /usr/local/lib/R/4.1/site-library/RcppEigen/include/Eigen/src/Core/util/Macros.h:628:1: error: unknown type name &#39;namespace&#39;
+## namespace Eigen {
+## ^
+## /usr/local/lib/R/4.1/site-library/RcppEigen/include/Eigen/src/Core/util/Macros.h:628:16: error: expected &#39;;&#39; after top level declarator
+## namespace Eigen {
+##                ^
+##                ;
+## In file included from &lt;built-in&gt;:1:
+## In file included from /Users/imaru/Library/R/x86_64/4.1/library/StanHeaders/include/stan/math/prim/mat/fun/Eigen.hpp:13:
+## In file included from /usr/local/lib/R/4.1/site-library/RcppEigen/include/Eigen/Dense:1:
+## /usr/local/lib/R/4.1/site-library/RcppEigen/include/Eigen/Core:96:10: fatal error: &#39;complex&#39; file not found
+## #include &lt;complex&gt;
+##          ^~~~~~~~~
+## 3 errors generated.
+## make: *** [foo.o] Error 1</code></pre>
+<pre><code>## Start sampling</code></pre>
+<pre class="r"><code>brms310_3</code></pre>
+<pre><code>##  Family: gaussian 
+##   Links: mu = identity; sigma = identity 
+## Formula: sales ~ product * clerk 
+##    Data: dat3 (Number of observations: 100) 
+##   Draws: 4 chains, each with iter = 2000; warmup = 1000; thin = 1;
+##          total post-warmup draws = 4000
+## 
+## Population-Level Effects: 
+##               Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+## Intercept        88.64     12.61    63.21   113.08 1.00     1420     1571
+## product          -2.27      0.39    -3.03    -1.50 1.00     1393     1671
+## clerk             6.40      2.32     1.85    11.12 1.00     1361     1659
+## product:clerk     1.05      0.07     0.91     1.19 1.01     1321     1464
+## 
+## Family Specific Parameters: 
+##       Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+## sigma    20.22      1.46    17.60    23.31 1.00     2605     2400
+## 
+## Draws were sampled using sampling(NUTS). For each parameter, Bulk_ESS
+## and Tail_ESS are effective sample size measures, and Rhat is the potential
+## scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
+<pre class="r"><code>eff3&lt;-conditional_effects(brms310_3, effects=&#39;product:clerk&#39;)
+plot(eff3, points=TRUE)</code></pre>
+<p><img src="baba3_files/figure-html/unnamed-chunk-51-1.png" width="768" /></p>
+<ul>
+<li>本のように9本書かなくても十分に交互作用は分かりやすい気もする</li>
 </ul>
 </div>
 </div>

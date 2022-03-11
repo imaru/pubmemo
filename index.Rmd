@@ -9,4 +9,5 @@ output:
 - [馬場本1](./baba1.html)
 - [馬場本2](./baba2.html)
 - [馬場本3](./baba3.html)
+- [馬場本4](./baba4.html)
 - [心理科学科技術部](./psytech.html)

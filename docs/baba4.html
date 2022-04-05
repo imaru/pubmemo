@@ -242,9 +242,30 @@
 </div>
 <div id="分析の準備" class="section level2">
 <h2>3. 分析の準備</h2>
-<pre class="r"><code>library(rstan)
-library(brms)
-rstan_options(auto_write=TRUE)
+<pre class="r"><code>library(rstan)</code></pre>
+<pre><code>##  要求されたパッケージ StanHeaders をロード中です</code></pre>
+<pre><code>##  要求されたパッケージ ggplot2 をロード中です</code></pre>
+<pre><code>## Warning in register(): Can&#39;t find generic `scale_type` in package ggplot2 to
+## register S3 method.</code></pre>
+<pre><code>## rstan (Version 2.21.3, GitRev: 2e1f913d3ca3)</code></pre>
+<pre><code>## For execution on a local, multicore CPU with excess RAM we recommend calling
+## options(mc.cores = parallel::detectCores()).
+## To avoid recompilation of unchanged Stan programs, we recommend calling
+## rstan_options(auto_write = TRUE)</code></pre>
+<pre class="r"><code>library(brms)</code></pre>
+<pre><code>##  要求されたパッケージ Rcpp をロード中です</code></pre>
+<pre><code>## Loading &#39;brms&#39; package (version 2.16.3). Useful instructions
+## can be found by typing help(&#39;brms&#39;). A more detailed introduction
+## to the package is available through vignette(&#39;brms_overview&#39;).</code></pre>
+<pre><code>## 
+##  次のパッケージを付け加えます: &#39;brms&#39;</code></pre>
+<pre><code>##  以下のオブジェクトは &#39;package:rstan&#39; からマスクされています: 
+## 
+##      loo</code></pre>
+<pre><code>##  以下のオブジェクトは &#39;package:stats&#39; からマスクされています: 
+## 
+##      ar</code></pre>
+<pre class="r"><code>rstan_options(auto_write=TRUE)
 options(mc.cores=parallel::detectCores())
 
 dat41&lt;-read.csv(&#39;4-1-1-fish-num-2.csv&#39;)
@@ -406,7 +427,7 @@ print(res41, pars=c(&#39;Intercept&#39;,&#39;b_sunny&#39;,&#39;b_temp&#39;,&#39;
 ## b_temp     0.08    0.00 0.02  0.04  0.08  0.11   859 1.01
 ## sigma_r    1.10    0.01 0.16  0.83  1.09  1.45   830 1.01
 ## 
-## Samples were drawn using NUTS(diag_e) at Fri Mar 11 16:38:30 2022.
+## Samples were drawn using NUTS(diag_e) at Thu Mar 24 09:02:33 2022.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).</code></pre>

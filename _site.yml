@@ -4,6 +4,8 @@ navbar:
   left:
     - text: "Home"
       href: index.html
+    - text: "緑本"
+      href: midori1.html
     - text: "馬場本1部"
       href: baba1.html
     - text: "馬場本2部"

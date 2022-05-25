@@ -1,0 +1,40 @@
+---
+title: 'midori3'
+author: "Toshihide Imaruoka"
+output:
+  rmdformats::downcute:
+    highlight: kate
+    css: mycss.css
+    dev: "ragg_png"
+---
+# 3. 一般化線形モデルーポアソン回帰
+  * 説明変数を組み込んだモデル
+    * 個体ごとに異なる説明変数を組み込む
+    * ポアソン回帰
+  
+## 3.1 例題：個体ごとに平均種子数が異なる場合
+  * 架空の植物100個
+    * 個体$_i$
+    * 種子数$y_i$
+    * 体サイズ$x_i$: 正の実数
+    * 施肥処理$f_i$: C処理なし, T処理あり; 50体ずつ
+      * 体サイズと施肥処理は独立
+      
+## 3.2 観測されたデータの概要を調べる
+  * R でデータ読み込み、処理
+  
+```{r}
+dat<-read.csv('kubobook_2012-2/poisson/data3a.csv')
+summary(dat)
+```
+## 3.3 統計モデリングの前にデータを図示する
+
+  * データをよく見ておくこと大事
+```{r}
+plot(dat$x, dat$y, pch=c(21,19)[as.factor(dat$f)])
+legend('topleft', legend=c("C","T"), pch=c(21,19))
+plot(as.factor(dat$f),dat$y)
+```
+  
+
+    

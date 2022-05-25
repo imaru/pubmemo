@@ -141,4 +141,3 @@ ydat<-(1/sqrt(2*pi*v))*exp(-(xdat-m)^2/(2*v))
 plot(xdat, ydat, type='l')
 ```
           
-        

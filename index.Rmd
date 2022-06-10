@@ -11,4 +11,6 @@ output:
 - [馬場本3](./baba3.html)
 - [馬場本4](./baba4.html)
 - [緑本1](./midori1.html)
+- [緑本2](./midori2.html)
+- [緑本3](./midori3.html)
 - [心理科学科技術部](./psytech.html)

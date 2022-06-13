@@ -124,6 +124,7 @@
             <li><a href="#例題個体ごとに平均種子数が異なる場合">3.1 例題：個体ごとに平均種子数が異なる場合</a></li>
             <li><a href="#観測されたデータの概要を調べる">3.2 観測されたデータの概要を調べる</a></li>
             <li><a href="#統計モデリングの前にデータを図示する">3.3 統計モデリングの前にデータを図示する</a></li>
+            <li><a href="#ポアソン回帰の統計モデル">3.4 ポアソン回帰の統計モデル</a></li>
             </ul></li>
             </ul>
           </div>
@@ -245,6 +246,53 @@ legend(&#39;topleft&#39;, legend=c(&quot;C&quot;,&quot;T&quot;), pch=c(21,19))</
 <p><img src="midori3_files/figure-html/unnamed-chunk-2-1.png" width="768" /></p>
 <pre class="r"><code>plot(as.factor(dat$f),dat$y)</code></pre>
 <p><img src="midori3_files/figure-html/unnamed-chunk-2-2.png" width="768" /></p>
+</div>
+<div id="ポアソン回帰の統計モデル" class="section level2">
+<h2>3.4 ポアソン回帰の統計モデル</h2>
+<ul>
+<li>カウントデータなのでポアソン分布でばらつきを表現できるはず</li>
+<li>平均種子数<span class="math inline">\(\lambda_i\)</span>が体サイズxや施肥処理fに影響される</li>
+<li>まずは体サイズ<span class="math inline">\(x_i\)</span>だけに影響されるというモデル
+<ul>
+<li><span class="math inline">\(p(y_i|\lambda_i)=\frac{\lambda_i^{y_i}exp(-\lambda_i)}{y_i!}\)</span></li>
+</ul></li>
+</ul>
+<div id="線形予測子と対数リンク関数" class="section level3">
+<h3>3.4.1 線形予測子と対数リンク関数</h3>
+<ul>
+<li>ここでは平均<span class="math inline">\(\lambda_i\)</span>は説明変数<span class="math inline">\(x_i\)</span>の関数であるとしている。そこで、
+<ul>
+<li><span class="math inline">\(\lambda_i=exp(\beta_1+\beta_2x_i)\)</span></li>
+<li>図示してみると、パラメータ(<span class="math inline">\(\beta_1, \beta_2\)</span>)によって体サイズと平均種子数の関係が大きく変化することが分かる</li>
+<li>ここでは、右辺がexp()である理由は説明されていないことに注意</li>
+</ul></li>
+<li>線形予測子(linear predictor)とリンク関数(link function)
+<ul>
+<li>さっきの式は、下のように変形可能（両辺にlog）
+<ul>
+<li><span class="math inline">\(log\lambda_i=\beta_1+\beta_2x_i\)</span></li>
+</ul></li>
+<li>右辺が項の線形和となったので、これを線形予測子と呼ぶ</li>
+<li>このとき、左辺が<span class="math inline">\(\lambda\)</span>の関数となり、右辺が線形予測子。このときの左辺の関数をリンク関数と呼ぶ。今の場合は対数リンク関数。
+<ul>
+<li>ポアソン回帰の場合は、対数リンク関数を使うのが普通。</li>
+</ul></li>
+<li>正準リンク関数
+<ul>
+<li>ポアソン回帰には対数リンク関数</li>
+<li>ロジスティック回帰にはリジットリンク関数</li>
+<li>これらを正準リンク関数と呼ぶ
+<ul>
+<li>計算に都合が良い＝ポアソン回帰の場合、パラメータが負になり得ない</li>
+<li>分かりやすい＝効果が項同士の積で表される(expだから)→3.6で説明</li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+<div id="あてはめとあてはまりの良さ" class="section level3">
+<h3>3.4.2 あてはめとあてはまりの良さ</h3>
+</div>
 </div>
 </div>
 </div>

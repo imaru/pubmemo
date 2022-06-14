@@ -10,15 +10,12 @@
     
     <title>midori3</title>
 
-        <script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
+        <script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
         <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link href="site_libs/bootstrap-3.3.7/css/bootstrap.min.css" rel="stylesheet" />
         <script src="site_libs/bootstrap-3.3.7/js/bootstrap.min.js"></script>
-        <script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
         <script src="site_libs/navigation-1.1/tabsets.js"></script>
-        <link href="site_libs/magnific-popup-1.1.0/magnific-popup.css" rel="stylesheet" />
-        <script src="site_libs/magnific-popup-1.1.0/jquery.magnific-popup.min.js"></script>
         <link href="site_libs/downcute-0.1/downcute.css" rel="stylesheet" />
         <link href="site_libs/downcute-0.1/downcute_fonts_embed.css" rel="stylesheet" />
         <script src="site_libs/downcute-0.1/downcute_styles.js"></script>
@@ -125,6 +122,7 @@
             <li><a href="#観測されたデータの概要を調べる">3.2 観測されたデータの概要を調べる</a></li>
             <li><a href="#統計モデリングの前にデータを図示する">3.3 統計モデリングの前にデータを図示する</a></li>
             <li><a href="#ポアソン回帰の統計モデル">3.4 ポアソン回帰の統計モデル</a></li>
+            <li><a href="#ポアソン回帰モデルによる予測">3.4.3 ポアソン回帰モデルによる予測</a></li>
             </ul></li>
             </ul>
           </div>
@@ -138,7 +136,7 @@
       <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
         <div class="container">
           <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
@@ -292,7 +290,98 @@ legend(&#39;topleft&#39;, legend=c(&quot;C&quot;,&quot;T&quot;), pch=c(21,19))</
 </div>
 <div id="あてはめとあてはまりの良さ" class="section level3">
 <h3>3.4.2 あてはめとあてはまりの良さ</h3>
+<ul>
+<li>ポアソン回帰＝データに対するポアソン分布を使った統計モデルの「あてはめ」
+<ul>
+<li>いろいろなあてはめの可能性がある中で、対数尤度logLが最大になるパラメータを決める</li>
+<li>あるデータYのもとでの対数尤度は
+<ul>
+<li><span class="math inline">\(logL(\beta_1,\beta_2)=\Sigma_ilog\frac{\lambda^{y_i}exp(-\lambda_i)}{y_i!}\)</span></li>
+<li>ここで、<span class="math inline">\(\lambda_i\)</span>はパラメータ<span class="math inline">\(\beta_1と\beta_2\)</span>の関数</li>
+<li>2章ではパラメータが1つだったので対数尤度の最大値は簡単に求められたけど、2つだとそうはいかない。
+<ul>
+<li>そこで「数値を使った試行錯誤」＝MCMC</li>
+<li>ただし、いきなりMCMCというわけではなく、RではGLMについてはglm関数で最尤推定ができる。以下、ここで使ってるデータの例。</li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+<pre class="r"><code>fit&lt;-glm(y~x, data=dat, family=poisson)
+print(fit)</code></pre>
+<pre><code>## 
+## Call:  glm(formula = y ~ x, family = poisson, data = dat)
+## 
+## Coefficients:
+## (Intercept)            x  
+##     1.29172      0.07566  
+## 
+## Degrees of Freedom: 99 Total (i.e. Null);  98 Residual
+## Null Deviance:       89.51 
+## Residual Deviance: 84.99     AIC: 474.8</code></pre>
+<pre class="r"><code>summary(fit)</code></pre>
+<pre><code>## 
+## Call:
+## glm(formula = y ~ x, family = poisson, data = dat)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -2.3679  -0.7348  -0.1775   0.6987   2.3760  
+## 
+## Coefficients:
+##             Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept)  1.29172    0.36369   3.552 0.000383 ***
+## x            0.07566    0.03560   2.125 0.033580 *  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for poisson family taken to be 1)
+## 
+##     Null deviance: 89.507  on 99  degrees of freedom
+## Residual deviance: 84.993  on 98  degrees of freedom
+## AIC: 474.77
+## 
+## Number of Fisher Scoring iterations: 4</code></pre>
+<pre class="r"><code>logLik(fit)</code></pre>
+<pre><code>## &#39;log Lik.&#39; -235.3863 (df=2)</code></pre>
+<ul>
+<li>結果の読み方まとめ
+<ul>
+<li>(Intercept)は<span class="math inline">\(\beta_1\)</span></li>
+<li>xは<span class="math inline">\(\beta_2\)</span></li>
+<li>Estimateは推定値</li>
+<li>Std. Error は標準誤差
+<ul>
+<li>推定値<span class="math inline">\(\beta_1と\beta_2\)</span>のばらつき（標準偏差）</li>
+<li>パラメータ推定値のばらつきSEの推定方法
+<ul>
+<li>パラメータ推定値のばらつきを正規分布と仮定、さらに対数尤度関数の形が正規分布に近いと仮定。それによってSEを求めている。</li>
+</ul></li>
+</ul></li>
+<li>z valueは統計量z。最尤推定値/SE（Wald統計量）。最尤推定値が0から離れているかどうかの目安となり得る。</li>
+<li>Pr(&gt;|z|)は、平均z値（の絶対値）、標準偏差1の正規分布の無限大から0の面積の2倍。値が大きいと、z値（つまり推定値）が0に近いということになる。今の例でいうと<span class="math inline">\(\beta_1\)</span>は0と十分に離れてるけど、<span class="math inline">\(\beta_2\)</span>は結構近い。信頼区間くらいで考えた方が良さそう。</li>
+</ul></li>
+<li>ある説明変数をモデルに含めるべきかどうかは、第4章のモデル選択で判断すべき
+<ul>
+<li>あてはまりの改善か、予測の改善か</li>
+<li>じゃああてはまりの完全にはWald信頼区間？そういうわけでもなさそうだけど。</li>
+</ul></li>
+<li>最大対数尤度＝あてはまりの良さ（goodness of fit)
+<ul>
+<li>logLik()関数</li>
+</ul></li>
+</ul>
 </div>
+</div>
+<div id="ポアソン回帰モデルによる予測" class="section level2">
+<h2>3.4.3 ポアソン回帰モデルによる予測</h2>
+<ul>
+<li>ポアソン回帰の推定結果を使って、体サイズに対する種子数の予測ができる</li>
+</ul>
+<pre class="r"><code>plot(dat$x, dat$y, pch=c(21,19)[as.factor(dat$f)], ylim=c(min(dat$y), max(dat$y)))
+xx&lt;-seq(min(dat$x), max(dat$x), length=100)
+par(new=T)
+plot(xx, exp(1.29 + 0.0757 * xx), type=&#39;l&#39;, lwd=2, ylim=c(min(dat$y), max(dat$y)))</code></pre>
+<p><img src="midori3_files/figure-html/unnamed-chunk-4-1.png" width="768" /></p>
 </div>
 </div>
 </div>

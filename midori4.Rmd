@@ -1,0 +1,10 @@
+---
+title: "midori4"
+author: "Toshihide Imaruoka"
+date: "6/14/2022"
+output:
+  rmdformats::downcute:
+    highlight: kate
+    css: mycss.css
+    dev: "ragg_png"
+---

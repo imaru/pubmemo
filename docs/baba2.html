@@ -10,15 +10,12 @@
     
     <title>馬場本</title>
 
-        <script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
+        <script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
         <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link href="site_libs/bootstrap-3.3.7/css/bootstrap.min.css" rel="stylesheet" />
         <script src="site_libs/bootstrap-3.3.7/js/bootstrap.min.js"></script>
-        <script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
         <script src="site_libs/navigation-1.1/tabsets.js"></script>
-        <link href="site_libs/magnific-popup-1.1.0/magnific-popup.css" rel="stylesheet" />
-        <script src="site_libs/magnific-popup-1.1.0/jquery.magnific-popup.min.js"></script>
         <link href="site_libs/downcute-0.1/downcute.css" rel="stylesheet" />
         <link href="site_libs/downcute-0.1/downcute_fonts_embed.css" rel="stylesheet" />
         <script src="site_libs/downcute-0.1/downcute_styles.js"></script>
@@ -124,7 +121,8 @@
             <ul>
             <li><a href="#目的と概要">1. 目的と概要</a></li>
             <li><a href="#rのインストール">2. Rのインストール</a></li>
-            <li><a href="#rstudioのインストール">3. RStudioのインストール</a></li>
+            <li><a href="#rstudioのインストール">3.
+            RStudioのインストール</a></li>
             <li><a href="#rstudioの使い方">4. RStudioの使い方</a></li>
             <li><a href="#変数">5. 変数</a></li>
             <li><a href="#関数">6. 関数</a></li>
@@ -135,77 +133,112 @@
             <li><a href="#リスト">11. リスト</a></li>
             <li><a href="#データの抽出">12. データの抽出</a></li>
             <li><a href="#時系列データts">13. 時系列データ(ts)</a></li>
-            <li><a href="#ファイルからのデータ読み込み">14. ファイルからのデータ読み込み</a></li>
+            <li><a href="#ファイルからのデータ読み込み">14.
+            ファイルからのデータ読み込み</a></li>
             <li><a href="#乱数の生成">15. 乱数の生成</a></li>
-            <li><a href="#繰り返し構文とforループ">16. 繰り返し構文とforループ</a></li>
-            <li><a href="#外部パッケージの活用">17. 外部パッケージの活用</a></li>
+            <li><a href="#繰り返し構文とforループ">16.
+            繰り返し構文とforループ</a></li>
+            <li><a href="#外部パッケージの活用">17.
+            外部パッケージの活用</a></li>
             </ul></li>
             <li><a href="#章-データの要約">2-2章: データの要約</a>
             <ul>
-            <li><a href="#度数度数分布ヒストグラム">2. 度数・度数分布・ヒストグラム</a></li>
+            <li><a href="#度数度数分布ヒストグラム">2.
+            度数・度数分布・ヒストグラム</a></li>
             <li><a href="#カーネル密度推定">3. カーネル密度推定</a></li>
             <li><a href="#算術平均">4. 算術平均</a></li>
-            <li><a href="#中央値四分位点パーセント点">5. 中央値・四分位点・パーセント点</a></li>
-            <li><a href="#共分散とピアソンの積率相関係数">6. 共分散とピアソンの積率相関係数</a></li>
-            <li><a href="#自己共分散自己相関係数コレログラム">7. 自己共分散・自己相関係数・コレログラム</a></li>
+            <li><a href="#中央値四分位点パーセント点">5.
+            中央値・四分位点・パーセント点</a></li>
+            <li><a href="#共分散とピアソンの積率相関係数">6.
+            共分散とピアソンの積率相関係数</a></li>
+            <li><a href="#自己共分散自己相関係数コレログラム">7.
+            自己共分散・自己相関係数・コレログラム</a></li>
             </ul></li>
-            <li><a href="#章-ggplot2によるデータの可視化">2-3章 ggplot2によるデータの可視化</a>
+            <li><a href="#章-ggplot2によるデータの可視化">2-3章
+            ggplot2によるデータの可視化</a>
             <ul>
             <li><a href="#ggplot2の基本">2. ggplot2の基本</a></li>
             <li><a href="#データの読み込み">3. データの読み込み</a></li>
-            <li><a href="#ヒストグラムとカーネル密度推定">4. ヒストグラムとカーネル密度推定</a></li>
-            <li><a href="#グラフの重ね合わせと一覧表示">5. グラフの重ね合わせと一覧表示</a></li>
-            <li><a href="#箱ひげ図とバイオリンプロット">3.6 箱ひげ図とバイオリンプロット</a></li>
+            <li><a href="#ヒストグラムとカーネル密度推定">4.
+            ヒストグラムとカーネル密度推定</a></li>
+            <li><a href="#グラフの重ね合わせと一覧表示">5.
+            グラフの重ね合わせと一覧表示</a></li>
+            <li><a href="#箱ひげ図とバイオリンプロット">3.6
+            箱ひげ図とバイオリンプロット</a></li>
             <li><a href="#散布図">3.7 散布図</a></li>
             <li><a href="#折れ線グラフ">3.8 折れ線グラフ</a></li>
             </ul></li>
-            <li><a href="#の補足ggplot2の考え方rグラフィックブック付録a">2-3の補足：ggplot2の考え方(Rグラフィックブック付録A)</a>
+            <li><a
+            href="#の補足ggplot2の考え方rグラフィックブック付録a">2-3の補足：ggplot2の考え方(Rグラフィックブック付録A)</a>
             <ul>
-            <li><a href="#wideフォーマットとlongフォーマット">wideフォーマットとlongフォーマット</a></li>
+            <li><a
+            href="#wideフォーマットとlongフォーマット">wideフォーマットとlongフォーマット</a></li>
             <li><a href="#ggplotの用語">ggplotの用語</a></li>
             <li><a href="#基本的な使い方">基本的な使い方</a></li>
             </ul></li>
             <li><a href="#章-stanの基本">2-4章 Stanの基本</a>
             <ul>
-            <li><a href="#stanのインストール">2. Stanのインストール</a></li>
-            <li><a href="#サンプルとmcmcサンプル">3. サンプルとMCMCサンプル</a></li>
-            <li><a href="#ここで推定するモデルの構造">4. ここで推定するモデルの構造</a></li>
+            <li><a href="#stanのインストール">2.
+            Stanのインストール</a></li>
+            <li><a href="#サンプルとmcmcサンプル">3.
+            サンプルとMCMCサンプル</a></li>
+            <li><a href="#ここで推定するモデルの構造">4.
+            ここで推定するモデルの構造</a></li>
             <li><a href="#rとstan">5. RとStan</a></li>
-            <li><a href="#stanファイルの書き方">6. Stanファイルの書き方</a></li>
-            <li><a href="#stanファイルの実装例">7. Stanファイルの実装例</a></li>
-            <li><a href="#rファイル実装の流れ">8. Rファイル実装の流れ</a></li>
+            <li><a href="#stanファイルの書き方">6.
+            Stanファイルの書き方</a></li>
+            <li><a href="#stanファイルの実装例">7.
+            Stanファイルの実装例</a></li>
+            <li><a href="#rファイル実装の流れ">8.
+            Rファイル実装の流れ</a></li>
             <li><a href="#分析の準備">9. 分析の準備</a></li>
             <li><a href="#データ読み込み">10. データ読み込み</a></li>
-            <li><a href="#list形式でデータをまとめる">11. list形式でデータをまとめる</a></li>
-            <li><a href="#stanと連携してmcmc実行">12. Stanと連携してMCMC実行</a></li>
+            <li><a href="#list形式でデータをまとめる">11.
+            list形式でデータをまとめる</a></li>
+            <li><a href="#stanと連携してmcmc実行">12.
+            Stanと連携してMCMC実行</a></li>
             <li><a href="#結果の確認">13. 結果の確認</a></li>
             <li><a href="#収束の確認">14. 収束の確認</a></li>
             <li><a href="#ベクトル化">15. ベクトル化</a></li>
             <li><a href="#モデルの図式化">16. モデルの図式化</a></li>
             </ul></li>
-            <li><a href="#stanコーディングの詳細">2-6. Stanコーディングの詳細</a>
+            <li><a href="#stanコーディングの詳細">2-6.
+            Stanコーディングの詳細</a>
             <ul>
-            <li><a href="#stanファイルの構造">2. Stanファイルの構造</a></li>
+            <li><a href="#stanファイルの構造">2.
+            Stanファイルの構造</a></li>
             <li><a href="#変数の宣言">3. 変数の宣言</a></li>
             <li><a href="#代入">4. 代入</a></li>
             <li><a href="#サンプリング文">5. サンプリング文</a></li>
-            <li><a href="#弱情報事前分布の設定">6. 弱情報事前分布の設定</a></li>
+            <li><a href="#弱情報事前分布の設定">6.
+            弱情報事前分布の設定</a></li>
             <li><a href="#mcmcの実行">2. MCMCの実行</a></li>
-            <li><a href="#mcmcサンプルの抽出">3. MCMCサンプルの抽出</a></li>
-            <li><a href="#mcmcサンプルの代表値の計算">4. MCMCサンプルの代表値の計算</a></li>
-            <li><a href="#トレースプロットの描画">5. トレースプロットの描画</a></li>
-            <li><a href="#事後予測チェックの概要">10. 事後予測チェックの概要</a></li>
-            <li><a href="#事後予測チェックの対象となるデータとモデル">11. 事後予測チェックの対象となるデータとモデル</a></li>
+            <li><a href="#mcmcサンプルの抽出">3.
+            MCMCサンプルの抽出</a></li>
+            <li><a href="#mcmcサンプルの代表値の計算">4.
+            MCMCサンプルの代表値の計算</a></li>
+            <li><a href="#トレースプロットの描画">5.
+            トレースプロットの描画</a></li>
+            <li><a href="#事後予測チェックの概要">10.
+            事後予測チェックの概要</a></li>
+            <li><a
+            href="#事後予測チェックの対象となるデータとモデル">11.
+            事後予測チェックの対象となるデータとモデル</a></li>
             </ul></li>
-            <li><a href="#stanコーディングの詳細-1">2-6. Stanコーディングの詳細</a>
+            <li><a href="#stanコーディングの詳細-1">2-6.
+            Stanコーディングの詳細</a>
             <ul>
-            <li><a href="#stanファイルの構造-1">2. Stanファイルの構造</a></li>
+            <li><a href="#stanファイルの構造-1">2.
+            Stanファイルの構造</a></li>
             <li><a href="#変数の宣言-1">3. 変数の宣言</a></li>
             <li><a href="#代入-1">4. 代入</a></li>
             <li><a href="#サンプリング文-1">5. サンプリング文</a></li>
-            <li><a href="#弱情報事前分布の設定-1">6. 弱情報事前分布の設定</a></li>
+            <li><a href="#弱情報事前分布の設定-1">6.
+            弱情報事前分布の設定</a></li>
             <li><a href="#対数密度加算文">7. 対数密度加算文</a></li>
-            <li><a href="#平均値の差の評価とgenerated-quantitiesブロック">8. 平均値の差の評価とgenerated quantitiesブロック</a></li>
+            <li><a
+            href="#平均値の差の評価とgenerated-quantitiesブロック">8.
+            平均値の差の評価とgenerated quantitiesブロック</a></li>
             <li><a href="#練習問題">練習問題</a></li>
             </ul></li>
             </ul>
@@ -220,7 +253,7 @@
       <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
         <div class="container">
           <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
@@ -257,6 +290,12 @@
         <a href="midori3.html">緑本3部</a>
       </li>
       <li>
+        <a href="midori4.html">緑本4部</a>
+      </li>
+      <li>
+        <a href="midori5.html">緑本5部</a>
+      </li>
+      <li>
         <a href="psytech.html">技術部</a>
       </li>
             </ul>
@@ -270,7 +309,8 @@
       <h1 class="title">馬場本</h1>
       
       <p class="authors">
-           <span class="glyphicon glyphicon-user"></span> Toshihide Imaruoka
+           <span class="glyphicon glyphicon-user"></span> Toshihide
+Imaruoka
       </p>
               
 
@@ -365,7 +405,8 @@ print(mtrx)</code></pre>
 <h2>12. データの抽出</h2>
 <ul>
 <li>[]での抽出</li>
-<li>a&lt;-matrix(data=1:10,nrow=2) でa[,1]のようにすれば特定列のみ、特定行のみ抽出</li>
+<li>a&lt;-matrix(data=1:10,nrow=2)
+でa[,1]のようにすれば特定列のみ、特定行のみ抽出</li>
 <li>a[1, 2:3]のようなことも可能</li>
 <li>dim()で要素数、dimnamesで要素名を調べる</li>
 <li>行名や列名でも指定可能</li>
@@ -455,8 +496,10 @@ plot(density(fish$length, adjust=1))</code></pre>
 <div id="共分散とピアソンの積率相関係数" class="section level2">
 <h2>6. 共分散とピアソンの積率相関係数</h2>
 <ul>
-<li>共分散: <span class="math inline">\(\frac{1}{N} \Sigma^N_{i=1} (x_i-\bar{x})(y_i-\bar{y}))\)</span></li>
-<li>ピアソンの積率相関係数: <span class="math inline">\(\rho_{xy}=\frac{\Sigma^N_{i=1}(x_i-\bar{x})(y_i-\bar{y})}{\sqrt{\{\Sigma^N_{i=1}(x_i-\bar{x})^2\}\{\Sigma^N_{i=1}(y_i-\bar{y})^2\}}}\)</span></li>
+<li>共分散: <span class="math inline">\(\frac{1}{N} \Sigma^N_{i=1}
+(x_i-\bar{x})(y_i-\bar{y}))\)</span></li>
+<li>ピアソンの積率相関係数: <span
+class="math inline">\(\rho_{xy}=\frac{\Sigma^N_{i=1}(x_i-\bar{x})(y_i-\bar{y})}{\sqrt{\{\Sigma^N_{i=1}(x_i-\bar{x})^2\}\{\Sigma^N_{i=1}(y_i-\bar{y})^2\}}}\)</span></li>
 <li>cor(varx, vary)</li>
 </ul>
 </div>
@@ -467,7 +510,8 @@ plot(density(fish$length, adjust=1))</code></pre>
 <ul>
 <li>1次：1時点前との相関</li>
 <li>2次：2時点前との相関</li>
-<li><span class="math inline">\(\frac{1}{N}\Sigma^N_{i=1}(y_t-\bar{y})(y_{t-1}-\bar{y})\)</span></li>
+<li><span
+class="math inline">\(\frac{1}{N}\Sigma^N_{i=1}(y_t-\bar{y})(y_{t-1}-\bar{y})\)</span></li>
 <li>acf()</li>
 </ul></li>
 </ul>
@@ -512,13 +556,8 @@ head(fish, n=3)</code></pre>
 <pre class="r"><code>ggplot(data=fish, mapping=aes(x=length, y=..density..))+geom_histogram(alpha=0.5, bins=20)+geom_density(size=1.5)+labs(title=&#39;ヒストグラム&#39;)</code></pre>
 <p><img src="baba2_files/figure-html/unnamed-chunk-7-1.png" width="768" /></p>
 <pre class="r"><code>library(gcookbook)
-library(gridExtra)</code></pre>
-<pre><code>## 
-##  次のパッケージを付け加えます: &#39;gridExtra&#39;</code></pre>
-<pre><code>##  以下のオブジェクトは &#39;package:dplyr&#39; からマスクされています: 
-## 
-##      combine</code></pre>
-<pre class="r"><code>p_hist&lt;-ggplot(data=fish, mapping=aes(x=length))+geom_histogram(alpha=0.5, bins=20)+labs(title=&quot;ヒストグラム&quot;)
+library(gridExtra)
+p_hist&lt;-ggplot(data=fish, mapping=aes(x=length))+geom_histogram(alpha=0.5, bins=20)+labs(title=&quot;ヒストグラム&quot;)
 p_density&lt;-ggplot(data=fish, mappin=aes(x=length))+geom_density(size=1.5)+labs(title=&quot;カーネル密度推定&quot;)
 grid.arrange(p_hist, p_density, nrow=2)+theme(plot.title=element_text(family=&quot;Hirakaku&quot;))</code></pre>
 <p><img src="baba2_files/figure-html/unnamed-chunk-8-1.png" width="768" /></p>
@@ -544,7 +583,8 @@ grid.arrange(p_hist, p_density, nrow=2)+theme(plot.title=element_text(family=&qu
 </ul>
 </div>
 </div>
-<div id="の補足ggplot2の考え方rグラフィックブック付録a" class="section level1">
+<div id="の補足ggplot2の考え方rグラフィックブック付録a"
+class="section level1">
 <h1>2-3の補足：ggplot2の考え方(Rグラフィックブック付録A)</h1>
 <div id="wideフォーマットとlongフォーマット" class="section level2">
 <h2>wideフォーマットとlongフォーマット</h2>
@@ -563,13 +603,8 @@ simpledat</code></pre>
 <li>reshapeパッケージ、melt()</li>
 </ul></li>
 </ul>
-<pre class="r"><code>library(reshape2)</code></pre>
-<pre><code>## 
-##  次のパッケージを付け加えます: &#39;reshape2&#39;</code></pre>
-<pre><code>##  以下のオブジェクトは &#39;package:tidyr&#39; からマスクされています: 
-## 
-##      smiths</code></pre>
-<pre class="r"><code>longdat&lt;-melt(simpledat)
+<pre class="r"><code>library(reshape2)
+longdat&lt;-melt(simpledat)
 longdat</code></pre>
 <pre><code>##   Var1 Var2 value
 ## 1   B1   A1    10
@@ -584,7 +619,8 @@ longdat</code></pre>
 <ul>
 <li>データ：視覚化の対象、変数で構成される</li>
 <li>幾何オブジェクト：描画されるもの。データを表現したもの。</li>
-<li>エステティック属性：幾何オブジェクトの視覚的プロパティ（x, yの位置、線の色など）</li>
+<li>エステティック属性：幾何オブジェクトの視覚的プロパティ（x,
+yの位置、線の色など）</li>
 <li>マッピング：「データの値をエステティック属性にマッピングする」</li>
 <li>スケール：データ空間の値とエステティック空間の値との関係。</li>
 <li>ガイド：目盛りやラベル</li>
@@ -650,8 +686,10 @@ p2+scale_x_continuous(limits=c(0,8))</code></pre>
 <ul>
 <li>売り上げ（単位：万円）を記録したデータ100個</li>
 <li>売り上げデータは正規分布に従う</li>
-<li>売り上げ平均<span class="math inline">\(\mu\)</span>, ばらつき<span class="math inline">\(\sigma\)</span></li>
-<li><span class="math inline">\(sales \sim Normal(\mu, \sigma^2)\)</span></li>
+<li>売り上げ平均<span class="math inline">\(\mu\)</span>, ばらつき<span
+class="math inline">\(\sigma\)</span></li>
+<li><span class="math inline">\(sales \sim Normal(\mu,
+\sigma^2)\)</span></li>
 </ul></li>
 </ul>
 </div>
@@ -688,7 +726,8 @@ p2+scale_x_continuous(limits=c(0,8))</code></pre>
 <li>parameterブロック：事後分布を得るパラメータ一覧</li>
 <li>modelブロック：事前分布、尤度
 <ul>
-<li>事前分布を指定しないと<span class="math inline">\((-\infty, \infty)\)</span>の一様分布</li>
+<li>事前分布を指定しないと<span class="math inline">\((-\infty,
+\infty)\)</span>の一様分布</li>
 </ul></li>
 </ul></li>
 </ul>
@@ -752,8 +791,14 @@ p2+scale_x_continuous(limits=c(0,8))</code></pre>
 <li>実際にはMCMCサンプルは毎回異なるが、seed=1を指定することで固定。</li>
 </ul></li>
 </ul>
-<pre class="r"><code>library(rstan)
-rstan_options(auto_write=TRUE)
+<pre class="r"><code>library(rstan)</code></pre>
+<pre><code>##  要求されたパッケージ StanHeaders をロード中です</code></pre>
+<pre><code>## rstan (Version 2.21.5, GitRev: 2e1f913d3ca3)</code></pre>
+<pre><code>## For execution on a local, multicore CPU with excess RAM we recommend calling
+## options(mc.cores = parallel::detectCores()).
+## To avoid recompilation of unchanged Stan programs, we recommend calling
+## rstan_options(auto_write = TRUE)</code></pre>
+<pre class="r"><code>rstan_options(auto_write=TRUE)
 options(mc.cores=parallel::detectCores())
 
 file_beer_sales_1 &lt;- read.csv(&quot;2-4-1-beer-sales-1.csv&quot;)
@@ -789,7 +834,7 @@ mcmc_result&lt;-stan(
 ## sigma   18.19    0.02 1.27   15.93   18.12   20.98  2758    1
 ## lp__  -336.43    0.02 0.96 -338.94 -336.13 -335.48  1905    1
 ## 
-## Samples were drawn using NUTS(diag_e) at Wed May 25 15:40:42 2022.
+## Samples were drawn using NUTS(diag_e) at Thu Jun 16 12:31:36 2022.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).</code></pre>
@@ -810,7 +855,8 @@ mcmc_result&lt;-stan(
 <div id="ベクトル化" class="section level2">
 <h2>15. ベクトル化</h2>
 <ul>
-<li><span class="math inline">\(sales[N] \sim normal(mu, sigma)\)</span> をベクトルにする</li>
+<li><span class="math inline">\(sales[N] \sim normal(mu, sigma)\)</span>
+をベクトルにする</li>
 <li><span class="math inline">\(sales \sim normal(mu, sigma)\)</span>
 <ul>
 <li>わずかに結果が変わる</li>
@@ -891,16 +937,21 @@ mcmc_result&lt;-stan(
 <li>modelブロック</li>
 <li>ビール売上の例
 <ul>
-<li>売上平均値のパラメータ<span class="math inline">\(\mu\)</span>, ばらつき<span class="math inline">\(\sigma^2\)</span></li>
-<li>売上salesは平均<span class="math inline">\(\mu\)</span>, ばらつき<span class="math inline">\(\sigma^2\)</span>の正規分布からサンプリングされたと想定</li>
-<li><span class="math inline">\(sales \sim Normal(\mu, \sigma^2)\)</span></li>
+<li>売上平均値のパラメータ<span class="math inline">\(\mu\)</span>,
+ばらつき<span class="math inline">\(\sigma^2\)</span></li>
+<li>売上salesは平均<span class="math inline">\(\mu\)</span>,
+ばらつき<span
+class="math inline">\(\sigma^2\)</span>の正規分布からサンプリングされたと想定</li>
+<li><span class="math inline">\(sales \sim Normal(\mu,
+\sigma^2)\)</span></li>
 <li>N: サンプルサイズとして
 <ul>
 <li>model{ for (i in 1:N){ sales[i] ~ normal(mu, sigma) } }</li>
 </ul></li>
 <li>左辺ではデータでも、未知のパラメータでもOK</li>
 <li>muとsigmaの事前分布は指定できる</li>
-<li>model{ mu ~ normal(0, 1000000); sigma ~ normal(0, 1000000); for (i in 1:N){ sales[i] ~ normal(mu, sigma); } }</li>
+<li>model{ mu ~ normal(0, 1000000); sigma ~ normal(0, 1000000); for (i
+in 1:N){ sales[i] ~ normal(mu, sigma); } }</li>
 <li>事前分布を変えたときに結果（＝事後分布）がどう変わってくるかの確認作業：感度分析</li>
 </ul></li>
 </ul>
@@ -944,12 +995,14 @@ mcmc_result&lt;-stan(
 <ul>
 <li>rstan::extract(): stanfitクラスからmcmcサンプルを抽出する</li>
 <li>mcmc_sample &lt;- rstan::extract(mcmc_result, permuted=FALSE)</li>
-<li>抜き出されたmcmc_sampleオブジェクトはarrayクラス、dimsは1000（iter数-wamup数), 4(chans数), 3(mu, sigma, lp__)となる。
+<li>抜き出されたmcmc_sampleオブジェクトはarrayクラス、dimsは1000（iter数-wamup数),
+4(chans数), 3(mu, sigma, lp__)となる。
 <ul>
 <li>dim_names(mcmc_samples)で確認できる</li>
 </ul></li>
 <li>mcmc_sample[]で要素を見ることができる</li>
-<li>mcmc_sample[,,mu]だと<span class="math inline">\(\mu\)</span>のMCMCサンプル全てを取り出せる</li>
+<li>mcmc_sample[,,mu]だと<span
+class="math inline">\(\mu\)</span>のMCMCサンプル全てを取り出せる</li>
 </ul>
 <pre class="r"><code>mcmc_sample&lt;-rstan::extract(mcmc_result, permuted=FALSE)
 class(mcmc_sample)</code></pre>
@@ -996,15 +1049,18 @@ autoplot(ts(mcmc_sample[,,&quot;mu&quot;]),
   facets = F,
   ylab = &quot;mu&quot;,
   main= &quot;トレースプロット&quot;)</code></pre>
-<p><img src="baba2_files/figure-html/unnamed-chunk-17-1.png" width="768" /> 6. ggplot2による事後分布の可視化 * MCMCサンプルをまとめる＝パラメータの事後分布</p>
+<p><img src="baba2_files/figure-html/unnamed-chunk-17-1.png" width="768" />
+6. ggplot2による事後分布の可視化 *
+MCMCサンプルをまとめる＝パラメータの事後分布</p>
 <pre class="r"><code>mu_df &lt;- data.frame(mu_mcmc_sample &lt;- mu_mcmc_vec)
 ggplot(data=mu_df, mapping=aes(x=mu_mcmc_sample))+geom_density(size=1.5)</code></pre>
-<p><img src="baba2_files/figure-html/ggplot2-1.png" width="768" /> ## 7. bayesplotによる事後分布の可視化 * bayesplot便利</p>
+<p><img src="baba2_files/figure-html/ggplot2-1.png" width="768" /> ## 7.
+bayesplotによる事後分布の可視化 * bayesplot便利</p>
 <pre class="r"><code>library(rstan)
 rstan_options(auto_write=TRUE)
 options(mc.cores=parallel::detectCores())
 library(bayesplot)</code></pre>
-<pre><code>## This is bayesplot version 1.8.1</code></pre>
+<pre><code>## This is bayesplot version 1.9.0</code></pre>
 <pre><code>## - Online documentation and vignettes at mc-stan.org/bayesplot</code></pre>
 <pre><code>## - bayesplot theme set to bayesplot::theme_default()</code></pre>
 <pre><code>##    * Does _not_ affect other ggplot2 plots</code></pre>
@@ -1014,7 +1070,9 @@ library(bayesplot)</code></pre>
 <pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
 <p><img src="baba2_files/figure-html/bayesplot%20combo-1.png" width="768" /></p>
 <pre class="r"><code>mcmc_combo(mcmc_sample, parc=c(&quot;mu&quot;,&quot;sigma&quot;))</code></pre>
-<p><img src="baba2_files/figure-html/bayesplot%20combo-2.png" width="768" /> ## 8. bayesplotによる事後分布の範囲の比較 ## 9. bayesplotによるMCMCサンプルの自己相関の評価 * コレログラムも描ける</p>
+<p><img src="baba2_files/figure-html/bayesplot%20combo-2.png" width="768" />
+## 8. bayesplotによる事後分布の範囲の比較 ## 9.
+bayesplotによるMCMCサンプルの自己相関の評価 * コレログラムも描ける</p>
 </div>
 <div id="事後予測チェックの概要" class="section level2">
 <h2>10. 事後予測チェックの概要</h2>
@@ -1035,7 +1093,8 @@ library(bayesplot)</code></pre>
 </ul></li>
 </ul>
 </div>
-<div id="事後予測チェックの対象となるデータとモデル" class="section level2">
+<div id="事後予測チェックの対象となるデータとモデル"
+class="section level2">
 <h2>11. 事後予測チェックの対象となるデータとモデル</h2>
 <ul>
 <li>小動物の発見個体数
@@ -1108,16 +1167,21 @@ library(bayesplot)</code></pre>
 <li>modelブロック</li>
 <li>ビール売上の例
 <ul>
-<li>売上平均値のパラメータ<span class="math inline">\(\mu\)</span>, ばらつき<span class="math inline">\(\sigma^2\)</span></li>
-<li>売上salesは平均<span class="math inline">\(\mu\)</span>, ばらつき<span class="math inline">\(\sigma^2\)</span>の正規分布からサンプリングされたと想定</li>
-<li><span class="math inline">\(sales \sim Normal(\mu, \sigma^2)\)</span></li>
+<li>売上平均値のパラメータ<span class="math inline">\(\mu\)</span>,
+ばらつき<span class="math inline">\(\sigma^2\)</span></li>
+<li>売上salesは平均<span class="math inline">\(\mu\)</span>,
+ばらつき<span
+class="math inline">\(\sigma^2\)</span>の正規分布からサンプリングされたと想定</li>
+<li><span class="math inline">\(sales \sim Normal(\mu,
+\sigma^2)\)</span></li>
 <li>N: サンプルサイズとして
 <ul>
 <li>model{ for (i in 1:N){ sales[i] ~ normal(mu, sigma) } }</li>
 </ul></li>
 <li>左辺ではデータでも、未知のパラメータでもOK</li>
 <li>muとsigmaの事前分布は指定できる</li>
-<li>model{ mu ~ normal(0, 1000000); sigma ~ normal(0, 1000000); for (i in 1:N){ sales[i] ~ normal(mu, sigma); } }</li>
+<li>model{ mu ~ normal(0, 1000000); sigma ~ normal(0, 1000000); for (i
+in 1:N){ sales[i] ~ normal(mu, sigma); } }</li>
 <li>事前分布を変えたときに結果（＝事後分布）がどう変わってくるかの確認作業：感度分析</li>
 </ul></li>
 </ul>
@@ -1147,22 +1211,26 @@ library(bayesplot)</code></pre>
 <li>例えばmu, sigmaに従う正規分布にしたがって得られるデータ</li>
 <li>対数密度加算文では
 <ul>
-<li>model{ for (i in 1:N) target += normal_lpdf(sales[i]|mu, sigma); }</li>
+<li>model{ for (i in 1:N) target += normal_lpdf(sales[i]|mu, sigma);
+}</li>
 </ul></li>
-<li>targetに対して対数確率密度関数(log probability density function)を加算してるということ
+<li>targetに対して対数確率密度関数(log probability density
+function)を加算してるということ
 <ul>
 <li>離散型の場合、lpmf(log probability mass function)</li>
 </ul></li>
 <li>事前分布として広い正規分布を与える場合
 <ul>
-<li>model{ target += normal_lpdf(mu|0, 1000000); target += normal_lpdf(sigma|0, 1000000);
+<li>model{ target += normal_lpdf(mu|0, 1000000); target +=
+normal_lpdf(sigma|0, 1000000);
 <ul>
 <li>ここでtargetはlp__(対数事後確率) }</li>
 </ul></li>
 </ul></li>
 </ul>
 </div>
-<div id="平均値の差の評価とgenerated-quantitiesブロック" class="section level2">
+<div id="平均値の差の評価とgenerated-quantitiesブロック"
+class="section level2">
 <h2>8. 平均値の差の評価とgenerated quantitiesブロック</h2>
 <ul>
 <li>モデル推定とは独立に乱数を得たい</li>
@@ -1200,7 +1268,7 @@ print(mcmc_result_6, probs=c(0.025, 0.5, .0975))</code></pre>
 ## diff      66.66    0.05 3.50   59.84   66.67   62.19  4094    1
 ## lp__    -719.42    0.03 1.45 -723.21 -719.07 -721.34  2249    1
 ## 
-## Samples were drawn using NUTS(diag_e) at Wed May 25 15:40:47 2022.
+## Samples were drawn using NUTS(diag_e) at Thu Jun 16 12:31:42 2022.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).</code></pre>
@@ -1237,7 +1305,7 @@ print(mcmc_p_res)</code></pre>
 ## diff      2.58    0.01 0.32   1.94   2.37   2.58   2.80   3.22  3643    1
 ## lp__    -32.31    0.04 1.48 -35.98 -33.01 -31.98 -31.25 -30.48  1552    1
 ## 
-## Samples were drawn using NUTS(diag_e) at Wed May 25 15:40:48 2022.
+## Samples were drawn using NUTS(diag_e) at Thu Jun 16 12:31:43 2022.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).</code></pre>
@@ -1279,7 +1347,7 @@ print(mcmc_p_res)</code></pre>
 ## diff    2.58    0.01 0.32   1.94   2.37   2.58   2.79   3.19  3575    1
 ## lp__  -32.07    0.03 1.26 -35.38 -32.66 -31.74 -31.15 -30.63  1686    1
 ## 
-## Samples were drawn using NUTS(diag_e) at Wed May 25 15:40:50 2022.
+## Samples were drawn using NUTS(diag_e) at Thu Jun 16 12:31:47 2022.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).</code></pre>

@@ -10,15 +10,12 @@
     
     <title>馬場本4</title>
 
-        <script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
+        <script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
         <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link href="site_libs/bootstrap-3.3.7/css/bootstrap.min.css" rel="stylesheet" />
         <script src="site_libs/bootstrap-3.3.7/js/bootstrap.min.js"></script>
-        <script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
         <script src="site_libs/navigation-1.1/tabsets.js"></script>
-        <link href="site_libs/magnific-popup-1.1.0/magnific-popup.css" rel="stylesheet" />
-        <script src="site_libs/magnific-popup-1.1.0/jquery.magnific-popup.min.js"></script>
         <link href="site_libs/downcute-0.1/downcute.css" rel="stylesheet" />
         <link href="site_libs/downcute-0.1/downcute_fonts_embed.css" rel="stylesheet" />
         <script src="site_libs/downcute-0.1/downcute_styles.js"></script>
@@ -119,39 +116,60 @@
         <div class="Sidebar">
           <div class="SidebarItems" id="toc">
             <ul>
-            <li><a href="#部-一般化線形混合モデル">4部: 一般化線形混合モデル</a></li>
-            <li><a href="#階層ベイズモデルと一般化線形混合モデルの基本">4-1: 階層ベイズモデルと一般化線形混合モデルの基本</a>
+            <li><a href="#部-一般化線形混合モデル">4部:
+            一般化線形混合モデル</a></li>
+            <li><a
+            href="#階層ベイズモデルと一般化線形混合モデルの基本">4-1:
+            階層ベイズモデルと一般化線形混合モデルの基本</a>
             <ul>
             <li><a href="#本章の目的と概要">1. 本章の目的と概要</a></li>
             <li><a href="#階層ベイズモデル">2. 階層ベイズモデル</a></li>
             <li><a href="#分析の準備">3. 分析の準備</a></li>
-            <li><a href="#通常のポアソン回帰モデルを適用した結果">4. 通常のポアソン回帰モデルを適用した結果</a></li>
-            <li><a href="#過分散対処のあためのglmmの構造">5. 過分散対処のあためのGLMMの構造</a></li>
-            <li><a href="#固定効果ランダム効果混合モデル">6. 固定効果・ランダム効果・混合モデル</a></li>
-            <li><a href="#モデルの構造の図式化">7. モデルの構造の図式化</a></li>
-            <li><a href="#glmmのためのstanファイルの実装">8. GLMMのためのStanファイルの実装</a></li>
+            <li><a href="#通常のポアソン回帰モデルを適用した結果">4.
+            通常のポアソン回帰モデルを適用した結果</a></li>
+            <li><a href="#過分散対処のあためのglmmの構造">5.
+            過分散対処のあためのGLMMの構造</a></li>
+            <li><a href="#固定効果ランダム効果混合モデル">6.
+            固定効果・ランダム効果・混合モデル</a></li>
+            <li><a href="#モデルの構造の図式化">7.
+            モデルの構造の図式化</a></li>
+            <li><a href="#glmmのためのstanファイルの実装">8.
+            GLMMのためのStanファイルの実装</a></li>
             <li><a href="#mcmcの実行">9. MCMCの実行</a></li>
-            <li><a href="#brmsによるglmmの推定">10. brmsによるGLMMの推定</a></li>
-            <li><a href="#補足正規線形モデルを拡張する場合の注意">11. 補足：正規線形モデルを拡張する場合の注意</a></li>
+            <li><a href="#brmsによるglmmの推定">10.
+            brmsによるGLMMの推定</a></li>
+            <li><a href="#補足正規線形モデルを拡張する場合の注意">11.
+            補足：正規線形モデルを拡張する場合の注意</a></li>
             </ul></li>
-            <li><a href="#ランダム切片モデル">4-2: ランダム切片モデル</a>
+            <li><a href="#ランダム切片モデル">4-2:
+            ランダム切片モデル</a>
             <ul>
             <li><a href="#分析の準備-1">2. 分析の準備</a></li>
-            <li><a href="#ランダム切片モデルの構造">3. ランダム切片モデルの構造</a></li>
-            <li><a href="#ランダム効果の使いどころ">4. ランダム効果の使いどころ</a></li>
-            <li><a href="#brmsによるランダム切片モデルの推定">5. brmsによるランダム切片モデルの推定</a></li>
+            <li><a href="#ランダム切片モデルの構造">3.
+            ランダム切片モデルの構造</a></li>
+            <li><a href="#ランダム効果の使いどころ">4.
+            ランダム効果の使いどころ</a></li>
+            <li><a href="#brmsによるランダム切片モデルの推定">5.
+            brmsによるランダム切片モデルの推定</a></li>
             <li><a href="#回帰曲線の図示">6. 回帰曲線の図示</a></li>
             </ul></li>
-            <li><a href="#ランダム係数モデル">4-3: ランダム係数モデル</a>
+            <li><a href="#ランダム係数モデル">4-3:
+            ランダム係数モデル</a>
             <ul>
-            <li><a href="#本章の目的と概要-1">1. 本章の目的と概要</a></li>
+            <li><a href="#本章の目的と概要-1">1.
+            本章の目的と概要</a></li>
             <li><a href="#分析の準備-2">2. 分析の準備</a></li>
-            <li><a href="#交互作用を用いたモデル化">3. 交互作用を用いたモデル化</a></li>
-            <li><a href="#ランダム効果と縮約">4. ランダム効果と縮約</a></li>
-            <li><a href="#ランダム係数モデルの構造">5. ランダム係数モデルの構造</a></li>
-            <li><a href="#brmsによるランダム係数モデルの推定">6. brmsによるランダム係数モデルの推定</a></li>
+            <li><a href="#交互作用を用いたモデル化">3.
+            交互作用を用いたモデル化</a></li>
+            <li><a href="#ランダム効果と縮約">4.
+            ランダム効果と縮約</a></li>
+            <li><a href="#ランダム係数モデルの構造">5.
+            ランダム係数モデルの構造</a></li>
+            <li><a href="#brmsによるランダム係数モデルの推定">6.
+            brmsによるランダム係数モデルの推定</a></li>
             <li><a href="#回帰曲線の図示-1">7. 回帰曲線の図示</a></li>
-            <li><a href="#ランダム効果を用いるさまざまなモデル">8. ランダム効果を用いるさまざまなモデル</a></li>
+            <li><a href="#ランダム効果を用いるさまざまなモデル">8.
+            ランダム効果を用いるさまざまなモデル</a></li>
             </ul></li>
             </ul>
           </div>
@@ -165,7 +183,7 @@
       <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
         <div class="container">
           <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
@@ -202,6 +220,12 @@
         <a href="midori3.html">緑本3部</a>
       </li>
       <li>
+        <a href="midori4.html">緑本4部</a>
+      </li>
+      <li>
+        <a href="midori5.html">緑本5部</a>
+      </li>
+      <li>
         <a href="psytech.html">技術部</a>
       </li>
             </ul>
@@ -215,7 +239,8 @@
       <h1 class="title">馬場本4</h1>
       
       <p class="authors">
-           <span class="glyphicon glyphicon-user"></span> Toshihide Imaruoka
+           <span class="glyphicon glyphicon-user"></span> Toshihide
+Imaruoka
       </p>
               
 
@@ -227,7 +252,8 @@
 <div id="部-一般化線形混合モデル" class="section level1">
 <h1>4部: 一般化線形混合モデル</h1>
 </div>
-<div id="階層ベイズモデルと一般化線形混合モデルの基本" class="section level1">
+<div id="階層ベイズモデルと一般化線形混合モデルの基本"
+class="section level1">
 <h1>4-1: 階層ベイズモデルと一般化線形混合モデルの基本</h1>
 <div id="本章の目的と概要" class="section level2">
 <h2>1. 本章の目的と概要</h2>
@@ -295,15 +321,18 @@ plot(eff41_1, points=T)</code></pre>
 <li>基本は同じ</li>
 <li>釣果数に気温と天気が影響する
 <ul>
-<li><span class="math inline">\(log(\lambda_i)=\beta_0+\beta_1x_1+\beta_2x_2\)</span></li>
+<li><span
+class="math inline">\(log(\lambda_i)=\beta_0+\beta_1x_1+\beta_2x_2\)</span></li>
 </ul></li>
 <li>ただし、調査対象者の違い、湖の状況の違いも影響するのでそれをモデルに入れる
 <ul>
 <li>ランダムな影響<span class="math inline">\(r_i\)</span>
 <ul>
 <li>平均0, 分散<span class="math inline">\(\sigma_\gamma^2\)</span></li>
-<li><span class="math inline">\(\gamma_i\sim Normal(0, \sigma_r^2)\)</span></li>
-<li><span class="math inline">\(log(\lambda_i)=\beta_0+\beta_1x_1+\beta_2x_2+r_i\)</span></li>
+<li><span class="math inline">\(\gamma_i\sim Normal(0,
+\sigma_r^2)\)</span></li>
+<li><span
+class="math inline">\(log(\lambda_i)=\beta_0+\beta_1x_1+\beta_2x_2+r_i\)</span></li>
 <li><span class="math inline">\(y_i\sim Poiss(\lambda_i)\)</span></li>
 </ul></li>
 </ul></li>
@@ -314,7 +343,8 @@ plot(eff41_1, points=T)</code></pre>
 <ul>
 <li>用語
 <ul>
-<li><span class="math inline">\(\beta\)</span>で表現された係数として表される効果：固定効果</li>
+<li><span
+class="math inline">\(\beta\)</span>で表現された係数として表される効果：固定効果</li>
 <li>何らかの確率分布に従い、ランダムに変化する係数：ランダム効果・変量効果</li>
 <li>固定効果とランダム効果を両方持つモデル：混合モデル</li>
 </ul></li>
@@ -360,8 +390,10 @@ model{
   fish_num ~ poisson_log(lambda);
 }</code></pre>
 <ul>
-<li>transformed parameters内の式は線形予測子。おそらく、これは右辺をexp()に入れてもいいはずだけど、モデルでpoisson_log関数を使ってるので、そうしてないだけ。</li>
-<li>modelブロックないの<span class="math inline">\(r\sim normal(0, sigma_r)\)</span>は事前分布の指定っぽいんだけど、sigma_rが変数なので分散はどうなる？参照先である2部6章では10000のような数値を入れていたけど。
+<li>transformed
+parameters内の式は線形予測子。おそらく、これは右辺をexp()に入れてもいいはずだけど、モデルでpoisson_log関数を使ってるので、そうしてないだけ。</li>
+<li>modelブロックないの<span class="math inline">\(r\sim normal(0,
+sigma_r)\)</span>は事前分布の指定っぽいんだけど、sigma_rが変数なので分散はどうなる？参照先である2部6章では10000のような数値を入れていたけど。
 <ul>
 <li>合点がいった。sigma_rも推定対象なのか。ランダム効果の大きさを表すパラメータとのこと。
 <ul>
@@ -384,9 +416,9 @@ data_list41&lt;-list(
   sunny=sunny_dummy
 )
 
-res41&lt;-rstan::sampling(stanmodel41, data=data_list41, seed=1)
+res41&lt;-rstan::sampling(stanmodel41_1, data=data_list41, seed=1)
 print(res41, pars=c(&#39;Intercept&#39;,&#39;b_sunny&#39;,&#39;b_temp&#39;,&#39;sigma_r&#39;), probs=c(0.025,0.5,0.975))</code></pre>
-<pre><code>## Inference for Stan model: stan-2e806d1ee782.
+<pre><code>## Inference for Stan model: 12d4c63cfcd2f20c4e83f50cd70873ce.
 ## 4 chains, each with iter=2000; warmup=1000; thin=1; 
 ## post-warmup draws per chain=1000, total post-warmup draws=4000.
 ## 
@@ -396,7 +428,7 @@ print(res41, pars=c(&#39;Intercept&#39;,&#39;b_sunny&#39;,&#39;b_temp&#39;,&#39;
 ## b_temp     0.08    0.00 0.02  0.04  0.08  0.11   859 1.01
 ## sigma_r    1.10    0.01 0.16  0.83  1.09  1.45   830 1.01
 ## 
-## Samples were drawn using NUTS(diag_e) at Wed May 25 15:43:54 2022.
+## Samples were drawn using NUTS(diag_e) at Thu Jun 16 12:37:13 2022.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).</code></pre>
@@ -426,13 +458,13 @@ print(res41, pars=c(&#39;Intercept&#39;,&#39;b_sunny&#39;,&#39;b_temp&#39;,&#39;
 ## Group-Level Effects: 
 ## ~id (Number of levels: 100) 
 ##               Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-## sd(Intercept)     1.09      0.15     0.82     1.41 1.00     1134     1869
+## sd(Intercept)     1.09      0.15     0.83     1.41 1.00     1198     1949
 ## 
 ## Population-Level Effects: 
 ##              Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-## Intercept       -0.45      0.34    -1.15     0.19 1.00     1538     2279
-## weathersunny    -0.73      0.29    -1.31    -0.15 1.00     1369     2173
-## temperature      0.08      0.02     0.04     0.11 1.00     1419     2046
+## Intercept       -0.45      0.35    -1.17     0.20 1.00     1236     1959
+## weathersunny    -0.74      0.29    -1.32    -0.19 1.00     1093     1769
+## temperature      0.08      0.02     0.04     0.11 1.00     1089     1712
 ## 
 ## Draws were sampled using sampling(NUTS). For each parameter, Bulk_ESS
 ## and Tail_ESS are effective sample size measures, and Rhat is the potential
@@ -478,9 +510,12 @@ summary(dat42)</code></pre>
 <ul>
 <li>基本はさっきと同じ</li>
 <li><span class="math inline">\(r_k\)</span>: kはAからJまで10種類</li>
-<li>平均0、分散<span class="math inline">\(\sigma_r^2\)</span>の正規分布に従う</li>
-<li><span class="math inline">\(r_k\sim Normal(0, \sigma_r)\)</span></li>
-<li><span class="math inline">\(log(\lambda_i)=\$beta_0+\beta_1x_1+\beta_2x_2+r_k\)</span></li>
+<li>平均0、分散<span
+class="math inline">\(\sigma_r^2\)</span>の正規分布に従う</li>
+<li><span class="math inline">\(r_k\sim Normal(0,
+\sigma_r)\)</span></li>
+<li><span
+class="math inline">\(log(\lambda_i)=\$beta_0+\beta_1x_1+\beta_2x_2+r_k\)</span></li>
 <li><span class="math inline">\(y_i\sim Poiss(\lambda_i)\)</span></li>
 </ul>
 </div>
@@ -513,13 +548,13 @@ summary(dat42)</code></pre>
 ## Group-Level Effects: 
 ## ~human (Number of levels: 10) 
 ##               Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-## sd(Intercept)     0.63      0.20     0.35     1.12 1.00     1114     1866
+## sd(Intercept)     0.64      0.21     0.36     1.16 1.00      855     1466
 ## 
 ## Population-Level Effects: 
 ##              Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-## Intercept       -0.87      0.29    -1.46    -0.31 1.00     1600     2034
-## weathersunny    -0.52      0.13    -0.77    -0.25 1.00     3622     2871
-## temperature      0.10      0.01     0.08     0.12 1.00     4043     2762
+## Intercept       -0.86      0.30    -1.46    -0.29 1.00     1221     1896
+## weathersunny    -0.52      0.14    -0.79    -0.27 1.00     3489     2730
+## temperature      0.10      0.01     0.08     0.12 1.00     3968     2990
 ## 
 ## Draws were sampled using sampling(NUTS). For each parameter, Bulk_ESS
 ## and Tail_ESS are effective sample size measures, and Rhat is the potential
@@ -528,17 +563,17 @@ summary(dat42)</code></pre>
 <pre><code>## $human
 ## , , Intercept
 ## 
-##      Estimate Est.Error        Q2.5        Q97.5
-## A  0.76246389 0.2507210  0.29776983  1.278291524
-## B  0.08964038 0.2900751 -0.48213749  0.670028220
-## C  0.69476327 0.2554795  0.22398653  1.206560187
-## D -0.60783840 0.3382417 -1.29825027  0.006334305
-## E -0.11671980 0.2975916 -0.69450327  0.470415057
-## F -0.73292936 0.3389056 -1.42431489 -0.101547684
-## G  0.45046711 0.2676849 -0.04610697  0.997473205
-## H -0.31042534 0.2835935 -0.87018872  0.232979536
-## I  0.03316624 0.2847159 -0.55654620  0.595694211
-## J -0.15397593 0.2918981 -0.73413287  0.410067460</code></pre>
+##       Estimate Est.Error       Q2.5       Q97.5
+## A  0.743806099 0.2560084  0.2476996  1.27423163
+## B  0.076520258 0.2935145 -0.4942997  0.66038284
+## C  0.674009327 0.2608083  0.1887097  1.20272308
+## D -0.633151981 0.3321230 -1.3286379 -0.03053646
+## E -0.136445359 0.2955297 -0.7194843  0.44663911
+## F -0.751753910 0.3525089 -1.5041951 -0.12077933
+## G  0.435392221 0.2711128 -0.1013973  0.97510368
+## H -0.331334877 0.2920335 -0.9275123  0.24062440
+## I  0.006910673 0.2804459 -0.5740365  0.53861957
+## J -0.180740105 0.2889660 -0.7626654  0.37981631</code></pre>
 </div>
 <div id="回帰曲線の図示" class="section level2">
 <h2>6. 回帰曲線の図示</h2>
@@ -613,9 +648,12 @@ plot(eff, points=T)</code></pre>
 <h2>5. ランダム係数モデルの構造</h2>
 <ul>
 <li>ランダム切片とランダム係数をどちらもモデルに入れる</li>
-<li><span class="math inline">\(\gamma_k\sim Normal(0, \sigma_\gamma^2)\)</span></li>
-<li><span class="math inline">\(\tau_k\sim Normal(0, \sigma_\tau^2)\)</span></li>
-<li><span class="math inline">\(log(\lambda_i)\sim \beta_0 + (\beta_1+\tau_k)x_{i1}+\gamma_k\)</span></li>
+<li><span class="math inline">\(\gamma_k\sim Normal(0,
+\sigma_\gamma^2)\)</span></li>
+<li><span class="math inline">\(\tau_k\sim Normal(0,
+\sigma_\tau^2)\)</span></li>
+<li><span class="math inline">\(log(\lambda_i)\sim \beta_0 +
+(\beta_1+\tau_k)x_{i1}+\gamma_k\)</span></li>
 <li><span class="math inline">\(y_i\sim Poiss(\lambda_i)\)</span></li>
 </ul>
 </div>

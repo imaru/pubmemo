@@ -116,11 +116,21 @@
         <div class="Sidebar">
           <div class="SidebarItems" id="toc">
             <ul>
-            <li><a href="#glmのモデル選択aicとモデルの予測の良さ">4. GLMのモデル選択–AICとモデルの予測の良さ–</a>
+            <li><a href="#glmのモデル選択aicとモデルの予測の良さ">4.
+            GLMのモデル選択–AICとモデルの予測の良さ–</a>
             <ul>
-            <li><a href="#データは一つモデルはたくさん">4.1 データは一つ、モデルはたくさん</a></li>
-            <li><a href="#統計モデルのあてはまりの悪さ逸脱度">4.2 統計モデルのあてはまりの悪さ：逸脱度</a></li>
-            <li><a href="#モデル選択基準aic">4.3 モデル選択基準AIC</a></li>
+            <li><a href="#データは一つモデルはたくさん">4.1
+            データは一つ、モデルはたくさん</a></li>
+            <li><a href="#統計モデルのあてはまりの悪さ逸脱度">4.2
+            統計モデルのあてはまりの悪さ：逸脱度</a></li>
+            <li><a href="#モデル選択基準aic">4.3
+            モデル選択基準AIC</a></li>
+            <li><a href="#aicを説明するためのまた別の例題">4.4
+            AICを説明するためのまた別の例題</a></li>
+            <li><a href="#なぜaicでモデル選択してよいのか">4.5
+            なぜAICでモデル選択してよいのか？</a></li>
+            <li><a href="#この章のまとめと参考文献">4.6
+            この章のまとめと参考文献</a></li>
             </ul></li>
             </ul>
           </div>
@@ -174,6 +184,9 @@
         <a href="midori4.html">緑本4部</a>
       </li>
       <li>
+        <a href="midori5.html">緑本5部</a>
+      </li>
+      <li>
         <a href="psytech.html">技術部</a>
       </li>
             </ul>
@@ -187,7 +200,8 @@
       <h1 class="title">midori4</h1>
       
       <p class="authors">
-           <span class="glyphicon glyphicon-user"></span> Toshihide Imaruoka
+           <span class="glyphicon glyphicon-user"></span> Toshihide
+Imaruoka
       </p>
          <p class="date"><span class="glyphicon glyphicon-calendar"></span> 6/14/2022</p>
            
@@ -227,9 +241,12 @@
 </ul></li>
 <li>モデル
 <ul>
-<li>体サイズが影響するモデル(<span class="math inline">\(y\sim x+\beta\)</span>)</li>
-<li>施肥処理が影響するモデル(<span class="math inline">\(y\sim f+\beta\)</span>)</li>
-<li>体サイズと施肥処理が影響するモデル（<span class="math inline">\(y\sim x+f+\beta\)</span>)</li>
+<li>体サイズが影響するモデル(<span class="math inline">\(y\sim
+x+\beta\)</span>)</li>
+<li>施肥処理が影響するモデル(<span class="math inline">\(y\sim
+f+\beta\)</span>)</li>
+<li>体サイズと施肥処理が影響するモデル（<span
+class="math inline">\(y\sim x+f+\beta\)</span>)</li>
 <li>一定モデル(<span class="math inline">\(f\sim \beta\)</span>)</li>
 </ul></li>
 <li>3章では対数尤度を最大にするパラメータを求め、そのパラメータに対する対数尤度＝最大対数尤度が当てはまりの良さだとした
@@ -245,8 +262,15 @@
 <li>逸脱度(deviance)
 <ul>
 <li>最大対数尤度を変形した統計量</li>
-<li>対数尤度：<span class="math inline">\(logL({\beta_j})\)</span>←あるパラメータ<span class="math inline">\(\beta_j\)</span>のときの対数尤度。簡単のため<span class="math inline">\(logL\)</span>と表す</li>
-<li>最大対数尤度：<span class="math inline">\(logL\)</span>を最大にするパラメータ<span class="math inline">\(\beta_j\)</span>のときの<span class="math inline">\(logL\)</span>：<span class="math inline">\(logL^*\)</span>とする</li>
+<li>対数尤度：<span
+class="math inline">\(logL({\beta_j})\)</span>←あるパラメータ<span
+class="math inline">\(\beta_j\)</span>のときの対数尤度。簡単のため<span
+class="math inline">\(logL\)</span>と表す</li>
+<li>最大対数尤度：<span
+class="math inline">\(logL\)</span>を最大にするパラメータ<span
+class="math inline">\(\beta_j\)</span>のときの<span
+class="math inline">\(logL\)</span>：<span
+class="math inline">\(logL^*\)</span>とする</li>
 <li>逸脱度D
 <ul>
 <li><span class="math inline">\(D=-2logL^*\)</span></li>
@@ -256,7 +280,8 @@
 <ul>
 <li>体サイズだけのモデルをxモデルと呼ぶ
 <ul>
-<li>xモデルの最大対数尤度<span class="math inline">\(logL^*\)</span>は-235.4</li>
+<li>xモデルの最大対数尤度<span
+class="math inline">\(logL^*\)</span>は-235.4</li>
 <li>D=470.8</li>
 </ul></li>
 <li>glm()の結果にこんな値はない。どこにいった？</li>
@@ -290,14 +315,17 @@ print(D.x)</code></pre>
 </ul></li>
 <li>まずはResidual Deviance（残差逸脱度）の説明
 <ul>
-<li>残差逸脱度＝逸脱度<span class="math inline">\(D\)</span>-（ポアソン分布モデルで可能な最小逸脱度）</li>
+<li>残差逸脱度＝逸脱度<span
+class="math inline">\(D\)</span>-（ポアソン分布モデルで可能な最小逸脱度）</li>
 <li>最小逸脱度：最多のパラメータを使った作ったモデル
 <ul>
 <li>データ100個の場合、パラメータ100個とする（意味はない）</li>
 <li>意味はないけど、当てはまりは良い</li>
 <li>最大対数尤度を計算
 <ul>
-<li>dpois(dat<span class="math inline">\(y[1], dat\)</span>y[1])は、データがポアソン分布に従っているとして、ラムダがdat<span class="math inline">\(y[1]のときに、データがdat\)</span>y[1]である確率のこと（0.16くらいになる）</li>
+<li>dpois(dat<span class="math inline">\(y[1],
+dat\)</span>y[1])は、データがポアソン分布に従っているとして、ラムダがdat<span
+class="math inline">\(y[1]のときに、データがdat\)</span>y[1]である確率のこと（0.16くらいになる）</li>
 <li>データとパラメータが一致するので、これは考えられる中で最も高い確率。</li>
 <li>その対数を全データ（100個）分足した数</li>
 <li>これは他のどんなモデルよりも小さくなるはず（確率は大きいけど対数を取るから小さい）</li>
@@ -351,14 +379,183 @@ print(f.null)</code></pre>
 <li>AIC: モデル選択基準の一つ
 <ul>
 <li>予測の良さを重視するモデル選択基準</li>
-<li><span class="math inline">\(AIC = -2{(最大対数尤度)-(最尤推定したパラメータ数)}\)</span>
+<li><span class="math inline">\(AIC =
+-2{(最大対数尤度)-(最尤推定したパラメータ数)}\)</span>
 <ul>
 <li>= <span class="math inline">\(-2(logL^*-k)\)</span></li>
 <li>= <span class="math inline">\(D+2k\)</span>
 <ul>
-<li><span class="math inline">\(logL^*\)</span>は-D/2だから(<span class="math inline">\(D=-2logL^*\)</span> p71)</li>
+<li><span class="math inline">\(logL^*\)</span>は-D/2だから(<span
+class="math inline">\(D=-2logL^*\)</span> p71)</li>
 </ul></li>
 </ul></li>
+<li>これで計算するとxモデルがAIC最小となる（表4.3）</li>
+</ul></li>
+</ul>
+</div>
+<div id="aicを説明するためのまた別の例題" class="section level2">
+<h2>4.4 AICを説明するためのまた別の例題</h2>
+<ul>
+<li>新しい架空データ
+<ul>
+<li>個体<span class="math inline">\(i\)</span>の種子数<span
+class="math inline">\(y_i\)</span>と体サイズ<span
+class="math inline">\(x_i\)</span>が50個体分</li>
+<li>応答変数<span class="math inline">\(y_i\)</span>、説明変数<span
+class="math inline">\(x_i\)</span></li>
+<li>ただし<span class="math inline">\(x_i\)</span>は<span
+class="math inline">\(y_i\)</span>とは関係なし</li>
+</ul></li>
+<li>次のようなモデルを比較
+<ul>
+<li><span class="math inline">\(log\lambda_i=\beta_1\)</span> –
+一定モデル(<span class="math inline">\(k=1\)</span>)</li>
+<li><span class="math inline">\(log\lambda_i=\beta_1+\beta_2x_i\)</span>
+– xモデル(<span class="math inline">\(k=2\)</span>)
+<ul>
+<li>ちなみに、この2つのモデルはネストしている(nested)</li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+<div id="なぜaicでモデル選択してよいのか" class="section level2">
+<h2>4.5 なぜAICでモデル選択してよいのか？</h2>
+<ul>
+<li>平均対数尤度：統計モデルの予測の良さ</li>
+<li>バイアス補正とは？</li>
+</ul>
+<div id="統計モデルの予測の良さ平均対数尤度" class="section level3">
+<h3>4.5.1 統計モデルの予測の良さ：平均対数尤度</h3>
+<ul>
+<li>ここでは、一定モデルを使って平均対数尤度を説明
+<ul>
+<li>平均種子数<span
+class="math inline">\(\lambda_i=exp\beta_1\)</span></li>
+<li>最尤推定法によって、対数尤度が最大となる<span
+class="math inline">\(\hat{\beta}_1\)</span>を求める
+<ul>
+<li><span class="math inline">\(\hat{\beta}_1\)</span>=2.04</li>
+</ul></li>
+<li>真のパラメータは2.08だった（<span class="math inline">\(\lambda=8;
+log8=2.08\)</span>)</li>
+<li>図4.6：真のモデルからデータを生成し、データからパラメータ推定
+<ul>
+<li>最大対数尤度<span
+class="math inline">\(logL^*\)</span>は観測データに対する当てはまりの良さで、真のモデルに対するものではない</li>
+</ul></li>
+<li>「あてはまりの良さ」は、たまたまその時にあるデータに対するもの</li>
+<li>モデルが、次に真のモデルから生成されたデータをどれくらい予測できるか、なら良さそう</li>
+<li>今の例題では真のモデルが分かってるので、予測の良さ評価用のデータを作ってやってみる
+<ul>
+<li>真のモデルに200セット生成させる</li>
+<li>それぞれに対する一定モデル(<span
+class="math inline">\(\hat{\beta_1}=2.04\)</span>)の当てはまりの良さを対数尤度で評価、平均する＝平均対数尤度＝<span
+class="math inline">\(E(logL)\)</span>
+<ul>
+<li>パラメータ2.04は最初の1データを元に決め、その当てはまりの良さを同じデータで評価したもの（そういう決め方だから当たり前のことを言ってる）</li>
+<li>でも、最初の1データは真のモデルからたまたま生成されたものだから、それだけで評価してはいけない</li>
+<li>だから、別のデータも評価して、その平均(<span
+class="math inline">\(E(logL)\)</span>)を出そう、ということ。</li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+<div id="最大対数尤度のバイアス補正" class="section level3">
+<h3>4.5.2 最大対数尤度のバイアス補正</h3>
+<ul>
+<li>そういうことを12回繰り返す（図4.9(B)）</li>
+<li>たまたまデータへの<span class="math inline">\(logL^*\)</span>と<span
+class="math inline">\(E(logL)\)</span>の大小関係はばらばら
+<ul>
+<li>この関係に関する分布を考えるため、<span
+class="math inline">\(b=logL^*-E(logL)\)</span>を定義＝バイアス</li>
+</ul></li>
+<li>バイアスbの分布は図4.10、平均1.01</li>
+<li>予測用のデータをたくさん作ってやってみたら、「たまたま」のデータで評価した最大対数尤度よりも1程度大きくなることが分かった
+<ul>
+<li>この<span
+class="math inline">\(E(logL)\)</span>は当てはまりの良さの指標として使えそうな気がする。</li>
+<li><span
+class="math inline">\(E(logL)=logL^*-1\)</span>と言えそうなので、そうすればいいのでは＝バイアス補正
+<ul>
+<li>この、今の計算でバイアスが1となったのは、偶然ではなく、解析的にも導出できるらしい（平均対数尤度＝<span
+class="math inline">\(logL^*-k\)</span>
+kはパラメータ数；文献が引用されている）</li>
+<li>これに-2をかけたものがAIC＝予測の悪さ</li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+<div id="ネストしているglm間のaic比較" class="section level3">
+<h3>4.5.3 ネストしているGLM間のAIC比較</h3>
+<ul>
+<li>ネストしてるモデル間の比較について</li>
+<li>AICが小さい方を選ぶというのが基本的な考え方（平均対数尤度<span
+class="math inline">\(E(logL)\)</span>＝平均的な予測の良さに-2をかけたものがAICだから）</li>
+<li>ただ、前の節で<span
+class="math inline">\(E(logL)\)</span>を出したときに使った平均バイアスを求めるときのばらつきが大きかったのが気になる（図4.10：<span
+class="math inline">\(logL^*とE(logL)の差が結構ばらつくということ\)</span>）
+<ul>
+<li>この「気になる」に対して、ネストしてるモデル間の比較ではバイアスのばらつきは小さいよということを示そうとしている</li>
+</ul></li>
+<li>さっきの一定モデルとxモデルをAICで比較してみる
+<ul>
+<li>一定モデルは<span class="math inline">\(k=1\)</span>, xモデルは<span
+class="math inline">\(k=2\)</span>（体サイズのパラメータが増えてる）</li>
+<li>増えた変数は結果に影響しないことが分かってるので、AICは2くらい大きくなる（<span
+class="math inline">\(-2\times
+-k\)</span>)＝2くらい予測が悪化するはず</li>
+<li>以下、考え方の流れ
+<ul>
+<li>まず、最大対数尤度（＝「たまたま」データとの当てはまりの良さ）の比較（図4.11(A)）
+<ul>
+<li>実際に計算してみると<span
+class="math inline">\(xモデルのlogL^*-一定モデルのlogL^*\)</span>の平均は0.54</li>
+<li>変数を増やし、パラメータを増やしたことであてはまりの良さは良くなってしまう（無関係の変数だから良くなるはずがない＝とにかくパラメータを増やせば、「たまたま」データとの当てはまりはどんどん良くなる可能性がある）</li>
+</ul></li>
+<li>次に平均対数尤度（＝予測の良さ）を比較（図4.11(B)）
+<ul>
+<li>今度は<span
+class="math inline">\(xモデルのE(logL)-一定モデルのE(logL)\)</span>の平均値は-0.54</li>
+<li>パラメータを増やしたことで予測が悪くなった</li>
+</ul></li>
+<li>さらに一定モデルのバイアス(b)とxモデルのバイアス(b)の差の分布をみる（図4.12）
+<ul>
+<li><span
+class="math inline">\(xモデルのlogL^*-E(logL)-(一定モデルのlogL^*-E(logL))\)</span>（図4.13）</li>
+<li>0.54-(-0.54)なので1.08くらいになる</li>
+<li>図4.12にあるように、バイアス差の分布はあまり大きくならない＝AIC使ってもいいんじゃない？という話</li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li>じゃあ、無意味じゃない変数（モデルではパラメータ）を増やしたときには？
+<ul>
+<li>図4.14を読む
+<ul>
+<li>当てはまりの良さ（白い円）も良くなるけど、AIC（グレイ）も良くなる</li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="この章のまとめと参考文献" class="section level2">
+<h2>4.6 この章のまとめと参考文献</h2>
+<ul>
+<li>複数のモデルから最適なものを選ぶとき、当てはまりの良さ（<span
+class="math inline">\(logL^*\)</span>)でいいか？</li>
+<li>この章では当てはまりの良さではなく逸脱度<span
+class="math inline">\(D=-2\times logL^*\)</span>で考えた</li>
+<li>意味のない変数の追加でも<span
+class="math inline">\(logL^*\)</span>は小さくなってしまう</li>
+<li>AICは<span
+class="math inline">\(E(logL)=logL^*-b\)</span>をもとにしている。バイアス補正してるのが大きい。</li>
+<li>AICに関する誤解
+<ul>
+<li>あてはまりの良さの指標ではない</li>
+<li>真のモデルを選べるわけでもない（真のモデルよりパラメータが少ないモデルを選ぶことがある）</li>
+<li>FAQは<a
+href="https://kuboweb.github.io/-kubo/ce/FaqModelSelection.html">サポートサイト</a>まで</li>
 </ul></li>
 </ul>
 </div>

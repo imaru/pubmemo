@@ -8,7 +8,7 @@
         <meta name="author" content="Toshihide Imaruoka" />
     
     
-    <title>3-1Basis_of_GLM</title>
+    <title>midori5</title>
 
         <script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
         <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -116,31 +116,22 @@
         <div class="Sidebar">
           <div class="SidebarItems" id="toc">
             <ul>
-            <li><a href="#章-一般化線形モデルの基本">3-1章:
-            一般化線形モデルの基本</a>
+            <li><a href="#glmの尤度比検定と検定の非対称性">5.
+            GLMの尤度比検定と検定の非対称性</a>
             <ul>
-            <li><a href="#目的と概要">1. 目的と概要</a></li>
-            <li><a href="#複雑なモデルを構築する際の手続きの標準化">2.
-            複雑なモデルを構築する際の手続きの標準化</a></li>
-            <li><a href="#確率分布線形予測子リンク関数">3.
-            確率分布・線形予測子・リンク関数</a></li>
-            <li><a
-            href="#一般化線形モデルの例-説明変数が無く正規分布を仮定するモデル">4.
-            一般化線形モデルの例:
-            説明変数が無く、正規分布を仮定するモデル</a></li>
-            <li><a
-            href="#単回帰モデル-説明変数が1つだけあり正規分布を仮定するモデル">5.
-            単回帰モデル:
-            説明変数が1つだけあり、正規分布を仮定するモデル</a></li>
-            <li><a href="#分散分析モデルダミー変数を利用するモデル">6.
-            分散分析モデル：ダミー変数を利用するモデル</a></li>
-            <li><a href="#正規線形モデル正規分布を仮定するモデル">7.
-            正規線形モデル：正規分布を仮定するモデル</a></li>
-            <li><a href="#ポアソン回帰モデル">8.
-            ポアソン回帰モデル</a></li>
-            <li><a
-            href="#ロジスティック回帰モデル-二項分布を仮定するモデル">9.
-            ロジスティック回帰モデル: 二項分布を仮定するモデル</a></li>
+            <li><a href="#統計学的な検定のわくぐみ">5.1
+            統計学的な検定のわくぐみ</a></li>
+            <li><a href="#尤度比検定の例題逸脱度の差を調べる">5.2
+            尤度比検定の例題：逸脱度の差を調べる</a></li>
+            <li><a href="#種類の過誤と統計学的な検定の非対称性">5.3
+            2種類の過誤と統計学的な検定の非対称性</a></li>
+            <li><a href="#帰無仮説を棄却するための有意水準">5.4
+            帰無仮説を棄却するための有意水準</a></li>
+            <li><a href="#方法2-chi2分布を使った近似計算法">5.4.2
+            方法(2) <span
+            class="math inline">\(\chi^2\)</span>分布を使った近似計算法</a></li>
+            <li><a href="#帰無仮説を棄却できないは差がないではない">5.5
+            「帰無仮説を棄却できない」は「差がない」ではない</a></li>
             </ul></li>
             </ul>
           </div>
@@ -207,13 +198,13 @@
         </div><!--/.container -->
       </div><!--/.navbar -->
         
-      <h1 class="title">3-1Basis_of_GLM</h1>
+      <h1 class="title">midori5</h1>
       
       <p class="authors">
            <span class="glyphicon glyphicon-user"></span> Toshihide
 Imaruoka
       </p>
-         <p class="date"><span class="glyphicon glyphicon-calendar"></span> 11/1/2021</p>
+         <p class="date"><span class="glyphicon glyphicon-calendar"></span> 6/16/2022</p>
            
 
    
@@ -221,295 +212,272 @@ Imaruoka
    
 <!-- Don't indent these lines or it will mess pre blocks indentation --> 
 <div class="page-content has-page-title">
-<div id="章-一般化線形モデルの基本" class="section level1">
-<h1>3-1章: 一般化線形モデルの基本</h1>
-<div id="目的と概要" class="section level2">
-<h2>1. 目的と概要</h2>
+<div id="glmの尤度比検定と検定の非対称性" class="section level1">
+<h1>5. GLMの尤度比検定と検定の非対称性</h1>
 <ul>
-<li>一般化線形モデル(GLM): 実践的モデル &amp; 複雑なモデルの部品</li>
-<li>確率分布、線形予測子、リンク関数</li>
-<li>リファレンス的に使える章</li>
+<li>検定についての章</li>
+<li>尤度比検定：ネストしてるモデル同士の比較</li>
+<li>パラメトリック検定を「正規分布を使った」とするのは誤用</li>
+</ul>
+<div id="統計学的な検定のわくぐみ" class="section level2">
+<h2>5.1 統計学的な検定のわくぐみ</h2>
+<ul>
+<li>図5.1
+<ul>
+<li>統計モデルの検定とAICによるモデル選択の比較</li>
+<li>統計モデル検定の帰無仮説・対立仮説の考え方次第では、結構似てる
+<ul>
+<li>あるモデルを帰無仮説、別のモデルを対立仮説と考える</li>
+<li>ただし、パラメータを推定した後の手続きは異なる
+<ul>
+<li>帰無仮説の特別扱い</li>
+</ul></li>
+<li>Neyman-Peason（ネイマン・ピアソン）
+<ul>
+<li>帰無仮説を真のモデルを考え、</li>
+<li>真のモデルから得られる検定統計量を調べて「ありがちな範囲」を設定</li>
+<li>対立仮説モデルから得られる検定統計量が上の範囲内かどうかを確認</li>
+</ul></li>
+</ul></li>
+</ul></li>
 </ul>
 </div>
-<div id="複雑なモデルを構築する際の手続きの標準化"
-class="section level2">
-<h2>2. 複雑なモデルを構築する際の手続きの標準化</h2>
+<div id="尤度比検定の例題逸脱度の差を調べる" class="section level2">
+<h2>5.2 尤度比検定の例題：逸脱度の差を調べる</h2>
 <ul>
-<li>モデルをどう構築するか</li>
-<li>ビールの売り上げの例
+<li>第3章の種子数データを使う</li>
+<li>統計モデル：<span
+class="math inline">\(\lambda_i=exp(\beta_1+\beta_2x_i)\)</span>を平均とするポアソン分布GLM
 <ul>
-<li><span class="math inline">\(y \sim
-Normal(\mu,\sigma^2)\)</span></li>
-<li>これを複雑にしようとしたとき、“勝手に”やるばかりだと非効率かも</li>
-<li>「モデルの方」「フレームワーク」</li>
+<li>一定モデル：<span class="math inline">\(y_i\sim
+\beta_1\)</span></li>
+<li>xモデル：<span class="math inline">\(y_i\sim
+\beta_1+\beta_2x_i\)</span></li>
+<li>一定モデルが帰無仮説</li>
 </ul></li>
-<li>一般化線形モデルにおけるモデルの変更手続き
+<li>逸脱度は算出済み
+<ul>
+<li>一定モデル：<span class="math inline">\(D=475.3\)</span></li>
+<li>xモデル：<span class="math inline">\(D=470.8\)</span></li>
+<li>差は4.5くらい</li>
+</ul></li>
+<li>尤度比
+<ul>
+<li><span
+class="math inline">\(\frac{L_1^*}{L_2^*}=\frac{一定モデルの最大尤度}{xモデルの最大尤度}=\frac{対数尤度のexpだからexp(-237.6)}{exp(-235.4)}\)</span></li>
+<li>ただし、このままは使わず、尤度比の対数をとって-2をかける
+<ul>
+<li><span
+class="math inline">\(log(\frac{L_1^*}{L_2^*})=log(L_1^*)-log(L_2^*)\)</span>に-2をかける</li>
+<li>上の式は逸脱度Dの差に等しい</li>
+<li>つまり、尤度比は逸脱度Dの差のこと</li>
+<li>逸脱度の差（尤度比）を<span
+class="math inline">\(\Delta{D}_{1,2}\)</span>と表す</li>
+</ul></li>
+<li>尤度比4.5が（逸脱度が）改善されたと言っていいのかどうかという問題を考える</li>
+</ul></li>
+</ul>
+</div>
+<div id="種類の過誤と統計学的な検定の非対称性" class="section level2">
+<h2>5.3 2種類の過誤と統計学的な検定の非対称性</h2>
+<ul>
+<li>Neyman-Pearsonで考えるので、モデルを帰無仮説と対立仮説として考える
+<ul>
+<li>帰無仮説：一定モデル</li>
+<li>対立仮説：xモデル</li>
+</ul></li>
+<li>このとき、「帰無仮説が正しくなければ対立仮説は正しい」は真だけど、対偶の「対立仮説が正しくなければ帰無仮説は正しい」は真ではない→5.5で詳しく</li>
+<li>表5.2に第一種の過誤と第二種の過誤の話</li>
+<li>どちらの過誤も防ぐのは大変</li>
+<li>Neyman-Pearson：第一種の過誤を避けることに専念しよう
 <ol style="list-style-type: decimal">
-<li>確率分布を変える</li>
-<li>線形予測子を変える</li>
-<li>リンク関数を変える</li>
+<li>帰無仮説（一定モデル）を正しいものだと仮定</li>
+<li>観測データに一定モデルをあてはめ、最大対数尤度となるパラメータを決定（＝2.06）。これを真のモデルと同じとする。</li>
+<li>真のモデル（<span
+class="math inline">\(\hat{\beta_1}=2.06\)</span>からデータを繰り返し生成。データに対して一定モデルとxモデルを当てはめ、<span
+class="math inline">\(\Delta{D_{1,2}}\)</span>を得て、その分布をみる</li>
+<li>分布から<span class="math inline">\(\Delta
+D_{1,2}\geqq4.5\)</span>となる確率<span
+class="math inline">\(P\)</span>がわかるので評価できる</li>
 </ol></li>
+<li>第一種過誤の重視＝検定の非対称性</li>
 </ul>
 </div>
-<div id="確率分布線形予測子リンク関数" class="section level2">
-<h2>3. 確率分布・線形予測子・リンク関数</h2>
+<div id="帰無仮説を棄却するための有意水準" class="section level2">
+<h2>5.4 帰無仮説を棄却するための有意水準</h2>
 <ul>
-<li>確率分布
+<li><span class="math inline">\(P\)</span>値：<span
+class="math inline">\(\Delta D_{1,2}\geqq4.5\)</span>となる確率
 <ul>
-<li>観測データを生む確率的過程を表現するためのもの。データに合わせて変える。
-<ul>
-<li>ビールなら正規分布</li>
-<li>小動物の数ならポアソン分布</li>
-<li>購入比率なら二項分布</li>
+<li>第一種の過誤をおかす確率</li>
+<li><span
+class="math inline">\(P\)</span>値が大きい＝そのくらいの差はよくあること＝帰無仮説を棄却できない</li>
+<li><span
+class="math inline">\(P\)</span>値が小さい＝その差は滅多にない＝帰無仮説を棄却する（真のモデルとは思えないから）</li>
 </ul></li>
-</ul></li>
-<li>変数
+<li>大きい/小さいの基準は？</li>
+<li>有意水準<span
+class="math inline">\(\alpha\)</span>を事前に決めておく
 <ul>
-<li>応答変数・従属変数</li>
-<li>説明変数</li>
+<li><span
+class="math inline">\(P\geqq\alpha\)</span>：帰無仮説は棄却できない</li>
+<li><span
+class="math inline">\(P&lt;\alpha\)</span>：帰無仮説を棄却できる</li>
 </ul></li>
-<li>線形予測子
+<li><span class="math inline">\(\alpha\)</span>はどう決める？
 <ul>
-<li>説明変数の線型結合</li>
-</ul></li>
-<li>リンク関数
-<ul>
-<li>応答変数と線形予測子を関係付けること</li>
+<li>まあ何となく</li>
+<li>伝統的に</li>
 </ul></li>
 </ul>
-</div>
-<div id="一般化線形モデルの例-説明変数が無く正規分布を仮定するモデル"
-class="section level2">
-<h2>4. 一般化線形モデルの例:
-説明変数が無く、正規分布を仮定するモデル</h2>
-<ul>
-<li>ビール売り上げの例
-<ul>
-<li>凡例
-<ul>
-<li><span class="math inline">\(y_i\)</span>:売り上げデータ</li>
-<li><span class="math inline">\(\mu_i\)</span>: <span
-class="math inline">\(y_i\)</span>の期待値</li>
-<li><span class="math inline">\(_i\)</span>: 何番目のデータか</li>
-<li><span class="math inline">\(g\)</span>: 恒等関数（<span
-class="math inline">\(g(y)=y\)</span>となる関数=何も起きない関数）</li>
-</ul></li>
-<li>一般化線形モデル
-<ul>
-<li><span class="math inline">\(g(\mu_i)=\beta_0\)</span></li>
-<li><span class="math inline">\(y_i \sim Normal(\mu,
-\sigma^2)\)</span></li>
-<li><span
-class="math inline">\(\beta_0\)</span>が線形予測子、恒等関数<span
-class="math inline">\(g()\)</span>がリンク関数</li>
-</ul></li>
-<li>書き換え
-<ul>
-<li><span class="math inline">\(\mu_i=\beta_0\)</span></li>
-<li><span class="math inline">\(y_i \sim Normal(\mu,
-\sigma^2)\)</span></li>
-</ul></li>
-<li>従属変数の平均値<span class="math inline">\(\mu_i\)</span>が値<span
-class="math inline">\(\beta_0\)</span>をとることを想定したモデル</li>
-</ul></li>
-</ul>
-</div>
-<div id="単回帰モデル-説明変数が1つだけあり正規分布を仮定するモデル"
-class="section level2">
-<h2>5. 単回帰モデル:
-説明変数が1つだけあり、正規分布を仮定するモデル</h2>
-<ul>
-<li>ビールの売り上げが気温<span
-class="math inline">\(x\)</span>によって変化するというモデル
+<div id="方法1-汎用性のあるパラメトリックブートストラップ法"
+class="section level3">
+<h3>5.4.1 方法(1) 汎用性のあるパラメトリックブートストラップ法</h3>
 <ul>
 <li><span
-class="math inline">\(g(\mu_i)=\beta_0+\beta_1x_i\)</span></li>
-<li><span class="math inline">\(y_i \sim Normal(\mu_i,
-\sigma^2)\)</span></li>
-<li><span
-class="math inline">\(\beta_0+\beta_1x_i\)</span>が線形予測子、恒等関数<span
-class="math inline">\(g()\)</span>がリンク関数</li>
-</ul></li>
-<li>書き換え
+class="math inline">\(P\)</span>値を評価するための分布があれば良いことになる</li>
+<li>まず1つめ：パラメトリックブートストラップ法（BP法）
 <ul>
-<li><span class="math inline">\(\mu_i = \beta_0 +
-\beta_1x_i\)</span></li>
-<li><span class="math inline">\(y_i \sim Normal(\mu_i,
-\sigma^2)\)</span></li>
-</ul></li>
-<li>気温<span class="math inline">\(x\)</span>が1変化すると<span
-class="math inline">\(\beta_1\)</span>増減する</li>
-<li>単回帰モデル
-<ul>
-<li><span class="math inline">\(\beta_0\)</span>を切片</li>
-<li><span class="math inline">\(\beta_1\)</span>を<span
-class="math inline">\(x\)</span>の係数・傾き</li>
-</ul></li>
-<li>単回帰モデルを使うことで..
-<ul>
-<li>説明変数と従属変数の関係の考察</li>
-<li>従属変数の予測</li>
-</ul></li>
-</ul>
-</div>
-<div id="分散分析モデルダミー変数を利用するモデル"
-class="section level2">
-<h2>6. 分散分析モデル：ダミー変数を利用するモデル</h2>
-<ul>
-<li>説明変数が質的変数のとき
-<ul>
-<li>ダミー変数を使う必要性
-<ul>
-<li>ダミー変数：0 / 1</li>
-<li>晴れ・雨・曇りを表現する
-<ul>
-<li>晴れ：0/1</li>
-<li>雨: 0/1</li>
-</ul></li>
-<li>状態-1の変数
-<ul>
-<li>1 0 -&gt; 晴れ</li>
-<li>0 1 -&gt; 雨</li>
-<li>0 0 -&gt; 曇り</li>
-</ul></li>
-</ul></li>
-</ul></li>
-<li>ビールの例
-<ul>
-<li>売上が天気の影響を受ける
-<ul>
-<li><span class="math inline">\(x_1\)</span>:晴れなら1, <span
-class="math inline">\(x_2\)</span>: 雨なら1, <span
-class="math inline">\(g()\)</span>: 恒等関数
-<ul>
-<li><span
-class="math inline">\(g(\mu_i)=\beta_0+\beta_1x_{i1}+\beta_{i2}\)</span></li>
-<li>y Normal(_i, ^2)</li>
-</ul></li>
-<li>書き換え
-<ul>
-<li><span
-class="math inline">\(\mu_i=\beta_0+\beta_1x_{i1}+\beta_{i2}\)</span></li>
-</ul></li>
-<li>分散分析モデル
-<ul>
-<li>説明変数が質的データ</li>
-<li>確率分布として正規分布</li>
-</ul></li>
-</ul></li>
-</ul></li>
-</ul>
-</div>
-<div id="正規線形モデル正規分布を仮定するモデル" class="section level2">
-<h2>7. 正規線形モデル：正規分布を仮定するモデル</h2>
-<ul>
-<li>単回帰モデルも分散分析モデルも含まれる</li>
-<li>リンク関数は恒等関数</li>
-<li>確率分布は正規分布</li>
-<li>説明変数は量的だけ（単回帰モデル）、質的だけ（分散分析モデル）、両方とも（？）</li>
-</ul>
-</div>
-<div id="ポアソン回帰モデル" class="section level2">
-<h2>8. ポアソン回帰モデル</h2>
-<ul>
-<li>魚の釣果尾数のモデル化
-<ul>
-<li>あまり釣れないし生の数のみ、ポアソン分布に従う</li>
-<li>分布のパラメータ<span
-class="math inline">\(\lambda\)</span>は気温と天気の影響を受ける
-<ul>
-<li><span class="math inline">\(p(y_i|\lambda_i)=\frac{\lambda_i^{y_i}
-exp(-\lambda_i)}{y_i!}\)</span></li>
-<li>ここから、ちょっと馬場本の式3.10,
-3.11が分かりにくく感じたので、緑本p159の説明順を参考に表現を変えます。なんでexp()なのか、logなのかの説明がなくて分からない。
-<ul>
-<li>パラメータ<span
-class="math inline">\(\lambda\)</span>が次の式に従うとする
-<ul>
-<li><span class="math inline">\(\lambda_i =
-exp(\beta_0+\beta_1x_1+\beta_2x_2+\beta_3x_3)\)</span></li>
-</ul></li>
-<li>この式を変形すると
-<ul>
-<li><span class="math inline">\(log\lambda_i =
-\beta_0+\beta_1x_1+\beta_2x_2+\beta_3x_3\)</span></li>
-<li>リンク関数: <span class="math inline">\(log\lambda_i\)</span> -&gt;
-対数リンク関数</li>
-<li>線形予測子：<span
-class="math inline">\(\beta_0+\beta_1x_1+\beta_2x_2+\beta_3x_3\)</span></li>
-</ul></li>
-<li>馬場本P159の式3.11
-<ul>
-<li><span
-class="math inline">\(\lambda=\beta_0+\beta_1x_1+\beta_2x_2+\beta_3x_3\)</span>
-(3.11)</li>
-</ul></li>
-<li>は誤解しそう</li>
-<li>緑本のように
-<ul>
-<li><span
-class="math inline">\(\lambda=exp(\beta_0+\beta_1x_1+\beta_2x_2+\beta_3x_3)\)</span></li>
-</ul></li>
-<li>とした方がいい気がする。</li>
-<li>ポアソン回帰には対数リンク関数、ロジスティック回帰にはロジットリンク関数＝正準リンク関数
-<ul>
-<li>Rのglm()では特に指定しなけば確率分布ごとに異なる正準リンク関数が使われる</li>
-<li>なぜポアソン回帰には対数リンク関数を使うのか？
+<li>乱数発生によるシミュレーションでデータたくさん生成</li>
+<li>以下、Rでの手順
 <ol style="list-style-type: decimal">
-<li>推定計算に都合がいいから(緑本P48): <span
-class="math inline">\(\lambda_i\)</span>がexp(線形予測子)になるので、負になることがない。都合がいい。</li>
-<li>わかりやすいから（緑本P59あたり）：効果が掛け算になる。<span
-class="math inline">\(exp(\beta_0+\beta_1x_1)\)</span>は<span
-class="math inline">\(exp(\beta_0)\times
-exp(\beta_1x_1)\)</span>。複数の効果が掛け算で効いてくる方がもっともらしい。</li>
+<li>一定モデルとxモデルの最尤推定を実施し、結果をfit1とfit2に取得</li>
+<li>2つのモデルの残差逸脱度（変数deviance)が分かるので、その差から<span
+class="math inline">\(\Delta D_{1,2}\)</span>を算出。これが尤度比。</li>
+<li>一定モデルから推定された平均種子数（推定された<span
+class="math inline">\(\beta_1\)</span>をexpに）、それをラムダとしてrpois()でデータを100個生成</li>
+</ol>
+<ul>
+<li>ここで本ではrpois()に渡す値をmean(d$y)と計算してるんだけど、ちょっとしっくりこない。</li>
+</ul>
+<ol start="4" style="list-style-type: decimal">
+<li>生成した100個の値に対して、一定モデルとxモデルを適用し、その結果から尤度比を算出</li>
+<li>以上を1000回くらい繰り返す</li>
 </ol></li>
-</ul></li>
-</ul></li>
+<li>実装してみよう
+<ul>
+<li>下の結果から、「逸脱度の差(4.51)のP値は0.035であり、有意水準0.05よりも小さいので帰無仮説を棄却し、xモデルを採択」と言える</li>
 </ul></li>
 </ul></li>
 </ul>
+<pre class="r"><code>dat&lt;-read.csv(&#39;kubobook_2012-2/poisson/data3a.csv&#39;)
+dat$f&lt;-as.factor(dat$f)
+f1&lt;-glm(y~1, data=dat, family=poisson)
+f2&lt;-glm(y~1+x, data=dat, family=poisson)
+d1&lt;-f1$deviance-f2$deviance
+
+#nrp=10000
+#for (rp in 1:nrp){
+#  dat$rnd&lt;-rpois(100, lambda=mean(dat$y))
+#  fit1&lt;-glm(rnd~1, data=dat, family=poisson)
+#  fit2&lt;-glm(rnd~x, data=dat, family=poisson)
+#  d[rp]&lt;-fit1$deviance-fit2$deviance
+#}
+
+# 上のは遅くてきついので、本を参考に関数を作成
+
+# datを引数として逸脱度の差を返す関数
+get.D&lt;-function(dat){
+  nsample&lt;-nrow(dat)
+  ymean&lt;-mean(dat$y)
+  dat$rnd&lt;-rpois(nsample, lambda=mean(dat$y))
+  fit1&lt;-glm(rnd~1, data=dat, family=poisson)
+  fit2&lt;-glm(rnd~x, data=dat, family=poisson)
+  fit1$deviance-fit2$deviance # ここが戻り値になる？
+}
+
+# datと繰り返し回数を引数として、get.Dを繰り返す関数
+pb&lt;-function(dat, n.bs){
+  replicate(n.bs, get.D(dat))
+}
+
+nr=10000
+D12&lt;-pb(dat, n.bs=nr)
+
+
+summary(D12)</code></pre>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##  0.0000  0.1018  0.4558  1.0034  1.3144 14.7547</code></pre>
+<pre class="r"><code>hist(D12)
+abline(v=d1, lty=2)</code></pre>
+<p><img src="midori5_files/figure-html/unnamed-chunk-1-1.png" width="768" /></p>
+<pre class="r"><code>sum(D12&gt;d1)/nr</code></pre>
+<pre><code>## [1] 0.0352</code></pre>
 </div>
-<div id="ロジスティック回帰モデル-二項分布を仮定するモデル"
+</div>
+<div id="方法2-chi2分布を使った近似計算法" class="section level2">
+<h2>5.4.2 方法(2) <span
+class="math inline">\(\chi^2\)</span>分布を使った近似計算法</h2>
+<ul>
+<li>PB法はどんなときにも使えるけど、シミュレーションが必要</li>
+<li>近似計算でもっと楽にやれる場合もある</li>
+<li>Rを使った実施例
+<ul>
+<li>逸脱度の差が自由度1の<span
+class="math inline">\(\chi^2\)</span>分布に近似（する場合がある）</li>
+<li>anova関数の引数にfit1(glmの一定モデル結果)とfit2(xモデル結果)を渡して逸脱度の分析
+<ul>
+<li>anova()
+<ul>
+<li>1つあるいは複数のfitted model
+objectの分散（あるいは逸脱度）分析を計算</li>
+<li>lmやglmの結果を引数とする</li>
+</ul></li>
+</ul></li>
+<li>有意確率が得られる。ただしPB法の確率と一致しない。サンプル数が小さい場合、<span
+class="math inline">\(\chi^2\)</span>には近似しにくい</li>
+</ul></li>
+<li>サンプル数が小さいときはPB法を使うべき</li>
+<li>データの分布が等分散正規分布なら、t検定や分散比を統計量としたF検定（分散分析）も使えるよ。</li>
+</ul>
+<pre class="r"><code>fit1&lt;-glm(y~1, data=dat, family=poisson)
+fit2&lt;-glm(y~x, data=dat, family=poisson)
+anova(fit1, fit2, test=&#39;Chisq&#39;)</code></pre>
+<pre><code>## Analysis of Deviance Table
+## 
+## Model 1: y ~ 1
+## Model 2: y ~ x
+##   Resid. Df Resid. Dev Df Deviance Pr(&gt;Chi)  
+## 1        99     89.507                       
+## 2        98     84.993  1   4.5139  0.03362 *
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+</div>
+<div id="帰無仮説を棄却できないは差がないではない"
 class="section level2">
-<h2>9. ロジスティック回帰モデル: 二項分布を仮定するモデル</h2>
+<h2>5.5 「帰無仮説を棄却できない」は「差がない」ではない</h2>
 <ul>
-<li>コインの裏表、種子の発芽率（発芽するかしないか）、商品の購入率（するしない）
+<li><span
+class="math inline">\(P&lt;\alpha\)</span>の場合、帰無仮説を棄却する</li>
+<li>じゃあ<span class="math inline">\(P\geqq\alpha\)</span>の場合は？
 <ul>
-<li>二値確率変数</li>
-<li>二項分布</li>
+<li>「帰無仮説は正しい」ではない
+<ul>
+<li>対偶はなりたたない</li>
 </ul></li>
-<li>例：植物の種子の発芽率
-<ul>
-<li>10粒中発芽する種子数をモデル化
-<ul>
-<li>試行回数10の二項分布、成功確率<span
-class="math inline">\(p\)</span></li>
-<li><span
-class="math inline">\(p\)</span>は日照の有無と栄養素の量に影響される</li>
-<li><span class="math inline">\(y_i\)</span>: 10粒のうち発芽した数</li>
-<li><span class="math inline">\(x_{i1}\)</span>:
-日が当たっていれば1、当たっていなければ0のダミー変数</li>
-<li><span class="math inline">\(x_{i2}\)</span>: 栄養素の量</li>
-<li><span
-class="math inline">\(logit(p_i)=\beta_0+\beta_1x_1+\beta_2x_2\)</span></li>
-<li><span class="math inline">\(y\sim Binom(10,p_i)\)</span></li>
+<li>どちらも採択しない。判断を保留するのが正しい。</li>
 </ul></li>
-<li>ロジット関数<span class="math inline">\(logit()\)</span>
+<li>Neyman-Pearsonのわくぐみの非対称性（5.3節）
 <ul>
-<li><span
-class="math inline">\(logit(p)+log(\frac{p}{1-p})\)</span></li>
+<li>第一種の過誤を棄却することを頑張ってる分、逆は弱い</li>
 </ul></li>
-<li>ロジット関数の逆関数＝ロジスティック関数
+<li>第二種の過誤の確率を<span
+class="math inline">\(P_2\)</span>として評価することも可能
 <ul>
-<li><span
-class="math inline">\(logistic(x)=\frac{1}{1+exp(-x)}\)</span></li>
+<li>ただし、<span
+class="math inline">\(P_2\)</span>を使って何か、というやり方が決まっているわけではない</li>
+<li>検定力(<span
+class="math inline">\(1-P_2\)</span>)＝帰無仮説が誤りだったときに、それを正しく棄却する確率として使うことが多い</li>
+<li>実験研究では事前に検定力を定量的に決めることが望まれる
+<ul>
+<li>A prioriとかPost hocとか</li>
+<li>G*Power使ったりとか</li>
+<li><a
+href="https://www.mizumot.com/method/mizumoto-takeuchi.pdf">水本・竹内,
+2010</a></li>
 </ul></li>
 </ul></li>
 </ul>
-<pre class="r"><code>x&lt;-seq(-10,10,0.01)
-y&lt;-1/(1+exp(-x))
-plot(x,y,type=&#39;l&#39;)</code></pre>
-<p><img src="3-1GLM_files/figure-html/unnamed-chunk-1-1.png" width="768" /></p>
 </div>
 </div>
 </div>

@@ -116,13 +116,23 @@
         <div class="Sidebar">
           <div class="SidebarItems" id="toc">
             <ul>
-            <li><a href="#一般化線形モデルーポアソン回帰">3. 一般化線形モデルーポアソン回帰</a>
+            <li><a href="#一般化線形モデルーポアソン回帰">3.
+            一般化線形モデルーポアソン回帰</a>
             <ul>
-            <li><a href="#例題個体ごとに平均種子数が異なる場合">3.1 例題：個体ごとに平均種子数が異なる場合</a></li>
-            <li><a href="#観測されたデータの概要を調べる">3.2 観測されたデータの概要を調べる</a></li>
-            <li><a href="#統計モデリングの前にデータを図示する">3.3 統計モデリングの前にデータを図示する</a></li>
-            <li><a href="#ポアソン回帰の統計モデル">3.4 ポアソン回帰の統計モデル</a></li>
-            <li><a href="#ポアソン回帰モデルによる予測">3.4.3 ポアソン回帰モデルによる予測</a></li>
+            <li><a href="#例題個体ごとに平均種子数が異なる場合">3.1
+            例題：個体ごとに平均種子数が異なる場合</a></li>
+            <li><a href="#観測されたデータの概要を調べる">3.2
+            観測されたデータの概要を調べる</a></li>
+            <li><a href="#統計モデリングの前にデータを図示する">3.3
+            統計モデリングの前にデータを図示する</a></li>
+            <li><a href="#ポアソン回帰の統計モデル">3.4
+            ポアソン回帰の統計モデル</a></li>
+            <li><a href="#説明変数が因子型の統計モデル">3.5
+            説明変数が因子型の統計モデル</a></li>
+            <li><a href="#説明変数が数量型因子型の統計モデル">3.6
+            説明変数が数量型＋因子型の統計モデル</a></li>
+            <li><a href="#何でも正規分布何でも直線には無理がある">3.7
+            「何でも正規分布」「何でも直線」には無理がある</a></li>
             </ul></li>
             </ul>
           </div>
@@ -173,6 +183,12 @@
         <a href="midori3.html">緑本3部</a>
       </li>
       <li>
+        <a href="midori4.html">緑本4部</a>
+      </li>
+      <li>
+        <a href="midori5.html">緑本5部</a>
+      </li>
+      <li>
         <a href="psytech.html">技術部</a>
       </li>
             </ul>
@@ -186,7 +202,8 @@
       <h1 class="title">midori3</h1>
       
       <p class="authors">
-           <span class="glyphicon glyphicon-user"></span> Toshihide Imaruoka
+           <span class="glyphicon glyphicon-user"></span> Toshihide
+Imaruoka
       </p>
               
 
@@ -212,7 +229,8 @@
 <li>個体<span class="math inline">\(_i\)</span></li>
 <li>種子数<span class="math inline">\(y_i\)</span></li>
 <li>体サイズ<span class="math inline">\(x_i\)</span>: 正の実数</li>
-<li>施肥処理<span class="math inline">\(f_i\)</span>: C処理なし, T処理あり; 50体ずつ
+<li>施肥処理<span class="math inline">\(f_i\)</span>: C処理なし,
+T処理あり; 50体ずつ
 <ul>
 <li>体サイズと施肥処理は独立</li>
 </ul></li>
@@ -225,13 +243,14 @@
 <li>R でデータ読み込み、処理</li>
 </ul>
 <pre class="r"><code>dat&lt;-read.csv(&#39;kubobook_2012-2/poisson/data3a.csv&#39;)
+dat$f&lt;-as.factor(dat$f)
 summary(dat)</code></pre>
-<pre><code>##        y               x               f            
-##  Min.   : 2.00   Min.   : 7.190   Length:100        
-##  1st Qu.: 6.00   1st Qu.: 9.428   Class :character  
-##  Median : 8.00   Median :10.155   Mode  :character  
-##  Mean   : 7.83   Mean   :10.089                     
-##  3rd Qu.:10.00   3rd Qu.:10.685                     
+<pre><code>##        y               x          f     
+##  Min.   : 2.00   Min.   : 7.190   C:50  
+##  1st Qu.: 6.00   1st Qu.: 9.428   T:50  
+##  Median : 8.00   Median :10.155         
+##  Mean   : 7.83   Mean   :10.089         
+##  3rd Qu.:10.00   3rd Qu.:10.685         
 ##  Max.   :15.00   Max.   :12.400</code></pre>
 </div>
 <div id="統計モデリングの前にデータを図示する" class="section level2">
@@ -239,39 +258,48 @@ summary(dat)</code></pre>
 <ul>
 <li>データをよく見ておくこと大事</li>
 </ul>
-<pre class="r"><code>plot(dat$x, dat$y, pch=c(21,19)[as.factor(dat$f)])
+<pre class="r"><code>plot(dat$x, dat$y, pch=c(21,19)[dat$f])
 legend(&#39;topleft&#39;, legend=c(&quot;C&quot;,&quot;T&quot;), pch=c(21,19))</code></pre>
 <p><img src="midori3_files/figure-html/unnamed-chunk-2-1.png" width="768" /></p>
-<pre class="r"><code>plot(as.factor(dat$f),dat$y)</code></pre>
+<pre class="r"><code>plot(dat$f,dat$y)</code></pre>
 <p><img src="midori3_files/figure-html/unnamed-chunk-2-2.png" width="768" /></p>
 </div>
 <div id="ポアソン回帰の統計モデル" class="section level2">
 <h2>3.4 ポアソン回帰の統計モデル</h2>
 <ul>
 <li>カウントデータなのでポアソン分布でばらつきを表現できるはず</li>
-<li>平均種子数<span class="math inline">\(\lambda_i\)</span>が体サイズxや施肥処理fに影響される</li>
-<li>まずは体サイズ<span class="math inline">\(x_i\)</span>だけに影響されるというモデル
+<li>平均種子数<span
+class="math inline">\(\lambda_i\)</span>が体サイズxや施肥処理fに影響される</li>
+<li>まずは体サイズ<span
+class="math inline">\(x_i\)</span>だけに影響されるというモデル
 <ul>
-<li><span class="math inline">\(p(y_i|\lambda_i)=\frac{\lambda_i^{y_i}exp(-\lambda_i)}{y_i!}\)</span></li>
+<li><span
+class="math inline">\(p(y_i|\lambda_i)=\frac{\lambda_i^{y_i}exp(-\lambda_i)}{y_i!}\)</span></li>
 </ul></li>
 </ul>
 <div id="線形予測子と対数リンク関数" class="section level3">
 <h3>3.4.1 線形予測子と対数リンク関数</h3>
 <ul>
-<li>ここでは平均<span class="math inline">\(\lambda_i\)</span>は説明変数<span class="math inline">\(x_i\)</span>の関数であるとしている。そこで、
+<li>ここでは平均<span
+class="math inline">\(\lambda_i\)</span>は説明変数<span
+class="math inline">\(x_i\)</span>の関数であるとしている。そこで、
 <ul>
-<li><span class="math inline">\(\lambda_i=exp(\beta_1+\beta_2x_i)\)</span></li>
-<li>図示してみると、パラメータ(<span class="math inline">\(\beta_1, \beta_2\)</span>)によって体サイズと平均種子数の関係が大きく変化することが分かる</li>
+<li><span
+class="math inline">\(\lambda_i=exp(\beta_1+\beta_2x_i)\)</span></li>
+<li>図示してみると、パラメータ(<span class="math inline">\(\beta_1,
+\beta_2\)</span>)によって体サイズと平均種子数の関係が大きく変化することが分かる</li>
 <li>ここでは、右辺がexp()である理由は説明されていないことに注意</li>
 </ul></li>
 <li>線形予測子(linear predictor)とリンク関数(link function)
 <ul>
 <li>さっきの式は、下のように変形可能（両辺にlog）
 <ul>
-<li><span class="math inline">\(log\lambda_i=\beta_1+\beta_2x_i\)</span></li>
+<li><span
+class="math inline">\(log\lambda_i=\beta_1+\beta_2x_i\)</span></li>
 </ul></li>
 <li>右辺が項の線形和となったので、これを線形予測子と呼ぶ</li>
-<li>このとき、左辺が<span class="math inline">\(\lambda\)</span>の関数となり、右辺が線形予測子。このときの左辺の関数をリンク関数と呼ぶ。今の場合は対数リンク関数。
+<li>このとき、左辺が<span
+class="math inline">\(\lambda\)</span>の関数となり、右辺が線形予測子。このときの左辺の関数をリンク関数と呼ぶ。今の場合は対数リンク関数。
 <ul>
 <li>ポアソン回帰の場合は、対数リンク関数を使うのが普通。</li>
 </ul></li>
@@ -296,8 +324,11 @@ legend(&#39;topleft&#39;, legend=c(&quot;C&quot;,&quot;T&quot;), pch=c(21,19))</
 <li>いろいろなあてはめの可能性がある中で、対数尤度logLが最大になるパラメータを決める</li>
 <li>あるデータYのもとでの対数尤度は
 <ul>
-<li><span class="math inline">\(logL(\beta_1,\beta_2)=\Sigma_ilog\frac{\lambda^{y_i}exp(-\lambda_i)}{y_i!}\)</span></li>
-<li>ここで、<span class="math inline">\(\lambda_i\)</span>はパラメータ<span class="math inline">\(\beta_1と\beta_2\)</span>の関数</li>
+<li><span
+class="math inline">\(logL(\beta_1,\beta_2)=\Sigma_ilog\frac{\lambda^{y_i}exp(-\lambda_i)}{y_i!}\)</span></li>
+<li>ここで、<span
+class="math inline">\(\lambda_i\)</span>はパラメータ<span
+class="math inline">\(\beta_1と\beta_2\)</span>の関数</li>
 <li>2章ではパラメータが1つだったので対数尤度の最大値は簡単に求められたけど、2つだとそうはいかない。
 <ul>
 <li>そこで「数値を使った試行錯誤」＝MCMC</li>
@@ -351,14 +382,18 @@ print(fit)</code></pre>
 <li>Estimateは推定値</li>
 <li>Std. Error は標準誤差
 <ul>
-<li>推定値<span class="math inline">\(\beta_1と\beta_2\)</span>のばらつき（標準偏差）</li>
+<li>推定値<span
+class="math inline">\(\beta_1と\beta_2\)</span>のばらつき（標準偏差）</li>
 <li>パラメータ推定値のばらつきSEの推定方法
 <ul>
 <li>パラメータ推定値のばらつきを正規分布と仮定、さらに対数尤度関数の形が正規分布に近いと仮定。それによってSEを求めている。</li>
 </ul></li>
 </ul></li>
-<li>z valueは統計量z。最尤推定値/SE（Wald統計量）。最尤推定値が0から離れているかどうかの目安となり得る。</li>
-<li>Pr(&gt;|z|)は、平均z値（の絶対値）、標準偏差1の正規分布の無限大から0の面積の2倍。値が大きいと、z値（つまり推定値）が0に近いということになる。今の例でいうと<span class="math inline">\(\beta_1\)</span>は0と十分に離れてるけど、<span class="math inline">\(\beta_2\)</span>は結構近い。信頼区間くらいで考えた方が良さそう。</li>
+<li>z
+valueは統計量z。最尤推定値/SE（Wald統計量）。最尤推定値が0から離れているかどうかの目安となり得る。</li>
+<li>Pr(&gt;|z|)は、平均z値（の絶対値）、標準偏差1の正規分布の無限大から0の面積の2倍。値が大きいと、z値（つまり推定値）が0に近いということになる。今の例でいうと<span
+class="math inline">\(\beta_1\)</span>は0と十分に離れてるけど、<span
+class="math inline">\(\beta_2\)</span>は結構近い。信頼区間くらいで考えた方が良さそう。</li>
 </ul></li>
 <li>ある説明変数をモデルに含めるべきかどうかは、第4章のモデル選択で判断すべき
 <ul>
@@ -371,17 +406,138 @@ print(fit)</code></pre>
 </ul></li>
 </ul>
 </div>
-</div>
-<div id="ポアソン回帰モデルによる予測" class="section level2">
-<h2>3.4.3 ポアソン回帰モデルによる予測</h2>
+<div id="ポアソン回帰モデルによる予測" class="section level3">
+<h3>3.4.3 ポアソン回帰モデルによる予測</h3>
 <ul>
 <li>ポアソン回帰の推定結果を使って、体サイズに対する種子数の予測ができる</li>
 </ul>
-<pre class="r"><code>plot(dat$x, dat$y, pch=c(21,19)[as.factor(dat$f)], ylim=c(min(dat$y), max(dat$y)))
+<pre class="r"><code>plot(dat$x, dat$y, pch=c(21,19)[dat$f], ylim=c(min(dat$y), max(dat$y)))
 xx&lt;-seq(min(dat$x), max(dat$x), length=100)
 par(new=T)
 plot(xx, exp(1.29 + 0.0757 * xx), type=&#39;l&#39;, lwd=2, ylim=c(min(dat$y), max(dat$y)))</code></pre>
 <p><img src="midori3_files/figure-html/unnamed-chunk-4-1.png" width="768" /></p>
+</div>
+</div>
+<div id="説明変数が因子型の統計モデル" class="section level2">
+<h2>3.5 説明変数が因子型の統計モデル</h2>
+<ul>
+<li>因子型の変数について考えるために施肥効果<span
+class="math inline">\(f_i\)</span>について考えてみる
+<ul>
+<li>まずは体サイズは無視して、施肥効果だけのモデル</li>
+<li>glm()を使えば簡単で、y~fとするだけ</li>
+<li>ただし、本ではダミー変数を使うという考え方の確認をしている
+<ul>
+<li>ダミー変数<span class="math inline">\(d_i\)</span>が
+<ul>
+<li><span class="math inline">\(f_i\)</span>がCのときには<span
+class="math inline">\(d_i\)</span>=0</li>
+<li><span class="math inline">\(f_i\)</span>がTのときには<span
+class="math inline">\(d_i\)</span>=1</li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+<pre class="r"><code>fit.f&lt;-glm(y~f, data=dat, family=poisson)
+print(fit.f)</code></pre>
+<pre><code>## 
+## Call:  glm(formula = y ~ f, family = poisson, data = dat)
+## 
+## Coefficients:
+## (Intercept)           fT  
+##     2.05156      0.01277  
+## 
+## Degrees of Freedom: 99 Total (i.e. Null);  98 Residual
+## Null Deviance:       89.51 
+## Residual Deviance: 89.48     AIC: 479.3</code></pre>
+<pre class="r"><code>logLik(fit.f)</code></pre>
+<pre><code>## &#39;log Lik.&#39; -237.6273 (df=2)</code></pre>
+<ul>
+<li>最大対数尤度を出すと、体サイズだけのモデルよりも値が小さい＝あてはまりが悪い</li>
+<li>ちなみに因子型変数が3水準の場合(肥料Aを与える、Bを与える、どちらも与えない）、A,B,CをAが与えられたかどうか、Bが与えられたかどうかの組み合わせで表す＝項が2つとなる
+<ul>
+<li>項<span class="math inline">\(d_{i.A}\)</span>と<span
+class="math inline">\(d_{i.B}\)</span>を置き、それぞれを0,1で表現する（肥料Aを与えたー与えない、肥料Bを与えたー与えない）</li>
+</ul></li>
+</ul>
+</div>
+<div id="説明変数が数量型因子型の統計モデル" class="section level2">
+<h2>3.6 説明変数が数量型＋因子型の統計モデル</h2>
+<ul>
+<li>体サイズ<span class="math inline">\(x_i\)</span>と施肥処理<span
+class="math inline">\(f_i\)</span>を両方組み込んだモデル</li>
+</ul>
+<pre class="r"><code>f.all&lt;-glm(y~x+f, family=poisson, data=dat)
+print(f.all)</code></pre>
+<pre><code>## 
+## Call:  glm(formula = y ~ x + f, family = poisson, data = dat)
+## 
+## Coefficients:
+## (Intercept)            x           fT  
+##     1.26311      0.08007     -0.03200  
+## 
+## Degrees of Freedom: 99 Total (i.e. Null);  97 Residual
+## Null Deviance:       89.51 
+## Residual Deviance: 84.81     AIC: 476.6</code></pre>
+<pre class="r"><code>logLik(f.all)</code></pre>
+<pre><code>## &#39;log Lik.&#39; -235.2937 (df=3)</code></pre>
+<ul>
+<li>最大対数尤度は体サイズのみのときと比べ、少しだけよくなってる
+<ul>
+<li>これについては第4章で検討</li>
+</ul></li>
+</ul>
+<div id="対数リンク関数のわかりやすさかけ算される効果"
+class="section level3">
+<h3>3.6.1 対数リンク関数のわかりやすさ：かけ算される効果</h3>
+<ul>
+<li>y ~ x + f としているけど、対数リンク関数なので実は掛け算
+<ul>
+<li>log(y) = x + f ということは y = exp(x + f)ということで、y = exp(x) *
+exp(f) ということだから。</li>
+</ul></li>
+<li>ただし、だから対数リンク関数が妥当だ、あるいは正しいという話ではない</li>
+<li>図3.8
+<ul>
+<li>対数リンク関数（種子数はexpで増加）の場合と恒等リンク関数（種子数は線形の増加）を比較</li>
+<li>対数リンク関数の場合、種子数が大きいときは施肥の効果が大きくなる</li>
+<li>恒等リンク関数の場合、種子数の絶対値に関わらず施肥の効果は一定</li>
+</ul></li>
+<li>どちらのモデルがより妥当かを意味をよく考えるべき
+<ul>
+<li>単に当てはまりの良さだけではなく</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="何でも正規分布何でも直線には無理がある" class="section level2">
+<h2>3.7 「何でも正規分布」「何でも直線」には無理がある</h2>
+<ul>
+<li>GLMで確率分布を正規分布、リンク関数を恒等リンク関数とすれば、線形モデルあるいは一般線形モデル
+<ul>
+<li>線形モデルの一つである直線回帰（よくやりがち）と一般線形モデルのポアソン回帰を仮想データで比較してみる。ポアソン回帰は線形モデルでは絶対に実現できないことに注意。</li>
+</ul></li>
+<li>図3.9のデータ
+<ul>
+<li>左は直線回帰しようとしている
+<ul>
+<li>多くのおかしな点
+<ul>
+<li>xが小さいときにはyのばらつきが小さい（0がたくさん）のに対して、xが大きくなるとyのばらつきが大きくなる＝等分散ではない</li>
+<li>yが離散値（正規分布は連続量に対する確率分布のはず）</li>
+<li>直線回帰の結果、yの予測値が負になるところがある</li>
+</ul></li>
+<li>おかしい</li>
+</ul></li>
+<li>右はポアソン回帰の例
+<ul>
+<li>離散値に無理なく対応</li>
+<li>対数リンク関数を使うことでyは負にならない（リンク関数は選べる）</li>
+<li>ばらつきの変化にも対応できる</li>
+</ul></li>
+<li>データの変換（対数変換・角変換など）も以前はよく使われていた（例えば、だんだんばらつきが大きくなるデータに対数変換とか）けど、それが妥当なわけではない</li>
+</ul></li>
+</ul>
 </div>
 </div>
 </div>

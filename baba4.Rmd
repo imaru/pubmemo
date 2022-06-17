@@ -80,7 +80,7 @@ plot(eff41_1, points=T)
 
 ## 8. GLMMのためのStanファイルの実装
   * まずはStanでの実装から
-```{stan output.var='stanmodel41'}
+```{stan output.var='stanmodel41_1'}
 data{
   int N;
   int fish_num[N];
@@ -111,7 +111,7 @@ model{
     
 ## 9. MCMCの実行
 
-```{r stanmodel41}
+```{r stanmodel41_1}
 formula41<-formula(fish_num ~ weather + temperature)
 mtx41<-model.matrix(formula41, dat41)
 sunny_dummy<-as.numeric(mtx41[,'weathersunny'])
@@ -123,7 +123,7 @@ data_list41<-list(
   sunny=sunny_dummy
 )
 
-res41<-rstan::sampling(stanmodel41, data=data_list41, seed=1)
+res41<-rstan::sampling(stanmodel41_1, data=data_list41, seed=1)
 print(res41, pars=c('Intercept','b_sunny','b_temp','sigma_r'), probs=c(0.025,0.5,0.975))
 ```
 

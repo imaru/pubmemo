@@ -116,22 +116,15 @@
         <div class="Sidebar">
           <div class="SidebarItems" id="toc">
             <ul>
-            <li><a href="#glmの尤度比検定と検定の非対称性">5.
-            GLMの尤度比検定と検定の非対称性</a>
+            <li><a href="#glmの尤度比検定と検定の非対称性">5. GLMの尤度比検定と検定の非対称性</a>
             <ul>
-            <li><a href="#統計学的な検定のわくぐみ">5.1
-            統計学的な検定のわくぐみ</a></li>
-            <li><a href="#尤度比検定の例題逸脱度の差を調べる">5.2
-            尤度比検定の例題：逸脱度の差を調べる</a></li>
-            <li><a href="#種類の過誤と統計学的な検定の非対称性">5.3
-            2種類の過誤と統計学的な検定の非対称性</a></li>
-            <li><a href="#帰無仮説を棄却するための有意水準">5.4
-            帰無仮説を棄却するための有意水準</a></li>
-            <li><a href="#方法2-chi2分布を使った近似計算法">5.4.2
-            方法(2) <span
-            class="math inline">\(\chi^2\)</span>分布を使った近似計算法</a></li>
-            <li><a href="#帰無仮説を棄却できないは差がないではない">5.5
-            「帰無仮説を棄却できない」は「差がない」ではない</a></li>
+            <li><a href="#統計学的な検定のわくぐみ">5.1 統計学的な検定のわくぐみ</a></li>
+            <li><a href="#尤度比検定の例題逸脱度の差を調べる">5.2 尤度比検定の例題：逸脱度の差を調べる</a></li>
+            <li><a href="#種類の過誤と統計学的な検定の非対称性">5.3 2種類の過誤と統計学的な検定の非対称性</a></li>
+            <li><a href="#帰無仮説を棄却するための有意水準">5.4 帰無仮説を棄却するための有意水準</a></li>
+            <li><a href="#方法2-chi2分布を使った近似計算法">5.4.2 方法(2) <span class="math inline">\(\chi^2\)</span>分布を使った近似計算法</a></li>
+            <li><a href="#帰無仮説を棄却できないは差がないではない">5.5 「帰無仮説を棄却できない」は「差がない」ではない</a></li>
+            <li><a href="#検定とモデル選択そして推定された統計モデルの解釈">5.6 検定とモデル選択、そして推定された統計モデルの解釈</a></li>
             </ul></li>
             </ul>
           </div>
@@ -201,8 +194,7 @@
       <h1 class="title">midori5</h1>
       
       <p class="authors">
-           <span class="glyphicon glyphicon-user"></span> Toshihide
-Imaruoka
+           <span class="glyphicon glyphicon-user"></span> Toshihide Imaruoka
       </p>
          <p class="date"><span class="glyphicon glyphicon-calendar"></span> 6/16/2022</p>
            
@@ -246,13 +238,10 @@ Imaruoka
 <h2>5.2 尤度比検定の例題：逸脱度の差を調べる</h2>
 <ul>
 <li>第3章の種子数データを使う</li>
-<li>統計モデル：<span
-class="math inline">\(\lambda_i=exp(\beta_1+\beta_2x_i)\)</span>を平均とするポアソン分布GLM
+<li>統計モデル：<span class="math inline">\(\lambda_i=exp(\beta_1+\beta_2x_i)\)</span>を平均とするポアソン分布GLM
 <ul>
-<li>一定モデル：<span class="math inline">\(y_i\sim
-\beta_1\)</span></li>
-<li>xモデル：<span class="math inline">\(y_i\sim
-\beta_1+\beta_2x_i\)</span></li>
+<li>一定モデル：<span class="math inline">\(y_i\sim \beta_1\)</span></li>
+<li>xモデル：<span class="math inline">\(y_i\sim \beta_1+\beta_2x_i\)</span></li>
 <li>一定モデルが帰無仮説</li>
 </ul></li>
 <li>逸脱度は算出済み
@@ -263,16 +252,13 @@ class="math inline">\(\lambda_i=exp(\beta_1+\beta_2x_i)\)</span>を平均とす�
 </ul></li>
 <li>尤度比
 <ul>
-<li><span
-class="math inline">\(\frac{L_1^*}{L_2^*}=\frac{一定モデルの最大尤度}{xモデルの最大尤度}=\frac{対数尤度のexpだからexp(-237.6)}{exp(-235.4)}\)</span></li>
+<li><span class="math inline">\(\frac{L_1^*}{L_2^*}=\frac{一定モデルの最大尤度}{xモデルの最大尤度}=\frac{対数尤度のexpだからexp(-237.6)}{exp(-235.4)}\)</span></li>
 <li>ただし、このままは使わず、尤度比の対数をとって-2をかける
 <ul>
-<li><span
-class="math inline">\(log(\frac{L_1^*}{L_2^*})=log(L_1^*)-log(L_2^*)\)</span>に-2をかける</li>
+<li><span class="math inline">\(log(\frac{L_1^*}{L_2^*})=log(L_1^*)-log(L_2^*)\)</span>に-2をかける</li>
 <li>上の式は逸脱度Dの差に等しい</li>
 <li>つまり、尤度比は逸脱度Dの差のこと</li>
-<li>逸脱度の差（尤度比）を<span
-class="math inline">\(\Delta{D}_{1,2}\)</span>と表す</li>
+<li>逸脱度の差（尤度比）を<span class="math inline">\(\Delta{D}_{1,2}\)</span>と表す</li>
 </ul></li>
 <li>尤度比4.5が（逸脱度が）改善されたと言っていいのかどうかという問題を考える</li>
 </ul></li>
@@ -293,12 +279,8 @@ class="math inline">\(\Delta{D}_{1,2}\)</span>と表す</li>
 <ol style="list-style-type: decimal">
 <li>帰無仮説（一定モデル）を正しいものだと仮定</li>
 <li>観測データに一定モデルをあてはめ、最大対数尤度となるパラメータを決定（＝2.06）。これを真のモデルと同じとする。</li>
-<li>真のモデル（<span
-class="math inline">\(\hat{\beta_1}=2.06\)</span>からデータを繰り返し生成。データに対して一定モデルとxモデルを当てはめ、<span
-class="math inline">\(\Delta{D_{1,2}}\)</span>を得て、その分布をみる</li>
-<li>分布から<span class="math inline">\(\Delta
-D_{1,2}\geqq4.5\)</span>となる確率<span
-class="math inline">\(P\)</span>がわかるので評価できる</li>
+<li>真のモデル（<span class="math inline">\(\hat{\beta_1}=2.06\)</span>からデータを繰り返し生成。データに対して一定モデルとxモデルを当てはめ、<span class="math inline">\(\Delta{D_{1,2}}\)</span>を得て、その分布をみる</li>
+<li>分布から<span class="math inline">\(\Delta D_{1,2}\geqq4.5\)</span>となる確率<span class="math inline">\(P\)</span>がわかるので評価できる</li>
 </ol></li>
 <li>第一種過誤の重視＝検定の非対称性</li>
 </ul>
@@ -306,23 +288,17 @@ class="math inline">\(P\)</span>がわかるので評価できる</li>
 <div id="帰無仮説を棄却するための有意水準" class="section level2">
 <h2>5.4 帰無仮説を棄却するための有意水準</h2>
 <ul>
-<li><span class="math inline">\(P\)</span>値：<span
-class="math inline">\(\Delta D_{1,2}\geqq4.5\)</span>となる確率
+<li><span class="math inline">\(P\)</span>値：<span class="math inline">\(\Delta D_{1,2}\geqq4.5\)</span>となる確率
 <ul>
 <li>第一種の過誤をおかす確率</li>
-<li><span
-class="math inline">\(P\)</span>値が大きい＝そのくらいの差はよくあること＝帰無仮説を棄却できない</li>
-<li><span
-class="math inline">\(P\)</span>値が小さい＝その差は滅多にない＝帰無仮説を棄却する（真のモデルとは思えないから）</li>
+<li><span class="math inline">\(P\)</span>値が大きい＝そのくらいの差はよくあること＝帰無仮説を棄却できない</li>
+<li><span class="math inline">\(P\)</span>値が小さい＝その差は滅多にない＝帰無仮説を棄却する（真のモデルとは思えないから）</li>
 </ul></li>
 <li>大きい/小さいの基準は？</li>
-<li>有意水準<span
-class="math inline">\(\alpha\)</span>を事前に決めておく
+<li>有意水準<span class="math inline">\(\alpha\)</span>を事前に決めておく
 <ul>
-<li><span
-class="math inline">\(P\geqq\alpha\)</span>：帰無仮説は棄却できない</li>
-<li><span
-class="math inline">\(P&lt;\alpha\)</span>：帰無仮説を棄却できる</li>
+<li><span class="math inline">\(P\geqq\alpha\)</span>：帰無仮説は棄却できない</li>
+<li><span class="math inline">\(P&lt;\alpha\)</span>：帰無仮説を棄却できる</li>
 </ul></li>
 <li><span class="math inline">\(\alpha\)</span>はどう決める？
 <ul>
@@ -330,22 +306,18 @@ class="math inline">\(P&lt;\alpha\)</span>：帰無仮説を棄却できる</li>
 <li>伝統的に</li>
 </ul></li>
 </ul>
-<div id="方法1-汎用性のあるパラメトリックブートストラップ法"
-class="section level3">
+<div id="方法1-汎用性のあるパラメトリックブートストラップ法" class="section level3">
 <h3>5.4.1 方法(1) 汎用性のあるパラメトリックブートストラップ法</h3>
 <ul>
-<li><span
-class="math inline">\(P\)</span>値を評価するための分布があれば良いことになる</li>
+<li><span class="math inline">\(P\)</span>値を評価するための分布があれば良いことになる</li>
 <li>まず1つめ：パラメトリックブートストラップ法（BP法）
 <ul>
 <li>乱数発生によるシミュレーションでデータたくさん生成</li>
 <li>以下、Rでの手順
 <ol style="list-style-type: decimal">
 <li>一定モデルとxモデルの最尤推定を実施し、結果をfit1とfit2に取得</li>
-<li>2つのモデルの残差逸脱度（変数deviance)が分かるので、その差から<span
-class="math inline">\(\Delta D_{1,2}\)</span>を算出。これが尤度比。</li>
-<li>一定モデルから推定された平均種子数（推定された<span
-class="math inline">\(\beta_1\)</span>をexpに）、それをラムダとしてrpois()でデータを100個生成</li>
+<li>2つのモデルの残差逸脱度（変数deviance)が分かるので、その差から<span class="math inline">\(\Delta D_{1,2}\)</span>を算出。これが尤度比。</li>
+<li>一定モデルから推定された平均種子数（推定された<span class="math inline">\(\beta_1\)</span>をexpに）、それをラムダとしてrpois()でデータを100個生成</li>
 </ol>
 <ul>
 <li>ここで本ではrpois()に渡す値をmean(d$y)と計算してるんだけど、ちょっとしっくりこない。</li>
@@ -397,35 +369,31 @@ D12&lt;-pb(dat, n.bs=nr)
 
 summary(D12)</code></pre>
 <pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##  0.0000  0.1018  0.4558  1.0034  1.3144 14.7547</code></pre>
+##  0.0000  0.1053  0.4482  1.0083  1.3509 13.7952</code></pre>
 <pre class="r"><code>hist(D12)
 abline(v=d1, lty=2)</code></pre>
 <p><img src="midori5_files/figure-html/unnamed-chunk-1-1.png" width="768" /></p>
 <pre class="r"><code>sum(D12&gt;d1)/nr</code></pre>
-<pre><code>## [1] 0.0352</code></pre>
+<pre><code>## [1] 0.0345</code></pre>
 </div>
 </div>
 <div id="方法2-chi2分布を使った近似計算法" class="section level2">
-<h2>5.4.2 方法(2) <span
-class="math inline">\(\chi^2\)</span>分布を使った近似計算法</h2>
+<h2>5.4.2 方法(2) <span class="math inline">\(\chi^2\)</span>分布を使った近似計算法</h2>
 <ul>
 <li>PB法はどんなときにも使えるけど、シミュレーションが必要</li>
 <li>近似計算でもっと楽にやれる場合もある</li>
 <li>Rを使った実施例
 <ul>
-<li>逸脱度の差が自由度1の<span
-class="math inline">\(\chi^2\)</span>分布に近似（する場合がある）</li>
+<li>逸脱度の差が自由度1の<span class="math inline">\(\chi^2\)</span>分布に近似（する場合がある）</li>
 <li>anova関数の引数にfit1(glmの一定モデル結果)とfit2(xモデル結果)を渡して逸脱度の分析
 <ul>
 <li>anova()
 <ul>
-<li>1つあるいは複数のfitted model
-objectの分散（あるいは逸脱度）分析を計算</li>
+<li>1つあるいは複数のfitted model objectの分散（あるいは逸脱度）分析を計算</li>
 <li>lmやglmの結果を引数とする</li>
 </ul></li>
 </ul></li>
-<li>有意確率が得られる。ただしPB法の確率と一致しない。サンプル数が小さい場合、<span
-class="math inline">\(\chi^2\)</span>には近似しにくい</li>
+<li>有意確率が得られる。ただしPB法の確率と一致しない。サンプル数が小さい場合、<span class="math inline">\(\chi^2\)</span>には近似しにくい</li>
 </ul></li>
 <li>サンプル数が小さいときはPB法を使うべき</li>
 <li>データの分布が等分散正規分布なら、t検定や分散比を統計量としたF検定（分散分析）も使えるよ。</li>
@@ -443,12 +411,10 @@ anova(fit1, fit2, test=&#39;Chisq&#39;)</code></pre>
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 </div>
-<div id="帰無仮説を棄却できないは差がないではない"
-class="section level2">
+<div id="帰無仮説を棄却できないは差がないではない" class="section level2">
 <h2>5.5 「帰無仮説を棄却できない」は「差がない」ではない</h2>
 <ul>
-<li><span
-class="math inline">\(P&lt;\alpha\)</span>の場合、帰無仮説を棄却する</li>
+<li><span class="math inline">\(P&lt;\alpha\)</span>の場合、帰無仮説を棄却する</li>
 <li>じゃあ<span class="math inline">\(P\geqq\alpha\)</span>の場合は？
 <ul>
 <li>「帰無仮説は正しい」ではない
@@ -461,21 +427,28 @@ class="math inline">\(P&lt;\alpha\)</span>の場合、帰無仮説を棄却す�
 <ul>
 <li>第一種の過誤を棄却することを頑張ってる分、逆は弱い</li>
 </ul></li>
-<li>第二種の過誤の確率を<span
-class="math inline">\(P_2\)</span>として評価することも可能
+<li>第二種の過誤の確率を<span class="math inline">\(P_2\)</span>として評価することも可能
 <ul>
-<li>ただし、<span
-class="math inline">\(P_2\)</span>を使って何か、というやり方が決まっているわけではない</li>
-<li>検定力(<span
-class="math inline">\(1-P_2\)</span>)＝帰無仮説が誤りだったときに、それを正しく棄却する確率として使うことが多い</li>
+<li>ただし、<span class="math inline">\(P_2\)</span>を使って何か、というやり方が決まっているわけではない</li>
+<li>検定力(<span class="math inline">\(1-P_2\)</span>)＝帰無仮説が誤りだったときに、それを正しく棄却する確率として使うことが多い</li>
 <li>実験研究では事前に検定力を定量的に決めることが望まれる
 <ul>
 <li>A prioriとかPost hocとか</li>
 <li>G*Power使ったりとか</li>
-<li><a
-href="https://www.mizumot.com/method/mizumoto-takeuchi.pdf">水本・竹内,
-2010</a></li>
+<li><a href="https://www.mizumot.com/method/mizumoto-takeuchi.pdf">水本・竹内, 2010</a></li>
 </ul></li>
+</ul></li>
+</ul>
+</div>
+<div id="検定とモデル選択そして推定された統計モデルの解釈" class="section level2">
+<h2>5.6 検定とモデル選択、そして推定された統計モデルの解釈</h2>
+<ul>
+<li>尤度比検定とモデル選択：どちらも逸脱度（<span class="math inline">\(logL^*\times -2\)</span>）</li>
+<li>モデル選択
+<ul>
+<li>目的は「良い予測をするモデル」</li>
+<li>予測の良さ＝平均対数尤度</li>
+<li>平均対数尤度＝最大対数尤度</li>
 </ul></li>
 </ul>
 </div>

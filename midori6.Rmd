@@ -68,5 +68,108 @@ plot(g)
 ```
   
 ## 6.4 ロジスティック回帰とロジットリンク関数
+  * 二項分布を使ったGLM
+    * ロジスティック回帰
 
-        
+### 6.4.1 ロジットリンク関数
+  * ロジスティック回帰
+    * 二項分布
+    * ロジットリンク関数
+
+```{r}
+x<-seq(-6,6,0.1)
+y<-plogis(x)
+plot(x,y, type='l')
+
+logistic <- function(z) 1/(1+exp(-z))
+plot(x, logistic(x), type='l')
+```
+
+  * 種子の生存・死亡を二項分布で表す
+    * パラメータ$q_i$：種子の生存確率, $0\leqq q_i\leqq1$
+    * これをうまく線形予測子と関連づけるためのリンク関数としてロジット関数を使うんだけど、ロジット関数って何っていう話の前にロジスティック関数
+      * ロジスティック関数
+        * $q_i=logistic(z_i)=\frac{1}{1+exp(-z_i)}$
+        * 変形する
+        * $exp(-z)=\frac{1}{q_i}-1$
+        * $z_i=-log(\frac{1}{q_i}-1)$
+        * $z_i=log(\frac{q_i}{1-q_i})=logit(q_i)$ (logのカッコ内を逆数にする＝符号反転)
+      * $q_i=logistic(z_i), z_i=\beta_1+\beta_2 x$でさまざまな$\beta$のときのxとqの関係
+      
+```{r}
+library(tidyverse)
+library(ggplot2)
+beta2<-c(-1,2,4)
+beta1<-c(-3,0,2)
+x<-seq(-3,3,0.1)
+d1<-logistic(beta1[1]+beta2[2]*x)
+d2<-logistic(beta1[2]+beta2[2]*x)
+d3<-logistic(beta1[3]+beta2[2]*x)
+d4<-logistic(beta1[2]+beta2[1]*x)
+d5<-logistic(beta1[2]+beta2[2]*x)
+d6<-logistic(beta1[2]+beta2[3]*x)
+dat2<-rbind(x,d1,d2,d3) %>% t %>% data.frame %>% tidyr::pivot_longer(!x, names_to = 'd', values_to = 'q')
+dat3<-rbind(x,d4,d5,d6) %>% t %>% data.frame %>% tidyr::pivot_longer(!x, names_to = 'd', values_to = 'q')
+gdat2<-ggplot(dat2, aes(x=x, y=q, col=d))
+gdat2<-gdat2+geom_line()
+gdat3<-ggplot(dat3, aes(x=x, y=q, col=d))
+gdat3<-gdat3+geom_line()
+plot(gdat2)
+plot(gdat3)
+```
+      
+### 6.4.2 パラメータ推定
+  * 二項分布の式から尤度関数、対数尤度関数を得て、対数尤度$logL$を最大にする$q_i$をもとめる。
+    * ただし、$q_i=\beta_1+\beta_2x+\beta_3f$
+  * 解析的に解くのは大変だけど、glm()がやってくれる
+    * glm(cbind(y, N-y)~x+f, data=dat, famlily=binomial)
+      * cbind()は列の結合。第1引数は1行2列の行列ということ。
+  * 例のデータでやってみる
+  
+```{r}
+library(tidyverse)
+library(ggplot2)
+res<-glm(cbind(y,N-y)~x+f, data=dat, family=binomial)
+print(res)
+xx<-seq(7,12,0.1)
+ff<-rep('C',length(xx))
+ff2<-rep('T',length(xx))
+CC<-predict(res,newdata=data.frame(x=xx, f=ff), type='response')
+TT<-predict(res,newdata=data.frame(x=xx, f=ff2), type='response')
+tfdat<-rbind(xx,CC,TT) %>% t %>% data.frame %>% tidyr::pivot_longer(!xx, names_to = 'f', values_to = 'y')
+ctg<-ggplot(tfdat, aes(x=xx, y=y, color=f))
+ctg<-ctg+geom_line()
+plot(ctg)
+```
+  
+### 6.4.3 ロジットリンク関数の意味・解釈
+  * パラメータの解釈
+  * ロジット関数
+    * $logit(q_i)=log\frac{q_i}{1-q}=線形予測子$
+    * $\frac{1_i}{1-q_i}=exp(\beta_1+\beta_2x_i+\beta_3f_i)$
+    * $\frac{1_i}{1-q_i}=exp(\beta_1)exp(\beta_2x_i)exp(\beta_3f_i)$
+  * 左辺$\frac{1_i}{1-q_i}$オッズ比：生存する確率/生存しない確率
+    * 右辺にパラメータの推定値を代入し、切片を省略
+    * $\frac{1_i}{1-q_i}\propto exp(1.95x_i)exp(2.02f_i)$
+    * 体サイズが1増えると
+      * $\frac{1_i}{1-q_i}\propto exp(1.95x_i)exp(1.95)exp(2.02f_i)$
+      * となるので、exp(1.95)=7倍くらい増える
+    * 同様に施肥処理ではexp(2.02)=7.5倍くらい増える
+  * オッズと「リスク」
+    * 発生確率が低いとき、リスクは近似的にはオッズ比に等しい
+    * 線形予測子内のある要因のパラメータのexp()分、リスクが減る/増えることになる
+    
+### 6.4.4 ロジスティック回帰のモデル選択
+  * $x_i$と$f_i$を含むモデルが最も良く予測するモデルかは分からない
+    * AICによるモデル選択を選ぼう
+    * MASSパッケージのstepAIC()関数
+      * ネストしているモデルのAICを比較して、AICが最小になるモデルを選択
+      * やってみる
+      * x+fモデルのAICが272.21となり最小（表6.2にはいろいろな値も含めて）
+
+```{r}
+library(MASS)
+stepAIC(res)
+```
+
+## 

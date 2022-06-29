@@ -172,4 +172,69 @@ library(MASS)
 stepAIC(res)
 ```
 
-## 
+## 6.5 交互作用行の入った線形予測子
+  * 交互作用項：$x_i$と$f_i$の積の効果
+    * 肥料を与えるかどうかによって体サイズの効果が全く違う、とか。
+  * $glm(cbind(y, N-y)\sim x*f, family='binomial', data=dat)$
+  * 今の例で実施してみる（下）
+    * 予測はほとんど変わらない
+    * AICは交互作用項がないほうが小さい（272.21）
+  * 交互作用項の解釈は難しい
+    * 予測の図をみる
+  * むやみに交互作用項を入れない
+  * 交互作用項を含むモデルのAICが最小になることもあるけど、つじつまを合わせてるだけのこもあるので注意
+  
+```{r}
+library(MASS)
+res2<-glm(cbind(y, N-y)~x*f, family=binomial, data=dat)
+stepAIC(res2)
+CC2<-predict(res2,newdata=data.frame(x=xx, f=ff), type='response')
+TT2<-predict(res2,newdata=data.frame(x=xx, f=ff2), type='response')
+tfdat2<-rbind(xx,CC2,TT2) %>% t %>% data.frame %>% tidyr::pivot_longer(!xx, names_to = 'f', values_to = 'y')
+ctg2<-ggplot(tfdat2, aes(x=xx, y=y, color=f))
+ctg2<-ctg+geom_line()
+plot(ctg2)
+```
+
+## 6.6 割算値の統計モデリングはやめよう
+  * 何かを何かで割った値をデータにすることの害
+    * 情報が減る：300/1000と3/10は同じではない
+    * 分布の形が不明：分子も分母も誤差を持つとき、その比はどういう分布に従う？
+    
+### 6.6.1 割算値いらずのオフセット項わざ
+  * 統計モデリングでは割算や変数変換は不要
+    * Nのうちy個生存
+      * 生存率y/Nをデータとするのではなく、yとNをデータとする。二項分布にcbind(y,N-y)を使う。
+  * 例題：単位面積あたりの個体数（e.g., 人口密度）
+    * 架空データ
+      * 森林に調査地100箇所（$i$は1から100まで）
+      * 調査地ごとの面積$A_i$は異なる
+      * 調査地$i$の明るさ$x_i$を計測
+      * 調査地$i$の植物個体数$y_i$を記録
+      * 個体密度が$x_i$にどう影響されるか
+    * $y_i$を$A_i$で割りたくなるけど、そうはしない
+      * $\frac{平均個体数\lambda_i}{A_i}=人口密度$
+      * $\lambda_i=A_i \times 人口密度$
+      * ここで人口密度をexp(式)とする。ここが結構謎。人口密度は負になることはない。負になることがない値をモデルに入れるときにexp()に入れるというのがよく使う技っぽい。
+      * $\lambda_i=A_iexp(\beta_i+\beta_2x_i)$: 平均個体数は人口密度に面積をかけたもの（ただし、人口密度は光に影響されると考えるので、$x_i$項を含む式とする
+      * $\lambda_i=exp(\beta_1+\beta_2x_i+logA_i)$
+        * これで対数リンク関数、ポアソン分布のGLMの形
+        * ただし、線形予測子の中に計数を持たない$logA_i$が入っている＝オフセット項
+          * もともと、平均個体数の分母にあったものだから
+          * glm()でオフセット項を指定できる
+    * オフセット項
+      * 単位面積あたり、単位時間あたりの計測に応用可能
+        * 観察時間の対数をオフセット項にする、など
+      * 比や密度などにも応用可能
+        * どっちもばらつきをもっててもOKだけど、それはこの本には出てこない
+        
+## 6.7 正規分布とその尤度
+      
+    
+```{r}
+dat2<-read.csv('kubobook_2012-2/binomial/data4b.csv')
+plot(dat2$A,dat2$y)
+glm(y~x, offset=log(A), family=poisson, data=dat2)
+```
+    
+    

@@ -116,19 +116,14 @@
         <div class="Sidebar">
           <div class="SidebarItems" id="toc">
             <ul>
-            <li><a
-            href="#glmの応用範囲を広げるロジスティック回帰など">6.
-            GLMの応用範囲を広げる–ロジスティック回帰など–</a>
+            <li><a href="#glmの応用範囲を広げるロジスティック回帰など">6. GLMの応用範囲を広げる–ロジスティック回帰など–</a>
             <ul>
-            <li><a href="#さまざまな種類のデータで応用できるglm">6.1
-            さまざまな種類のデータで応用できるGLM</a></li>
-            <li><a href="#例題上限のあるカウントデータ">6.2
-            例題：上限のあるカウントデータ</a></li>
-            <li><a href="#二項分布で表現するありなしカウントデータ">6.3
-            二項分布で表現する「あり・なし」カウントデータ</a></li>
-            <li><a href="#ロジスティック回帰とロジットリンク関数">6.4
-            ロジスティック回帰とロジットリンク関数</a></li>
-            <li><a href="#section"></a></li>
+            <li><a href="#さまざまな種類のデータで応用できるglm">6.1 さまざまな種類のデータで応用できるGLM</a></li>
+            <li><a href="#例題上限のあるカウントデータ">6.2 例題：上限のあるカウントデータ</a></li>
+            <li><a href="#二項分布で表現するありなしカウントデータ">6.3 二項分布で表現する「あり・なし」カウントデータ</a></li>
+            <li><a href="#ロジスティック回帰とロジットリンク関数">6.4 ロジスティック回帰とロジットリンク関数</a></li>
+            <li><a href="#交互作用行の入った線形予測子">6.5 交互作用行の入った線形予測子</a></li>
+            <li><a href="#割算値の統計モデリングはやめよう">6.6 割算値の統計モデリングはやめよう</a></li>
             </ul></li>
             </ul>
           </div>
@@ -198,8 +193,7 @@
       <h1 class="title">midori6</h1>
       
       <p class="authors">
-           <span class="glyphicon glyphicon-user"></span> Toshihide
-Imaruoka
+           <span class="glyphicon glyphicon-user"></span> Toshihide Imaruoka
       </p>
          <p class="date"><span class="glyphicon glyphicon-calendar"></span> 6/21/2022</p>
            
@@ -209,8 +203,7 @@ Imaruoka
    
 <!-- Don't indent these lines or it will mess pre blocks indentation --> 
 <div class="page-content has-page-title">
-<div id="glmの応用範囲を広げるロジスティック回帰など"
-class="section level1">
+<div id="glmの応用範囲を広げるロジスティック回帰など" class="section level1">
 <h1>6. GLMの応用範囲を広げる–ロジスティック回帰など–</h1>
 <div id="さまざまな種類のデータで応用できるglm" class="section level2">
 <h2>6.1 さまざまな種類のデータで応用できるGLM</h2>
@@ -221,18 +214,13 @@ class="section level1">
 <ul>
 <li>離散変数
 <ul>
-<li>二項分布：成功確率<span
-class="math inline">\(p\)</span>の0/1をn試行実施したときに1となる回数</li>
-<li>ポアソン分布：平均<span
-class="math inline">\(\lambda\)</span>の度数データをn回取得したときに得られる値</li>
-<li>負の二項分布：成功確率<span
-class="math inline">\(p\)</span>の0/1でk回0が出る前に1が出た回数</li>
+<li>二項分布：成功確率<span class="math inline">\(p\)</span>の0/1をn試行実施したときに1となる回数</li>
+<li>ポアソン分布：平均<span class="math inline">\(\lambda\)</span>の度数データをn回取得したときに得られる値</li>
+<li>負の二項分布：成功確率<span class="math inline">\(p\)</span>の0/1でk回0が出る前に1が出た回数</li>
 </ul></li>
 <li>連続変数
 <ul>
-<li>ガンマ分布：めったに（<span
-class="math inline">\(1/\lambda\)</span>)起きない事象が<span
-class="math inline">\(\alpha\)</span>回起きるまでの時間</li>
+<li>ガンマ分布：めったに（<span class="math inline">\(1/\lambda\)</span>)起きない事象が<span class="math inline">\(\alpha\)</span>回起きるまでの時間</li>
 <li>正規分布：負の値も取り得る連続量データ。どういうデータ？
 <ul>
 <li>反応時間：正規分布しない。対数正規分布？</li>
@@ -247,13 +235,7 @@ class="math inline">\(\alpha\)</span>回起きるまでの時間</li>
 <div id="例題上限のあるカウントデータ" class="section level2">
 <h2>6.2 例題：上限のあるカウントデータ</h2>
 <ul>
-<li>例題データ：ある植物の<span
-class="math inline">\(個体_i\)</span>の種子<span
-class="math inline">\(N_i\)</span>個を観察したときの生存数<span
-class="math inline">\(y_i\)</span>個。死んでるのは<span
-class="math inline">\(N_i-y_i\)</span>個。体サイズ<span
-class="math inline">\(x_i\)</span>や施肥処理<span
-class="math inline">\(f_i\)</span>が影響する。100個の個体を調べる。</li>
+<li>例題データ：ある植物の<span class="math inline">\(個体_i\)</span>の種子<span class="math inline">\(N_i\)</span>個を観察したときの生存数<span class="math inline">\(y_i\)</span>個。死んでるのは<span class="math inline">\(N_i-y_i\)</span>個。体サイズ<span class="math inline">\(x_i\)</span>や施肥処理<span class="math inline">\(f_i\)</span>が影響する。100個の個体を調べる。</li>
 <li>データを読み込んで概要をみてみる</li>
 </ul>
 <pre class="r"><code>dat&lt;-read.csv(&#39;kubobook_2012-2/binomial/data4a.csv&#39;)
@@ -267,24 +249,19 @@ summary(dat)</code></pre>
 ##  3rd Qu.:8   3rd Qu.:8.00   3rd Qu.:10.770         
 ##  Max.   :8   Max.   :8.00   Max.   :12.440</code></pre>
 </div>
-<div id="二項分布で表現するありなしカウントデータ"
-class="section level2">
+<div id="二項分布で表現するありなしカウントデータ" class="section level2">
 <h2>6.3 二項分布で表現する「あり・なし」カウントデータ</h2>
 <ul>
 <li>上限があるカウントデータだからポアソン分布では表現できない</li>
 <li>二項分布
 <ul>
-<li><span class="math inline">\(p(y|N, q)={N \choose
-y}q^y(1-q)^{N-y}\)</span>
+<li><span class="math inline">\(p(y|N, q)={N \choose y}q^y(1-q)^{N-y}\)</span>
 <ul>
-<li><span class="math inline">\(p(y|N, q)\)</span>:
-N個中y個で事象が生起する確率。qは事象の生起確率。</li>
-<li><span class="math inline">\({N \choose y}\)</span>:
-場合の数。N個の観察からy個の生存種子を選び出す場合の数。どのy個でもいいのでそれのこと。</li>
+<li><span class="math inline">\(p(y|N, q)\)</span>: N個中y個で事象が生起する確率。qは事象の生起確率。</li>
+<li><span class="math inline">\({N \choose y}\)</span>: 場合の数。N個の観察からy個の生存種子を選び出す場合の数。どのy個でもいいのでそれのこと。</li>
 </ul></li>
 </ul></li>
-<li><span class="math inline">\(N\)</span>を8として<span
-class="math inline">\(q\)</span>を変えて二項分布を書いてみる。</li>
+<li><span class="math inline">\(N\)</span>を8として<span class="math inline">\(q\)</span>を変えて二項分布を書いてみる。</li>
 </ul>
 <pre class="r"><code>y&lt;-seq(0,8)
 N&lt;-8
@@ -346,24 +323,18 @@ plot(x, logistic(x), type=&#39;l&#39;)</code></pre>
 <ul>
 <li>種子の生存・死亡を二項分布で表す
 <ul>
-<li>パラメータ<span class="math inline">\(q_i\)</span>：種子の生存確率,
-<span class="math inline">\(0\leqq q_i\leqq1\)</span></li>
+<li>パラメータ<span class="math inline">\(q_i\)</span>：種子の生存確率, <span class="math inline">\(0\leqq q_i\leqq1\)</span></li>
 <li>これをうまく線形予測子と関連づけるためのリンク関数としてロジット関数を使うんだけど、ロジット関数って何っていう話の前にロジスティック関数
 <ul>
 <li>ロジスティック関数
 <ul>
-<li><span
-class="math inline">\(q_i=logistic(z_i)=\frac{1}{1+exp(-z_i)}\)</span></li>
+<li><span class="math inline">\(q_i=logistic(z_i)=\frac{1}{1+exp(-z_i)}\)</span></li>
 <li>変形する</li>
 <li><span class="math inline">\(exp(-z)=\frac{1}{q_i}-1\)</span></li>
 <li><span class="math inline">\(z_i=-log(\frac{1}{q_i}-1)\)</span></li>
-<li><span
-class="math inline">\(z_i=log(\frac{q_i}{1-q_i})=logit(q_i)\)</span>
-(logのカッコ内を逆数にする＝符号反転)</li>
+<li><span class="math inline">\(z_i=log(\frac{q_i}{1-q_i})=logit(q_i)\)</span> (logのカッコ内を逆数にする＝符号反転)</li>
 </ul></li>
-<li><span class="math inline">\(q_i=logistic(z_i), z_i=\beta_1+\beta_2
-x\)</span>でさまざまな<span
-class="math inline">\(\beta\)</span>のときのxとqの関係</li>
+<li><span class="math inline">\(q_i=logistic(z_i), z_i=\beta_1+\beta_2 x\)</span>でさまざまな<span class="math inline">\(\beta\)</span>のときのxとqの関係</li>
 </ul></li>
 </ul></li>
 </ul>
@@ -392,12 +363,9 @@ plot(gdat2)</code></pre>
 <div id="パラメータ推定" class="section level3">
 <h3>6.4.2 パラメータ推定</h3>
 <ul>
-<li>二項分布の式から尤度関数、対数尤度関数を得て、対数尤度<span
-class="math inline">\(logL\)</span>を最大にする<span
-class="math inline">\(q_i\)</span>をもとめる。
+<li>二項分布の式から尤度関数、対数尤度関数を得て、対数尤度<span class="math inline">\(logL\)</span>を最大にする<span class="math inline">\(q_i\)</span>をもとめる。
 <ul>
-<li>ただし、<span
-class="math inline">\(q_i=\beta_1+\beta_2x+\beta_3f\)</span></li>
+<li>ただし、<span class="math inline">\(q_i=\beta_1+\beta_2x+\beta_3f\)</span></li>
 </ul></li>
 <li>解析的に解くのは大変だけど、glm()がやってくれる
 <ul>
@@ -439,23 +407,17 @@ plot(ctg)</code></pre>
 <li>パラメータの解釈</li>
 <li>ロジット関数
 <ul>
-<li><span
-class="math inline">\(logit(q_i)=log\frac{q_i}{1-q}=線形予測子\)</span></li>
-<li><span
-class="math inline">\(\frac{1_i}{1-q_i}=exp(\beta_1+\beta_2x_i+\beta_3f_i)\)</span></li>
-<li><span
-class="math inline">\(\frac{1_i}{1-q_i}=exp(\beta_1)exp(\beta_2x_i)exp(\beta_3f_i)\)</span></li>
+<li><span class="math inline">\(logit(q_i)=log\frac{q_i}{1-q}=線形予測子\)</span></li>
+<li><span class="math inline">\(\frac{1_i}{1-q_i}=exp(\beta_1+\beta_2x_i+\beta_3f_i)\)</span></li>
+<li><span class="math inline">\(\frac{1_i}{1-q_i}=exp(\beta_1)exp(\beta_2x_i)exp(\beta_3f_i)\)</span></li>
 </ul></li>
-<li>左辺<span
-class="math inline">\(\frac{1_i}{1-q_i}\)</span>オッズ比：生存する確率/生存しない確率
+<li>左辺<span class="math inline">\(\frac{1_i}{1-q_i}\)</span>オッズ比：生存する確率/生存しない確率
 <ul>
 <li>右辺にパラメータの推定値を代入し、切片を省略</li>
-<li><span class="math inline">\(\frac{1_i}{1-q_i}\propto
-exp(1.95x_i)exp(2.02f_i)\)</span></li>
+<li><span class="math inline">\(\frac{1_i}{1-q_i}\propto exp(1.95x_i)exp(2.02f_i)\)</span></li>
 <li>体サイズが1増えると
 <ul>
-<li><span class="math inline">\(\frac{1_i}{1-q_i}\propto
-exp(1.95x_i)exp(1.95)exp(2.02f_i)\)</span></li>
+<li><span class="math inline">\(\frac{1_i}{1-q_i}\propto exp(1.95x_i)exp(1.95)exp(2.02f_i)\)</span></li>
 <li>となるので、exp(1.95)=7倍くらい増える</li>
 </ul></li>
 <li>同様に施肥処理ではexp(2.02)=7.5倍くらい増える</li>
@@ -470,8 +432,7 @@ exp(1.95x_i)exp(1.95)exp(2.02f_i)\)</span></li>
 <div id="ロジスティック回帰のモデル選択" class="section level3">
 <h3>6.4.4 ロジスティック回帰のモデル選択</h3>
 <ul>
-<li><span class="math inline">\(x_i\)</span>と<span
-class="math inline">\(f_i\)</span>を含むモデルが最も良く予測するモデルかは分からない
+<li><span class="math inline">\(x_i\)</span>と<span class="math inline">\(f_i\)</span>を含むモデルが最も良く予測するモデルかは分からない
 <ul>
 <li>AICによるモデル選択を選ぼう</li>
 <li>MASSパッケージのstepAIC()関数
@@ -508,8 +469,102 @@ class="math inline">\(f_i\)</span>を含むモデルが最も良く予測する�
 ## Residual Deviance: 123   AIC: 272.2</code></pre>
 </div>
 </div>
-<div id="section" class="section level2">
-<h2></h2>
+<div id="交互作用行の入った線形予測子" class="section level2">
+<h2>6.5 交互作用行の入った線形予測子</h2>
+<ul>
+<li>交互作用項：<span class="math inline">\(x_i\)</span>と<span class="math inline">\(f_i\)</span>の積の効果
+<ul>
+<li>肥料を与えるかどうかによって体サイズの効果が全く違う、とか。</li>
+</ul></li>
+<li><span class="math inline">\(glm(cbind(y, N-y)\sim x*f, family=&#39;binomial&#39;, data=dat)\)</span></li>
+<li>今の例で実施してみる（下）
+<ul>
+<li>予測はほとんど変わらない</li>
+<li>AICは交互作用項がないほうが小さい（272.21）</li>
+</ul></li>
+<li>交互作用項の解釈は難しい
+<ul>
+<li>予測の図をみる</li>
+</ul></li>
+<li>むやみに交互作用項を入れない</li>
+<li>交互作用項を含むモデルのAICが最小になることもあるけど、つじつまを合わせてるだけのこもあるので注意</li>
+</ul>
+<pre class="r"><code>library(MASS)
+res2&lt;-glm(cbind(y, N-y)~x*f, family=binomial, data=dat)
+stepAIC(res2)</code></pre>
+<pre><code>## Start:  AIC=273.61
+## cbind(y, N - y) ~ x * f
+## 
+##        Df Deviance    AIC
+## - x:f   1   123.03 272.21
+## &lt;none&gt;      122.43 273.61
+## 
+## Step:  AIC=272.21
+## cbind(y, N - y) ~ x + f
+## 
+##        Df Deviance    AIC
+## &lt;none&gt;      123.03 272.21
+## - f     1   217.17 364.35
+## - x     1   490.58 637.76</code></pre>
+<pre><code>## 
+## Call:  glm(formula = cbind(y, N - y) ~ x + f, family = binomial, data = dat)
+## 
+## Coefficients:
+## (Intercept)            x           fT  
+##     -19.536        1.952        2.022  
+## 
+## Degrees of Freedom: 99 Total (i.e. Null);  97 Residual
+## Null Deviance:       499.2 
+## Residual Deviance: 123   AIC: 272.2</code></pre>
+<pre class="r"><code>CC2&lt;-predict(res2,newdata=data.frame(x=xx, f=ff), type=&#39;response&#39;)
+TT2&lt;-predict(res2,newdata=data.frame(x=xx, f=ff2), type=&#39;response&#39;)
+tfdat2&lt;-rbind(xx,CC2,TT2) %&gt;% t %&gt;% data.frame %&gt;% tidyr::pivot_longer(!xx, names_to = &#39;f&#39;, values_to = &#39;y&#39;)
+ctg2&lt;-ggplot(tfdat2, aes(x=xx, y=y, color=f))
+ctg2&lt;-ctg+geom_line()
+plot(ctg2)</code></pre>
+<p><img src="midori6_files/figure-html/unnamed-chunk-7-1.png" width="768" /></p>
+</div>
+<div id="割算値の統計モデリングはやめよう" class="section level2">
+<h2>6.6 割算値の統計モデリングはやめよう</h2>
+<ul>
+<li>何かを何かで割った値をデータにすることの害
+<ul>
+<li>情報が減る：300/1000と3/10は同じではない</li>
+<li>分布の形が不明：分子も分母も誤差を持つとき、その比はどういう分布に従う？</li>
+</ul></li>
+</ul>
+<div id="割算値いらずのオフセット項わざ" class="section level3">
+<h3>6.6.1 割算値いらずのオフセット項わざ</h3>
+<ul>
+<li>統計モデリングでは割算や変数変換は不要
+<ul>
+<li>Nのうちy個生存
+<ul>
+<li>生存率y/Nをデータとするのではなく、yとNをデータとする。二項分布にcbind(y,N-y)を使う。</li>
+</ul></li>
+</ul></li>
+<li>例題：単位面積あたりの個体数（e.g., 人口密度）
+<ul>
+<li>架空データ
+<ul>
+<li>森林に調査地100箇所（<span class="math inline">\(i\)</span>は1から100まで）</li>
+<li>調査地ごとの面積<span class="math inline">\(A_i\)</span>は異なる</li>
+<li>調査地<span class="math inline">\(i\)</span>の明るさ<span class="math inline">\(x_i\)</span>を計測</li>
+<li>調査地<span class="math inline">\(i\)</span>の植物個体数<span class="math inline">\(y_i\)</span>を記録</li>
+<li>個体密度が<span class="math inline">\(x_i\)</span>にどう影響されるか</li>
+</ul></li>
+<li><span class="math inline">\(y_i\)</span>を<span class="math inline">\(A_i\)</span>で割りたくなるけど、そうはしない
+<ul>
+<li><span class="math inline">\(\frac{平均個体数\lambda_i}{A_i}=人口密度\)</span></li>
+<li><span class="math inline">\(\lambda_i=A_i \times 人口密度\)</span></li>
+<li>ここで人口密度をexp(線形予測子)とする。ここが結構謎。人口密度は負になることはない。負になることがない値をモデルに入れるときにexp()に入れるというのがよく使う技っぽい。</li>
+</ul></li>
+</ul></li>
+</ul>
+<pre class="r"><code>dat2&lt;-read.csv(&#39;kubobook_2012-2/binomial/data4b.csv&#39;)
+plot(dat2$A,dat2$y)</code></pre>
+<p><img src="midori6_files/figure-html/unnamed-chunk-8-1.png" width="768" /></p>
+</div>
 </div>
 </div>
 </div>

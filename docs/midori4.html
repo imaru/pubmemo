@@ -242,12 +242,12 @@ Imaruoka
 <li>モデル
 <ul>
 <li>体サイズが影響するモデル(<span class="math inline">\(y\sim
-x+\beta\)</span>)</li>
+x\)</span>)&lt;-glm()の第1引数</li>
 <li>施肥処理が影響するモデル(<span class="math inline">\(y\sim
-f+\beta\)</span>)</li>
+f\)</span>)</li>
 <li>体サイズと施肥処理が影響するモデル（<span
-class="math inline">\(y\sim x+f+\beta\)</span>)</li>
-<li>一定モデル(<span class="math inline">\(f\sim \beta\)</span>)</li>
+class="math inline">\(y\sim x+f\)</span>)</li>
+<li>一定モデル(<span class="math inline">\(f\sim 1\)</span>)</li>
 </ul></li>
 <li>3章では対数尤度を最大にするパラメータを求め、そのパラメータに対する対数尤度＝最大対数尤度が当てはまりの良さだとした
 <ul>
@@ -323,9 +323,8 @@ class="math inline">\(D\)</span>-（ポアソン分布モデルで可能な最�
 <li>意味はないけど、当てはまりは良い</li>
 <li>最大対数尤度を計算
 <ul>
-<li>dpois(dat<span class="math inline">\(y[1],
-dat\)</span>y[1])は、データがポアソン分布に従っているとして、ラムダがdat<span
-class="math inline">\(y[1]のときに、データがdat\)</span>y[1]である確率のこと（0.16くらいになる）</li>
+<li>dpois(dat$y[1],
+dat$y[1])は、データがポアソン分布に従っているとして、ラムダがdat$y[1]のときに、データがdat$y[1]である確率のこと（0.16くらいになる）</li>
 <li>データとパラメータが一致するので、これは考えられる中で最も高い確率。</li>
 <li>その対数を全データ（100個）分足した数</li>
 <li>これは他のどんなモデルよりも小さくなるはず（確率は大きいけど対数を取るから小さい）</li>
@@ -380,7 +379,7 @@ print(f.null)</code></pre>
 <ul>
 <li>予測の良さを重視するモデル選択基準</li>
 <li><span class="math inline">\(AIC =
--2{(最大対数尤度)-(最尤推定したパラメータ数)}\)</span>
+-2\{(最大対数尤度)-(最尤推定したパラメータ数)\}\)</span>
 <ul>
 <li>= <span class="math inline">\(-2(logL^*-k)\)</span></li>
 <li>= <span class="math inline">\(D+2k\)</span>

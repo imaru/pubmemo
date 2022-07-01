@@ -116,14 +116,24 @@
         <div class="Sidebar">
           <div class="SidebarItems" id="toc">
             <ul>
-            <li><a href="#glmの応用範囲を広げるロジスティック回帰など">6. GLMの応用範囲を広げる–ロジスティック回帰など–</a>
+            <li><a
+            href="#glmの応用範囲を広げるロジスティック回帰など">6.
+            GLMの応用範囲を広げる–ロジスティック回帰など–</a>
             <ul>
-            <li><a href="#さまざまな種類のデータで応用できるglm">6.1 さまざまな種類のデータで応用できるGLM</a></li>
-            <li><a href="#例題上限のあるカウントデータ">6.2 例題：上限のあるカウントデータ</a></li>
-            <li><a href="#二項分布で表現するありなしカウントデータ">6.3 二項分布で表現する「あり・なし」カウントデータ</a></li>
-            <li><a href="#ロジスティック回帰とロジットリンク関数">6.4 ロジスティック回帰とロジットリンク関数</a></li>
-            <li><a href="#交互作用行の入った線形予測子">6.5 交互作用行の入った線形予測子</a></li>
-            <li><a href="#割算値の統計モデリングはやめよう">6.6 割算値の統計モデリングはやめよう</a></li>
+            <li><a href="#さまざまな種類のデータで応用できるglm">6.1
+            さまざまな種類のデータで応用できるGLM</a></li>
+            <li><a href="#例題上限のあるカウントデータ">6.2
+            例題：上限のあるカウントデータ</a></li>
+            <li><a href="#二項分布で表現するありなしカウントデータ">6.3
+            二項分布で表現する「あり・なし」カウントデータ</a></li>
+            <li><a href="#ロジスティック回帰とロジットリンク関数">6.4
+            ロジスティック回帰とロジットリンク関数</a></li>
+            <li><a href="#交互作用行の入った線形予測子">6.5
+            交互作用行の入った線形予測子</a></li>
+            <li><a href="#割算値の統計モデリングはやめよう">6.6
+            割算値の統計モデリングはやめよう</a></li>
+            <li><a href="#正規分布とその尤度">6.7
+            正規分布とその尤度</a></li>
             </ul></li>
             </ul>
           </div>
@@ -193,7 +203,8 @@
       <h1 class="title">midori6</h1>
       
       <p class="authors">
-           <span class="glyphicon glyphicon-user"></span> Toshihide Imaruoka
+           <span class="glyphicon glyphicon-user"></span> Toshihide
+Imaruoka
       </p>
          <p class="date"><span class="glyphicon glyphicon-calendar"></span> 6/21/2022</p>
            
@@ -203,7 +214,8 @@
    
 <!-- Don't indent these lines or it will mess pre blocks indentation --> 
 <div class="page-content has-page-title">
-<div id="glmの応用範囲を広げるロジスティック回帰など" class="section level1">
+<div id="glmの応用範囲を広げるロジスティック回帰など"
+class="section level1">
 <h1>6. GLMの応用範囲を広げる–ロジスティック回帰など–</h1>
 <div id="さまざまな種類のデータで応用できるglm" class="section level2">
 <h2>6.1 さまざまな種類のデータで応用できるGLM</h2>
@@ -214,13 +226,18 @@
 <ul>
 <li>離散変数
 <ul>
-<li>二項分布：成功確率<span class="math inline">\(p\)</span>の0/1をn試行実施したときに1となる回数</li>
-<li>ポアソン分布：平均<span class="math inline">\(\lambda\)</span>の度数データをn回取得したときに得られる値</li>
-<li>負の二項分布：成功確率<span class="math inline">\(p\)</span>の0/1でk回0が出る前に1が出た回数</li>
+<li>二項分布：成功確率<span
+class="math inline">\(p\)</span>の0/1をn試行実施したときに1となる回数</li>
+<li>ポアソン分布：平均<span
+class="math inline">\(\lambda\)</span>の度数データをn回取得したときに得られる値</li>
+<li>負の二項分布：成功確率<span
+class="math inline">\(p\)</span>の0/1でk回0が出る前に1が出た回数</li>
 </ul></li>
 <li>連続変数
 <ul>
-<li>ガンマ分布：めったに（<span class="math inline">\(1/\lambda\)</span>)起きない事象が<span class="math inline">\(\alpha\)</span>回起きるまでの時間</li>
+<li>ガンマ分布：めったに（<span
+class="math inline">\(1/\lambda\)</span>)起きない事象が<span
+class="math inline">\(\alpha\)</span>回起きるまでの時間</li>
 <li>正規分布：負の値も取り得る連続量データ。どういうデータ？
 <ul>
 <li>反応時間：正規分布しない。対数正規分布？</li>
@@ -235,7 +252,13 @@
 <div id="例題上限のあるカウントデータ" class="section level2">
 <h2>6.2 例題：上限のあるカウントデータ</h2>
 <ul>
-<li>例題データ：ある植物の<span class="math inline">\(個体_i\)</span>の種子<span class="math inline">\(N_i\)</span>個を観察したときの生存数<span class="math inline">\(y_i\)</span>個。死んでるのは<span class="math inline">\(N_i-y_i\)</span>個。体サイズ<span class="math inline">\(x_i\)</span>や施肥処理<span class="math inline">\(f_i\)</span>が影響する。100個の個体を調べる。</li>
+<li>例題データ：ある植物の<span
+class="math inline">\(個体_i\)</span>の種子<span
+class="math inline">\(N_i\)</span>個を観察したときの生存数<span
+class="math inline">\(y_i\)</span>個。死んでるのは<span
+class="math inline">\(N_i-y_i\)</span>個。体サイズ<span
+class="math inline">\(x_i\)</span>や施肥処理<span
+class="math inline">\(f_i\)</span>が影響する。100個の個体を調べる。</li>
 <li>データを読み込んで概要をみてみる</li>
 </ul>
 <pre class="r"><code>dat&lt;-read.csv(&#39;kubobook_2012-2/binomial/data4a.csv&#39;)
@@ -249,19 +272,24 @@ summary(dat)</code></pre>
 ##  3rd Qu.:8   3rd Qu.:8.00   3rd Qu.:10.770         
 ##  Max.   :8   Max.   :8.00   Max.   :12.440</code></pre>
 </div>
-<div id="二項分布で表現するありなしカウントデータ" class="section level2">
+<div id="二項分布で表現するありなしカウントデータ"
+class="section level2">
 <h2>6.3 二項分布で表現する「あり・なし」カウントデータ</h2>
 <ul>
 <li>上限があるカウントデータだからポアソン分布では表現できない</li>
 <li>二項分布
 <ul>
-<li><span class="math inline">\(p(y|N, q)={N \choose y}q^y(1-q)^{N-y}\)</span>
+<li><span class="math inline">\(p(y|N, q)={N \choose
+y}q^y(1-q)^{N-y}\)</span>
 <ul>
-<li><span class="math inline">\(p(y|N, q)\)</span>: N個中y個で事象が生起する確率。qは事象の生起確率。</li>
-<li><span class="math inline">\({N \choose y}\)</span>: 場合の数。N個の観察からy個の生存種子を選び出す場合の数。どのy個でもいいのでそれのこと。</li>
+<li><span class="math inline">\(p(y|N, q)\)</span>:
+N個中y個で事象が生起する確率。qは事象の生起確率。</li>
+<li><span class="math inline">\({N \choose y}\)</span>:
+場合の数。N個の観察からy個の生存種子を選び出す場合の数。どのy個でもいいのでそれのこと。</li>
 </ul></li>
 </ul></li>
-<li><span class="math inline">\(N\)</span>を8として<span class="math inline">\(q\)</span>を変えて二項分布を書いてみる。</li>
+<li><span class="math inline">\(N\)</span>を8として<span
+class="math inline">\(q\)</span>を変えて二項分布を書いてみる。</li>
 </ul>
 <pre class="r"><code>y&lt;-seq(0,8)
 N&lt;-8
@@ -323,18 +351,24 @@ plot(x, logistic(x), type=&#39;l&#39;)</code></pre>
 <ul>
 <li>種子の生存・死亡を二項分布で表す
 <ul>
-<li>パラメータ<span class="math inline">\(q_i\)</span>：種子の生存確率, <span class="math inline">\(0\leqq q_i\leqq1\)</span></li>
+<li>パラメータ<span class="math inline">\(q_i\)</span>：種子の生存確率,
+<span class="math inline">\(0\leqq q_i\leqq1\)</span></li>
 <li>これをうまく線形予測子と関連づけるためのリンク関数としてロジット関数を使うんだけど、ロジット関数って何っていう話の前にロジスティック関数
 <ul>
 <li>ロジスティック関数
 <ul>
-<li><span class="math inline">\(q_i=logistic(z_i)=\frac{1}{1+exp(-z_i)}\)</span></li>
+<li><span
+class="math inline">\(q_i=logistic(z_i)=\frac{1}{1+exp(-z_i)}\)</span></li>
 <li>変形する</li>
 <li><span class="math inline">\(exp(-z)=\frac{1}{q_i}-1\)</span></li>
 <li><span class="math inline">\(z_i=-log(\frac{1}{q_i}-1)\)</span></li>
-<li><span class="math inline">\(z_i=log(\frac{q_i}{1-q_i})=logit(q_i)\)</span> (logのカッコ内を逆数にする＝符号反転)</li>
+<li><span
+class="math inline">\(z_i=log(\frac{q_i}{1-q_i})=logit(q_i)\)</span>
+(logのカッコ内を逆数にする＝符号反転)</li>
 </ul></li>
-<li><span class="math inline">\(q_i=logistic(z_i), z_i=\beta_1+\beta_2 x\)</span>でさまざまな<span class="math inline">\(\beta\)</span>のときのxとqの関係</li>
+<li><span class="math inline">\(q_i=logistic(z_i), z_i=\beta_1+\beta_2
+x\)</span>でさまざまな<span
+class="math inline">\(\beta\)</span>のときのxとqの関係</li>
 </ul></li>
 </ul></li>
 </ul>
@@ -363,9 +397,12 @@ plot(gdat2)</code></pre>
 <div id="パラメータ推定" class="section level3">
 <h3>6.4.2 パラメータ推定</h3>
 <ul>
-<li>二項分布の式から尤度関数、対数尤度関数を得て、対数尤度<span class="math inline">\(logL\)</span>を最大にする<span class="math inline">\(q_i\)</span>をもとめる。
+<li>二項分布の式から尤度関数、対数尤度関数を得て、対数尤度<span
+class="math inline">\(logL\)</span>を最大にする<span
+class="math inline">\(q_i\)</span>をもとめる。
 <ul>
-<li>ただし、<span class="math inline">\(q_i=\beta_1+\beta_2x+\beta_3f\)</span></li>
+<li>ただし、<span
+class="math inline">\(q_i=\beta_1+\beta_2x+\beta_3f\)</span></li>
 </ul></li>
 <li>解析的に解くのは大変だけど、glm()がやってくれる
 <ul>
@@ -407,17 +444,23 @@ plot(ctg)</code></pre>
 <li>パラメータの解釈</li>
 <li>ロジット関数
 <ul>
-<li><span class="math inline">\(logit(q_i)=log\frac{q_i}{1-q}=線形予測子\)</span></li>
-<li><span class="math inline">\(\frac{1_i}{1-q_i}=exp(\beta_1+\beta_2x_i+\beta_3f_i)\)</span></li>
-<li><span class="math inline">\(\frac{1_i}{1-q_i}=exp(\beta_1)exp(\beta_2x_i)exp(\beta_3f_i)\)</span></li>
+<li><span
+class="math inline">\(logit(q_i)=log\frac{q_i}{1-q}=線形予測子\)</span></li>
+<li><span
+class="math inline">\(\frac{1_i}{1-q_i}=exp(\beta_1+\beta_2x_i+\beta_3f_i)\)</span></li>
+<li><span
+class="math inline">\(\frac{1_i}{1-q_i}=exp(\beta_1)exp(\beta_2x_i)exp(\beta_3f_i)\)</span></li>
 </ul></li>
-<li>左辺<span class="math inline">\(\frac{1_i}{1-q_i}\)</span>オッズ比：生存する確率/生存しない確率
+<li>左辺<span
+class="math inline">\(\frac{1_i}{1-q_i}\)</span>オッズ比：生存する確率/生存しない確率
 <ul>
 <li>右辺にパラメータの推定値を代入し、切片を省略</li>
-<li><span class="math inline">\(\frac{1_i}{1-q_i}\propto exp(1.95x_i)exp(2.02f_i)\)</span></li>
+<li><span class="math inline">\(\frac{1_i}{1-q_i}\propto
+exp(1.95x_i)exp(2.02f_i)\)</span></li>
 <li>体サイズが1増えると
 <ul>
-<li><span class="math inline">\(\frac{1_i}{1-q_i}\propto exp(1.95x_i)exp(1.95)exp(2.02f_i)\)</span></li>
+<li><span class="math inline">\(\frac{1_i}{1-q_i}\propto
+exp(1.95x_i)exp(1.95)exp(2.02f_i)\)</span></li>
 <li>となるので、exp(1.95)=7倍くらい増える</li>
 </ul></li>
 <li>同様に施肥処理ではexp(2.02)=7.5倍くらい増える</li>
@@ -432,7 +475,8 @@ plot(ctg)</code></pre>
 <div id="ロジスティック回帰のモデル選択" class="section level3">
 <h3>6.4.4 ロジスティック回帰のモデル選択</h3>
 <ul>
-<li><span class="math inline">\(x_i\)</span>と<span class="math inline">\(f_i\)</span>を含むモデルが最も良く予測するモデルかは分からない
+<li><span class="math inline">\(x_i\)</span>と<span
+class="math inline">\(f_i\)</span>を含むモデルが最も良く予測するモデルかは分からない
 <ul>
 <li>AICによるモデル選択を選ぼう</li>
 <li>MASSパッケージのstepAIC()関数
@@ -472,11 +516,13 @@ plot(ctg)</code></pre>
 <div id="交互作用行の入った線形予測子" class="section level2">
 <h2>6.5 交互作用行の入った線形予測子</h2>
 <ul>
-<li>交互作用項：<span class="math inline">\(x_i\)</span>と<span class="math inline">\(f_i\)</span>の積の効果
+<li>交互作用項：<span class="math inline">\(x_i\)</span>と<span
+class="math inline">\(f_i\)</span>の積の効果
 <ul>
 <li>肥料を与えるかどうかによって体サイズの効果が全く違う、とか。</li>
 </ul></li>
-<li><span class="math inline">\(glm(cbind(y, N-y)\sim x*f, family=&#39;binomial&#39;, data=dat)\)</span></li>
+<li><span class="math inline">\(glm(cbind(y, N-y)\sim x*f,
+family=&#39;binomial&#39;, data=dat)\)</span></li>
 <li>今の例で実施してみる（下）
 <ul>
 <li>予測はほとんど変わらない</li>
@@ -547,24 +593,72 @@ plot(ctg2)</code></pre>
 <ul>
 <li>架空データ
 <ul>
-<li>森林に調査地100箇所（<span class="math inline">\(i\)</span>は1から100まで）</li>
-<li>調査地ごとの面積<span class="math inline">\(A_i\)</span>は異なる</li>
-<li>調査地<span class="math inline">\(i\)</span>の明るさ<span class="math inline">\(x_i\)</span>を計測</li>
-<li>調査地<span class="math inline">\(i\)</span>の植物個体数<span class="math inline">\(y_i\)</span>を記録</li>
-<li>個体密度が<span class="math inline">\(x_i\)</span>にどう影響されるか</li>
+<li>森林に調査地100箇所（<span
+class="math inline">\(i\)</span>は1から100まで）</li>
+<li>調査地ごとの面積<span
+class="math inline">\(A_i\)</span>は異なる</li>
+<li>調査地<span class="math inline">\(i\)</span>の明るさ<span
+class="math inline">\(x_i\)</span>を計測</li>
+<li>調査地<span class="math inline">\(i\)</span>の植物個体数<span
+class="math inline">\(y_i\)</span>を記録</li>
+<li>個体密度が<span
+class="math inline">\(x_i\)</span>にどう影響されるか</li>
 </ul></li>
-<li><span class="math inline">\(y_i\)</span>を<span class="math inline">\(A_i\)</span>で割りたくなるけど、そうはしない
+<li><span class="math inline">\(y_i\)</span>を<span
+class="math inline">\(A_i\)</span>で割りたくなるけど、そうはしない
 <ul>
-<li><span class="math inline">\(\frac{平均個体数\lambda_i}{A_i}=人口密度\)</span></li>
-<li><span class="math inline">\(\lambda_i=A_i \times 人口密度\)</span></li>
-<li>ここで人口密度をexp(線形予測子)とする。ここが結構謎。人口密度は負になることはない。負になることがない値をモデルに入れるときにexp()に入れるというのがよく使う技っぽい。</li>
+<li><span
+class="math inline">\(\frac{平均個体数\lambda_i}{A_i}=人口密度\)</span></li>
+<li><span class="math inline">\(\lambda_i=A_i \times
+人口密度\)</span></li>
+<li>ここで人口密度をexp(式)とする。ここが結構謎。人口密度は負になることはない。負になることがない値をモデルに入れるときにexp()に入れるというのがよく使う技っぽい。</li>
+<li><span
+class="math inline">\(\lambda_i=A_iexp(\beta_i+\beta_2x_i)\)</span>:
+平均個体数は人口密度に面積をかけたもの（ただし、人口密度は光に影響されると考えるので、<span
+class="math inline">\(x_i\)</span>項を含む式とする</li>
+<li><span
+class="math inline">\(\lambda_i=exp(\beta_1+\beta_2x_i+logA_i)\)</span>
+<ul>
+<li>これで対数リンク関数、ポアソン分布のGLMの形</li>
+<li>ただし、線形予測子の中に計数を持たない<span
+class="math inline">\(logA_i\)</span>が入っている＝オフセット項
+<ul>
+<li>もともと、平均個体数の分母にあったものだから</li>
+<li>glm()でオフセット項を指定できる</li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li>オフセット項
+<ul>
+<li>単位面積あたり、単位時間あたりの計測に応用可能
+<ul>
+<li>観察時間の対数をオフセット項にする、など</li>
+</ul></li>
+<li>比や密度などにも応用可能
+<ul>
+<li>どっちもばらつきをもっててもOKだけど、それはこの本には出てこない</li>
+</ul></li>
 </ul></li>
 </ul></li>
 </ul>
+</div>
+</div>
+<div id="正規分布とその尤度" class="section level2">
+<h2>6.7 正規分布とその尤度</h2>
 <pre class="r"><code>dat2&lt;-read.csv(&#39;kubobook_2012-2/binomial/data4b.csv&#39;)
 plot(dat2$A,dat2$y)</code></pre>
 <p><img src="midori6_files/figure-html/unnamed-chunk-8-1.png" width="768" /></p>
-</div>
+<pre class="r"><code>glm(y~x, offset=log(A), family=poisson, data=dat2)</code></pre>
+<pre><code>## 
+## Call:  glm(formula = y ~ x, family = poisson, data = dat2, offset = log(A))
+## 
+## Coefficients:
+## (Intercept)            x  
+##      0.9731       1.0383  
+## 
+## Degrees of Freedom: 99 Total (i.e. Null);  98 Residual
+## Null Deviance:       261.5 
+## Residual Deviance: 81.61     AIC: 650.3</code></pre>
 </div>
 </div>
 </div>

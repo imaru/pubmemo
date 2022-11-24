@@ -10,7 +10,7 @@
     
     <title>midori4</title>
 
-        <script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
+        <script src="site_libs/header-attrs-2.18/header-attrs.js"></script>
         <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link href="site_libs/bootstrap-3.3.7/css/bootstrap.min.css" rel="stylesheet" />
@@ -116,20 +116,26 @@
         <div class="Sidebar">
           <div class="SidebarItems" id="toc">
             <ul>
-            <li><a href="#glmのモデル選択aicとモデルの予測の良さ">4.
+            <li><a href="#glmのモデル選択aicとモデルの予測の良さ"
+            id="toc-glmのモデル選択aicとモデルの予測の良さ">4.
             GLMのモデル選択–AICとモデルの予測の良さ–</a>
             <ul>
-            <li><a href="#データは一つモデルはたくさん">4.1
+            <li><a href="#データは一つモデルはたくさん"
+            id="toc-データは一つモデルはたくさん">4.1
             データは一つ、モデルはたくさん</a></li>
-            <li><a href="#統計モデルのあてはまりの悪さ逸脱度">4.2
+            <li><a href="#統計モデルのあてはまりの悪さ逸脱度"
+            id="toc-統計モデルのあてはまりの悪さ逸脱度">4.2
             統計モデルのあてはまりの悪さ：逸脱度</a></li>
-            <li><a href="#モデル選択基準aic">4.3
-            モデル選択基準AIC</a></li>
-            <li><a href="#aicを説明するためのまた別の例題">4.4
+            <li><a href="#モデル選択基準aic"
+            id="toc-モデル選択基準aic">4.3 モデル選択基準AIC</a></li>
+            <li><a href="#aicを説明するためのまた別の例題"
+            id="toc-aicを説明するためのまた別の例題">4.4
             AICを説明するためのまた別の例題</a></li>
-            <li><a href="#なぜaicでモデル選択してよいのか">4.5
+            <li><a href="#なぜaicでモデル選択してよいのか"
+            id="toc-なぜaicでモデル選択してよいのか">4.5
             なぜAICでモデル選択してよいのか？</a></li>
-            <li><a href="#この章のまとめと参考文献">4.6
+            <li><a href="#この章のまとめと参考文献"
+            id="toc-この章のまとめと参考文献">4.6
             この章のまとめと参考文献</a></li>
             </ul></li>
             </ul>
@@ -185,6 +191,9 @@
       </li>
       <li>
         <a href="midori5.html">緑本5部</a>
+      </li>
+      <li>
+        <a href="midori6.html">緑本6部</a>
       </li>
       <li>
         <a href="psytech.html">技術部</a>
@@ -474,7 +483,7 @@ class="math inline">\(b=logL^*-E(logL)\)</span>を定義＝バイアス</li>
 <li>予測用のデータをたくさん作ってやってみたら、「たまたま」のデータで評価した最大対数尤度よりも1程度大きくなることが分かった
 <ul>
 <li>この<span
-class="math inline">\(E(logL)\)</span>は当てはまりの良さの指標として使えそうな気がする。</li>
+class="math inline">\(E(logL)\)</span>はモデルの良さの指標として使えそうな気がする。</li>
 <li><span
 class="math inline">\(E(logL)=logL^*-1\)</span>と言えそうなので、そうすればいいのでは＝バイアス補正
 <ul>

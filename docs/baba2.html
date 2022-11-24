@@ -10,7 +10,7 @@
     
     <title>馬場本</title>
 
-        <script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
+        <script src="site_libs/header-attrs-2.18/header-attrs.js"></script>
         <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link href="site_libs/bootstrap-3.3.7/css/bootstrap.min.css" rel="stylesheet" />
@@ -116,130 +116,186 @@
         <div class="Sidebar">
           <div class="SidebarItems" id="toc">
             <ul>
-            <li><a href="#章">2章</a></li>
-            <li><a href="#章rの基本">2-1章：Rの基本</a>
+            <li><a href="#章" id="toc-章">2章</a></li>
+            <li><a href="#章rの基本"
+            id="toc-章rの基本">2-1章：Rの基本</a>
             <ul>
-            <li><a href="#目的と概要">1. 目的と概要</a></li>
-            <li><a href="#rのインストール">2. Rのインストール</a></li>
-            <li><a href="#rstudioのインストール">3.
+            <li><a href="#目的と概要" id="toc-目的と概要">1.
+            目的と概要</a></li>
+            <li><a href="#rのインストール" id="toc-rのインストール">2.
+            Rのインストール</a></li>
+            <li><a href="#rstudioのインストール"
+            id="toc-rstudioのインストール">3.
             RStudioのインストール</a></li>
-            <li><a href="#rstudioの使い方">4. RStudioの使い方</a></li>
-            <li><a href="#変数">5. 変数</a></li>
-            <li><a href="#関数">6. 関数</a></li>
-            <li><a href="#ベクトル">7. ベクトル</a></li>
-            <li><a href="#行列">8. 行列</a></li>
-            <li><a href="#配列">9. 配列</a></li>
-            <li><a href="#データフレーム">10. データフレーム</a></li>
-            <li><a href="#リスト">11. リスト</a></li>
-            <li><a href="#データの抽出">12. データの抽出</a></li>
-            <li><a href="#時系列データts">13. 時系列データ(ts)</a></li>
-            <li><a href="#ファイルからのデータ読み込み">14.
+            <li><a href="#rstudioの使い方" id="toc-rstudioの使い方">4.
+            RStudioの使い方</a></li>
+            <li><a href="#変数" id="toc-変数">5. 変数</a></li>
+            <li><a href="#関数" id="toc-関数">6. 関数</a></li>
+            <li><a href="#ベクトル" id="toc-ベクトル">7.
+            ベクトル</a></li>
+            <li><a href="#行列" id="toc-行列">8. 行列</a></li>
+            <li><a href="#配列" id="toc-配列">9. 配列</a></li>
+            <li><a href="#データフレーム" id="toc-データフレーム">10.
+            データフレーム</a></li>
+            <li><a href="#リスト" id="toc-リスト">11. リスト</a></li>
+            <li><a href="#データの抽出" id="toc-データの抽出">12.
+            データの抽出</a></li>
+            <li><a href="#時系列データts" id="toc-時系列データts">13.
+            時系列データ(ts)</a></li>
+            <li><a href="#ファイルからのデータ読み込み"
+            id="toc-ファイルからのデータ読み込み">14.
             ファイルからのデータ読み込み</a></li>
-            <li><a href="#乱数の生成">15. 乱数の生成</a></li>
-            <li><a href="#繰り返し構文とforループ">16.
+            <li><a href="#乱数の生成" id="toc-乱数の生成">15.
+            乱数の生成</a></li>
+            <li><a href="#繰り返し構文とforループ"
+            id="toc-繰り返し構文とforループ">16.
             繰り返し構文とforループ</a></li>
-            <li><a href="#外部パッケージの活用">17.
+            <li><a href="#外部パッケージの活用"
+            id="toc-外部パッケージの活用">17.
             外部パッケージの活用</a></li>
             </ul></li>
-            <li><a href="#章-データの要約">2-2章: データの要約</a>
+            <li><a href="#章-データの要約"
+            id="toc-章-データの要約">2-2章: データの要約</a>
             <ul>
-            <li><a href="#度数度数分布ヒストグラム">2.
+            <li><a href="#度数度数分布ヒストグラム"
+            id="toc-度数度数分布ヒストグラム">2.
             度数・度数分布・ヒストグラム</a></li>
-            <li><a href="#カーネル密度推定">3. カーネル密度推定</a></li>
-            <li><a href="#算術平均">4. 算術平均</a></li>
-            <li><a href="#中央値四分位点パーセント点">5.
+            <li><a href="#カーネル密度推定" id="toc-カーネル密度推定">3.
+            カーネル密度推定</a></li>
+            <li><a href="#算術平均" id="toc-算術平均">4.
+            算術平均</a></li>
+            <li><a href="#中央値四分位点パーセント点"
+            id="toc-中央値四分位点パーセント点">5.
             中央値・四分位点・パーセント点</a></li>
-            <li><a href="#共分散とピアソンの積率相関係数">6.
+            <li><a href="#共分散とピアソンの積率相関係数"
+            id="toc-共分散とピアソンの積率相関係数">6.
             共分散とピアソンの積率相関係数</a></li>
-            <li><a href="#自己共分散自己相関係数コレログラム">7.
+            <li><a href="#自己共分散自己相関係数コレログラム"
+            id="toc-自己共分散自己相関係数コレログラム">7.
             自己共分散・自己相関係数・コレログラム</a></li>
             </ul></li>
-            <li><a href="#章-ggplot2によるデータの可視化">2-3章
+            <li><a href="#章-ggplot2によるデータの可視化"
+            id="toc-章-ggplot2によるデータの可視化">2-3章
             ggplot2によるデータの可視化</a>
             <ul>
-            <li><a href="#ggplot2の基本">2. ggplot2の基本</a></li>
-            <li><a href="#データの読み込み">3. データの読み込み</a></li>
-            <li><a href="#ヒストグラムとカーネル密度推定">4.
+            <li><a href="#ggplot2の基本" id="toc-ggplot2の基本">2.
+            ggplot2の基本</a></li>
+            <li><a href="#データの読み込み" id="toc-データの読み込み">3.
+            データの読み込み</a></li>
+            <li><a href="#ヒストグラムとカーネル密度推定"
+            id="toc-ヒストグラムとカーネル密度推定">4.
             ヒストグラムとカーネル密度推定</a></li>
-            <li><a href="#グラフの重ね合わせと一覧表示">5.
+            <li><a href="#グラフの重ね合わせと一覧表示"
+            id="toc-グラフの重ね合わせと一覧表示">5.
             グラフの重ね合わせと一覧表示</a></li>
-            <li><a href="#箱ひげ図とバイオリンプロット">3.6
+            <li><a href="#箱ひげ図とバイオリンプロット"
+            id="toc-箱ひげ図とバイオリンプロット">3.6
             箱ひげ図とバイオリンプロット</a></li>
-            <li><a href="#散布図">3.7 散布図</a></li>
-            <li><a href="#折れ線グラフ">3.8 折れ線グラフ</a></li>
+            <li><a href="#散布図" id="toc-散布図">3.7 散布図</a></li>
+            <li><a href="#折れ線グラフ" id="toc-折れ線グラフ">3.8
+            折れ線グラフ</a></li>
             </ul></li>
-            <li><a
-            href="#の補足ggplot2の考え方rグラフィックブック付録a">2-3の補足：ggplot2の考え方(Rグラフィックブック付録A)</a>
+            <li><a href="#の補足ggplot2の考え方rグラフィックブック付録a"
+            id="toc-の補足ggplot2の考え方rグラフィックブック付録a">2-3の補足：ggplot2の考え方(Rグラフィックブック付録A)</a>
             <ul>
-            <li><a
-            href="#wideフォーマットとlongフォーマット">wideフォーマットとlongフォーマット</a></li>
-            <li><a href="#ggplotの用語">ggplotの用語</a></li>
-            <li><a href="#基本的な使い方">基本的な使い方</a></li>
+            <li><a href="#wideフォーマットとlongフォーマット"
+            id="toc-wideフォーマットとlongフォーマット">wideフォーマットとlongフォーマット</a></li>
+            <li><a href="#ggplotの用語"
+            id="toc-ggplotの用語">ggplotの用語</a></li>
+            <li><a href="#基本的な使い方"
+            id="toc-基本的な使い方">基本的な使い方</a></li>
             </ul></li>
-            <li><a href="#章-stanの基本">2-4章 Stanの基本</a>
+            <li><a href="#章-stanの基本" id="toc-章-stanの基本">2-4章
+            Stanの基本</a>
             <ul>
-            <li><a href="#stanのインストール">2.
-            Stanのインストール</a></li>
-            <li><a href="#サンプルとmcmcサンプル">3.
+            <li><a href="#stanのインストール"
+            id="toc-stanのインストール">2. Stanのインストール</a></li>
+            <li><a href="#サンプルとmcmcサンプル"
+            id="toc-サンプルとmcmcサンプル">3.
             サンプルとMCMCサンプル</a></li>
-            <li><a href="#ここで推定するモデルの構造">4.
+            <li><a href="#ここで推定するモデルの構造"
+            id="toc-ここで推定するモデルの構造">4.
             ここで推定するモデルの構造</a></li>
-            <li><a href="#rとstan">5. RとStan</a></li>
-            <li><a href="#stanファイルの書き方">6.
+            <li><a href="#rとstan" id="toc-rとstan">5. RとStan</a></li>
+            <li><a href="#stanファイルの書き方"
+            id="toc-stanファイルの書き方">6.
             Stanファイルの書き方</a></li>
-            <li><a href="#stanファイルの実装例">7.
+            <li><a href="#stanファイルの実装例"
+            id="toc-stanファイルの実装例">7.
             Stanファイルの実装例</a></li>
-            <li><a href="#rファイル実装の流れ">8.
-            Rファイル実装の流れ</a></li>
-            <li><a href="#分析の準備">9. 分析の準備</a></li>
-            <li><a href="#データ読み込み">10. データ読み込み</a></li>
-            <li><a href="#list形式でデータをまとめる">11.
+            <li><a href="#rファイル実装の流れ"
+            id="toc-rファイル実装の流れ">8. Rファイル実装の流れ</a></li>
+            <li><a href="#分析の準備" id="toc-分析の準備">9.
+            分析の準備</a></li>
+            <li><a href="#データ読み込み" id="toc-データ読み込み">10.
+            データ読み込み</a></li>
+            <li><a href="#list形式でデータをまとめる"
+            id="toc-list形式でデータをまとめる">11.
             list形式でデータをまとめる</a></li>
-            <li><a href="#stanと連携してmcmc実行">12.
+            <li><a href="#stanと連携してmcmc実行"
+            id="toc-stanと連携してmcmc実行">12.
             Stanと連携してMCMC実行</a></li>
-            <li><a href="#結果の確認">13. 結果の確認</a></li>
-            <li><a href="#収束の確認">14. 収束の確認</a></li>
-            <li><a href="#ベクトル化">15. ベクトル化</a></li>
-            <li><a href="#モデルの図式化">16. モデルの図式化</a></li>
+            <li><a href="#結果の確認" id="toc-結果の確認">13.
+            結果の確認</a></li>
+            <li><a href="#収束の確認" id="toc-収束の確認">14.
+            収束の確認</a></li>
+            <li><a href="#ベクトル化" id="toc-ベクトル化">15.
+            ベクトル化</a></li>
+            <li><a href="#モデルの図式化" id="toc-モデルの図式化">16.
+            モデルの図式化</a></li>
             </ul></li>
-            <li><a href="#stanコーディングの詳細">2-6.
+            <li><a href="#stanコーディングの詳細"
+            id="toc-stanコーディングの詳細">2-6.
             Stanコーディングの詳細</a>
             <ul>
-            <li><a href="#stanファイルの構造">2.
-            Stanファイルの構造</a></li>
-            <li><a href="#変数の宣言">3. 変数の宣言</a></li>
-            <li><a href="#代入">4. 代入</a></li>
-            <li><a href="#サンプリング文">5. サンプリング文</a></li>
-            <li><a href="#弱情報事前分布の設定">6.
+            <li><a href="#stanファイルの構造"
+            id="toc-stanファイルの構造">2. Stanファイルの構造</a></li>
+            <li><a href="#変数の宣言" id="toc-変数の宣言">3.
+            変数の宣言</a></li>
+            <li><a href="#代入" id="toc-代入">4. 代入</a></li>
+            <li><a href="#サンプリング文" id="toc-サンプリング文">5.
+            サンプリング文</a></li>
+            <li><a href="#弱情報事前分布の設定"
+            id="toc-弱情報事前分布の設定">6.
             弱情報事前分布の設定</a></li>
-            <li><a href="#mcmcの実行">2. MCMCの実行</a></li>
-            <li><a href="#mcmcサンプルの抽出">3.
-            MCMCサンプルの抽出</a></li>
-            <li><a href="#mcmcサンプルの代表値の計算">4.
+            <li><a href="#mcmcの実行" id="toc-mcmcの実行">2.
+            MCMCの実行</a></li>
+            <li><a href="#mcmcサンプルの抽出"
+            id="toc-mcmcサンプルの抽出">3. MCMCサンプルの抽出</a></li>
+            <li><a href="#mcmcサンプルの代表値の計算"
+            id="toc-mcmcサンプルの代表値の計算">4.
             MCMCサンプルの代表値の計算</a></li>
-            <li><a href="#トレースプロットの描画">5.
+            <li><a href="#トレースプロットの描画"
+            id="toc-トレースプロットの描画">5.
             トレースプロットの描画</a></li>
-            <li><a href="#事後予測チェックの概要">10.
+            <li><a href="#事後予測チェックの概要"
+            id="toc-事後予測チェックの概要">10.
             事後予測チェックの概要</a></li>
-            <li><a
-            href="#事後予測チェックの対象となるデータとモデル">11.
+            <li><a href="#事後予測チェックの対象となるデータとモデル"
+            id="toc-事後予測チェックの対象となるデータとモデル">11.
             事後予測チェックの対象となるデータとモデル</a></li>
             </ul></li>
-            <li><a href="#stanコーディングの詳細-1">2-6.
+            <li><a href="#stanコーディングの詳細-1"
+            id="toc-stanコーディングの詳細-1">2-6.
             Stanコーディングの詳細</a>
             <ul>
-            <li><a href="#stanファイルの構造-1">2.
-            Stanファイルの構造</a></li>
-            <li><a href="#変数の宣言-1">3. 変数の宣言</a></li>
-            <li><a href="#代入-1">4. 代入</a></li>
-            <li><a href="#サンプリング文-1">5. サンプリング文</a></li>
-            <li><a href="#弱情報事前分布の設定-1">6.
+            <li><a href="#stanファイルの構造-1"
+            id="toc-stanファイルの構造-1">2. Stanファイルの構造</a></li>
+            <li><a href="#変数の宣言-1" id="toc-変数の宣言-1">3.
+            変数の宣言</a></li>
+            <li><a href="#代入-1" id="toc-代入-1">4. 代入</a></li>
+            <li><a href="#サンプリング文-1" id="toc-サンプリング文-1">5.
+            サンプリング文</a></li>
+            <li><a href="#弱情報事前分布の設定-1"
+            id="toc-弱情報事前分布の設定-1">6.
             弱情報事前分布の設定</a></li>
-            <li><a href="#対数密度加算文">7. 対数密度加算文</a></li>
+            <li><a href="#対数密度加算文" id="toc-対数密度加算文">7.
+            対数密度加算文</a></li>
             <li><a
-            href="#平均値の差の評価とgenerated-quantitiesブロック">8.
+            href="#平均値の差の評価とgenerated-quantitiesブロック"
+            id="toc-平均値の差の評価とgenerated-quantitiesブロック">8.
             平均値の差の評価とgenerated quantitiesブロック</a></li>
-            <li><a href="#練習問題">練習問題</a></li>
+            <li><a href="#練習問題" id="toc-練習問題">練習問題</a></li>
             </ul></li>
             </ul>
           </div>
@@ -294,6 +350,9 @@
       </li>
       <li>
         <a href="midori5.html">緑本5部</a>
+      </li>
+      <li>
+        <a href="midori6.html">緑本6部</a>
       </li>
       <li>
         <a href="psytech.html">技術部</a>
@@ -538,8 +597,9 @@ class="math inline">\(\frac{1}{N}\Sigma^N_{i=1}(y_t-\bar{y})(y_{t-1}-\bar{y})\)<
 </div>
 <div id="グラフの重ね合わせと一覧表示" class="section level2">
 <h2>5. グラフの重ね合わせと一覧表示</h2>
-<pre class="r"><code>library(&#39;ggplot2&#39;)
-fish &lt;- read.csv(&#39;2-2-1-fish.csv&#39;)
+<pre class="r"><code>library(&#39;ggplot2&#39;)</code></pre>
+<pre><code>## Warning: package &#39;ggplot2&#39; was built under R version 4.2.2</code></pre>
+<pre class="r"><code>fish &lt;- read.csv(&#39;2-2-1-fish.csv&#39;)
 head(fish, n=3)</code></pre>
 <pre><code>##      length
 ## 1  8.747092
@@ -554,10 +614,17 @@ head(fish, n=3)</code></pre>
 ## 2 10.367287
 ## 3  8.328743</code></pre>
 <pre class="r"><code>ggplot(data=fish, mapping=aes(x=length, y=..density..))+geom_histogram(alpha=0.5, bins=20)+geom_density(size=1.5)+labs(title=&#39;ヒストグラム&#39;)</code></pre>
+<pre><code>## Warning: Using `size` aesthetic for lines was deprecated in
+## ggplot2 3.4.0.
+## ℹ Please use `linewidth` instead.</code></pre>
+<pre><code>## Warning: The dot-dot notation (`..density..`) was deprecated in
+## ggplot2 3.4.0.
+## ℹ Please use `after_stat(density)` instead.</code></pre>
 <p><img src="baba2_files/figure-html/unnamed-chunk-7-1.png" width="768" /></p>
 <pre class="r"><code>library(gcookbook)
-library(gridExtra)
-p_hist&lt;-ggplot(data=fish, mapping=aes(x=length))+geom_histogram(alpha=0.5, bins=20)+labs(title=&quot;ヒストグラム&quot;)
+library(gridExtra)</code></pre>
+<pre><code>## Warning: package &#39;gridExtra&#39; was built under R version 4.2.2</code></pre>
+<pre class="r"><code>p_hist&lt;-ggplot(data=fish, mapping=aes(x=length))+geom_histogram(alpha=0.5, bins=20)+labs(title=&quot;ヒストグラム&quot;)
 p_density&lt;-ggplot(data=fish, mappin=aes(x=length))+geom_density(size=1.5)+labs(title=&quot;カーネル密度推定&quot;)
 grid.arrange(p_hist, p_density, nrow=2)+theme(plot.title=element_text(family=&quot;Hirakaku&quot;))</code></pre>
 <p><img src="baba2_files/figure-html/unnamed-chunk-8-1.png" width="768" /></p>
@@ -603,8 +670,9 @@ simpledat</code></pre>
 <li>reshapeパッケージ、melt()</li>
 </ul></li>
 </ul>
-<pre class="r"><code>library(reshape2)
-longdat&lt;-melt(simpledat)
+<pre class="r"><code>library(reshape2)</code></pre>
+<pre><code>## Warning: package &#39;reshape2&#39; was built under R version 4.2.2</code></pre>
+<pre class="r"><code>longdat&lt;-melt(simpledat)
 longdat</code></pre>
 <pre><code>##   Var1 Var2 value
 ## 1   B1   A1    10
@@ -792,12 +860,16 @@ class="math inline">\(\sigma\)</span></li>
 </ul></li>
 </ul>
 <pre class="r"><code>library(rstan)</code></pre>
-<pre><code>##  要求されたパッケージ StanHeaders をロード中です</code></pre>
-<pre><code>## rstan (Version 2.21.5, GitRev: 2e1f913d3ca3)</code></pre>
+<pre><code>## Loading required package: StanHeaders</code></pre>
+<pre><code>## Warning: package &#39;StanHeaders&#39; was built under R version 4.2.2</code></pre>
+<pre><code>## rstan (Version 2.19.3, GitRev: 2e1f913d3ca3)</code></pre>
 <pre><code>## For execution on a local, multicore CPU with excess RAM we recommend calling
 ## options(mc.cores = parallel::detectCores()).
 ## To avoid recompilation of unchanged Stan programs, we recommend calling
 ## rstan_options(auto_write = TRUE)</code></pre>
+<pre><code>## For improved execution time, we recommend calling
+## Sys.setenv(LOCAL_CPPFLAGS = &#39;-march=corei7 -mtune=corei7&#39;)
+## although this causes Stan to throw an error on a few processors.</code></pre>
 <pre class="r"><code>rstan_options(auto_write=TRUE)
 options(mc.cores=parallel::detectCores())
 
@@ -830,11 +902,11 @@ mcmc_result&lt;-stan(
 ## post-warmup draws per chain=1000, total post-warmup draws=4000.
 ## 
 ##          mean se_mean   sd    2.5%     50%   97.5% n_eff Rhat
-## mu     102.22    0.03 1.83   98.61  102.23  105.79  3283    1
-## sigma   18.19    0.02 1.27   15.93   18.12   20.98  2758    1
-## lp__  -336.43    0.02 0.96 -338.94 -336.13 -335.48  1905    1
+## mu     102.18    0.03 1.82   98.57  102.20  105.73  3277    1
+## sigma   18.20    0.02 1.29   15.95   18.12   21.00  2858    1
+## lp__  -336.44    0.02 0.97 -338.98 -336.12 -335.48  1774    1
 ## 
-## Samples were drawn using NUTS(diag_e) at Thu Jun 16 12:31:36 2022.
+## Samples were drawn using NUTS(diag_e) at Thu Nov 24 10:59:06 2022.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).</code></pre>
@@ -1019,7 +1091,8 @@ class(mcmc_sample)</code></pre>
 ## $parameters
 ## [1] &quot;mu&quot;    &quot;sigma&quot; &quot;lp__&quot;</code></pre>
 <pre class="r"><code>mcmc_sample[c(1:8),&quot;chain:1&quot;,&quot;mu&quot;]</code></pre>
-<pre><code>## [1] 104.0878 104.4901 102.4625 101.3802 102.5435 104.7143 100.2602 104.0725</code></pre>
+<pre><code>## [1] 103.90312  98.49369 100.81415 103.21097 100.20969 102.94384 101.85238
+## [8] 103.25985</code></pre>
 <pre class="r"><code>dim(mcmc_sample[,,&quot;mu&quot;])</code></pre>
 <pre><code>## [1] 1000    4</code></pre>
 <pre class="r"><code>class(mcmc_sample[,,&quot;mu&quot;])</code></pre>
@@ -1032,20 +1105,21 @@ class(mcmc_sample)</code></pre>
 </ul>
 <pre class="r"><code>mu_mcmc_vec &lt;- as.vector(mcmc_sample[,,&quot;mu&quot;])
 median(mu_mcmc_vec)</code></pre>
-<pre><code>## [1] 102.2262</code></pre>
+<pre><code>## [1] 102.1961</code></pre>
 <pre class="r"><code>mean(mu_mcmc_vec)</code></pre>
-<pre><code>## [1] 102.2221</code></pre>
+<pre><code>## [1] 102.1772</code></pre>
 <pre class="r"><code>quantile(mu_mcmc_vec, probs=c(0.025, 0.975))</code></pre>
-<pre><code>##     2.5%    97.5% 
-##  98.6053 105.7918</code></pre>
+<pre><code>##      2.5%     97.5% 
+##  98.57235 105.73220</code></pre>
 </div>
 <div id="トレースプロットの描画" class="section level2">
 <h2>5. トレースプロットの描画</h2>
 <ul>
 <li>MCMCサンプルをもとにトレースプロットの描画</li>
 </ul>
-<pre class="r"><code>library(ggfortify)
-autoplot(ts(mcmc_sample[,,&quot;mu&quot;]),
+<pre class="r"><code>library(ggfortify)</code></pre>
+<pre><code>## Warning: package &#39;ggfortify&#39; was built under R version 4.2.2</code></pre>
+<pre class="r"><code>autoplot(ts(mcmc_sample[,,&quot;mu&quot;]),
   facets = F,
   ylab = &quot;mu&quot;,
   main= &quot;トレースプロット&quot;)</code></pre>
@@ -1060,14 +1134,15 @@ bayesplotによる事後分布の可視化 * bayesplot便利</p>
 rstan_options(auto_write=TRUE)
 options(mc.cores=parallel::detectCores())
 library(bayesplot)</code></pre>
-<pre><code>## This is bayesplot version 1.9.0</code></pre>
+<pre><code>## This is bayesplot version 1.10.0</code></pre>
 <pre><code>## - Online documentation and vignettes at mc-stan.org/bayesplot</code></pre>
 <pre><code>## - bayesplot theme set to bayesplot::theme_default()</code></pre>
 <pre><code>##    * Does _not_ affect other ggplot2 plots</code></pre>
 <pre><code>##    * See ?bayesplot_theme_set for details on theme setting</code></pre>
 <pre class="r"><code>mcmc_hist(mcmc_sample, parc=c(&quot;mu&quot;, &quot;sigma&quot;))</code></pre>
 <pre><code>## Warning: The following arguments were unrecognized and ignored: parc</code></pre>
-<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with
+## `binwidth`.</code></pre>
 <p><img src="baba2_files/figure-html/bayesplot%20combo-1.png" width="768" /></p>
 <pre class="r"><code>mcmc_combo(mcmc_sample, parc=c(&quot;mu&quot;,&quot;sigma&quot;))</code></pre>
 <p><img src="baba2_files/figure-html/bayesplot%20combo-2.png" width="768" />
@@ -1241,7 +1316,8 @@ rstan_options(auto_write=TRUE)
 options(mc.cores=parallel::detectCores())
 file_beer_sales_ab&lt;-read.csv(&quot;2-6-1-beer-sales-ab.csv&quot;)
 ggplot(data=file_beer_sales_ab, mapping=aes(x=sales, y=..density.., color=beer_name, fill=beer_name))+geom_histogram(alpha=0.5,position=&quot;identity&quot;)+geom_density(alpha=0.5, size=0)</code></pre>
-<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with
+## `binwidth`.</code></pre>
 <p><img src="baba2_files/figure-html/mcmc_result6-1.png" width="768" /></p>
 <pre class="r"><code>sales_a&lt;-file_beer_sales_ab$sales[1:100]
 sales_b&lt;-file_beer_sales_ab$sales[101:200]
@@ -1261,14 +1337,14 @@ print(mcmc_result_6, probs=c(0.025, 0.5, .0975))</code></pre>
 ## post-warmup draws per chain=1000, total post-warmup draws=4000.
 ## 
 ##            mean se_mean   sd    2.5%     50%   9.75% n_eff Rhat
-## mu_a     102.22    0.03 1.84   98.64  102.22   99.89  4352    1
-## sigma_a   18.19    0.02 1.30   15.84   18.12   16.58  3742    1
-## mu_b     168.88    0.05 2.92  163.14  168.91  165.15  3627    1
-## sigma_b   29.11    0.03 2.09   25.37   28.96   26.47  4374    1
-## diff      66.66    0.05 3.50   59.84   66.67   62.19  4094    1
-## lp__    -719.42    0.03 1.45 -723.21 -719.07 -721.34  2249    1
+## mu_a     102.20    0.03 1.79   98.57  102.24   99.86  3879    1
+## sigma_a   18.19    0.02 1.27   15.84   18.10   16.60  4516    1
+## mu_b     168.88    0.05 2.91  163.16  168.83  165.16  3773    1
+## sigma_b   29.07    0.03 2.13   25.32   28.92   26.47  4135    1
+## diff      66.67    0.05 3.39   60.07   66.68   62.29  3822    1
+## lp__    -719.38    0.03 1.44 -723.14 -719.05 -721.31  1845    1
 ## 
-## Samples were drawn using NUTS(diag_e) at Thu Jun 16 12:31:42 2022.
+## Samples were drawn using NUTS(diag_e) at Thu Nov 24 10:59:28 2022.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).</code></pre>
@@ -1285,7 +1361,8 @@ pdata&lt;-read.csv(&quot;data_if.csv&quot;)
 xdata&lt;-pdata[which(pdata$con==&quot;X&quot;),]
 ydata&lt;-pdata[which(pdata$con==&quot;Y&quot;),]
 ggplot(data=pdata, mapping=aes(x=syakou, y=..density.., color=con, fill=con))+geom_histogram(alpha=0.5, position=&quot;identity&quot;)+geom_density(alpha=0.5, size=0)</code></pre>
-<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with
+## `binwidth`.</code></pre>
 <p><img src="baba2_files/figure-html/prac1-1.png" width="768" /></p>
 <pre class="r"><code>list_xy&lt;-list(datax=xdata[,2],datay=ydata[,2],Nx=length(xdata[,2]),Ny=length(ydata[,2]))
 mcmc_p_res &lt;- stan(file=&quot;2-6-5-pdata.stan&quot;,
@@ -1298,14 +1375,14 @@ print(mcmc_p_res)</code></pre>
 ## post-warmup draws per chain=1000, total post-warmup draws=4000.
 ## 
 ##           mean se_mean   sd   2.5%    25%    50%    75%  97.5% n_eff Rhat
-## mu_x      5.19    0.00 0.24   4.73   5.03   5.19   5.35   5.66  3376    1
-## sigma_x   1.24    0.00 0.18   0.93   1.11   1.22   1.34   1.65  3326    1
-## mu_y      2.60    0.00 0.22   2.17   2.46   2.61   2.75   3.05  3890    1
-## sigma_y   1.10    0.00 0.17   0.83   0.97   1.07   1.20   1.49  3012    1
-## diff      2.58    0.01 0.32   1.94   2.37   2.58   2.80   3.22  3643    1
-## lp__    -32.31    0.04 1.48 -35.98 -33.01 -31.98 -31.25 -30.48  1552    1
+## mu_x      5.18    0.00 0.23   4.74   5.02   5.18   5.34   5.63  4311    1
+## sigma_x   1.23    0.00 0.18   0.94   1.10   1.21   1.33   1.64  3818    1
+## mu_y      2.60    0.00 0.22   2.15   2.45   2.60   2.75   3.03  3628    1
+## sigma_y   1.10    0.00 0.17   0.83   0.98   1.08   1.20   1.51  3413    1
+## diff      2.59    0.01 0.32   1.95   2.37   2.59   2.80   3.22  3920    1
+## lp__    -32.25    0.04 1.39 -35.74 -32.95 -31.95 -31.22 -30.48  1469    1
 ## 
-## Samples were drawn using NUTS(diag_e) at Thu Jun 16 12:31:43 2022.
+## Samples were drawn using NUTS(diag_e) at Thu Nov 24 10:59:37 2022.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).</code></pre>
@@ -1313,7 +1390,8 @@ print(mcmc_p_res)</code></pre>
 mcmc_combo(mcmc_p_res, pars=c(&quot;mu_x&quot;, &quot;mu_y&quot;, &quot;sigma_x&quot;, &quot;sigma_y&quot;, &quot;diff&quot;))</code></pre>
 <p><img src="baba2_files/figure-html/prac1-2.png" width="768" /></p>
 <pre class="r"><code>stan_hist(mcmc_p_res)</code></pre>
-<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with
+## `binwidth`.</code></pre>
 <p><img src="baba2_files/figure-html/prac1-3.png" width="768" /></p>
 <ul>
 <li>同じ分散を仮定</li>
@@ -1327,7 +1405,8 @@ xdata&lt;-pdata[which(pdata$con==&quot;X&quot;),]
 ydata&lt;-pdata[which(pdata$con==&quot;Y&quot;),]
 
 ggplot(data=pdata, mapping=aes(x=syakou, y=..density.., color=con, fill=con))+geom_histogram(alpha=0.5, position=&quot;identity&quot;)+geom_density(alpha=0.5, size=0)</code></pre>
-<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with
+## `binwidth`.</code></pre>
 <p><img src="baba2_files/figure-html/prac2-1.png" width="768" /></p>
 <pre class="r"><code>list_xy&lt;-list(datax=xdata[,2],datay=ydata[,2],Nx=length(xdata[,2]),Ny=length(ydata[,2]))
 
@@ -1341,13 +1420,13 @@ print(mcmc_p_res)</code></pre>
 ## post-warmup draws per chain=1000, total post-warmup draws=4000.
 ## 
 ##         mean se_mean   sd   2.5%    25%    50%    75%  97.5% n_eff Rhat
-## mu_x    5.18    0.00 0.22   4.75   5.04   5.18   5.33   5.60  3458    1
-## sigma   1.15    0.00 0.12   0.94   1.06   1.13   1.22   1.41  3170    1
-## mu_y    2.60    0.00 0.23   2.14   2.45   2.60   2.76   3.06  3492    1
-## diff    2.58    0.01 0.32   1.94   2.37   2.58   2.79   3.19  3575    1
-## lp__  -32.07    0.03 1.26 -35.38 -32.66 -31.74 -31.15 -30.63  1686    1
+## mu_x    5.19    0.00 0.22   4.76   5.04   5.19   5.34   5.61  3240    1
+## sigma   1.14    0.00 0.12   0.95   1.06   1.13   1.22   1.39  3594    1
+## mu_y    2.60    0.00 0.23   2.16   2.45   2.60   2.75   3.05  3536    1
+## diff    2.59    0.01 0.32   1.96   2.38   2.58   2.81   3.21  3245    1
+## lp__  -32.03    0.03 1.19 -35.12 -32.59 -31.73 -31.14 -30.64  2139    1
 ## 
-## Samples were drawn using NUTS(diag_e) at Thu Jun 16 12:31:47 2022.
+## Samples were drawn using NUTS(diag_e) at Thu Nov 24 10:59:51 2022.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).</code></pre>

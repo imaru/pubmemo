@@ -10,7 +10,7 @@
     
     <title>#1-7MCMCの基本</title>
 
-        <script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
+        <script src="site_libs/header-attrs-2.18/header-attrs.js"></script>
         <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link href="site_libs/bootstrap-3.3.7/css/bootstrap.min.css" rel="stylesheet" />
@@ -116,58 +116,81 @@
         <div class="Sidebar">
           <div class="SidebarItems" id="toc">
             <ul>
-            <li><a href="#章-mcmcの基本">1-7章: MCMCの基本</a>
+            <li><a href="#章-mcmcの基本" id="toc-章-mcmcの基本">1-7章:
+            MCMCの基本</a>
             <ul>
-            <li><a href="#概要">1. 概要</a></li>
-            <li><a href="#mcmcとは何か">2. MCMCとは何か</a></li>
-            <li><a
-            href="#確率分布に従う乱数の例">★確率分布に従う乱数の例</a></li>
-            <li><a href="#mcmcと統計モデリングの関わり">3.
+            <li><a href="#概要" id="toc-概要">1. 概要</a></li>
+            <li><a href="#mcmcとは何か" id="toc-mcmcとは何か">2.
+            MCMCとは何か</a></li>
+            <li><a href="#確率分布に従う乱数の例"
+            id="toc-確率分布に従う乱数の例">★確率分布に従う乱数の例</a></li>
+            <li><a href="#mcmcと統計モデリングの関わり"
+            id="toc-mcmcと統計モデリングの関わり">3.
             MCMCと統計モデリングの関わり</a></li>
-            <li><a href="#モンテカルロ法">4. モンテカルロ法</a></li>
-            <li><a href="#モンテカルロ積分">5. モンテカルロ積分</a></li>
-            <li><a href="#マルコフ連鎖">6. マルコフ連鎖</a></li>
-            <li><a href="#定常分布">7. 定常分布</a></li>
-            <li><a
-            href="#スマホユーザーの例">★スマホユーザーの例</a></li>
-            <li><a href="#mcmcが目指すこと">8. MCMCが目指すこと</a></li>
-            <li><a href="#メトロポリスヘイスティングス法mh法">9.
+            <li><a href="#モンテカルロ法" id="toc-モンテカルロ法">4.
+            モンテカルロ法</a></li>
+            <li><a href="#モンテカルロ積分" id="toc-モンテカルロ積分">5.
+            モンテカルロ積分</a></li>
+            <li><a href="#マルコフ連鎖" id="toc-マルコフ連鎖">6.
+            マルコフ連鎖</a></li>
+            <li><a href="#定常分布" id="toc-定常分布">7.
+            定常分布</a></li>
+            <li><a href="#スマホユーザーの例"
+            id="toc-スマホユーザーの例">★スマホユーザーの例</a></li>
+            <li><a href="#mcmcが目指すこと" id="toc-mcmcが目指すこと">8.
+            MCMCが目指すこと</a></li>
+            <li><a href="#メトロポリスヘイスティングス法mh法"
+            id="toc-メトロポリスヘイスティングス法mh法">9.
             メトロポリス・ヘイスティングス法（MH法）</a></li>
-            <li><a href="#mh法の計算例">10. MH法の計算例</a></li>
-            <li><a
-            href="#メトロポリスヘイスティングス法の実装例">★メトロポリス・ヘイスティングス法の実装例</a></li>
-            <li><a href="#mh法の欠点">11. MH法の欠点</a></li>
-            <li><a href="#ハミルトニアンモンテカルロ法hmc法">12.
+            <li><a href="#mh法の計算例" id="toc-mh法の計算例">10.
+            MH法の計算例</a></li>
+            <li><a href="#メトロポリスヘイスティングス法の実装例"
+            id="toc-メトロポリスヘイスティングス法の実装例">★メトロポリス・ヘイスティングス法の実装例</a></li>
+            <li><a href="#mh法の欠点" id="toc-mh法の欠点">11.
+            MH法の欠点</a></li>
+            <li><a href="#ハミルトニアンモンテカルロ法hmc法"
+            id="toc-ハミルトニアンモンテカルロ法hmc法">12.
             ハミルトニアン・モンテカルロ法（HMC法）</a></li>
-            <li><a href="#乱数の取り扱いの注意点">13.
+            <li><a href="#乱数の取り扱いの注意点"
+            id="toc-乱数の取り扱いの注意点">13.
             乱数の取り扱いの注意点</a></li>
-            <li><a href="#繰り返し数iterの設定">14.
+            <li><a href="#繰り返し数iterの設定"
+            id="toc-繰り返し数iterの設定">14.
             繰り返し数(iter)の設定</a></li>
-            <li><a href="#バーンイン期間warmupの設定">15.
+            <li><a href="#バーンイン期間warmupの設定"
+            id="toc-バーンイン期間warmupの設定">15.
             バーンイン期間(warmup)の設定</a></li>
-            <li><a href="#間引きthinの設定">16.
-            間引き(thin)の設定</a></li>
-            <li><a href="#チェーンchainsの設定">17.
+            <li><a href="#間引きthinの設定"
+            id="toc-間引きthinの設定">16. 間引き(thin)の設定</a></li>
+            <li><a href="#チェーンchainsの設定"
+            id="toc-チェーンchainsの設定">17.
             チェーン(chains)の設定</a></li>
-            <li><a href="#収束の判定">18. 収束の判定</a></li>
-            <li><a href="#点推定と区間推定">19.
-            点推定と区間推定</a></li>
-            <li><a href="#ベイズ信用区間">20. ベイズ信用区間</a></li>
-            <li><a href="#事後中央値med-posteriori-median">21.
-            事後中央値(MED; posteriori median)</a></li>
-            <li><a href="#事後期待値eap-expected-a-posteriori">22.
+            <li><a href="#収束の判定" id="toc-収束の判定">18.
+            収束の判定</a></li>
+            <li><a href="#点推定と区間推定"
+            id="toc-点推定と区間推定">19. 点推定と区間推定</a></li>
+            <li><a href="#ベイズ信用区間" id="toc-ベイズ信用区間">20.
+            ベイズ信用区間</a></li>
+            <li><a href="#事後中央値med-posteriori-median"
+            id="toc-事後中央値med-posteriori-median">21. 事後中央値(MED;
+            posteriori median)</a></li>
+            <li><a href="#事後期待値eap-expected-a-posteriori"
+            id="toc-事後期待値eap-expected-a-posteriori">22.
             事後期待値(EAP; expected a posteriori)</a></li>
-            <li><a href="#事後確率最大値map-maximum-a-posteriori">23.
+            <li><a href="#事後確率最大値map-maximum-a-posteriori"
+            id="toc-事後確率最大値map-maximum-a-posteriori">23.
             事後確率最大値(MAP; maximum a posteriori)</a></li>
             </ul></li>
-            <li><a href="#の補足-緑本のmcmc">1-7の補足: 緑本のMCMC</a>
+            <li><a href="#の補足-緑本のmcmc"
+            id="toc-の補足-緑本のmcmc">1-7の補足: 緑本のMCMC</a>
             <ul>
-            <li><a
-            href="#緑本の-種子の例のヒストグラムと対数尤度関数">★緑本の
+            <li><a href="#緑本の-種子の例のヒストグラムと対数尤度関数"
+            id="toc-緑本の-種子の例のヒストグラムと対数尤度関数">★緑本の
             「種子の例」のヒストグラムと対数尤度関数</a></li>
-            <li><a href="#ふらふら最尤推定">★ふらふら最尤推定</a></li>
-            <li><a
-            href="#メトロポリス法の実装例">★メトロポリス法の実装例</a></li>
+            <li><a href="#ふらふら最尤推定"
+            id="toc-ふらふら最尤推定">★ふらふら最尤推定</a></li>
+            <li><a href="#メトロポリス法の実装例"
+            id="toc-メトロポリス法の実装例">★メトロポリス法の実装例</a></li>
             </ul></li>
             </ul>
           </div>
@@ -222,6 +245,9 @@
       </li>
       <li>
         <a href="midori5.html">緑本5部</a>
+      </li>
+      <li>
+        <a href="midori6.html">緑本6部</a>
       </li>
       <li>
         <a href="psytech.html">技術部</a>
@@ -299,7 +325,7 @@ class="math inline">\(2.5%\)</span>点の値はコレ、とか分かればいい
 </ul></li>
 <li>ここで発表はちょっと脇道に逸れます。ここからしばらくは頻度主義（求めたいパラメータは真の値を持つ、という考え方の統計）の例ですが、<a
 href="https://www.amazon.co.jp/dp/400006973X">緑本</a>から：<a
-href="#%E3%81%AE%E8%A3%9C%E8%B6%B3-%E7%B7%91%E6%9C%AC%E3%81%AEmcmc">MCMCを理解するための補足説明</a></li>
+href="#id_%E3%81%AE%E8%A3%9C%E8%B6%B3-%E7%B7%91%E6%9C%AC%E3%81%AEmcmc">MCMCを理解するための補足説明</a></li>
 </ul>
 </div>
 <div id="モンテカルロ法" class="section level2">

@@ -10,7 +10,7 @@
     
     <title>midori6</title>
 
-        <script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
+        <script src="site_libs/header-attrs-2.18/header-attrs.js"></script>
         <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link href="site_libs/bootstrap-3.3.7/css/bootstrap.min.css" rel="stylesheet" />
@@ -116,24 +116,30 @@
         <div class="Sidebar">
           <div class="SidebarItems" id="toc">
             <ul>
-            <li><a
-            href="#glmの応用範囲を広げるロジスティック回帰など">6.
+            <li><a href="#glmの応用範囲を広げるロジスティック回帰など"
+            id="toc-glmの応用範囲を広げるロジスティック回帰など">6.
             GLMの応用範囲を広げる–ロジスティック回帰など–</a>
             <ul>
-            <li><a href="#さまざまな種類のデータで応用できるglm">6.1
+            <li><a href="#さまざまな種類のデータで応用できるglm"
+            id="toc-さまざまな種類のデータで応用できるglm">6.1
             さまざまな種類のデータで応用できるGLM</a></li>
-            <li><a href="#例題上限のあるカウントデータ">6.2
+            <li><a href="#例題上限のあるカウントデータ"
+            id="toc-例題上限のあるカウントデータ">6.2
             例題：上限のあるカウントデータ</a></li>
-            <li><a href="#二項分布で表現するありなしカウントデータ">6.3
+            <li><a href="#二項分布で表現するありなしカウントデータ"
+            id="toc-二項分布で表現するありなしカウントデータ">6.3
             二項分布で表現する「あり・なし」カウントデータ</a></li>
-            <li><a href="#ロジスティック回帰とロジットリンク関数">6.4
+            <li><a href="#ロジスティック回帰とロジットリンク関数"
+            id="toc-ロジスティック回帰とロジットリンク関数">6.4
             ロジスティック回帰とロジットリンク関数</a></li>
-            <li><a href="#交互作用行の入った線形予測子">6.5
+            <li><a href="#交互作用行の入った線形予測子"
+            id="toc-交互作用行の入った線形予測子">6.5
             交互作用行の入った線形予測子</a></li>
-            <li><a href="#割算値の統計モデリングはやめよう">6.6
+            <li><a href="#割算値の統計モデリングはやめよう"
+            id="toc-割算値の統計モデリングはやめよう">6.6
             割算値の統計モデリングはやめよう</a></li>
-            <li><a href="#正規分布とその尤度">6.7
-            正規分布とその尤度</a></li>
+            <li><a href="#正規分布とその尤度"
+            id="toc-正規分布とその尤度">6.7 正規分布とその尤度</a></li>
             </ul></li>
             </ul>
           </div>
@@ -188,6 +194,9 @@
       </li>
       <li>
         <a href="midori5.html">緑本5部</a>
+      </li>
+      <li>
+        <a href="midori6.html">緑本6部</a>
       </li>
       <li>
         <a href="psytech.html">技術部</a>
@@ -302,21 +311,12 @@ plot(y,d1, type=&#39;b&#39;, col=1, ylim=c(0,0.5))
 par(new=T)
 plot(y,d2, type=&#39;b&#39;, col=2, ylim=c(0,0.5))
 par(new=T)
-plot(y,d3, type=&#39;b&#39;, col=3, ylim=c(0,0.5))
-
-# ggplot2でグラフ
-# データの加工にtidyverseをつかってる
-library(tidyverse)</code></pre>
-<pre><code>## ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──</code></pre>
-<pre><code>## ✔ ggplot2 3.3.6     ✔ purrr   0.3.4
-## ✔ tibble  3.1.7     ✔ dplyr   1.0.9
-## ✔ tidyr   1.2.0     ✔ stringr 1.4.0
-## ✔ readr   2.1.2     ✔ forcats 0.5.1</code></pre>
-<pre><code>## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-## ✖ dplyr::filter() masks stats::filter()
-## ✖ dplyr::lag()    masks stats::lag()</code></pre>
+plot(y,d3, type=&#39;b&#39;, col=3, ylim=c(0,0.5))</code></pre>
 <p><img src="midori6_files/figure-html/unnamed-chunk-2-1.png" width="768" /></p>
-<pre class="r"><code>library(ggplot2)
+<pre class="r"><code># ggplot2でグラフ
+# データの加工にtidyverseをつかってる
+library(tidyverse)
+library(ggplot2)
 tdat&lt;-rbind(y,d1,d2,d3) %&gt;% t %&gt;% data.frame %&gt;% tidyr::pivot_longer(!y, names_to = &#39;d&#39;, values_to = &#39;p&#39;)
 
 g&lt;-ggplot(tdat, aes(x=y, y=p, color=d))
@@ -489,8 +489,8 @@ class="math inline">\(f_i\)</span>を含むモデルが最も良く予測する�
 </ul>
 <pre class="r"><code>library(MASS)</code></pre>
 <pre><code>## 
-##  次のパッケージを付け加えます: &#39;MASS&#39;</code></pre>
-<pre><code>##  以下のオブジェクトは &#39;package:dplyr&#39; からマスクされています:
+## Attaching package: &#39;MASS&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:dplyr&#39;:
 ## 
 ##     select</code></pre>
 <pre class="r"><code>stepAIC(res)</code></pre>

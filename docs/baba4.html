@@ -10,7 +10,7 @@
     
     <title>馬場本4</title>
 
-        <script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
+        <script src="site_libs/header-attrs-2.18/header-attrs.js"></script>
         <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link href="site_libs/bootstrap-3.3.7/css/bootstrap.min.css" rel="stylesheet" />
@@ -116,59 +116,82 @@
         <div class="Sidebar">
           <div class="SidebarItems" id="toc">
             <ul>
-            <li><a href="#部-一般化線形混合モデル">4部:
+            <li><a href="#部-一般化線形混合モデル"
+            id="toc-部-一般化線形混合モデル">4部:
             一般化線形混合モデル</a></li>
-            <li><a
-            href="#階層ベイズモデルと一般化線形混合モデルの基本">4-1:
+            <li><a href="#階層ベイズモデルと一般化線形混合モデルの基本"
+            id="toc-階層ベイズモデルと一般化線形混合モデルの基本">4-1:
             階層ベイズモデルと一般化線形混合モデルの基本</a>
             <ul>
-            <li><a href="#本章の目的と概要">1. 本章の目的と概要</a></li>
-            <li><a href="#階層ベイズモデル">2. 階層ベイズモデル</a></li>
-            <li><a href="#分析の準備">3. 分析の準備</a></li>
-            <li><a href="#通常のポアソン回帰モデルを適用した結果">4.
+            <li><a href="#本章の目的と概要" id="toc-本章の目的と概要">1.
+            本章の目的と概要</a></li>
+            <li><a href="#階層ベイズモデル" id="toc-階層ベイズモデル">2.
+            階層ベイズモデル</a></li>
+            <li><a href="#分析の準備" id="toc-分析の準備">3.
+            分析の準備</a></li>
+            <li><a href="#通常のポアソン回帰モデルを適用した結果"
+            id="toc-通常のポアソン回帰モデルを適用した結果">4.
             通常のポアソン回帰モデルを適用した結果</a></li>
-            <li><a href="#過分散対処のあためのglmmの構造">5.
+            <li><a href="#過分散対処のあためのglmmの構造"
+            id="toc-過分散対処のあためのglmmの構造">5.
             過分散対処のあためのGLMMの構造</a></li>
-            <li><a href="#固定効果ランダム効果混合モデル">6.
+            <li><a href="#固定効果ランダム効果混合モデル"
+            id="toc-固定効果ランダム効果混合モデル">6.
             固定効果・ランダム効果・混合モデル</a></li>
-            <li><a href="#モデルの構造の図式化">7.
+            <li><a href="#モデルの構造の図式化"
+            id="toc-モデルの構造の図式化">7.
             モデルの構造の図式化</a></li>
-            <li><a href="#glmmのためのstanファイルの実装">8.
+            <li><a href="#glmmのためのstanファイルの実装"
+            id="toc-glmmのためのstanファイルの実装">8.
             GLMMのためのStanファイルの実装</a></li>
-            <li><a href="#mcmcの実行">9. MCMCの実行</a></li>
-            <li><a href="#brmsによるglmmの推定">10.
+            <li><a href="#mcmcの実行" id="toc-mcmcの実行">9.
+            MCMCの実行</a></li>
+            <li><a href="#brmsによるglmmの推定"
+            id="toc-brmsによるglmmの推定">10.
             brmsによるGLMMの推定</a></li>
-            <li><a href="#補足正規線形モデルを拡張する場合の注意">11.
+            <li><a href="#補足正規線形モデルを拡張する場合の注意"
+            id="toc-補足正規線形モデルを拡張する場合の注意">11.
             補足：正規線形モデルを拡張する場合の注意</a></li>
             </ul></li>
-            <li><a href="#ランダム切片モデル">4-2:
-            ランダム切片モデル</a>
+            <li><a href="#ランダム切片モデル"
+            id="toc-ランダム切片モデル">4-2: ランダム切片モデル</a>
             <ul>
-            <li><a href="#分析の準備-1">2. 分析の準備</a></li>
-            <li><a href="#ランダム切片モデルの構造">3.
+            <li><a href="#分析の準備-1" id="toc-分析の準備-1">2.
+            分析の準備</a></li>
+            <li><a href="#ランダム切片モデルの構造"
+            id="toc-ランダム切片モデルの構造">3.
             ランダム切片モデルの構造</a></li>
-            <li><a href="#ランダム効果の使いどころ">4.
+            <li><a href="#ランダム効果の使いどころ"
+            id="toc-ランダム効果の使いどころ">4.
             ランダム効果の使いどころ</a></li>
-            <li><a href="#brmsによるランダム切片モデルの推定">5.
+            <li><a href="#brmsによるランダム切片モデルの推定"
+            id="toc-brmsによるランダム切片モデルの推定">5.
             brmsによるランダム切片モデルの推定</a></li>
-            <li><a href="#回帰曲線の図示">6. 回帰曲線の図示</a></li>
+            <li><a href="#回帰曲線の図示" id="toc-回帰曲線の図示">6.
+            回帰曲線の図示</a></li>
             </ul></li>
-            <li><a href="#ランダム係数モデル">4-3:
-            ランダム係数モデル</a>
+            <li><a href="#ランダム係数モデル"
+            id="toc-ランダム係数モデル">4-3: ランダム係数モデル</a>
             <ul>
-            <li><a href="#本章の目的と概要-1">1.
-            本章の目的と概要</a></li>
-            <li><a href="#分析の準備-2">2. 分析の準備</a></li>
-            <li><a href="#交互作用を用いたモデル化">3.
+            <li><a href="#本章の目的と概要-1"
+            id="toc-本章の目的と概要-1">1. 本章の目的と概要</a></li>
+            <li><a href="#分析の準備-2" id="toc-分析の準備-2">2.
+            分析の準備</a></li>
+            <li><a href="#交互作用を用いたモデル化"
+            id="toc-交互作用を用いたモデル化">3.
             交互作用を用いたモデル化</a></li>
-            <li><a href="#ランダム効果と縮約">4.
-            ランダム効果と縮約</a></li>
-            <li><a href="#ランダム係数モデルの構造">5.
+            <li><a href="#ランダム効果と縮約"
+            id="toc-ランダム効果と縮約">4. ランダム効果と縮約</a></li>
+            <li><a href="#ランダム係数モデルの構造"
+            id="toc-ランダム係数モデルの構造">5.
             ランダム係数モデルの構造</a></li>
-            <li><a href="#brmsによるランダム係数モデルの推定">6.
+            <li><a href="#brmsによるランダム係数モデルの推定"
+            id="toc-brmsによるランダム係数モデルの推定">6.
             brmsによるランダム係数モデルの推定</a></li>
-            <li><a href="#回帰曲線の図示-1">7. 回帰曲線の図示</a></li>
-            <li><a href="#ランダム効果を用いるさまざまなモデル">8.
+            <li><a href="#回帰曲線の図示-1" id="toc-回帰曲線の図示-1">7.
+            回帰曲線の図示</a></li>
+            <li><a href="#ランダム効果を用いるさまざまなモデル"
+            id="toc-ランダム効果を用いるさまざまなモデル">8.
             ランダム効果を用いるさまざまなモデル</a></li>
             </ul></li>
             </ul>
@@ -224,6 +247,9 @@
       </li>
       <li>
         <a href="midori5.html">緑本5部</a>
+      </li>
+      <li>
+        <a href="midori6.html">緑本6部</a>
       </li>
       <li>
         <a href="psytech.html">技術部</a>
@@ -418,17 +444,17 @@ data_list41&lt;-list(
 
 res41&lt;-rstan::sampling(stanmodel41_1, data=data_list41, seed=1)
 print(res41, pars=c(&#39;Intercept&#39;,&#39;b_sunny&#39;,&#39;b_temp&#39;,&#39;sigma_r&#39;), probs=c(0.025,0.5,0.975))</code></pre>
-<pre><code>## Inference for Stan model: 12d4c63cfcd2f20c4e83f50cd70873ce.
+<pre><code>## Inference for Stan model: 87421ddef702ad4bb12e51cf6cc5feec.
 ## 4 chains, each with iter=2000; warmup=1000; thin=1; 
 ## post-warmup draws per chain=1000, total post-warmup draws=4000.
 ## 
 ##            mean se_mean   sd  2.5%   50% 97.5% n_eff Rhat
-## Intercept -0.46    0.01 0.35 -1.17 -0.45  0.17   811 1.01
-## b_sunny   -0.73    0.01 0.28 -1.31 -0.72 -0.18  1348 1.00
-## b_temp     0.08    0.00 0.02  0.04  0.08  0.11   859 1.01
-## sigma_r    1.10    0.01 0.16  0.83  1.09  1.45   830 1.01
+## Intercept -0.48    0.01 0.36 -1.22 -0.46  0.18   805 1.01
+## b_sunny   -0.72    0.01 0.28 -1.28 -0.71 -0.17  1291 1.00
+## b_temp     0.08    0.00 0.02  0.04  0.07  0.11   978 1.00
+## sigma_r    1.11    0.01 0.16  0.83  1.10  1.44   730 1.01
 ## 
-## Samples were drawn using NUTS(diag_e) at Thu Jun 16 12:37:13 2022.
+## Samples were drawn using NUTS(diag_e) at Thu Nov 24 11:16:38 2022.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).</code></pre>
@@ -458,13 +484,13 @@ print(res41, pars=c(&#39;Intercept&#39;,&#39;b_sunny&#39;,&#39;b_temp&#39;,&#39;
 ## Group-Level Effects: 
 ## ~id (Number of levels: 100) 
 ##               Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-## sd(Intercept)     1.09      0.15     0.83     1.41 1.00     1198     1949
+## sd(Intercept)     1.09      0.15     0.82     1.42 1.01      974     1552
 ## 
 ## Population-Level Effects: 
 ##              Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-## Intercept       -0.45      0.35    -1.17     0.20 1.00     1236     1959
-## weathersunny    -0.74      0.29    -1.32    -0.19 1.00     1093     1769
-## temperature      0.08      0.02     0.04     0.11 1.00     1089     1712
+## Intercept       -0.46      0.34    -1.16     0.16 1.00     1294     2146
+## weathersunny    -0.73      0.28    -1.27    -0.16 1.00     1162     1734
+## temperature      0.08      0.02     0.04     0.11 1.00     1175     1697
 ## 
 ## Draws were sampled using sampling(NUTS). For each parameter, Bulk_ESS
 ## and Tail_ESS are effective sample size measures, and Rhat is the potential
@@ -548,13 +574,13 @@ class="math inline">\(log(\lambda_i)=\$beta_0+\beta_1x_1+\beta_2x_2+r_k\)</span>
 ## Group-Level Effects: 
 ## ~human (Number of levels: 10) 
 ##               Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-## sd(Intercept)     0.64      0.21     0.36     1.16 1.00      855     1466
+## sd(Intercept)     0.62      0.19     0.34     1.07 1.01      873     1370
 ## 
 ## Population-Level Effects: 
 ##              Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-## Intercept       -0.86      0.30    -1.46    -0.29 1.00     1221     1896
-## weathersunny    -0.52      0.14    -0.79    -0.27 1.00     3489     2730
-## temperature      0.10      0.01     0.08     0.12 1.00     3968     2990
+## Intercept       -0.86      0.30    -1.46    -0.29 1.00     1450     1752
+## weathersunny    -0.52      0.14    -0.79    -0.26 1.00     3747     2564
+## temperature      0.10      0.01     0.08     0.12 1.00     3796     2753
 ## 
 ## Draws were sampled using sampling(NUTS). For each parameter, Bulk_ESS
 ## and Tail_ESS are effective sample size measures, and Rhat is the potential
@@ -563,17 +589,17 @@ class="math inline">\(log(\lambda_i)=\$beta_0+\beta_1x_1+\beta_2x_2+r_k\)</span>
 <pre><code>## $human
 ## , , Intercept
 ## 
-##       Estimate Est.Error       Q2.5       Q97.5
-## A  0.743806099 0.2560084  0.2476996  1.27423163
-## B  0.076520258 0.2935145 -0.4942997  0.66038284
-## C  0.674009327 0.2608083  0.1887097  1.20272308
-## D -0.633151981 0.3321230 -1.3286379 -0.03053646
-## E -0.136445359 0.2955297 -0.7194843  0.44663911
-## F -0.751753910 0.3525089 -1.5041951 -0.12077933
-## G  0.435392221 0.2711128 -0.1013973  0.97510368
-## H -0.331334877 0.2920335 -0.9275123  0.24062440
-## I  0.006910673 0.2804459 -0.5740365  0.53861957
-## J -0.180740105 0.2889660 -0.7626654  0.37981631</code></pre>
+##      Estimate Est.Error        Q2.5        Q97.5
+## A  0.74389676 0.2456097  0.27551612  1.253785105
+## B  0.07248029 0.2895007 -0.48876883  0.647795780
+## C  0.68123945 0.2533276  0.20803820  1.191471171
+## D -0.61962291 0.3342911 -1.31846554 -0.007675066
+## E -0.12732434 0.2945601 -0.70598851  0.449352902
+## F -0.73187413 0.3405837 -1.46756483 -0.125995835
+## G  0.43655997 0.2630849 -0.05817395  0.978069264
+## H -0.33140538 0.2833214 -0.90612793  0.221325831
+## I  0.01671876 0.2803874 -0.53485108  0.579523683
+## J -0.17360664 0.2858739 -0.73692635  0.387420555</code></pre>
 </div>
 <div id="回帰曲線の図示" class="section level2">
 <h2>6. 回帰曲線の図示</h2>
@@ -671,6 +697,9 @@ plot(eff, points=T)</code></pre>
 )</code></pre>
 <pre><code>## Compiling Stan program...</code></pre>
 <pre><code>## Start sampling</code></pre>
+<pre><code>## Warning: There were 6 divergent transitions after warmup. Increasing adapt_delta above 0.98 may help. See
+## http://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup</code></pre>
+<pre><code>## Warning: Examine the pairs() plot to diagnose sampling problems</code></pre>
 <ul>
 <li>本のままのパラメータでは警告
 <ul>

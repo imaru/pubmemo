@@ -15,4 +15,5 @@ output:
 - [緑本3](./midori3.html)
 - [緑本4](./midori4.html)
 - [緑本5](./midori5.html)
+- [緑本6](./midori6.html)
 - [心理科学科技術部](./psytech.html)

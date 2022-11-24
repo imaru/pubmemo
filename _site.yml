@@ -14,18 +14,6 @@ navbar:
       href: baba3.html
     - text: "馬場本4部"
       href: baba4.html
-    - text: "緑本1部"
-      href: midori1.html
-    - text: "緑本2部"
-      href: midori2.html
-    - text: "緑本3部"
-      href: midori3.html
-    - text: "緑本4部"
-      href: midori4.html
-    - text: "緑本5部"
-      href: midori5.html
-    - text: "緑本6部 "
-      href: midori6.html
     - text: "技術部"
       href: psytech.html
 output_dir: "docs"

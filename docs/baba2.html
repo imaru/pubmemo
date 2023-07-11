@@ -10,7 +10,7 @@
     
     <title>馬場本</title>
 
-        <script src="site_libs/header-attrs-2.18/header-attrs.js"></script>
+        <script src="site_libs/header-attrs-2.23/header-attrs.js"></script>
         <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link href="site_libs/bootstrap-3.3.7/css/bootstrap.min.css" rel="stylesheet" />
@@ -337,24 +337,6 @@
         <a href="baba4.html">馬場本4部</a>
       </li>
       <li>
-        <a href="midori1.html">緑本1部</a>
-      </li>
-      <li>
-        <a href="midori2.html">緑本2部</a>
-      </li>
-      <li>
-        <a href="midori3.html">緑本3部</a>
-      </li>
-      <li>
-        <a href="midori4.html">緑本4部</a>
-      </li>
-      <li>
-        <a href="midori5.html">緑本5部</a>
-      </li>
-      <li>
-        <a href="midori6.html">緑本6部 </a>
-      </li>
-      <li>
         <a href="psytech.html">技術部</a>
       </li>
             </ul>
@@ -597,9 +579,8 @@ class="math inline">\(\frac{1}{N}\Sigma^N_{i=1}(y_t-\bar{y})(y_{t-1}-\bar{y})\)<
 </div>
 <div id="グラフの重ね合わせと一覧表示" class="section level2">
 <h2>5. グラフの重ね合わせと一覧表示</h2>
-<pre class="r"><code>library(&#39;ggplot2&#39;)</code></pre>
-<pre><code>## Warning: package &#39;ggplot2&#39; was built under R version 4.2.2</code></pre>
-<pre class="r"><code>fish &lt;- read.csv(&#39;2-2-1-fish.csv&#39;)
+<pre class="r"><code>library(&#39;ggplot2&#39;)
+fish &lt;- read.csv(&#39;2-2-1-fish.csv&#39;)
 head(fish, n=3)</code></pre>
 <pre><code>##      length
 ## 1  8.747092
@@ -614,17 +595,22 @@ head(fish, n=3)</code></pre>
 ## 2 10.367287
 ## 3  8.328743</code></pre>
 <pre class="r"><code>ggplot(data=fish, mapping=aes(x=length, y=..density..))+geom_histogram(alpha=0.5, bins=20)+geom_density(size=1.5)+labs(title=&#39;ヒストグラム&#39;)</code></pre>
-<pre><code>## Warning: Using `size` aesthetic for lines was deprecated in
-## ggplot2 3.4.0.
-## ℹ Please use `linewidth` instead.</code></pre>
-<pre><code>## Warning: The dot-dot notation (`..density..`) was deprecated in
-## ggplot2 3.4.0.
-## ℹ Please use `after_stat(density)` instead.</code></pre>
+<pre><code>## Warning: Using `size` aesthetic for lines was deprecated
+## in ggplot2 3.4.0.
+## ℹ Please use `linewidth` instead.
+## This warning is displayed once every 8 hours.
+## Call `lifecycle::last_lifecycle_warnings()` to
+## see where this warning was generated.</code></pre>
+<pre><code>## Warning: The dot-dot notation (`..density..`) was
+## deprecated in ggplot2 3.4.0.
+## ℹ Please use `after_stat(density)` instead.
+## This warning is displayed once every 8 hours.
+## Call `lifecycle::last_lifecycle_warnings()` to
+## see where this warning was generated.</code></pre>
 <p><img src="baba2_files/figure-html/unnamed-chunk-7-1.png" width="768" /></p>
 <pre class="r"><code>library(gcookbook)
-library(gridExtra)</code></pre>
-<pre><code>## Warning: package &#39;gridExtra&#39; was built under R version 4.2.2</code></pre>
-<pre class="r"><code>p_hist&lt;-ggplot(data=fish, mapping=aes(x=length))+geom_histogram(alpha=0.5, bins=20)+labs(title=&quot;ヒストグラム&quot;)
+library(gridExtra)
+p_hist&lt;-ggplot(data=fish, mapping=aes(x=length))+geom_histogram(alpha=0.5, bins=20)+labs(title=&quot;ヒストグラム&quot;)
 p_density&lt;-ggplot(data=fish, mappin=aes(x=length))+geom_density(size=1.5)+labs(title=&quot;カーネル密度推定&quot;)
 grid.arrange(p_hist, p_density, nrow=2)+theme(plot.title=element_text(family=&quot;Hirakaku&quot;))</code></pre>
 <p><img src="baba2_files/figure-html/unnamed-chunk-8-1.png" width="768" /></p>
@@ -670,9 +656,8 @@ simpledat</code></pre>
 <li>reshapeパッケージ、melt()</li>
 </ul></li>
 </ul>
-<pre class="r"><code>library(reshape2)</code></pre>
-<pre><code>## Warning: package &#39;reshape2&#39; was built under R version 4.2.2</code></pre>
-<pre class="r"><code>longdat&lt;-melt(simpledat)
+<pre class="r"><code>library(reshape2)
+longdat&lt;-melt(simpledat)
 longdat</code></pre>
 <pre><code>##   Var1 Var2 value
 ## 1   B1   A1    10
@@ -861,15 +846,16 @@ class="math inline">\(\sigma\)</span></li>
 </ul>
 <pre class="r"><code>library(rstan)</code></pre>
 <pre><code>## Loading required package: StanHeaders</code></pre>
-<pre><code>## Warning: package &#39;StanHeaders&#39; was built under R version 4.2.2</code></pre>
-<pre><code>## rstan (Version 2.19.3, GitRev: 2e1f913d3ca3)</code></pre>
+<pre><code>## 
+## rstan version 2.26.22 (Stan version 2.26.1)</code></pre>
 <pre><code>## For execution on a local, multicore CPU with excess RAM we recommend calling
 ## options(mc.cores = parallel::detectCores()).
 ## To avoid recompilation of unchanged Stan programs, we recommend calling
-## rstan_options(auto_write = TRUE)</code></pre>
-<pre><code>## For improved execution time, we recommend calling
-## Sys.setenv(LOCAL_CPPFLAGS = &#39;-march=corei7 -mtune=corei7&#39;)
-## although this causes Stan to throw an error on a few processors.</code></pre>
+## rstan_options(auto_write = TRUE)
+## For within-chain threading using `reduce_sum()` or `map_rect()` Stan functions,
+## change `threads_per_chain` option:
+## rstan_options(threads_per_chain = 1)</code></pre>
+<pre><code>## Do not specify &#39;-march=native&#39; in &#39;LOCAL_CPPFLAGS&#39; or a Makevars file</code></pre>
 <pre class="r"><code>rstan_options(auto_write=TRUE)
 options(mc.cores=parallel::detectCores())
 
@@ -897,7 +883,7 @@ mcmc_result&lt;-stan(
 </ul></li>
 </ul>
 <pre class="r"><code>print(mcmc_result, probs=c(0.025,0.5,0.975))</code></pre>
-<pre><code>## Inference for Stan model: 2-4-1-calc.
+<pre><code>## Inference for Stan model: anon_model.
 ## 4 chains, each with iter=2000; warmup=1000; thin=1; 
 ## post-warmup draws per chain=1000, total post-warmup draws=4000.
 ## 
@@ -906,7 +892,7 @@ mcmc_result&lt;-stan(
 ## sigma   18.20    0.02 1.29   15.95   18.12   21.00  2858    1
 ## lp__  -336.44    0.02 0.97 -338.98 -336.12 -335.48  1774    1
 ## 
-## Samples were drawn using NUTS(diag_e) at Thu Nov 24 12:28:13 2022.
+## Samples were drawn using NUTS(diag_e) at Tue Jul 11 18:13:37 2023.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).</code></pre>
@@ -1117,9 +1103,8 @@ median(mu_mcmc_vec)</code></pre>
 <ul>
 <li>MCMCサンプルをもとにトレースプロットの描画</li>
 </ul>
-<pre class="r"><code>library(ggfortify)</code></pre>
-<pre><code>## Warning: package &#39;ggfortify&#39; was built under R version 4.2.2</code></pre>
-<pre class="r"><code>autoplot(ts(mcmc_sample[,,&quot;mu&quot;]),
+<pre class="r"><code>library(ggfortify)
+autoplot(ts(mcmc_sample[,,&quot;mu&quot;]),
   facets = F,
   ylab = &quot;mu&quot;,
   main= &quot;トレースプロット&quot;)</code></pre>
@@ -1141,8 +1126,8 @@ library(bayesplot)</code></pre>
 <pre><code>##    * See ?bayesplot_theme_set for details on theme setting</code></pre>
 <pre class="r"><code>mcmc_hist(mcmc_sample, parc=c(&quot;mu&quot;, &quot;sigma&quot;))</code></pre>
 <pre><code>## Warning: The following arguments were unrecognized and ignored: parc</code></pre>
-<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with
-## `binwidth`.</code></pre>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better
+## value with `binwidth`.</code></pre>
 <p><img src="baba2_files/figure-html/bayesplot%20combo-1.png" width="768" /></p>
 <pre class="r"><code>mcmc_combo(mcmc_sample, parc=c(&quot;mu&quot;,&quot;sigma&quot;))</code></pre>
 <p><img src="baba2_files/figure-html/bayesplot%20combo-2.png" width="768" />
@@ -1316,8 +1301,8 @@ rstan_options(auto_write=TRUE)
 options(mc.cores=parallel::detectCores())
 file_beer_sales_ab&lt;-read.csv(&quot;2-6-1-beer-sales-ab.csv&quot;)
 ggplot(data=file_beer_sales_ab, mapping=aes(x=sales, y=..density.., color=beer_name, fill=beer_name))+geom_histogram(alpha=0.5,position=&quot;identity&quot;)+geom_density(alpha=0.5, size=0)</code></pre>
-<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with
-## `binwidth`.</code></pre>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better
+## value with `binwidth`.</code></pre>
 <p><img src="baba2_files/figure-html/mcmc_result6-1.png" width="768" /></p>
 <pre class="r"><code>sales_a&lt;-file_beer_sales_ab$sales[1:100]
 sales_b&lt;-file_beer_sales_ab$sales[101:200]
@@ -1332,19 +1317,19 @@ mcmc_result_6&lt;-stan(file=&quot;2-6-5-difference-mean.stan&quot;,
                     seed=1
 )
 print(mcmc_result_6, probs=c(0.025, 0.5, .0975))</code></pre>
-<pre><code>## Inference for Stan model: 2-6-5-difference-mean.
+<pre><code>## Inference for Stan model: anon_model.
 ## 4 chains, each with iter=2000; warmup=1000; thin=1; 
 ## post-warmup draws per chain=1000, total post-warmup draws=4000.
 ## 
 ##            mean se_mean   sd    2.5%     50%   9.75% n_eff Rhat
-## mu_a     102.20    0.03 1.79   98.57  102.24   99.86  3879    1
-## sigma_a   18.19    0.02 1.27   15.84   18.10   16.60  4516    1
-## mu_b     168.88    0.05 2.91  163.16  168.83  165.16  3773    1
-## sigma_b   29.07    0.03 2.13   25.32   28.92   26.47  4135    1
-## diff      66.67    0.05 3.39   60.07   66.68   62.29  3822    1
-## lp__    -719.38    0.03 1.44 -723.14 -719.05 -721.31  1845    1
+## mu_a     102.15    0.03 1.81   98.57  102.16   99.81  4444    1
+## sigma_a   18.20    0.02 1.28   15.87   18.13   16.62  3932    1
+## mu_b     168.84    0.05 2.93  163.23  168.83  165.02  4137    1
+## sigma_b   29.10    0.03 2.07   25.44   28.99   26.53  4124    1
+## diff      66.69    0.05 3.46   59.98   66.69   62.14  4316    1
+## lp__    -719.38    0.03 1.40 -722.86 -719.03 -721.39  1989    1
 ## 
-## Samples were drawn using NUTS(diag_e) at Thu Nov 24 12:28:30 2022.
+## Samples were drawn using NUTS(diag_e) at Tue Jul 11 18:13:55 2023.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).</code></pre>
@@ -1361,8 +1346,8 @@ pdata&lt;-read.csv(&quot;data_if.csv&quot;)
 xdata&lt;-pdata[which(pdata$con==&quot;X&quot;),]
 ydata&lt;-pdata[which(pdata$con==&quot;Y&quot;),]
 ggplot(data=pdata, mapping=aes(x=syakou, y=..density.., color=con, fill=con))+geom_histogram(alpha=0.5, position=&quot;identity&quot;)+geom_density(alpha=0.5, size=0)</code></pre>
-<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with
-## `binwidth`.</code></pre>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better
+## value with `binwidth`.</code></pre>
 <p><img src="baba2_files/figure-html/prac1-1.png" width="768" /></p>
 <pre class="r"><code>list_xy&lt;-list(datax=xdata[,2],datay=ydata[,2],Nx=length(xdata[,2]),Ny=length(ydata[,2]))
 mcmc_p_res &lt;- stan(file=&quot;2-6-5-pdata.stan&quot;,
@@ -1370,19 +1355,19 @@ mcmc_p_res &lt;- stan(file=&quot;2-6-5-pdata.stan&quot;,
                    seed=1
 )
 print(mcmc_p_res)</code></pre>
-<pre><code>## Inference for Stan model: 2-6-5-pdata.
+<pre><code>## Inference for Stan model: anon_model.
 ## 4 chains, each with iter=2000; warmup=1000; thin=1; 
 ## post-warmup draws per chain=1000, total post-warmup draws=4000.
 ## 
 ##           mean se_mean   sd   2.5%    25%    50%    75%  97.5% n_eff Rhat
-## mu_x      5.18    0.00 0.23   4.74   5.02   5.18   5.34   5.63  4311    1
-## sigma_x   1.23    0.00 0.18   0.94   1.10   1.21   1.33   1.64  3818    1
-## mu_y      2.60    0.00 0.22   2.15   2.45   2.60   2.75   3.03  3628    1
-## sigma_y   1.10    0.00 0.17   0.83   0.98   1.08   1.20   1.51  3413    1
-## diff      2.59    0.01 0.32   1.95   2.37   2.59   2.80   3.22  3920    1
-## lp__    -32.25    0.04 1.39 -35.74 -32.95 -31.95 -31.22 -30.48  1469    1
+## mu_x      5.18    0.00 0.24   4.71   5.02   5.18   5.34   5.67  3802    1
+## sigma_x   1.24    0.00 0.19   0.94   1.11   1.22   1.35   1.65  4114    1
+## mu_y      2.60    0.00 0.21   2.18   2.46   2.60   2.74   3.03  4370    1
+## sigma_y   1.10    0.00 0.17   0.83   0.98   1.08   1.20   1.49  3279    1
+## diff      2.58    0.01 0.32   1.95   2.37   2.58   2.79   3.22  4069    1
+## lp__    -32.27    0.03 1.44 -35.93 -32.97 -31.94 -31.20 -30.48  1900    1
 ## 
-## Samples were drawn using NUTS(diag_e) at Thu Nov 24 12:28:36 2022.
+## Samples were drawn using NUTS(diag_e) at Tue Jul 11 18:14:05 2023.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).</code></pre>
@@ -1390,8 +1375,8 @@ print(mcmc_p_res)</code></pre>
 mcmc_combo(mcmc_p_res, pars=c(&quot;mu_x&quot;, &quot;mu_y&quot;, &quot;sigma_x&quot;, &quot;sigma_y&quot;, &quot;diff&quot;))</code></pre>
 <p><img src="baba2_files/figure-html/prac1-2.png" width="768" /></p>
 <pre class="r"><code>stan_hist(mcmc_p_res)</code></pre>
-<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with
-## `binwidth`.</code></pre>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better
+## value with `binwidth`.</code></pre>
 <p><img src="baba2_files/figure-html/prac1-3.png" width="768" /></p>
 <ul>
 <li>同じ分散を仮定</li>
@@ -1405,8 +1390,8 @@ xdata&lt;-pdata[which(pdata$con==&quot;X&quot;),]
 ydata&lt;-pdata[which(pdata$con==&quot;Y&quot;),]
 
 ggplot(data=pdata, mapping=aes(x=syakou, y=..density.., color=con, fill=con))+geom_histogram(alpha=0.5, position=&quot;identity&quot;)+geom_density(alpha=0.5, size=0)</code></pre>
-<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with
-## `binwidth`.</code></pre>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better
+## value with `binwidth`.</code></pre>
 <p><img src="baba2_files/figure-html/prac2-1.png" width="768" /></p>
 <pre class="r"><code>list_xy&lt;-list(datax=xdata[,2],datay=ydata[,2],Nx=length(xdata[,2]),Ny=length(ydata[,2]))
 
@@ -1415,18 +1400,18 @@ mcmc_p_res &lt;- stan(file=&quot;2-6-5-pdata2.stan&quot;,
                    seed=1
 )
 print(mcmc_p_res)</code></pre>
-<pre><code>## Inference for Stan model: 2-6-5-pdata2.
+<pre><code>## Inference for Stan model: anon_model.
 ## 4 chains, each with iter=2000; warmup=1000; thin=1; 
 ## post-warmup draws per chain=1000, total post-warmup draws=4000.
 ## 
 ##         mean se_mean   sd   2.5%    25%    50%    75%  97.5% n_eff Rhat
-## mu_x    5.19    0.00 0.22   4.76   5.04   5.19   5.34   5.61  3240    1
-## sigma   1.14    0.00 0.12   0.95   1.06   1.13   1.22   1.39  3594    1
-## mu_y    2.60    0.00 0.23   2.16   2.45   2.60   2.75   3.05  3536    1
-## diff    2.59    0.01 0.32   1.96   2.38   2.58   2.81   3.21  3245    1
-## lp__  -32.03    0.03 1.19 -35.12 -32.59 -31.73 -31.14 -30.64  2139    1
+## mu_x    5.18    0.00 0.21   4.76   5.04   5.18   5.32   5.60  3650    1
+## sigma   1.14    0.00 0.12   0.95   1.06   1.13   1.22   1.40  3557    1
+## mu_y    2.59    0.00 0.24   2.12   2.44   2.59   2.75   3.05  4063    1
+## diff    2.59    0.01 0.31   1.98   2.38   2.59   2.80   3.20  3672    1
+## lp__  -32.05    0.03 1.23 -35.21 -32.63 -31.76 -31.13 -30.63  2131    1
 ## 
-## Samples were drawn using NUTS(diag_e) at Thu Nov 24 12:28:44 2022.
+## Samples were drawn using NUTS(diag_e) at Tue Jul 11 18:14:17 2023.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).</code></pre>

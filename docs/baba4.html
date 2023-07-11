@@ -10,7 +10,7 @@
     
     <title>馬場本4</title>
 
-        <script src="site_libs/header-attrs-2.18/header-attrs.js"></script>
+        <script src="site_libs/header-attrs-2.23/header-attrs.js"></script>
         <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link href="site_libs/bootstrap-3.3.7/css/bootstrap.min.css" rel="stylesheet" />
@@ -234,24 +234,6 @@
         <a href="baba4.html">馬場本4部</a>
       </li>
       <li>
-        <a href="midori1.html">緑本1部</a>
-      </li>
-      <li>
-        <a href="midori2.html">緑本2部</a>
-      </li>
-      <li>
-        <a href="midori3.html">緑本3部</a>
-      </li>
-      <li>
-        <a href="midori4.html">緑本4部</a>
-      </li>
-      <li>
-        <a href="midori5.html">緑本5部</a>
-      </li>
-      <li>
-        <a href="midori6.html">緑本6部</a>
-      </li>
-      <li>
         <a href="psytech.html">技術部</a>
       </li>
             </ul>
@@ -444,17 +426,17 @@ data_list41&lt;-list(
 
 res41&lt;-rstan::sampling(stanmodel41_1, data=data_list41, seed=1)
 print(res41, pars=c(&#39;Intercept&#39;,&#39;b_sunny&#39;,&#39;b_temp&#39;,&#39;sigma_r&#39;), probs=c(0.025,0.5,0.975))</code></pre>
-<pre><code>## Inference for Stan model: 87421ddef702ad4bb12e51cf6cc5feec.
+<pre><code>## Inference for Stan model: anon_model.
 ## 4 chains, each with iter=2000; warmup=1000; thin=1; 
 ## post-warmup draws per chain=1000, total post-warmup draws=4000.
 ## 
 ##            mean se_mean   sd  2.5%   50% 97.5% n_eff Rhat
-## Intercept -0.48    0.01 0.36 -1.22 -0.46  0.18   805 1.01
-## b_sunny   -0.72    0.01 0.28 -1.28 -0.71 -0.17  1291 1.00
-## b_temp     0.08    0.00 0.02  0.04  0.07  0.11   978 1.00
-## sigma_r    1.11    0.01 0.16  0.83  1.10  1.44   730 1.01
+## Intercept -0.45    0.01 0.34 -1.16 -0.43  0.17   872    1
+## b_sunny   -0.74    0.01 0.29 -1.30 -0.73 -0.18  1153    1
+## b_temp     0.08    0.00 0.02  0.04  0.08  0.11   847    1
+## sigma_r    1.09    0.01 0.15  0.83  1.08  1.42   866    1
 ## 
-## Samples were drawn using NUTS(diag_e) at Thu Nov 24 11:16:38 2022.
+## Samples were drawn using NUTS(diag_e) at Tue Jul 11 18:38:46 2023.
 ## For each parameter, n_eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor on split chains (at 
 ## convergence, Rhat=1).</code></pre>
@@ -484,13 +466,13 @@ print(res41, pars=c(&#39;Intercept&#39;,&#39;b_sunny&#39;,&#39;b_temp&#39;,&#39;
 ## Group-Level Effects: 
 ## ~id (Number of levels: 100) 
 ##               Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-## sd(Intercept)     1.09      0.15     0.82     1.42 1.01      974     1552
+## sd(Intercept)     1.09      0.15     0.83     1.41 1.00     1194     2055
 ## 
 ## Population-Level Effects: 
 ##              Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-## Intercept       -0.46      0.34    -1.16     0.16 1.00     1294     2146
-## weathersunny    -0.73      0.28    -1.27    -0.16 1.00     1162     1734
-## temperature      0.08      0.02     0.04     0.11 1.00     1175     1697
+## Intercept       -0.47      0.35    -1.19     0.17 1.00     1567     1832
+## weathersunny    -0.72      0.30    -1.30    -0.16 1.01     1224     1721
+## temperature      0.08      0.02     0.04     0.11 1.00     1371     1990
 ## 
 ## Draws were sampled using sampling(NUTS). For each parameter, Bulk_ESS
 ## and Tail_ESS are effective sample size measures, and Rhat is the potential
@@ -574,13 +556,13 @@ class="math inline">\(log(\lambda_i)=\$beta_0+\beta_1x_1+\beta_2x_2+r_k\)</span>
 ## Group-Level Effects: 
 ## ~human (Number of levels: 10) 
 ##               Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-## sd(Intercept)     0.62      0.19     0.34     1.07 1.01      873     1370
+## sd(Intercept)     0.64      0.21     0.36     1.16 1.00      968     1552
 ## 
 ## Population-Level Effects: 
 ##              Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-## Intercept       -0.86      0.30    -1.46    -0.29 1.00     1450     1752
-## weathersunny    -0.52      0.14    -0.79    -0.26 1.00     3747     2564
-## temperature      0.10      0.01     0.08     0.12 1.00     3796     2753
+## Intercept       -0.87      0.30    -1.50    -0.33 1.00     1460     1779
+## weathersunny    -0.52      0.13    -0.78    -0.27 1.00     3285     2715
+## temperature      0.10      0.01     0.08     0.12 1.00     3579     2844
 ## 
 ## Draws were sampled using sampling(NUTS). For each parameter, Bulk_ESS
 ## and Tail_ESS are effective sample size measures, and Rhat is the potential
@@ -589,17 +571,17 @@ class="math inline">\(log(\lambda_i)=\$beta_0+\beta_1x_1+\beta_2x_2+r_k\)</span>
 <pre><code>## $human
 ## , , Intercept
 ## 
-##      Estimate Est.Error        Q2.5        Q97.5
-## A  0.74389676 0.2456097  0.27551612  1.253785105
-## B  0.07248029 0.2895007 -0.48876883  0.647795780
-## C  0.68123945 0.2533276  0.20803820  1.191471171
-## D -0.61962291 0.3342911 -1.31846554 -0.007675066
-## E -0.12732434 0.2945601 -0.70598851  0.449352902
-## F -0.73187413 0.3405837 -1.46756483 -0.125995835
-## G  0.43655997 0.2630849 -0.05817395  0.978069264
-## H -0.33140538 0.2833214 -0.90612793  0.221325831
-## I  0.01671876 0.2803874 -0.53485108  0.579523683
-## J -0.17360664 0.2858739 -0.73692635  0.387420555</code></pre>
+##      Estimate Est.Error        Q2.5       Q97.5
+## A  0.76119706 0.2549181  0.29351583  1.30733330
+## B  0.08231762 0.2949582 -0.48398853  0.69671198
+## C  0.69018425 0.2614803  0.19675755  1.25110619
+## D -0.61284528 0.3400910 -1.31294558  0.02928462
+## E -0.12204142 0.2966121 -0.68973010  0.47643906
+## F -0.73766277 0.3559530 -1.48944447 -0.08173294
+## G  0.44693932 0.2726351 -0.06752996  1.01478231
+## H -0.32342412 0.2945592 -0.89942839  0.26573070
+## I  0.02266429 0.2840992 -0.53837630  0.58994563
+## J -0.16810624 0.2960147 -0.75550891  0.40990438</code></pre>
 </div>
 <div id="回帰曲線の図示" class="section level2">
 <h2>6. 回帰曲線の図示</h2>
@@ -697,8 +679,9 @@ plot(eff, points=T)</code></pre>
 )</code></pre>
 <pre><code>## Compiling Stan program...</code></pre>
 <pre><code>## Start sampling</code></pre>
-<pre><code>## Warning: There were 6 divergent transitions after warmup. Increasing adapt_delta above 0.98 may help. See
-## http://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup</code></pre>
+<pre><code>## Warning: There were 1 divergent transitions after warmup. See
+## https://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup
+## to find out why this is a problem and how to eliminate them.</code></pre>
 <pre><code>## Warning: Examine the pairs() plot to diagnose sampling problems</code></pre>
 <ul>
 <li>本のままのパラメータでは警告
